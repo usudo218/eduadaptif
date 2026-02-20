@@ -19,15 +19,72 @@
         body { background-color: var(--warna-latar); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; color: var(--warna-teks); }
         .app-container { background: white; width: 100%; max-width: 600px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
-        .header { background: var(--warna-utama); color: white; padding: 20px; text-align: center; position: relative;}
-        .header h1 { margin: 0; font-size: 1.5rem; }
-        .header p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.8; }
+        /* ==========================================
+           DESAIN HEADER & TOMBOL MENU ELEGAN (BARU)
+           ========================================== */
+        .header { 
+            background: var(--warna-utama); 
+            color: white; 
+            padding: 45px 20px 25px 20px; /* Padding atas agar tidak menabrak tombol */
+            text-align: center; 
+            position: relative;
+        }
+        .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.5px;}
+        .header p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
         
-        /* Tombol Dashboard (Kiri) & Logout (Kanan) */
-        .back-btn { position: absolute; top: 15px; left: 15px; color: white; text-decoration: none; font-size: 0.9rem; background: rgba(255,255,255,0.2); padding: 6px 10px; border-radius: 5px; transition: 0.2s;}
-        .back-btn:hover { background: rgba(255,255,255,0.4); }
-        .logout-btn { position: absolute; top: 15px; right: 15px; color: white; text-decoration: none; font-size: 0.9rem; background: rgba(220, 38, 38, 0.9); padding: 6px 12px; border-radius: 5px; transition: 0.2s; border: none; cursor: pointer; font-family: inherit; font-weight: bold;}
-        .logout-btn:hover { background: #B91C1C; }
+        /* Desain Dasar Tombol Kapsul (Pill) dengan Efek Kaca */
+        .back-btn, .logout-btn { 
+            position: absolute; 
+            top: 15px; 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            padding: 8px 16px; 
+            border-radius: 50px; /* Membentuk kapsul */
+            text-decoration: none; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(8px); /* Efek Kaca */
+            -webkit-backdrop-filter: blur(8px);
+            cursor: pointer; 
+            font-family: inherit;
+        }
+
+        .back-btn { 
+            left: 15px; 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+        .back-btn:hover { 
+            background: white; 
+            color: var(--warna-utama); 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); 
+            border-color: white;
+        }
+
+        .logout-btn { 
+            right: 15px; 
+            background: rgba(220, 38, 38, 0.15); 
+            color: #FFF1F2; 
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+        .logout-btn:hover { 
+            background: #DC2626; 
+            color: white; 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 15px rgba(220, 38, 38, 0.3); 
+            border-color: #DC2626;
+        }
+
+        @media (max-width: 480px) {
+            .back-btn, .logout-btn { padding: 6px 12px; font-size: 0.75rem; top: 12px;}
+            .header { padding-top: 55px; } 
+            .header h1 { font-size: 1.3rem; }
+        }
+        /* ========================================== */
 
         .content { padding: 25px 20px; flex-grow: 1; }
         
@@ -189,7 +246,8 @@
         const POIN_PENALTI_BANTUAN = 5; 
         const KKM = 100; 
 
-        const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzPcanC73JEFcHGfgKWDRfaUTNaztpOGZSmM61VqV_BfkiEYWebWNSHnZTE7Zx-4XDn/exec"; 
+        // GANTI LINK DI BAWAH INI DENGAN LINK GOOGLE APPS SCRIPT ANDA
+        const URL_APPS_SCRIPT = "PASTE_URL_APPS_SCRIPT_ANDA_DI_SINI"; 
 
         function inisialisasiDropdown() {
             if(typeof SISWA_BARU === 'undefined') { alert("File siswa.js tidak terbaca!"); return; }
@@ -325,7 +383,7 @@
                 document.getElementById('keterangan-hasil').innerText = "Status: BELUM TUNTAS. Silakan remedial.";
                 document.getElementById('tombol-ulang').style.display = "block"; document.getElementById('tombol-selesai').style.display = "none"; statusSiswa = "REMEDIAL";
             }
-            if(URL_APPS_SCRIPT !== "PASTE_URL_APPS_SCRIPT_ANDA_DI_SINI") {
+            if(URL_APPS_SCRIPT !== "https://script.google.com/macros/s/AKfycbzPcanC73JEFcHGfgKWDRfaUTNaztpOGZSmM61VqV_BfkiEYWebWNSHnZTE7Zx-4XDn/exec") {
                 const dataKirim = new URLSearchParams({ namaSiswa: namaSiswa + " (" + kelasSiswa + ")", modul: "Analisis Data (AD)", skor: skorAkhir, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, status: statusSiswa });
                 fetch(URL_APPS_SCRIPT, { method: 'POST', body: dataKirim }).then(response => { console.log("Data terekam."); }).catch(error => { console.error("Gagal kirim:", error); });
             }
