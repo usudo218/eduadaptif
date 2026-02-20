@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduAdaptif - Prototipe Inovasi Guru</title>
     <style>
-        /* CSS: Tampilan Antarmuka */
         :root {
             --warna-utama: #4F46E5; 
             --warna-aksen: #10B981; 
             --warna-merah: #EF4444;
+            --warna-kuning: #F59E0B; /* Warna khusus tombol bantuan */
             --warna-latar: #F3F4F6; 
             --warna-teks: #1F2937;  
             --latar-mentor: #E0E7FF; 
@@ -23,29 +23,28 @@
         .header p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.8; }
         .content { padding: 25px 20px; flex-grow: 1; }
         
-        .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); }
+        .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); transition: all 0.3s; }
+        .mentor-box.peringatan { border-left-color: var(--warna-kuning); background-color: #FEF3C7; }
         .mentor-avatar { font-size: 2.5rem; }
         .mentor-message { flex: 1; line-height: 1.5; }
         .mentor-name { font-weight: bold; color: var(--warna-utama); margin-bottom: 5px; display: block; }
+        .mentor-name.peringatan { color: #D97706; }
 
         .area-konten { display: none; }
         .area-aktif { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Format Halaman Masuk */
         .login-area { text-align: center; padding: 20px 0; }
         .login-area h2 { color: var(--warna-utama); margin-bottom: 10px; }
         .login-area p { margin-bottom: 25px; color: #6b7280; }
         .input-nama { width: 100%; padding: 15px; border: 2px solid #D1D5DB; border-radius: 8px; font-size: 1.1rem; margin-bottom: 20px; text-align: center; }
         .input-nama:focus { border-color: var(--warna-utama); outline: none; }
 
-        /* Format Materi & Infografis */
         .teks-materi { background: #f9fafb; padding: 20px; border-radius: 8px; border: 1px solid #e5e7eb; line-height: 1.6; text-align: justify; margin-bottom: 20px; font-size: 0.95rem; height: 450px; overflow-y: auto; }
         .teks-materi h3 { margin-top: 25px; color: var(--warna-utama); border-bottom: 2px solid #eee; padding-bottom: 10px;}
         .teks-materi h3:first-child { margin-top: 0; }
         .ilustrasi-mini { width: 100%; height: auto; min-height: 150px; background-color: #e5e7eb; object-fit: contain; border-radius: 8px; margin: 10px 0; border: 1px dashed #9ca3af; display: flex; align-items: center; justify-content: center; color: #6b7280; font-size: 0.8rem; }
         
-        /* Format Soal Pilihan Ganda */
         .question-area { text-align: center; }
         .question-area h2#teks-soal { font-size: 1.1rem; margin-bottom: 25px; color: #333; line-height: 1.5; text-align: left; font-weight: 600; }
         .opsi-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
@@ -59,21 +58,15 @@
         .btn-submit:hover { background: #059669; }
         .btn-ulang { background: var(--warna-merah); }
         .btn-ulang:hover { background: #DC2626; }
+        .btn-bantuan { background: var(--warna-kuning); color: #fff; margin-bottom: 20px; }
+        .btn-bantuan:hover { background: #D97706; }
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
 
         .skor-box { text-align: center; margin: 20px 0; }
         .angka-skor { font-size: 4rem; font-weight: bold; color: var(--warna-utama); margin: 10px 0; }
+        .teks-penalti { color: var(--warna-merah); font-weight: bold; font-size: 0.9rem; margin-top: 5px; }
 
-        /* Format Footer / Hak Cipta */
-        .footer {
-            background-color: #f9fafb;
-            color: #6b7280;
-            text-align: center;
-            padding: 15px;
-            font-size: 0.85rem;
-            border-top: 1px solid #e5e7eb;
-            line-height: 1.5;
-        }
+        .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 15px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -95,10 +88,10 @@
             </div>
 
             <div id="area-mentor-global" style="display: none;">
-                <div class="mentor-box">
-                    <div class="mentor-avatar">👨‍🏫</div>
+                <div class="mentor-box" id="kotak-mentor">
+                    <div class="mentor-avatar" id="avatar-mentor">👨‍🏫</div>
                     <div class="mentor-message">
-                        <span class="mentor-name">EduAdaptif</span>
+                        <span class="mentor-name" id="nama-mentor">Pak Agus</span>
                         <span id="pesan-mentor">Selamat datang!</span>
                     </div>
                 </div>
@@ -112,30 +105,29 @@
                     <h3>2. Diagram Batang (Bar Chart)</h3>
                     <p><strong>Fungsi Utama: Perbandingan Kuantitas.</strong> Digunakan untuk membandingkan nilai antar kategori yang berbeda.</p>
                     <img src="batang.jpg" alt="(Tempat Gambar: batang.jpg)" class="ilustrasi-mini">
-                    <p><em>Contoh: Membandingkan jumlah siswa laki-laki dan perempuan di kelas 10A, 10B, dan 10C.</em></p>
 
                     <h3>3. Grafik Lingkaran (Pie Chart)</h3>
                     <p><strong>Fungsi Utama: Proporsi/Persentase.</strong> Digunakan untuk menunjukkan bagaimana suatu "keseluruhan" terbagi menjadi bagian-bagian kecil.</p>
                     <img src="pie.jpg" alt="(Tempat Gambar: pie.jpg)" class="ilustrasi-mini">
-                    <p><em>Contoh: Persentase penggunaan sistem operasi (Windows, macOS, Linux) di sebuah perusahaan.</em></p>
                     
                     <h3>4. Grafik Garis (Line Chart)</h3>
                     <p><strong>Fungsi Utama: Tren Waktu.</strong> Digunakan untuk melihat perubahan data yang berkelanjutan dalam kurun waktu tertentu.</p>
                     <img src="garis.jpg" alt="(Tempat Gambar: garis.jpg)" class="ilustrasi-mini">
-                    <p><em>Contoh: Pergerakan nilai tukar Rupiah terhadap Dolar selama satu bulan terakhir.</em></p>
 
                     <h3>5. Diagram Pencar (Scatter Plot)</h3>
                     <p><strong>Fungsi Utama: Korelasi (Hubungan).</strong> Digunakan untuk melihat apakah ada hubungan antara dua variabel berbeda.</p>
                     <img src="pencar.jpg" alt="(Tempat Gambar: pencar.jpg)" class="ilustrasi-mini">
-                    <p><em>Contoh: Melihat hubungan antara 'durasi olahraga per minggu' dengan 'berat badan'.</em></p>
                 </div>
-                <button class="btn-action" onclick="mulaiKuis()">Saya Paham, Mulai Tantangan 15 Soal!</button>
+                <button class="btn-action" onclick="mulaiKuis()">Saya Paham, Mulai Tantangan Kuis!</button>
             </div>
 
             <div id="area-kuis" class="area-konten question-area">
                 <h2 id="indikator-soal">Soal 1 dari 15</h2>
                 <h2 id="teks-soal">Teks soal di sini...</h2>
                 <div id="container-opsi" class="opsi-container"></div>
+                
+                <button class="btn-action btn-bantuan" id="tombol-bantuan" onclick="mintaBantuan()">💡 Perlu Bantuan Pak Agus?</button>
+
                 <button class="btn-action btn-disabled" id="tombol-lanjut" onclick="simpanJawaban()" disabled>Pilih Jawaban Dulu</button>
             </div>
 
@@ -144,6 +136,7 @@
                     <h3>Skor Ketuntasan (Syarat: 100)</h3>
                     <div class="angka-skor" id="teks-skor">0</div>
                     <p id="keterangan-hasil">Menghitung skor...</p>
+                    <p class="teks-penalti" id="teks-penalti" style="display: none;">(Skor dikurangi karena menggunakan tombol bantuan)</p>
                 </div>
                 <button id="tombol-ulang" class="btn-action btn-ulang" style="display: none;" onclick="ulangiMateri()">Baca Ulang Materi & Remedial</button>
                 <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="alert('Membuka Modul AR 3D Visualisasi Data...')">Buka Bonus: Simulasi AR 3D</button>
@@ -164,30 +157,48 @@
         let indeksSoalSekarang = 0;
         let jumlahBenar = 0;
         let jawabanTerpilihSementara = null;
+        
+        // Logika Tracker Bantuan
+        let bantuanPerSoalDipakai = false; 
+        let totalKaliBantuan = 0;
+        const POIN_PENALTI_BANTUAN = 5; // Setiap klik minta bantuan dikurangi 5 dari skor akhir
         const KKM = 100; 
 
         function simpanNamaSiswa() {
             let inputNama = document.getElementById('input-nama-siswa').value.trim();
-            if (inputNama === "") {
-                alert("Hei, jangan lupa ketik nama kamu dulu ya!");
-                return;
-            }
-            
+            if (inputNama === "") { alert("Hei, jangan lupa ketik nama kamu dulu ya!"); return; }
             namaSiswa = inputNama.charAt(0).toUpperCase() + inputNama.slice(1);
             document.getElementById('area-mentor-global').style.display = "block";
             tampilkanMateri();
         }
 
+        function aturMentor(mode) {
+            const kotak = document.getElementById('kotak-mentor');
+            const nama = document.getElementById('nama-mentor');
+            if(mode === "normal") {
+                kotak.classList.remove('peringatan');
+                nama.classList.remove('peringatan');
+                document.getElementById('avatar-mentor').innerText = "👨‍🏫";
+            } else if (mode === "bantuan") {
+                kotak.classList.add('peringatan');
+                nama.classList.add('peringatan');
+                document.getElementById('avatar-mentor').innerText = "💡";
+            }
+        }
+
         function tampilkanMateri() {
             ubahTampilan('area-materi');
-            document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa}! Silakan pelajari modul ini dengan teliti. Perhatikan gambar infografisnya agar paham penggunaannya. Bapak tunggu di sesi kuis!`;
+            aturMentor("normal");
+            document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa}! Silakan pelajari modul ini dengan teliti. Perhatikan gambar infografisnya. Bapak tunggu di sesi kuis!`;
             indeksSoalSekarang = 0;
             jumlahBenar = 0;
+            totalKaliBantuan = 0; // Reset bantuan
         }
 
         function mulaiKuis() {
             ubahTampilan('area-kuis');
-            document.getElementById('pesan-mentor').innerText = `Fokus ya, ${namaSiswa}! Jawab 15 soal secara berurutan. Ingat, target kita adalah penguasaan materi 100%.`;
+            aturMentor("normal");
+            document.getElementById('pesan-mentor').innerText = `Fokus ya, ${namaSiswa}! Jawab 15 soal secara berurutan. Kamu boleh minta bantuan, tapi skor tertinggimu akan dikurangi.`;
             
             daftarSoalBerjalan = [...daftarSoalAsli];
             for (let i = daftarSoalBerjalan.length - 1; i > 0; i--) {
@@ -202,7 +213,22 @@
             document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1} dari ${daftarSoalBerjalan.length}`;
             document.getElementById('teks-soal').innerText = soalAktif.p;
             
+            // Reset state untuk soal baru
             jawabanTerpilihSementara = null;
+            bantuanPerSoalDipakai = false;
+            
+            // Reset Tombol Bantuan
+            const btnBantuan = document.getElementById('tombol-bantuan');
+            btnBantuan.style.display = "block";
+            btnBantuan.disabled = false;
+            btnBantuan.classList.remove('btn-disabled');
+            btnBantuan.innerText = "💡 Perlu Bantuan Pak Agus?";
+
+            // Reset Mentor Box
+            aturMentor("normal");
+            document.getElementById('pesan-mentor').innerText = `Pikirkan baik-baik, ${namaSiswa}. Kamu pasti bisa!`;
+
+            // Reset Tombol Lanjut
             const tombolLanjut = document.getElementById('tombol-lanjut');
             tombolLanjut.innerText = (indeksSoalSekarang === daftarSoalBerjalan.length - 1) ? "Kirim Semua Jawaban" : "Lanjut ke Soal Berikutnya";
             tombolLanjut.classList.add('btn-disabled');
@@ -218,6 +244,23 @@
                 btn.onclick = () => pilihOpsi(index, btn);
                 containerOpsi.appendChild(btn);
             });
+        }
+
+        // FUNGSI BARU: Minta Bantuan
+        function mintaBantuan() {
+            if(bantuanPerSoalDipakai) return; // Cegah klik dobel
+            
+            bantuanPerSoalDipakai = true;
+            totalKaliBantuan++;
+
+            let soalAktif = daftarSoalBerjalan[indeksSoalSekarang];
+            aturMentor("bantuan");
+            document.getElementById('pesan-mentor').innerText = `PETUNJUK: ${soalAktif.b} (Peringatan: Skor akhirmu akan dipotong ${POIN_PENALTI_BANTUAN} poin).`;
+            
+            const btnBantuan = document.getElementById('tombol-bantuan');
+            btnBantuan.disabled = true;
+            btnBantuan.classList.add('btn-disabled');
+            btnBantuan.innerText = "✔️ Bantuan Telah Diberikan";
         }
 
         function pilihOpsi(indexPilihan, tombolDiklik) {
@@ -248,16 +291,39 @@
 
         function tampilkanHasil() {
             ubahTampilan('area-hasil');
-            let skorAkhir = Math.round((jumlahBenar / daftarSoalBerjalan.length) * 100);
+            aturMentor("normal");
+            
+            // Perhitungan Skor (Hitung murni dulu, baru kurangi penalti)
+            let skorAwal = Math.round((jumlahBenar / daftarSoalBerjalan.length) * 100);
+            let totalPenalti = totalKaliBantuan * POIN_PENALTI_BANTUAN;
+            let skorAkhir = skorAwal - totalPenalti;
+            
+            // Cegah skor minus
+            if (skorAkhir < 0) skorAkhir = 0;
+
             document.getElementById('teks-skor').innerText = skorAkhir;
 
+            let teksPenaltiEl = document.getElementById('teks-penalti');
+            if (totalKaliBantuan > 0) {
+                teksPenaltiEl.style.display = "block";
+                teksPenaltiEl.innerText = `(Terdapat penalti -${totalPenalti} poin karena menekan tombol bantuan ${totalKaliBantuan} kali)`;
+            } else {
+                teksPenaltiEl.style.display = "none";
+            }
+
             if (skorAkhir >= KKM) {
-                document.getElementById('pesan-mentor').innerText = `Luar biasa, ${namaSiswa}! Kamu berhasil menjawab ${jumlahBenar} dari 15 soal dengan benar. Pertahankan prestasimu!`;
+                document.getElementById('pesan-mentor').innerText = `Luar biasa, ${namaSiswa}! Kamu benar semua TANPA minta bantuan sama sekali. Penguasaan materimu murni 100%!`;
                 document.getElementById('keterangan-hasil').innerText = "Status: TUNTAS (Mastery Achieved).";
                 document.getElementById('tombol-selesai').style.display = "block";
                 document.getElementById('tombol-ulang').style.display = "none";
             } else {
-                document.getElementById('pesan-mentor').innerText = `Skormu ${skorAkhir} (Benar ${jumlahBenar}/15). Target ketuntasan kita adalah 100%. Jangan menyerah ya, ${namaSiswa}, ayo baca ulang modulnya!`;
+                if (skorAwal === 100 && totalKaliBantuan > 0) {
+                    // Kasus khusus: Benar semua, tapi minta bantuan
+                    document.getElementById('pesan-mentor').innerText = `Kamu menjawab semua soal dengan benar, ${namaSiswa}, TAPI kamu menggunakan tombol bantuan. Nilai KKM 100 menuntut kemandirian penuh. Ayo remedial!`;
+                } else {
+                    document.getElementById('pesan-mentor').innerText = `Skormu ${skorAkhir}. Target ketuntasan kita adalah 100% secara mandiri. Jangan menyerah ya, ${namaSiswa}, ayo baca ulang modulnya!`;
+                }
+                
                 document.getElementById('keterangan-hasil').innerText = "Status: BELUM TUNTAS. Silakan remedial.";
                 document.getElementById('tombol-ulang').style.display = "block";
                 document.getElementById('tombol-selesai').style.display = "none";
