@@ -41,8 +41,11 @@
         .login-area { text-align: center; padding: 20px 0; }
         .login-area h2 { color: var(--warna-utama); margin-bottom: 10px; }
         .login-area p { margin-bottom: 25px; color: #6b7280; }
-        .input-nama { width: 100%; padding: 15px; border: 2px solid #D1D5DB; border-radius: 8px; font-size: 1.1rem; margin-bottom: 20px; text-align: center; }
-        .input-nama:focus { border-color: var(--warna-utama); outline: none; }
+        
+        /* Desain Select Box Baru */
+        select.input-nama { width: 100%; padding: 15px; border: 2px solid #D1D5DB; border-radius: 8px; font-size: 1rem; margin-bottom: 15px; text-align: center; background-color: white; cursor: pointer;}
+        select.input-nama:focus { border-color: var(--warna-utama); outline: none; }
+        select.input-nama:disabled { background-color: #F3F4F6; cursor: not-allowed; }
 
         .teks-materi { background: #f9fafb; padding: 20px; border-radius: 8px; border: 1px solid #e5e7eb; line-height: 1.6; text-align: justify; margin-bottom: 20px; font-size: 0.95rem; height: 450px; overflow-y: auto; }
         .teks-materi h3 { margin-top: 25px; color: var(--warna-utama); border-bottom: 2px solid #eee; padding-bottom: 10px;}
@@ -77,7 +80,7 @@
 
     <div class="app-container">
         <div class="header">
-            <a href="index.html" class="back-btn">🔙 Dashboard</a>
+            <a href="index.html" class="back-btn" onclick="hapusProgres()">🔙 Dashboard</a>
             <h1>Modul Analisis Data</h1>
             <p>Informatika Fase E - Kelas X</p>
         </div>
@@ -86,8 +89,16 @@
             <div id="area-login" class="area-konten area-aktif">
                 <div class="login-area">
                     <h2>Selamat Datang!</h2>
-                    <p>Silakan masukkan nama kamu untuk memulai sesi belajar.</p>
-                    <input type="text" id="input-nama-siswa" class="input-nama" placeholder="Ketik namamu di sini..." autocomplete="off">
+                    <p>Silakan pilih kelas dan namamu untuk memulai.</p>
+                    
+                    <select id="pilih-kelas" class="input-nama" onchange="filterNama()">
+                        <option value="">-- Pilih Kelas --</option>
+                        </select>
+
+                    <select id="pilih-nama" class="input-nama" disabled>
+                        <option value="">-- Pilih Nama --</option>
+                        </select>
+
                     <button class="btn-action" onclick="simpanNamaSiswa()">Mulai Belajar</button>
                 </div>
             </div>
@@ -143,7 +154,7 @@
                     <p class="teks-penalti" id="teks-penalti" style="display: none;">(Skor dikurangi karena menggunakan tombol bantuan)</p>
                 </div>
                 <button id="tombol-ulang" class="btn-action btn-ulang" style="display: none;" onclick="ulangiMateri()">Baca Ulang Materi & Remedial</button>
-                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="alert('Membuka Modul AR 3D Visualisasi Data...')">Buka Bonus: Simulasi AR 3D</button>
+                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="kembaliKeDashboard()">Buka Bonus: Simulasi AR 3D</button>
             </div>
         </div>
 
@@ -154,30 +165,131 @@
     </div>
 
     <script src="soal.js"></script>
+    <script src="siswa.js"></script>
 
     <script>
         let namaSiswa = ""; 
+        let kelasSiswa = "";
         let daftarSoalBerjalan = [];
         let indeksSoalSekarang = 0;
         let jumlahBenar = 0;
         let jawabanTerpilihSementara = null;
         
-        // Logika Tracker & Analitik
         let bantuanPerSoalDipakai = false; 
         let totalKaliBantuan = 0;
-        let jumlahPercobaan = 0; // Menghitung berapa kali anak ini mengulang
+        let jumlahPercobaan = 0; 
         const POIN_PENALTI_BANTUAN = 5; 
         const KKM = 100; 
 
-        // ==========================================
-        // URL GOOGLE APPS SCRIPT (UNTUK DATABASE)
-        // ==========================================
-        const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzPcanC73JEFcHGfgKWDRfaUTNaztpOGZSmM61VqV_BfkiEYWebWNSHnZTE7Zx-4XDn/exec";
+        const URL_APPS_SCRIPT = "PASTE_URL_APPS_SCRIPT_ANDA_DI_SINI";
 
+        // ==========================================
+        // 1. SISTEM DROPDOWN SISWA
+        // ==========================================
+        function inisialisasiDropdown() {
+            // Mengambil daftar kelas unik dari siswa.js
+            const unikKelas = [...new Set(SISWA_BARU.map(s => s.kelas))].sort();
+            const selectKelas = document.getElementById('pilih-kelas');
+            
+            unikKelas.forEach(k => {
+                let opt = document.createElement('option');
+                opt.value = k;
+                opt.innerText = k;
+                selectKelas.appendChild(opt);
+            });
+        }
+
+        function filterNama() {
+            const kelasDipilih = document.getElementById('pilih-kelas').value;
+            const selectNama = document.getElementById('pilih-nama');
+            
+            // Reset dropdown nama
+            selectNama.innerHTML = '<option value="">-- Pilih Nama --</option>';
+            
+            if(kelasDipilih === "") {
+                selectNama.disabled = true;
+                return;
+            }
+            
+            selectNama.disabled = false;
+            // Filter siswa berdasarkan kelas, lalu urutkan abjad
+            const siswaKelas = SISWA_BARU.filter(s => s.kelas === kelasDipilih).sort((a,b) => a.nama.localeCompare(b.nama));
+            
+            siswaKelas.forEach(s => {
+                let opt = document.createElement('option');
+                opt.value = s.nama;
+                opt.innerText = s.nama;
+                selectNama.appendChild(opt);
+            });
+        }
+
+        // ==========================================
+        // 2. SISTEM RESUME (ANTI-HILANG SAAT REFRESH)
+        // ==========================================
+        function simpanProgres(faseSistem) {
+            const progresState = {
+                nama: namaSiswa,
+                kelas: kelasSiswa,
+                fase: faseSistem, // 'materi' atau 'kuis'
+                soal: daftarSoalBerjalan,
+                indeks: indeksSoalSekarang,
+                benar: jumlahBenar,
+                bantuan: totalKaliBantuan,
+                percobaan: jumlahPercobaan
+            };
+            localStorage.setItem('eduAdaptif_ModulAD', JSON.stringify(progresState));
+        }
+
+        function muatProgres() {
+            const simpanan = localStorage.getItem('eduAdaptif_ModulAD');
+            
+            if(simpanan) {
+                // Jika ada data tersimpan, pulihkan variabel
+                const p = JSON.parse(simpanan);
+                namaSiswa = p.nama;
+                kelasSiswa = p.kelas;
+                daftarSoalBerjalan = p.soal;
+                indeksSoalSekarang = p.indeks;
+                jumlahBenar = p.benar;
+                totalKaliBantuan = p.bantuan;
+                jumlahPercobaan = p.percobaan;
+
+                document.getElementById('area-mentor-global').style.display = "block";
+                
+                // Arahkan ke fase yang tepat
+                if (p.fase === 'materi') {
+                    tampilkanMateri();
+                } else if (p.fase === 'kuis') {
+                    ubahTampilan('area-kuis');
+                    aturMentor("normal");
+                    document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa}! Kamu kembali. Ayo lanjutkan kuisnya dari soal nomor ${indeksSoalSekarang + 1}.`;
+                    muatSoal(); // Render ulang soal terakhir
+                }
+            } else {
+                // Jika belum pernah login, siapkan form login
+                inisialisasiDropdown();
+            }
+        }
+
+        function hapusProgres() {
+            localStorage.removeItem('eduAdaptif_ModulAD');
+        }
+
+        // Jalankan muatProgres saat halaman pertama kali dibuka
+        window.onload = muatProgres;
+
+        // ==========================================
+        // 3. LOGIKA APLIKASI UTAMA
+        // ==========================================
         function simpanNamaSiswa() {
-            let inputNama = document.getElementById('input-nama-siswa').value.trim();
-            if (inputNama === "") { alert("Hei, jangan lupa ketik nama kamu dulu ya!"); return; }
-            namaSiswa = inputNama.charAt(0).toUpperCase() + inputNama.slice(1);
+            kelasSiswa = document.getElementById('pilih-kelas').value;
+            namaSiswa = document.getElementById('pilih-nama').value;
+            
+            if (kelasSiswa === "" || namaSiswa === "") { 
+                alert("Pilih kelas dan namamu dulu ya dari daftar!"); 
+                return; 
+            }
+            
             document.getElementById('area-mentor-global').style.display = "block";
             tampilkanMateri();
         }
@@ -199,24 +311,28 @@
         function tampilkanMateri() {
             ubahTampilan('area-materi');
             aturMentor("normal");
-            document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa}! Silakan pelajari modul ini dengan teliti. Perhatikan gambar infografisnya. Bapak tunggu di sesi kuis!`;
+            document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa} dari ${kelasSiswa}! Silakan pelajari modul ini dengan teliti. Bapak tunggu di sesi kuis!`;
             indeksSoalSekarang = 0;
             jumlahBenar = 0;
             totalKaliBantuan = 0; 
+            
+            simpanProgres('materi'); // Simpan state
         }
 
         function mulaiKuis() {
             ubahTampilan('area-kuis');
             aturMentor("normal");
-            document.getElementById('pesan-mentor').innerText = `Fokus ya, ${namaSiswa}! Jawab 15 soal secara berurutan. Kamu boleh minta bantuan, tapi skor tertinggimu akan dikurangi.`;
+            document.getElementById('pesan-mentor').innerText = `Fokus ya, ${namaSiswa}! Jawab 15 soal secara berurutan. Kamu boleh minta bantuan, tapi skor akan dikurangi.`;
             
-            jumlahPercobaan++; // Menambah hitungan percobaan (1, 2, 3...)
+            jumlahPercobaan++; 
             
             daftarSoalBerjalan = [...daftarSoalAsli];
             for (let i = daftarSoalBerjalan.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [daftarSoalBerjalan[i], daftarSoalBerjalan[j]] = [daftarSoalBerjalan[j], daftarSoalBerjalan[i]];
             }
+            
+            simpanProgres('kuis'); // Simpan state
             muatSoal();
         }
 
@@ -235,7 +351,7 @@
             btnBantuan.innerText = "💡 Perlu Bantuan Pak Agus?";
 
             aturMentor("normal");
-            document.getElementById('pesan-mentor').innerText = `Pikirkan baik-baik, ${namaSiswa}. Kamu pasti bisa!`;
+            document.getElementById('pesan-mentor').innerText = `Pikirkan baik-baik. Kamu pasti bisa!`;
 
             const tombolLanjut = document.getElementById('tombol-lanjut');
             tombolLanjut.innerText = (indeksSoalSekarang === daftarSoalBerjalan.length - 1) ? "Kirim Semua Jawaban" : "Lanjut ke Soal Berikutnya";
@@ -262,12 +378,14 @@
 
             let soalAktif = daftarSoalBerjalan[indeksSoalSekarang];
             aturMentor("bantuan");
-            document.getElementById('pesan-mentor').innerText = `PETUNJUK: ${soalAktif.b} (Peringatan: Skor akhirmu akan dipotong ${POIN_PENALTI_BANTUAN} poin).`;
+            document.getElementById('pesan-mentor').innerText = `PETUNJUK: ${soalAktif.b} (Peringatan: Penalti -${POIN_PENALTI_BANTUAN} poin).`;
             
             const btnBantuan = document.getElementById('tombol-bantuan');
             btnBantuan.disabled = true;
             btnBantuan.classList.add('btn-disabled');
             btnBantuan.innerText = "✔️ Bantuan Telah Diberikan";
+            
+            simpanProgres('kuis'); // Update state jumlah bantuan
         }
 
         function pilihOpsi(indexPilihan, tombolDiklik) {
@@ -289,9 +407,12 @@
             }
 
             indeksSoalSekarang++;
+            
             if (indeksSoalSekarang < daftarSoalBerjalan.length) { 
+                simpanProgres('kuis'); // Simpan kemajuan per soal
                 muatSoal(); 
             } else { 
+                hapusProgres(); // Kuis selesai, hapus pelacakan agar kalau refresh ngulang
                 tampilkanHasil(); 
             }
         }
@@ -325,7 +446,7 @@
                 statusSiswa = "TUNTAS";
             } else {
                 if (skorAwal === 100 && totalKaliBantuan > 0) {
-                    document.getElementById('pesan-mentor').innerText = `Kamu menjawab semua soal dengan benar, ${namaSiswa}, TAPI kamu menggunakan tombol bantuan. Nilai KKM 100 menuntut kemandirian penuh. Ayo remedial!`;
+                    document.getElementById('pesan-mentor').innerText = `Kamu menjawab semua soal dengan benar, ${namaSiswa}, TAPI kamu menggunakan bantuan. Nilai KKM 100 menuntut kemandirian penuh. Ayo remedial!`;
                 } else {
                     document.getElementById('pesan-mentor').innerText = `Skormu ${skorAkhir}. Target ketuntasan kita adalah 100% secara mandiri. Jangan menyerah ya, ${namaSiswa}, ayo baca ulang modulnya!`;
                 }
@@ -335,33 +456,35 @@
                 statusSiswa = "REMEDIAL";
             }
 
-            // MENGIRIM DATA KE GOOGLE SHEETS
+            // PENGIRIMAN DATA KE DATABASE SPREADSHEET
             if(URL_APPS_SCRIPT !== "PASTE_URL_APPS_SCRIPT_ANDA_DI_SINI") {
-                const dataKirim = {
-                    namaSiswa: namaSiswa,
+                const dataKirim = new URLSearchParams({
+                    namaSiswa: namaSiswa + " (" + kelasSiswa + ")",
                     modul: "Analisis Data (AD)",
                     skor: skorAkhir,
                     bantuan: totalKaliBantuan,
                     percobaan: jumlahPercobaan,
                     status: statusSiswa
-                };
+                });
 
                 fetch(URL_APPS_SCRIPT, {
                     method: 'POST',
-                    mode: 'no-cors', 
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dataKirim)
-                }).then(() => {
-                    console.log("Data terekam di Spreadsheet.");
+                    body: dataKirim
+                }).then(response => {
+                    console.log("Mantap! Data terekam di Spreadsheet.");
                 }).catch(error => {
                     console.error("Gagal mengirim data:", error);
                 });
-            } else {
-                console.log("URL Apps Script belum diisi. Data tidak dikirim ke Google Sheets.");
             }
         }
 
         function ulangiMateri() { tampilkanMateri(); }
+        
+        function kembaliKeDashboard() {
+            hapusProgres();
+            window.location.href = "index.html";
+        }
+
         function ubahTampilan(idArea) {
             document.querySelectorAll('.area-konten').forEach(area => area.className = 'area-konten');
             document.getElementById(idArea).className = 'area-konten area-aktif';
@@ -369,4 +492,3 @@
     </script>
 </body>
 </html>
-
