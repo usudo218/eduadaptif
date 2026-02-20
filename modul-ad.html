@@ -385,7 +385,9 @@
             }
             if(URL_APPS_SCRIPT !== "https://script.google.com/macros/s/AKfycbzPcanC73JEFcHGfgKWDRfaUTNaztpOGZSmM61VqV_BfkiEYWebWNSHnZTE7Zx-4XDn/exec") {
                 const dataKirim = new URLSearchParams({ namaSiswa: namaSiswa + " (" + kelasSiswa + ")", modul: "Analisis Data (AD)", skor: skorAkhir, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, status: statusSiswa });
-                fetch(URL_APPS_SCRIPT, { method: 'POST', body: dataKirim }).then(response => { console.log("Data terekam."); }).catch(error => { console.error("Gagal kirim:", error); });
+                fetch(URL_APPS_SCRIPT, { method: 'POST', mode: 'no-cors', body: dataKirim })
+    .then(response => { console.log("Data dikirim ke server."); })
+    .catch(error => { console.error("Gagal kirim:", error); });
             }
         }
 
