@@ -15,7 +15,7 @@
 
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--warna-latar); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; color: var(--warna-teks); }
-        .app-container { background: white; width: 100%; max-width: 800px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
+        .app-container { background: white; width: 100%; max-width: 900px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
         .header { background: var(--warna-utama); color: white; padding: 30px 20px; text-align: center; }
         .header h1 { margin: 0; font-size: 2rem; }
@@ -74,34 +74,34 @@
     <div class="app-container">
         <div class="header">
             <h1>EduAdaptif SMA</h1>
-            <p>Platform Ketuntasan Belajar Informatika Kelas 10</p>
+            <p>Platform Ketuntasan Belajar Informatika Fase E (Kelas X)</p>
         </div>
 
         <div class="content">
             <div class="mentor-box">
                 <div class="mentor-avatar">👨‍🏫</div>
                 <div class="mentor-message">
-                    <span class="mentor-name">Pak Cokro</span>
+                    <span class="mentor-name">Pak Agus</span>
                     <span id="pesan-mentor">Selamat datang di Dashboard Utama! Silakan pilih modul pembelajaran yang tersedia di bawah ini. Pastikan kamu menuntaskan setiap modul hingga 100% ya.</span>
                 </div>
             </div>
 
             <div class="grid-modul">
-                <div class="card" onclick="alert('Modul ini belum aktif.')">
+                <div class="card" onclick="alert('Modul ini belum diaktifkan oleh Pak Agus.')">
                     <div class="card-elemen">Elemen TIK</div>
                     <h3 class="card-judul">Aplikasi Perkantoran</h3>
-                    <p class="card-deskripsi">Mempelajari integrasi pengolah kata, angka, dan presentasi serta fitur mailmerge.</p>
+                    <p class="card-deskripsi">Mempelajari integrasi pengolah kata, angka, presentasi, dan fitur mailmerge.</p>
                     <div class="card-status status-kunci">🔒 Belum Tersedia</div>
                 </div>
 
-                <div class="card" onclick="alert('Modul ini belum aktif.')">
+                <div class="card" onclick="alert('Modul ini belum diaktifkan oleh Pak Agus.')">
                     <div class="card-elemen">Elemen SK</div>
                     <h3 class="card-judul">Sistem Komputer</h3>
-                    <p class="card-deskripsi">Mempelajari komponen hardware, software, peran sistem operasi, dan instalasi.</p>
+                    <p class="card-deskripsi">Mempelajari komponen hardware, software, sistem operasi, dan instalasi.</p>
                     <div class="card-status status-kunci">🔒 Belum Tersedia</div>
                 </div>
 
-                <div class="card" onclick="alert('Modul ini belum aktif.')">
+                <div class="card" onclick="alert('Modul ini belum diaktifkan oleh Pak Agus.')">
                     <div class="card-elemen">Elemen JKI</div>
                     <h3 class="card-judul">Jaringan Komputer</h3>
                     <p class="card-deskripsi">Mempelajari konektivitas jaringan lokal, internet nirkabel, dan enkripsi data.</p>
@@ -115,17 +115,31 @@
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
-                <div class="card" onclick="alert('Modul ini belum aktif.')">
+                <div class="card" onclick="alert('Modul ini belum diaktifkan oleh Pak Agus.')">
                     <div class="card-elemen">Elemen DSI</div>
                     <h3 class="card-judul">Dampak Sosial TIK</h3>
-                    <p class="card-deskripsi">Mempelajari sejarah komputer, Hak Kekayaan Intelektual, dan UU ITE.</p>
+                    <p class="card-deskripsi">Mempelajari sejarah komputer, Hak Kekayaan Intelektual, dan lisensi produk TIK.</p>
                     <div class="card-status status-kunci">🔒 Belum Tersedia</div>
                 </div>
 
-                <div class="card" onclick="alert('Modul ini belum aktif.')">
+                <div class="card" onclick="alert('Modul ini belum diaktifkan oleh Pak Agus.')">
                     <div class="card-elemen">Elemen BK</div>
                     <h3 class="card-judul">Berpikir Komputasional</h3>
-                    <p class="card-deskripsi">Menerapkan algoritma pencarian (searching) dan pengurutan (sorting).</p>
+                    <p class="card-deskripsi">Menerapkan algoritma pencarian (searching), pengurutan (sorting), stack, dan queue.</p>
+                    <div class="card-status status-kunci">🔒 Belum Tersedia</div>
+                </div>
+
+                <div class="card" onclick="alert('Modul ini belum diaktifkan oleh Pak Agus.')">
+                    <div class="card-elemen">Elemen AP</div>
+                    <h3 class="card-judul">Algoritma & Pemrograman</h3>
+                    <p class="card-deskripsi">Mempelajari bahasa pemrograman prosedural tekstual dan struktur kontrol kondisional.</p>
+                    <div class="card-status status-kunci">🔒 Belum Tersedia</div>
+                </div>
+
+                <div class="card" onclick="alert('Modul ini belum diaktifkan oleh Pak Agus.')">
+                    <div class="card-elemen">Elemen PLB</div>
+                    <h3 class="card-judul">Praktik Lintas Bidang</h3>
+                    <p class="card-deskripsi">Kolaborasi proyek inklusif untuk merancang algoritma dan mengelola data masyarakat.</p>
                     <div class="card-status status-kunci">🔒 Belum Tersedia</div>
                 </div>
             </div>
