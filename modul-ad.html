@@ -314,7 +314,7 @@
                 document.getElementById('keterangan-hasil').innerText = "Status: BELUM TUNTAS. Silakan remedial.";
                 document.getElementById('tombol-ulang').style.display = "block"; document.getElementById('tombol-selesai').style.display = "none"; statusSiswa = "REMEDIAL";
             }
-            if(URL_APPS_SCRIPT !== "PASTE_URL_APPS_SCRIPT_ANDA_DI_SINI") {
+            if(URL_APPS_SCRIPT !== "https://script.google.com/macros/s/AKfycbzPcanC73JEFcHGfgKWDRfaUTNaztpOGZSmM61VqV_BfkiEYWebWNSHnZTE7Zx-4XDn/exec") {
                 const dataKirim = new URLSearchParams({ namaSiswa: namaSiswa + " (" + kelasSiswa + ")", modul: "Analisis Data (AD)", skor: skorAkhir, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, status: statusSiswa });
                 fetch(URL_APPS_SCRIPT, { method: 'POST', body: dataKirim }).then(response => { console.log("Data terekam."); }).catch(error => { console.error("Gagal kirim:", error); });
             }
