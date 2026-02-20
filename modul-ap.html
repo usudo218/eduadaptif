@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul Analisis Data - EduAdaptif SMA</title>
+    <title>Modul Algoritma & Pemrograman - EduAdaptif SMA</title>
     <style>
         :root {
-            --warna-utama: #4F46E5; 
-            --warna-aksen: #10B981; 
+            --warna-utama: #2563EB; /* Warna Biru agar berbeda dengan Modul AD */
+            --warna-aksen: #059669; 
             --warna-merah: #EF4444;
             --warna-kuning: #F59E0B; 
             --warna-latar: #F3F4F6; 
             --warna-teks: #1F2937;  
-            --latar-mentor: #E0E7FF; 
+            --latar-mentor: #DBEAFE; 
         }
 
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--warna-latar); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; color: var(--warna-teks); }
-        .app-container { background: white; width: 100%; max-width: 600px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
+        .app-container { background: white; width: 100%; max-width: 650px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
         .header { background: var(--warna-utama); color: white; padding: 20px; text-align: center; position: relative;}
         .header h1 { margin: 0; font-size: 1.5rem; }
-        .header p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.8; }
+        .header p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
         .back-btn { position: absolute; top: 15px; left: 15px; color: white; text-decoration: none; font-size: 0.9rem; background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 5px; transition: 0.2s;}
         .back-btn:hover { background: rgba(255,255,255,0.4); }
 
@@ -42,16 +42,16 @@
         .login-area h2 { color: var(--warna-utama); margin-bottom: 10px; }
         .login-area p { margin-bottom: 25px; color: #6b7280; }
         
-        /* Desain Select Box Baru */
         select.input-nama { width: 100%; padding: 15px; border: 2px solid #D1D5DB; border-radius: 8px; font-size: 1rem; margin-bottom: 15px; text-align: center; background-color: white; cursor: pointer;}
         select.input-nama:focus { border-color: var(--warna-utama); outline: none; }
         select.input-nama:disabled { background-color: #F3F4F6; cursor: not-allowed; }
 
-        .teks-materi { background: #f9fafb; padding: 20px; border-radius: 8px; border: 1px solid #e5e7eb; line-height: 1.6; text-align: justify; margin-bottom: 20px; font-size: 0.95rem; height: 450px; overflow-y: auto; }
-        .teks-materi h3 { margin-top: 25px; color: var(--warna-utama); border-bottom: 2px solid #eee; padding-bottom: 10px;}
+        .teks-materi { background: #f9fafb; padding: 25px; border-radius: 8px; border: 1px solid #e5e7eb; line-height: 1.7; text-align: justify; margin-bottom: 20px; font-size: 0.95rem; height: 500px; overflow-y: auto; }
+        .teks-materi h3 { margin-top: 30px; color: var(--warna-utama); border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;}
         .teks-materi h3:first-child { margin-top: 0; }
-        .ilustrasi-mini { width: 100%; height: auto; min-height: 150px; background-color: #e5e7eb; object-fit: contain; border-radius: 8px; margin: 10px 0; border: 1px dashed #9ca3af; display: flex; align-items: center; justify-content: center; color: #6b7280; font-size: 0.8rem; }
-        
+        .ilustrasi-mini { width: 100%; height: auto; min-height: 150px; background-color: #e5e7eb; object-fit: contain; border-radius: 8px; margin: 15px 0; border: 1px dashed #9ca3af; }
+        .kode-snippet { background: #1F2937; color: #10B981; padding: 10px 15px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; overflow-x: auto; margin: 10px 0;}
+
         .question-area { text-align: center; }
         .question-area h2#teks-soal { font-size: 1.1rem; margin-bottom: 25px; color: #333; line-height: 1.5; text-align: left; font-weight: 600; }
         .opsi-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
@@ -60,7 +60,7 @@
         .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); color: var(--warna-utama); font-weight: bold; }
 
         .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
-        .btn-action:hover { background: #4338CA; }
+        .btn-action:hover { background: #1D4ED8; }
         .btn-submit { background: var(--warna-aksen); }
         .btn-submit:hover { background: #059669; }
         .btn-ulang { background: var(--warna-merah); }
@@ -81,7 +81,7 @@
     <div class="app-container">
         <div class="header">
             <a href="index.html" class="back-btn" onclick="hapusProgres()">🔙 Dashboard</a>
-            <h1>Modul Analisis Data</h1>
+            <h1>Modul Algoritma & Pemrograman</h1>
             <p>Informatika Fase E - Kelas X</p>
         </div>
 
@@ -93,11 +93,11 @@
                     
                     <select id="pilih-kelas" class="input-nama" onchange="filterNama()">
                         <option value="">-- Pilih Kelas --</option>
-                        </select>
+                    </select>
 
                     <select id="pilih-nama" class="input-nama" disabled>
                         <option value="">-- Pilih Nama --</option>
-                        </select>
+                    </select>
 
                     <button class="btn-action" onclick="simpanNamaSiswa()">Mulai Belajar</button>
                 </div>
@@ -115,24 +115,45 @@
 
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
-                    <h3>1. Pengantar Visualisasi Data</h3>
-                    <p>Visualisasi data bukan sekadar membuat gambar yang bagus, tetapi memilih representasi visual yang paling tepat untuk menceritakan "isi hati" data tersebut agar mudah dianalisis.</p>
+                    <h3>1. Pengantar Algoritma & Flowchart</h3>
+                    <p><strong>Algoritma</strong> adalah urutan langkah-langkah logis untuk menyelesaikan masalah. Sebelum menulis kode di komputer, programmer biasanya merancang alurnya menggunakan <strong>Flowchart (Diagram Alir)</strong> atau <em>Pseudocode</em>.</p>
+                    <img src="flowchart.jpg" alt="(Pastikan file flowchart.jpg ada)" class="ilustrasi-mini">
+                    <p>Simbol penting Flowchart: <em>Oval</em> (Mulai/Selesai), <em>Jajar Genjang</em> (Input/Output), <em>Persegi Panjang</em> (Proses), dan <em>Belah Ketupat</em> (Keputusan/Decision).</p>
                     
-                    <h3>2. Diagram Batang (Bar Chart)</h3>
-                    <p><strong>Fungsi Utama: Perbandingan Kuantitas.</strong> Digunakan untuk membandingkan nilai antar kategori yang berbeda.</p>
-                    <img src="batang.jpg" alt="(Tempat Gambar: batang.jpg)" class="ilustrasi-mini">
+                    <h3>2. Tipe Data, Variabel & Konstanta</h3>
+                    <p><strong>Variabel</strong> ibarat sebuah kotak kosong yang bisa diisi dan diubah nilainya selama program berjalan. <strong>Konstanta</strong> adalah kotak yang nilainya dikunci (tidak bisa diubah), seperti nilai Pi = 3.14.</p>
+                    <img src="variabel.jpg" alt="(Pastikan file variabel.jpg ada)" class="ilustrasi-mini">
+                    <p><strong>Tipe Data dasar:</strong></p>
+                    <ul>
+                        <li><strong>Integer:</strong> Angka bulat (misal: 10, -5).</li>
+                        <li><strong>Float/Real:</strong> Angka desimal (misal: 3.14).</li>
+                        <li><strong>String:</strong> Teks / kumpulan huruf (misal: "Halo Dunia").</li>
+                        <li><strong>Boolean:</strong> Hanya memiliki 2 nilai: <em>True</em> (Benar) atau <em>False</em> (Salah).</li>
+                    </ul>
 
-                    <h3>3. Grafik Lingkaran (Pie Chart)</h3>
-                    <p><strong>Fungsi Utama: Proporsi/Persentase.</strong> Digunakan untuk menunjukkan bagaimana suatu "keseluruhan" terbagi menjadi bagian-bagian kecil.</p>
-                    <img src="pie.jpg" alt="(Tempat Gambar: pie.jpg)" class="ilustrasi-mini">
-                    
-                    <h3>4. Grafik Garis (Line Chart)</h3>
-                    <p><strong>Fungsi Utama: Tren Waktu.</strong> Digunakan untuk melihat perubahan data yang berkelanjutan dalam kurun waktu tertentu.</p>
-                    <img src="garis.jpg" alt="(Tempat Gambar: garis.jpg)" class="ilustrasi-mini">
+                    <h3>3. Struktur Percabangan (If-Else)</h3>
+                    <p>Digunakan saat program harus mengambil keputusan berdasarkan suatu kondisi (True/False).</p>
+                    <img src="percabangan.jpg" alt="(Pastikan file percabangan.jpg ada)" class="ilustrasi-mini">
+                    <div class="kode-snippet">
+IF (nilai > 75) THEN<br>
+&nbsp;&nbsp;&nbsp;Tulis "Lulus"<br>
+ELSE<br>
+&nbsp;&nbsp;&nbsp;Tulis "Remedial"<br>
+END IF
+                    </div>
 
-                    <h3>5. Diagram Pencar (Scatter Plot)</h3>
-                    <p><strong>Fungsi Utama: Korelasi (Hubungan).</strong> Digunakan untuk melihat apakah ada hubungan antara dua variabel berbeda.</p>
-                    <img src="pencar.jpg" alt="(Tempat Gambar: pencar.jpg)" class="ilustrasi-mini">
+                    <h3>4. Struktur Perulangan (Looping)</h3>
+                    <p>Digunakan untuk menjalankan perintah yang sama berulang kali tanpa harus menulis kodenya berkali-kali.</p>
+                    <img src="perulangan.jpg" alt="(Pastikan file perulangan.jpg ada)" class="ilustrasi-mini">
+                    <ul>
+                        <li><strong>FOR:</strong> Digunakan jika <em>jumlah perulangan sudah diketahui pasti</em> (misal: "Ulangi 10 kali").</li>
+                        <li><strong>WHILE:</strong> Digunakan jika perulangan bergantung pada kondisi, dan kita <em>tidak tahu kapan berhentinya</em> (misal: "Ulangi selama nyawa pemain > 0").</li>
+                    </ul>
+
+                    <h3>5. Array & Subprogram (Fungsi / Prosedur)</h3>
+                    <p><strong>Array (Larik)</strong> adalah struktur data untuk menyimpan banyak nilai bertipe sama di dalam satu variabel. Ingat, nomor laci (Indeks) Array di komputer <strong>selalu dimulai dari angka 0</strong>.</p>
+                    <img src="array.jpg" alt="(Pastikan file array.jpg ada)" class="ilustrasi-mini">
+                    <p><strong>Subprogram:</strong> Memecah program besar menjadi bagian kecil. <strong>Fungsi (Function)</strong> akan mengembalikan sebuah nilai (return value), sedangkan <strong>Prosedur (Procedure)</strong> hanya mengeksekusi aksi tanpa mengembalikan nilai.</p>
                 </div>
                 <button class="btn-action" onclick="mulaiKuis()">Saya Paham, Mulai Tantangan Kuis!</button>
             </div>
@@ -154,7 +175,7 @@
                     <p class="teks-penalti" id="teks-penalti" style="display: none;">(Skor dikurangi karena menggunakan tombol bantuan)</p>
                 </div>
                 <button id="tombol-ulang" class="btn-action btn-ulang" style="display: none;" onclick="ulangiMateri()">Baca Ulang Materi & Remedial</button>
-                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="kembaliKeDashboard()">Buka Bonus: Simulasi AR 3D</button>
+                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="kembaliKeDashboard()">Selesai & Kembali ke Menu</button>
             </div>
         </div>
 
@@ -164,7 +185,7 @@
         </div>
     </div>
 
-    <script src="soal.js"></script>
+    <script src="soal-ap.js"></script>
     <script src="siswa.js"></script>
 
     <script>
@@ -181,114 +202,78 @@
         const POIN_PENALTI_BANTUAN = 5; 
         const KKM = 100; 
 
+        // ==========================================
+        // URL GOOGLE APPS SCRIPT DATABASE
+        // ==========================================
         const URL_APPS_SCRIPT = "PASTE_URL_APPS_SCRIPT_ANDA_DI_SINI";
 
         // ==========================================
-        // 1. SISTEM DROPDOWN SISWA
+        // SISTEM DROPDOWN SISWA
         // ==========================================
         function inisialisasiDropdown() {
-            // Mengambil daftar kelas unik dari siswa.js
             const unikKelas = [...new Set(SISWA_BARU.map(s => s.kelas))].sort();
             const selectKelas = document.getElementById('pilih-kelas');
-            
             unikKelas.forEach(k => {
-                let opt = document.createElement('option');
-                opt.value = k;
-                opt.innerText = k;
-                selectKelas.appendChild(opt);
+                let opt = document.createElement('option'); opt.value = k; opt.innerText = k; selectKelas.appendChild(opt);
             });
         }
 
         function filterNama() {
             const kelasDipilih = document.getElementById('pilih-kelas').value;
             const selectNama = document.getElementById('pilih-nama');
-            
-            // Reset dropdown nama
             selectNama.innerHTML = '<option value="">-- Pilih Nama --</option>';
             
-            if(kelasDipilih === "") {
-                selectNama.disabled = true;
-                return;
-            }
+            if(kelasDipilih === "") { selectNama.disabled = true; return; }
             
             selectNama.disabled = false;
-            // Filter siswa berdasarkan kelas, lalu urutkan abjad
             const siswaKelas = SISWA_BARU.filter(s => s.kelas === kelasDipilih).sort((a,b) => a.nama.localeCompare(b.nama));
-            
             siswaKelas.forEach(s => {
-                let opt = document.createElement('option');
-                opt.value = s.nama;
-                opt.innerText = s.nama;
-                selectNama.appendChild(opt);
+                let opt = document.createElement('option'); opt.value = s.nama; opt.innerText = s.nama; selectNama.appendChild(opt);
             });
         }
 
         // ==========================================
-        // 2. SISTEM RESUME (ANTI-HILANG SAAT REFRESH)
+        // SISTEM RESUME KHUSUS AP (Kunci LocalStorage beda)
         // ==========================================
         function simpanProgres(faseSistem) {
             const progresState = {
-                nama: namaSiswa,
-                kelas: kelasSiswa,
-                fase: faseSistem, // 'materi' atau 'kuis'
-                soal: daftarSoalBerjalan,
-                indeks: indeksSoalSekarang,
-                benar: jumlahBenar,
-                bantuan: totalKaliBantuan,
-                percobaan: jumlahPercobaan
+                nama: namaSiswa, kelas: kelasSiswa, fase: faseSistem, 
+                soal: daftarSoalBerjalan, indeks: indeksSoalSekarang,
+                benar: jumlahBenar, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan
             };
-            localStorage.setItem('eduAdaptif_ModulAD', JSON.stringify(progresState));
+            // ID Penyimpanan khusus Modul AP
+            localStorage.setItem('eduAdaptif_ModulAP', JSON.stringify(progresState));
         }
 
         function muatProgres() {
-            const simpanan = localStorage.getItem('eduAdaptif_ModulAD');
-            
+            const simpanan = localStorage.getItem('eduAdaptif_ModulAP');
             if(simpanan) {
-                // Jika ada data tersimpan, pulihkan variabel
                 const p = JSON.parse(simpanan);
-                namaSiswa = p.nama;
-                kelasSiswa = p.kelas;
-                daftarSoalBerjalan = p.soal;
-                indeksSoalSekarang = p.indeks;
-                jumlahBenar = p.benar;
-                totalKaliBantuan = p.bantuan;
-                jumlahPercobaan = p.percobaan;
+                namaSiswa = p.nama; kelasSiswa = p.kelas;
+                daftarSoalBerjalan = p.soal; indeksSoalSekarang = p.indeks;
+                jumlahBenar = p.benar; totalKaliBantuan = p.bantuan; jumlahPercobaan = p.percobaan;
 
                 document.getElementById('area-mentor-global').style.display = "block";
                 
-                // Arahkan ke fase yang tepat
-                if (p.fase === 'materi') {
-                    tampilkanMateri();
-                } else if (p.fase === 'kuis') {
-                    ubahTampilan('area-kuis');
-                    aturMentor("normal");
-                    document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa}! Kamu kembali. Ayo lanjutkan kuisnya dari soal nomor ${indeksSoalSekarang + 1}.`;
-                    muatSoal(); // Render ulang soal terakhir
+                if (p.fase === 'materi') { tampilkanMateri(); } 
+                else if (p.fase === 'kuis') {
+                    ubahTampilan('area-kuis'); aturMentor("normal");
+                    document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa}! Kamu kembali. Ayo lanjutkan kuis pemrograman dari soal nomor ${indeksSoalSekarang + 1}.`;
+                    muatSoal(); 
                 }
-            } else {
-                // Jika belum pernah login, siapkan form login
-                inisialisasiDropdown();
-            }
+            } else { inisialisasiDropdown(); }
         }
 
-        function hapusProgres() {
-            localStorage.removeItem('eduAdaptif_ModulAD');
-        }
-
-        // Jalankan muatProgres saat halaman pertama kali dibuka
+        function hapusProgres() { localStorage.removeItem('eduAdaptif_ModulAP'); }
         window.onload = muatProgres;
 
         // ==========================================
-        // 3. LOGIKA APLIKASI UTAMA
+        // LOGIKA APLIKASI UTAMA
         // ==========================================
         function simpanNamaSiswa() {
             kelasSiswa = document.getElementById('pilih-kelas').value;
             namaSiswa = document.getElementById('pilih-nama').value;
-            
-            if (kelasSiswa === "" || namaSiswa === "") { 
-                alert("Pilih kelas dan namamu dulu ya dari daftar!"); 
-                return; 
-            }
+            if (kelasSiswa === "" || namaSiswa === "") { alert("Pilih kelas dan namamu dulu ya!"); return; }
             
             document.getElementById('area-mentor-global').style.display = "block";
             tampilkanMateri();
@@ -298,32 +283,24 @@
             const kotak = document.getElementById('kotak-mentor');
             const nama = document.getElementById('nama-mentor');
             if(mode === "normal") {
-                kotak.classList.remove('peringatan');
-                nama.classList.remove('peringatan');
+                kotak.classList.remove('peringatan'); nama.classList.remove('peringatan');
                 document.getElementById('avatar-mentor').innerText = "👨‍🏫";
             } else if (mode === "bantuan") {
-                kotak.classList.add('peringatan');
-                nama.classList.add('peringatan');
+                kotak.classList.add('peringatan'); nama.classList.add('peringatan');
                 document.getElementById('avatar-mentor').innerText = "💡";
             }
         }
 
         function tampilkanMateri() {
-            ubahTampilan('area-materi');
-            aturMentor("normal");
-            document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa} dari ${kelasSiswa}! Silakan pelajari modul ini dengan teliti. Bapak tunggu di sesi kuis!`;
-            indeksSoalSekarang = 0;
-            jumlahBenar = 0;
-            totalKaliBantuan = 0; 
-            
-            simpanProgres('materi'); // Simpan state
+            ubahTampilan('area-materi'); aturMentor("normal");
+            document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa} dari ${kelasSiswa}! Silakan pelajari sintaks dan logika pemrograman ini. Bapak tunggu di sesi kuis!`;
+            indeksSoalSekarang = 0; jumlahBenar = 0; totalKaliBantuan = 0; 
+            simpanProgres('materi'); 
         }
 
         function mulaiKuis() {
-            ubahTampilan('area-kuis');
-            aturMentor("normal");
-            document.getElementById('pesan-mentor').innerText = `Fokus ya, ${namaSiswa}! Jawab 15 soal secara berurutan. Kamu boleh minta bantuan, tapi skor akan dikurangi.`;
-            
+            ubahTampilan('area-kuis'); aturMentor("normal");
+            document.getElementById('pesan-mentor').innerText = `Uji logikamu, ${namaSiswa}! Jawab 15 soal ini dengan teliti.`;
             jumlahPercobaan++; 
             
             daftarSoalBerjalan = [...daftarSoalAsli];
@@ -331,9 +308,7 @@
                 const j = Math.floor(Math.random() * (i + 1));
                 [daftarSoalBerjalan[i], daftarSoalBerjalan[j]] = [daftarSoalBerjalan[j], daftarSoalBerjalan[i]];
             }
-            
-            simpanProgres('kuis'); // Simpan state
-            muatSoal();
+            simpanProgres('kuis'); muatSoal();
         }
 
         function muatSoal() {
@@ -341,85 +316,61 @@
             document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1} dari ${daftarSoalBerjalan.length}`;
             document.getElementById('teks-soal').innerText = soalAktif.p;
             
-            jawabanTerpilihSementara = null;
-            bantuanPerSoalDipakai = false;
+            jawabanTerpilihSementara = null; bantuanPerSoalDipakai = false;
             
             const btnBantuan = document.getElementById('tombol-bantuan');
-            btnBantuan.style.display = "block";
-            btnBantuan.disabled = false;
-            btnBantuan.classList.remove('btn-disabled');
+            btnBantuan.style.display = "block"; btnBantuan.disabled = false; btnBantuan.classList.remove('btn-disabled');
             btnBantuan.innerText = "💡 Perlu Bantuan Pak Agus?";
 
             aturMentor("normal");
-            document.getElementById('pesan-mentor').innerText = `Pikirkan baik-baik. Kamu pasti bisa!`;
+            document.getElementById('pesan-mentor').innerText = `Baca perlahan algoritmanya. Kamu pasti bisa!`;
 
             const tombolLanjut = document.getElementById('tombol-lanjut');
             tombolLanjut.innerText = (indeksSoalSekarang === daftarSoalBerjalan.length - 1) ? "Kirim Semua Jawaban" : "Lanjut ke Soal Berikutnya";
-            tombolLanjut.classList.add('btn-disabled');
-            tombolLanjut.classList.remove('btn-submit');
-            tombolLanjut.disabled = true;
+            tombolLanjut.classList.add('btn-disabled'); tombolLanjut.classList.remove('btn-submit'); tombolLanjut.disabled = true;
 
-            const containerOpsi = document.getElementById('container-opsi');
-            containerOpsi.innerHTML = ''; 
+            const containerOpsi = document.getElementById('container-opsi'); containerOpsi.innerHTML = ''; 
             soalAktif.o.forEach((opsiTeks, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'btn-opsi';
-                btn.innerText = opsiTeks;
-                btn.onclick = () => pilihOpsi(index, btn);
-                containerOpsi.appendChild(btn);
+                const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = opsiTeks;
+                btn.onclick = () => pilihOpsi(index, btn); containerOpsi.appendChild(btn);
             });
         }
 
         function mintaBantuan() {
             if(bantuanPerSoalDipakai) return; 
-            
-            bantuanPerSoalDipakai = true;
-            totalKaliBantuan++;
-
+            bantuanPerSoalDipakai = true; totalKaliBantuan++;
             let soalAktif = daftarSoalBerjalan[indeksSoalSekarang];
+            
             aturMentor("bantuan");
             document.getElementById('pesan-mentor').innerText = `PETUNJUK: ${soalAktif.b} (Peringatan: Penalti -${POIN_PENALTI_BANTUAN} poin).`;
             
             const btnBantuan = document.getElementById('tombol-bantuan');
-            btnBantuan.disabled = true;
-            btnBantuan.classList.add('btn-disabled');
-            btnBantuan.innerText = "✔️ Bantuan Telah Diberikan";
-            
-            simpanProgres('kuis'); // Update state jumlah bantuan
+            btnBantuan.disabled = true; btnBantuan.classList.add('btn-disabled'); btnBantuan.innerText = "✔️ Bantuan Telah Diberikan";
+            simpanProgres('kuis'); 
         }
 
         function pilihOpsi(indexPilihan, tombolDiklik) {
             document.querySelectorAll('.btn-opsi').forEach(btn => btn.classList.remove('terpilih'));
-            tombolDiklik.classList.add('terpilih');
-            jawabanTerpilihSementara = indexPilihan;
+            tombolDiklik.classList.add('terpilih'); jawabanTerpilihSementara = indexPilihan;
 
             const tombolLanjut = document.getElementById('tombol-lanjut');
-            tombolLanjut.classList.remove('btn-disabled');
-            tombolLanjut.classList.add('btn-submit');
-            tombolLanjut.disabled = false;
+            tombolLanjut.classList.remove('btn-disabled'); tombolLanjut.classList.add('btn-submit'); tombolLanjut.disabled = false;
         }
 
         function simpanJawaban() {
             if (jawabanTerpilihSementara === null) return; 
-
-            if (jawabanTerpilihSementara.toString() === daftarSoalBerjalan[indeksSoalSekarang].k.toString()) {
-                jumlahBenar++;
-            }
-
+            if (jawabanTerpilihSementara.toString() === daftarSoalBerjalan[indeksSoalSekarang].k.toString()) { jumlahBenar++; }
             indeksSoalSekarang++;
             
             if (indeksSoalSekarang < daftarSoalBerjalan.length) { 
-                simpanProgres('kuis'); // Simpan kemajuan per soal
-                muatSoal(); 
+                simpanProgres('kuis'); muatSoal(); 
             } else { 
-                hapusProgres(); // Kuis selesai, hapus pelacakan agar kalau refresh ngulang
-                tampilkanHasil(); 
+                hapusProgres(); tampilkanHasil(); 
             }
         }
 
         function tampilkanHasil() {
-            ubahTampilan('area-hasil');
-            aturMentor("normal");
+            ubahTampilan('area-hasil'); aturMentor("normal");
             
             let skorAwal = Math.round((jumlahBenar / daftarSoalBerjalan.length) * 100);
             let totalPenalti = totalKaliBantuan * POIN_PENALTI_BANTUAN;
@@ -430,29 +381,24 @@
 
             let teksPenaltiEl = document.getElementById('teks-penalti');
             if (totalKaliBantuan > 0) {
-                teksPenaltiEl.style.display = "block";
-                teksPenaltiEl.innerText = `(Terdapat penalti -${totalPenalti} poin karena menekan bantuan ${totalKaliBantuan} kali)`;
-            } else {
-                teksPenaltiEl.style.display = "none";
-            }
+                teksPenaltiEl.style.display = "block"; teksPenaltiEl.innerText = `(Terdapat penalti -${totalPenalti} poin karena menekan bantuan ${totalKaliBantuan} kali)`;
+            } else { teksPenaltiEl.style.display = "none"; }
 
             let statusSiswa = ""; 
 
             if (skorAkhir >= KKM) {
-                document.getElementById('pesan-mentor').innerText = `Luar biasa, ${namaSiswa}! Kamu benar semua TANPA minta bantuan sama sekali. Penguasaan materimu murni 100%!`;
+                document.getElementById('pesan-mentor').innerText = `Logikamu tajam, ${namaSiswa}! Kamu menguasai pemrograman TANPA minta bantuan sama sekali.`;
                 document.getElementById('keterangan-hasil').innerText = "Status: TUNTAS (Mastery Achieved).";
-                document.getElementById('tombol-selesai').style.display = "block";
-                document.getElementById('tombol-ulang').style.display = "none";
+                document.getElementById('tombol-selesai').style.display = "block"; document.getElementById('tombol-ulang').style.display = "none";
                 statusSiswa = "TUNTAS";
             } else {
                 if (skorAwal === 100 && totalKaliBantuan > 0) {
-                    document.getElementById('pesan-mentor').innerText = `Kamu menjawab semua soal dengan benar, ${namaSiswa}, TAPI kamu menggunakan bantuan. Nilai KKM 100 menuntut kemandirian penuh. Ayo remedial!`;
+                    document.getElementById('pesan-mentor').innerText = `Skor awal 100, ${namaSiswa}, TAPI kamu butuh bantuan Pak Agus. Seorang programmer sejati harus mandiri. Ayo ulangi!`;
                 } else {
-                    document.getElementById('pesan-mentor').innerText = `Skormu ${skorAkhir}. Target ketuntasan kita adalah 100% secara mandiri. Jangan menyerah ya, ${namaSiswa}, ayo baca ulang modulnya!`;
+                    document.getElementById('pesan-mentor').innerText = `Skormu ${skorAkhir}. Masih ada bug (kesalahan logika) yang perlu diperbaiki. Ayo baca ulang materinya!`;
                 }
                 document.getElementById('keterangan-hasil').innerText = "Status: BELUM TUNTAS. Silakan remedial.";
-                document.getElementById('tombol-ulang').style.display = "block";
-                document.getElementById('tombol-selesai').style.display = "none";
+                document.getElementById('tombol-ulang').style.display = "block"; document.getElementById('tombol-selesai').style.display = "none";
                 statusSiswa = "REMEDIAL";
             }
 
@@ -460,29 +406,23 @@
             if(URL_APPS_SCRIPT !== "PASTE_URL_APPS_SCRIPT_ANDA_DI_SINI") {
                 const dataKirim = new URLSearchParams({
                     namaSiswa: namaSiswa + " (" + kelasSiswa + ")",
-                    modul: "Analisis Data (AD)",
+                    modul: "Algoritma & Pemrograman (AP)",
                     skor: skorAkhir,
                     bantuan: totalKaliBantuan,
                     percobaan: jumlahPercobaan,
                     status: statusSiswa
                 });
 
-                fetch(URL_APPS_SCRIPT, {
-                    method: 'POST',
-                    body: dataKirim
-                }).then(response => {
-                    console.log("Mantap! Data terekam di Spreadsheet.");
-                }).catch(error => {
-                    console.error("Gagal mengirim data:", error);
-                });
+                fetch(URL_APPS_SCRIPT, { method: 'POST', body: dataKirim })
+                .then(response => { console.log("Data Pemrograman terekam di Spreadsheet."); })
+                .catch(error => { console.error("Gagal mengirim data:", error); });
             }
         }
 
         function ulangiMateri() { tampilkanMateri(); }
         
         function kembaliKeDashboard() {
-            hapusProgres();
-            window.location.href = "index.html";
+            hapusProgres(); window.location.href = "index.html";
         }
 
         function ubahTampilan(idArea) {
