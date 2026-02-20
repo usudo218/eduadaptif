@@ -20,7 +20,7 @@
         .app-container { background: white; width: 100%; max-width: 600px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
         /* ==========================================
-           DESAIN HEADER & TOMBOL MENU ELEGAN (BARU)
+           DESAIN HEADER & TOMBOL MENU ELEGAN 
            ========================================== */
         .header { 
             background: var(--warna-utama); 
@@ -245,7 +245,7 @@
         const POIN_PENALTI_BANTUAN = 5; 
         const KKM = 100; 
 
-        // URL APPS SCRIPT ASLI ANDA
+        // URL APPS SCRIPT ASLI BAPAK (SUDAH DIMASUKKAN)
         const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbxBIGfhnTJ52lbnwskE1p39bYDqtl36MJ-CImnpIzdRbdz_Aqn5xOBMiRjs2uMcFeLR/exec"; 
 
         function inisialisasiDropdown() {
@@ -382,7 +382,7 @@
                 document.getElementById('tombol-ulang').style.display = "block"; document.getElementById('tombol-selesai').style.display = "none"; statusSiswa = "REMEDIAL";
             }
             
-            // JURUS PAMUNGKAS METODE GET (DIJAMIN MASUK KE SPREADSHEET)
+            // MENGIRIM DATA DENGAN METODE GET LANGSUNG KE URL BAPAK
             const parameterData = new URLSearchParams({ 
                 namaSiswa: namaSiswa + " (" + kelasSiswa + ")", 
                 modul: "Analisis Data (AD)", 
@@ -392,7 +392,7 @@
                 status: statusSiswa 
             }).toString();
             
-            const urlKirimData = https://script.google.com/macros/s/AKfycbxBIGfhnTJ52lbnwskE1p39bYDqtl36MJ-CImnpIzdRbdz_Aqn5xOBMiRjs2uMcFeLR/exec + "?" + parameterData;
+            const urlKirimData = URL_APPS_SCRIPT + "?" + parameterData;
             
             fetch(urlKirimData, { method: 'GET', mode: 'no-cors' })
                 .then(response => { console.log("Perintah kirim selesai."); })
