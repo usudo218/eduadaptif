@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduAdaptif - Prototipe Inovasi Guru</title>
+    <style>
+        /* CSS: Tampilan Antarmuka */
+        :root {
+            --warna-utama: #4F46E5; 
+            --warna-aksen: #10B981; 
+            --warna-merah: #EF4444;
+            --warna-latar: #F3F4F6; 
+            --warna-teks: #1F2937;  
+            --latar-mentor: #E0E7FF; 
+        }
+
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--warna-latar); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; color: var(--warna-teks); }
+        .app-container { background: white; width: 100%; max-width: 600px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
+        .header { background: var(--warna-utama); color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 1.5rem; }
+        .header p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.8; }
+        .content { padding: 25px 20px; flex-grow: 1; }
+        
+        .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); }
+        .mentor-avatar { font-size: 2.5rem; }
+        .mentor-message { flex: 1; line-height: 1.5; }
+        .mentor-name { font-weight: bold; color: var(--warna-utama); margin-bottom: 5px; display: block; }
+
+        .area-konten { display: none; }
+        .area-aktif { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Format Halaman Masuk */
+        .login-area { text-align: center; padding: 20px 0; }
+        .login-area h2 { color: var(--warna-utama); margin-bottom: 10px; }
+        .login-area p { margin-bottom: 25px; color: #6b7280; }
+        .input-nama { width: 100%; padding: 15px; border: 2px solid #D1D5DB; border-radius: 8px; font-size: 1.1rem; margin-bottom: 20px; text-align: center; }
+        .input-nama:focus { border-color: var(--warna-utama); outline: none; }
+
+        /* Format Materi & Infografis */
+        .teks-materi { background: #f9fafb; padding: 20px; border-radius: 8px; border: 1px solid #e5e7eb; line-height: 1.6; text-align: justify; margin-bottom: 20px; font-size: 0.95rem; height: 450px; overflow-y: auto; }
+        .teks-materi h3 { margin-top: 25px; color: var(--warna-utama); border-bottom: 2px solid #eee; padding-bottom: 10px;}
+        .teks-materi h3:first-child { margin-top: 0; }
+        .ilustrasi-mini { width: 100%; height: auto; min-height: 150px; background-color: #e5e7eb; object-fit: contain; border-radius: 8px; margin: 10px 0; border: 1px dashed #9ca3af; display: flex; align-items: center; justify-content: center; color: #6b7280; font-size: 0.8rem; }
+        
+        /* Format Soal Pilihan Ganda */
+        .question-area { text-align: center; }
+        .question-area h2#teks-soal { font-size: 1.1rem; margin-bottom: 25px; color: #333; line-height: 1.5; text-align: left; font-weight: 600; }
+        .opsi-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; transition: 0.2s; color: var(--warna-teks); }
+        .btn-opsi:hover { background: #F3F4F6; border-color: var(--warna-utama); }
+        .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); color: var(--warna-utama); font-weight: bold; }
+
+        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
+        .btn-action:hover { background: #4338CA; }
+        .btn-submit { background: var(--warna-aksen); }
+        .btn-submit:hover { background: #059669; }
+        .btn-ulang { background: var(--warna-merah); }
+        .btn-ulang:hover { background: #DC2626; }
+        .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
+
+        .skor-box { text-align: center; margin: 20px 0; }
+        .angka-skor { font-size: 4rem; font-weight: bold; color: var(--warna-utama); margin: 10px 0; }
+
+        /* Format Footer / Hak Cipta */
+        .footer {
+            background-color: #f9fafb;
+            color: #6b7280;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.85rem;
+            border-top: 1px solid #e5e7eb;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="header">
+            <h1>EduAdaptif SMA</h1>
+            <p>Informatika Kl. 10: Analisis Data</p>
+        </div>
+
+        <div class="content">
+            <div id="area-login" class="area-konten area-aktif">
+                <div class="login-area">
+                    <h2>Selamat Datang!</h2>
+                    <p>Silakan masukkan nama kamu untuk memulai sesi belajar.</p>
+                    <input type="text" id="input-nama-siswa" class="input-nama" placeholder="Ketik namamu di sini..." autocomplete="off">
+                    <button class="btn-action" onclick="simpanNamaSiswa()">Mulai Belajar</button>
+                </div>
+            </div>
+
+            <div id="area-mentor-global" style="display: none;">
+                <div class="mentor-box">
+                    <div class="mentor-avatar">👨‍🏫</div>
+                    <div class="mentor-message">
+                        <span class="mentor-name">EduAdaptif</span>
+                        <span id="pesan-mentor">Selamat datang!</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="area-materi" class="area-konten">
+                <div class="teks-materi">
+                    <h3>1. Pengantar Visualisasi Data</h3>
+                    <p>Visualisasi data bukan sekadar membuat gambar yang bagus, tetapi memilih representasi visual yang paling tepat untuk menceritakan "isi hati" data tersebut agar mudah dianalisis.</p>
+                    
+                    <h3>2. Diagram Batang (Bar Chart)</h3>
+                    <p><strong>Fungsi Utama: Perbandingan Kuantitas.</strong> Digunakan untuk membandingkan nilai antar kategori yang berbeda.</p>
+                    <img src="batang.jpg" alt="(Tempat Gambar: batang.jpg)" class="ilustrasi-mini">
+                    <p><em>Contoh: Membandingkan jumlah siswa laki-laki dan perempuan di kelas 10A, 10B, dan 10C.</em></p>
+
+                    <h3>3. Grafik Lingkaran (Pie Chart)</h3>
+                    <p><strong>Fungsi Utama: Proporsi/Persentase.</strong> Digunakan untuk menunjukkan bagaimana suatu "keseluruhan" terbagi menjadi bagian-bagian kecil.</p>
+                    <img src="pie.jpg" alt="(Tempat Gambar: pie.jpg)" class="ilustrasi-mini">
+                    <p><em>Contoh: Persentase penggunaan sistem operasi (Windows, macOS, Linux) di sebuah perusahaan.</em></p>
+                    
+                    <h3>4. Grafik Garis (Line Chart)</h3>
+                    <p><strong>Fungsi Utama: Tren Waktu.</strong> Digunakan untuk melihat perubahan data yang berkelanjutan dalam kurun waktu tertentu.</p>
+                    <img src="garis.jpg" alt="(Tempat Gambar: garis.jpg)" class="ilustrasi-mini">
+                    <p><em>Contoh: Pergerakan nilai tukar Rupiah terhadap Dolar selama satu bulan terakhir.</em></p>
+
+                    <h3>5. Diagram Pencar (Scatter Plot)</h3>
+                    <p><strong>Fungsi Utama: Korelasi (Hubungan).</strong> Digunakan untuk melihat apakah ada hubungan antara dua variabel berbeda.</p>
+                    <img src="pencar.jpg" alt="(Tempat Gambar: pencar.jpg)" class="ilustrasi-mini">
+                    <p><em>Contoh: Melihat hubungan antara 'durasi olahraga per minggu' dengan 'berat badan'.</em></p>
+                </div>
+                <button class="btn-action" onclick="mulaiKuis()">Saya Paham, Mulai Tantangan 15 Soal!</button>
+            </div>
+
+            <div id="area-kuis" class="area-konten question-area">
+                <h2 id="indikator-soal">Soal 1 dari 15</h2>
+                <h2 id="teks-soal">Teks soal di sini...</h2>
+                <div id="container-opsi" class="opsi-container"></div>
+                <button class="btn-action btn-disabled" id="tombol-lanjut" onclick="simpanJawaban()" disabled>Pilih Jawaban Dulu</button>
+            </div>
+
+            <div id="area-hasil" class="area-konten">
+                <div class="skor-box">
+                    <h3>Skor Ketuntasan (Syarat: 100)</h3>
+                    <div class="angka-skor" id="teks-skor">0</div>
+                    <p id="keterangan-hasil">Menghitung skor...</p>
+                </div>
+                <button id="tombol-ulang" class="btn-action btn-ulang" style="display: none;" onclick="ulangiMateri()">Baca Ulang Materi & Remedial</button>
+                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="alert('Membuka Modul AR 3D Visualisasi Data...')">Buka Bonus: Simulasi AR 3D</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            Design By Agus Suyatno, S.Kom<br>
+            SMA Negeri 1 Muncar &copy; 2026
+        </div>
+    </div>
+
+    <script src="soal.js"></script>
+
+    <script>
+        let namaSiswa = ""; 
+        let daftarSoalBerjalan = [];
+        let indeksSoalSekarang = 0;
+        let jumlahBenar = 0;
+        let jawabanTerpilihSementara = null;
+        const KKM = 100; 
+
+        function simpanNamaSiswa() {
+            let inputNama = document.getElementById('input-nama-siswa').value.trim();
+            if (inputNama === "") {
+                alert("Hei, jangan lupa ketik nama kamu dulu ya!");
+                return;
+            }
+            
+            namaSiswa = inputNama.charAt(0).toUpperCase() + inputNama.slice(1);
+            document.getElementById('area-mentor-global').style.display = "block";
+            tampilkanMateri();
+        }
+
+        function tampilkanMateri() {
+            ubahTampilan('area-materi');
+            document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa}! Silakan pelajari modul ini dengan teliti. Perhatikan gambar infografisnya agar paham penggunaannya. Bapak tunggu di sesi kuis!`;
+            indeksSoalSekarang = 0;
+            jumlahBenar = 0;
+        }
+
+        function mulaiKuis() {
+            ubahTampilan('area-kuis');
+            document.getElementById('pesan-mentor').innerText = `Fokus ya, ${namaSiswa}! Jawab 15 soal secara berurutan. Ingat, target kita adalah penguasaan materi 100%.`;
+            
+            daftarSoalBerjalan = [...daftarSoalAsli];
+            for (let i = daftarSoalBerjalan.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [daftarSoalBerjalan[i], daftarSoalBerjalan[j]] = [daftarSoalBerjalan[j], daftarSoalBerjalan[i]];
+            }
+            muatSoal();
+        }
+
+        function muatSoal() {
+            let soalAktif = daftarSoalBerjalan[indeksSoalSekarang];
+            document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1} dari ${daftarSoalBerjalan.length}`;
+            document.getElementById('teks-soal').innerText = soalAktif.p;
+            
+            jawabanTerpilihSementara = null;
+            const tombolLanjut = document.getElementById('tombol-lanjut');
+            tombolLanjut.innerText = (indeksSoalSekarang === daftarSoalBerjalan.length - 1) ? "Kirim Semua Jawaban" : "Lanjut ke Soal Berikutnya";
+            tombolLanjut.classList.add('btn-disabled');
+            tombolLanjut.classList.remove('btn-submit');
+            tombolLanjut.disabled = true;
+
+            const containerOpsi = document.getElementById('container-opsi');
+            containerOpsi.innerHTML = ''; 
+            soalAktif.o.forEach((opsiTeks, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-opsi';
+                btn.innerText = opsiTeks;
+                btn.onclick = () => pilihOpsi(index, btn);
+                containerOpsi.appendChild(btn);
+            });
+        }
+
+        function pilihOpsi(indexPilihan, tombolDiklik) {
+            document.querySelectorAll('.btn-opsi').forEach(btn => btn.classList.remove('terpilih'));
+            tombolDiklik.classList.add('terpilih');
+            jawabanTerpilihSementara = indexPilihan;
+
+            const tombolLanjut = document.getElementById('tombol-lanjut');
+            tombolLanjut.classList.remove('btn-disabled');
+            tombolLanjut.classList.add('btn-submit');
+            tombolLanjut.disabled = false;
+        }
+
+        function simpanJawaban() {
+            if (jawabanTerpilihSementara === null) return; 
+
+            if (jawabanTerpilihSementara.toString() === daftarSoalBerjalan[indeksSoalSekarang].k.toString()) {
+                jumlahBenar++;
+            }
+
+            indeksSoalSekarang++;
+            if (indeksSoalSekarang < daftarSoalBerjalan.length) { 
+                muatSoal(); 
+            } else { 
+                tampilkanHasil(); 
+            }
+        }
+
+        function tampilkanHasil() {
+            ubahTampilan('area-hasil');
+            let skorAkhir = Math.round((jumlahBenar / daftarSoalBerjalan.length) * 100);
+            document.getElementById('teks-skor').innerText = skorAkhir;
+
+            if (skorAkhir >= KKM) {
+                document.getElementById('pesan-mentor').innerText = `Luar biasa, ${namaSiswa}! Kamu berhasil menjawab ${jumlahBenar} dari 15 soal dengan benar. Pertahankan prestasimu!`;
+                document.getElementById('keterangan-hasil').innerText = "Status: TUNTAS (Mastery Achieved).";
+                document.getElementById('tombol-selesai').style.display = "block";
+                document.getElementById('tombol-ulang').style.display = "none";
+            } else {
+                document.getElementById('pesan-mentor').innerText = `Skormu ${skorAkhir} (Benar ${jumlahBenar}/15). Target ketuntasan kita adalah 100%. Jangan menyerah ya, ${namaSiswa}, ayo baca ulang modulnya!`;
+                document.getElementById('keterangan-hasil').innerText = "Status: BELUM TUNTAS. Silakan remedial.";
+                document.getElementById('tombol-ulang').style.display = "block";
+                document.getElementById('tombol-selesai').style.display = "none";
+            }
+        }
+
+        function ulangiMateri() { tampilkanMateri(); }
+        function ubahTampilan(idArea) {
+            document.querySelectorAll('.area-konten').forEach(area => area.className = 'area-konten');
+            document.getElementById(idArea).className = 'area-konten area-aktif';
+        }
+    </script>
+</body>
+</html>
