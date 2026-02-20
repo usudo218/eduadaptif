@@ -15,7 +15,9 @@
 
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--warna-latar); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; color: var(--warna-teks); }
-        .app-container { background: white; width: 100%; max-width: 900px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
+        
+        /* Kontainer diperlebar menjadi 1200px agar 4 kolom tidak sesak */
+        .app-container { background: white; width: 100%; max-width: 1200px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
         .header { background: var(--warna-utama); color: white; padding: 30px 20px; text-align: center; }
         .header h1 { margin: 0; font-size: 2rem; }
@@ -23,20 +25,37 @@
         
         .content { padding: 30px 20px; flex-grow: 1; }
         
-        /* Kotak Sapaan Mentor */
         .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 20px; border-radius: 12px; margin-bottom: 30px; border-left: 5px solid var(--warna-utama); align-items: center;}
         .mentor-avatar { font-size: 3rem; }
         .mentor-message { flex: 1; line-height: 1.5; font-size: 1.1rem; }
         .mentor-name { font-weight: bold; color: var(--warna-utama); margin-bottom: 5px; display: block; font-size: 1.2rem;}
 
-        /* Grid untuk Kartu Modul */
+        /* ==========================================
+           PENGATURAN RESPONSIVE GRID (1 - 2 - 4) 
+           ========================================== */
+        
+        /* Default: Layar Smartphone (1 Kolom) */
         .grid-modul {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 1fr;
             gap: 20px;
         }
 
-        /* Desain Kartu (Card) */
+        /* Layar Tablet (Lebar minimal 768px) -> 2 Kolom */
+        @media (min-width: 768px) {
+            .grid-modul {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Layar Laptop/Desktop (Lebar minimal 1024px) -> 4 Kolom */
+        @media (min-width: 1024px) {
+            .grid-modul {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        /* ========================================== */
+
         .card {
             background: white;
             border: 1px solid #E5E7EB;
@@ -48,6 +67,7 @@
             cursor: pointer;
             text-decoration: none;
             color: var(--warna-teks);
+            height: 100%; /* Agar tinggi kartu sejajar semua */
         }
         
         .card:hover {
@@ -60,11 +80,9 @@
         .card-judul { font-size: 1.2rem; margin: 0 0 10px 0; font-weight: 700; line-height: 1.3;}
         .card-deskripsi { font-size: 0.9rem; color: #6B7280; flex-grow: 1; margin-bottom: 20px; line-height: 1.5;}
         
-        /* Status Tombol di Kartu */
-        .card-status { display: inline-block; text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; transition: 0.2s;}
+        .card-status { display: inline-block; text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; transition: 0.2s; margin-top: auto;}
         .status-aktif { background: var(--warna-aksen); color: white; }
         .card:hover .status-aktif { background: #059669; }
-        .status-kunci { background: #F3F4F6; color: #9CA3AF; cursor: not-allowed; }
 
         .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 15px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; line-height: 1.5; }
     </style>
@@ -87,58 +105,56 @@
             </div>
 
             <div class="grid-modul">
-                <a href="modul-tik.html" class="card" style="text-decoration: none;">
+                <a href="modul-tik.html" class="card">
                     <div class="card-elemen">Elemen TIK</div>
                     <h3 class="card-judul">Aplikasi Perkantoran</h3>
                     <p class="card-deskripsi">Mempelajari integrasi pengolah kata, angka, presentasi, dan fitur mailmerge.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
-                <a href="modul-sk.html" class="card" style="text-decoration: none;">
+                <a href="modul-sk.html" class="card">
                     <div class="card-elemen">Elemen SK</div>
                     <h3 class="card-judul">Sistem Komputer</h3>
-                    <p class="card-deskripsi">Mempelajari komponen hardware, software, sistem operasi, dan instalasi.</p>
+                    <p class="card-deskripsi">Mempelajari komponen hardware, software, sistem operasi, instalasi, dan HCI.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
-                
-             </a>
+                </a>
 
-                <a href="modul-jki.html" class="card" style="text-decoration: none;">
+                <a href="modul-jki.html" class="card">
                     <div class="card-elemen">Elemen JKI</div>
                     <h3 class="card-judul">Jaringan Komputer</h3>
                     <p class="card-deskripsi">Mempelajari konektivitas jaringan lokal, internet nirkabel, dan enkripsi data.</p>
-                   <div class="card-status status-aktif">▶️ Mulai Belajar</div>
-                
-             </a>
+                    <div class="card-status status-aktif">▶️ Mulai Belajar</div>
+                </a>
 
-                <a href="modul-ad.html" class="card" style="text-decoration: none;">
+                <a href="modul-ad.html" class="card">
                     <div class="card-elemen">Elemen AD</div>
                     <h3 class="card-judul">Analisis Data</h3>
                     <p class="card-deskripsi">Memahami siklus data, visualisasi grafik, dan penarikan kesimpulan informasi.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
-                 <a href="modul-dsi.html" class="card" style="text-decoration: none;">
+                <a href="modul-dsi.html" class="card">
                     <div class="card-elemen">Elemen DSI</div>
                     <h3 class="card-judul">Dampak Sosial TIK</h3>
-                    <p class="card-deskripsi">Mempelajari sejarah komputer, Hak Kekayaan Intelektual, dan lisensi produk TIK.</p>
+                    <p class="card-deskripsi">Mempelajari sejarah komputer, Hak Kekayaan Intelektual, UU ITE, dan profesi IT.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
-                <a href="modul-bk.html" class="card" style="text-decoration: none;">
+                <a href="modul-bk.html" class="card">
                     <div class="card-elemen">Elemen BK</div>
                     <h3 class="card-judul">Berpikir Komputasional</h3>
                     <p class="card-deskripsi">Menerapkan algoritma pencarian (searching), pengurutan (sorting), stack, dan queue.</p>
-                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
+                    <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
-                <a href="modul-ap.html" class="card" style="text-decoration: none;">
+                <a href="modul-ap.html" class="card">
                     <div class="card-elemen">Elemen AP</div>
                     <h3 class="card-judul">Algoritma & Pemrograman</h3>
                     <p class="card-deskripsi">Mempelajari bahasa pemrograman, variabel, struktur percabangan (if), perulangan, dan array.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
-                 <a href="modul-plb.html" class="card" style="text-decoration: none;">
+                <a href="modul-plb.html" class="card">
                     <div class="card-elemen">Elemen PLB</div>
                     <h3 class="card-judul">Praktik Lintas Bidang</h3>
                     <p class="card-deskripsi">Kolaborasi proyek inklusif untuk merancang algoritma dan mengelola data masyarakat.</p>
