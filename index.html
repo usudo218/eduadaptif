@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduAdaptif - Dashboard Utama</title>
+    <title>COKRO-LITE - Dashboard Utama</title>
     <style>
         :root {
             --warna-utama: #4F46E5; 
@@ -16,91 +16,107 @@
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--warna-latar); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; color: var(--warna-teks); }
         
-        /* Kontainer diperlebar menjadi 1200px agar 4 kolom tidak sesak */
         .app-container { background: white; width: 100%; max-width: 1200px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
-        .header { background: var(--warna-utama); color: white; padding: 30px 20px; text-align: center; }
-        .header h1 { margin: 0; font-size: 2rem; }
+        .header { background: var(--warna-utama); color: white; padding: 35px 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; }
         .header p { margin: 10px 0 0; font-size: 1rem; opacity: 0.9; }
         
         .content { padding: 30px 20px; flex-grow: 1; }
         
-        .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 20px; border-radius: 12px; margin-bottom: 30px; border-left: 5px solid var(--warna-utama); align-items: center;}
-        .mentor-avatar { font-size: 3rem; }
-        .mentor-message { flex: 1; line-height: 1.5; font-size: 1.1rem; }
-        .mentor-name { font-weight: bold; color: var(--warna-utama); margin-bottom: 5px; display: block; font-size: 1.2rem;}
+        /* MODIFIKASI KOTAK MENTOR PAK COKRO */
+        .mentor-box { 
+            display: flex; 
+            gap: 20px; 
+            background: var(--latar-mentor); 
+            padding: 25px; 
+            border-radius: 16px; 
+            margin-bottom: 35px; 
+            border-left: 6px solid var(--warna-utama); 
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.1);
+        }
+        .mentor-avatar { 
+            width: 90px; 
+            height: 90px; 
+            flex-shrink: 0; 
+            background: white;
+            border-radius: 50%;
+            border: 3px solid var(--warna-utama);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .mentor-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .mentor-message { flex: 1; line-height: 1.6; font-size: 1.1rem; }
+        .mentor-name { font-weight: bold; color: var(--warna-utama); margin-bottom: 5px; display: block; font-size: 1.3rem;}
 
-        /* ==========================================
-           PENGATURAN RESPONSIVE GRID (1 - 2 - 4) 
-           ========================================== */
-        
-        /* Default: Layar Smartphone (1 Kolom) */
         .grid-modul {
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
         }
 
-        /* Layar Tablet (Lebar minimal 768px) -> 2 Kolom */
         @media (min-width: 768px) {
-            .grid-modul {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .grid-modul { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* Layar Laptop/Desktop (Lebar minimal 1024px) -> 4 Kolom */
         @media (min-width: 1024px) {
-            .grid-modul {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            .grid-modul { grid-template-columns: repeat(4, 1fr); }
         }
-        /* ========================================== */
 
         .card {
             background: white;
             border: 1px solid #E5E7EB;
             border-radius: 12px;
             padding: 20px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
             cursor: pointer;
             text-decoration: none;
             color: var(--warna-teks);
-            height: 100%; /* Agar tinggi kartu sejajar semua */
+            height: 100%;
         }
         
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
             border-color: var(--warna-utama);
         }
 
-        .card-elemen { font-size: 0.8rem; font-weight: bold; color: var(--warna-utama); text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px;}
+        .card-elemen { font-size: 0.8rem; font-weight: bold; color: var(--warna-utama); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px;}
         .card-judul { font-size: 1.2rem; margin: 0 0 10px 0; font-weight: 700; line-height: 1.3;}
         .card-deskripsi { font-size: 0.9rem; color: #6B7280; flex-grow: 1; margin-bottom: 20px; line-height: 1.5;}
         
-        .card-status { display: inline-block; text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; transition: 0.2s; margin-top: auto;}
-        .status-aktif { background: var(--warna-aksen); color: white; }
-        .card:hover .status-aktif { background: #059669; }
+        .card-status { display: inline-block; text-align: center; padding: 12px; border-radius: 10px; font-weight: bold; font-size: 0.9rem; transition: 0.2s; margin-top: auto;}
+        .status-aktif { background: var(--warna-utama); color: white; }
+        .card:hover .status-aktif { background: var(--warna-aksen); }
 
-        .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 15px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; line-height: 1.5; }
+        .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 20px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; line-height: 1.6; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
         <div class="header">
-            <h1>EduAdaptif SMA</h1>
-            <p>Platform Ketuntasan Belajar Informatika Fase E (Kelas X)</p>
+            <h1>COKRO-LITE</h1>
+            <p>Inovasi Micro-Learning Informatika - SMA Negeri 1 Muncar</p>
         </div>
 
         <div class="content">
             <div class="mentor-box">
-                <div class="mentor-avatar">👨‍🏫</div>
+                <div class="mentor-avatar">
+                    <img src="images/pak-cokro.png" alt="Pak Cokro">
+                </div>
                 <div class="mentor-message">
-                    <span class="mentor-name">Pak Agus :</span>
-                    <span id="pesan-mentor">Selamat datang di Dashboard Utama! Silakan pilih modul pembelajaran yang tersedia di bawah ini. Pastikan kamu menuntaskan setiap modul hingga 100% ya.</span>
+                    <span class="mentor-name">Pak Cokro :</span>
+                    <span id="pesan-mentor">Selamat datang di <b>COKRO-LITE</b>! Saya akan menemanimu menuntaskan 8 elemen Informatika. Pilih modul di bawah ini, dan ingat: kejujuran adalah kunci ketuntasan sejati!</span>
                 </div>
             </div>
 
@@ -108,63 +124,63 @@
                 <a href="modul-tik.html" class="card">
                     <div class="card-elemen">Elemen TIK</div>
                     <h3 class="card-judul">Aplikasi Perkantoran</h3>
-                    <p class="card-deskripsi">Mempelajari integrasi pengolah kata, angka, presentasi, dan fitur mailmerge.</p>
+                    <p class="card-deskripsi">Integrasi pengolah kata, angka, presentasi, dan fitur Mail Merge.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-sk.html" class="card">
                     <div class="card-elemen">Elemen SK</div>
                     <h3 class="card-judul">Sistem Komputer</h3>
-                    <p class="card-deskripsi">Mempelajari komponen hardware, software, sistem operasi, instalasi, dan HCI.</p>
+                    <p class="card-deskripsi">Hardware, Software, Sistem Operasi, dan Interaksi Manusia Komputer.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-jki.html" class="card">
                     <div class="card-elemen">Elemen JKI</div>
                     <h3 class="card-judul">Jaringan Komputer</h3>
-                    <p class="card-deskripsi">Mempelajari konektivitas jaringan lokal, internet nirkabel, dan enkripsi data.</p>
+                    <p class="card-deskripsi">Konektivitas internet, jaringan lokal, dan keamanan data.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-ad.html" class="card">
                     <div class="card-elemen">Elemen AD</div>
                     <h3 class="card-judul">Analisis Data</h3>
-                    <p class="card-deskripsi">Memahami siklus data, visualisasi grafik, dan penarikan kesimpulan informasi.</p>
+                    <p class="card-deskripsi">Siklus data, pengolahan angka, dan visualisasi informasi.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-dsi.html" class="card">
                     <div class="card-elemen">Elemen DSI</div>
                     <h3 class="card-judul">Dampak Sosial TIK</h3>
-                    <p class="card-deskripsi">Mempelajari sejarah komputer, Hak Kekayaan Intelektual, UU ITE, dan profesi IT.</p>
+                    <p class="card-deskripsi">HAKI, UU ITE, sejarah informatika, dan peluang karier IT.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-bk.html" class="card">
                     <div class="card-elemen">Elemen BK</div>
                     <h3 class="card-judul">Berpikir Komputasional</h3>
-                    <p class="card-deskripsi">Menerapkan algoritma pencarian (searching), pengurutan (sorting), stack, dan queue.</p>
+                    <p class="card-deskripsi">Algoritma pencarian, pengurutan, stack, dan queue.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-ap.html" class="card">
                     <div class="card-elemen">Elemen AP</div>
                     <h3 class="card-judul">Algoritma & Pemrograman</h3>
-                    <p class="card-deskripsi">Mempelajari bahasa pemrograman, variabel, struktur percabangan (if), perulangan, dan array.</p>
+                    <p class="card-deskripsi">Coding dasar, variabel, struktur kontrol, dan array.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-plb.html" class="card">
                     <div class="card-elemen">Elemen PLB</div>
                     <h3 class="card-judul">Praktik Lintas Bidang</h3>
-                    <p class="card-deskripsi">Kolaborasi proyek inklusif untuk merancang algoritma dan mengelola data masyarakat.</p>
+                    <p class="card-deskripsi">Kolaborasi proyek nyata menyelesaikan masalah masyarakat dengan TIK.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
             </div>
         </div>
 
         <div class="footer">
-            Design By Agus Suyatno, S.Kom<br>
+            Design By <b>Agus Suyatno, S.Kom</b><br>
             SMA Negeri 1 Muncar &copy; 2026
         </div>
     </div>
