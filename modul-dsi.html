@@ -25,14 +25,13 @@
         .header { 
             background: var(--warna-utama); 
             color: white; 
-            padding: 45px 20px 25px 20px; /* Padding atas ditambah agar tidak menabrak tombol */
+            padding: 45px 20px 25px 20px; 
             text-align: center; 
             position: relative;
         }
         .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.5px;}
         .header p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
         
-        /* Desain Dasar Tombol Kapsul (Pill) dengan Efek Kaca */
         .back-btn, .logout-btn { 
             position: absolute; 
             top: 15px; 
@@ -42,17 +41,16 @@
             font-size: 0.85rem; 
             font-weight: 600; 
             padding: 8px 16px; 
-            border-radius: 50px; /* Membentuk kapsul melingkar penuh */
+            border-radius: 50px; 
             text-decoration: none; 
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
             border: 1px solid rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(8px); /* Efek kaca transparan */
+            backdrop-filter: blur(8px); 
             -webkit-backdrop-filter: blur(8px);
             cursor: pointer; 
             font-family: inherit;
         }
 
-        /* Khusus Tombol Dashboard (Kiri) */
         .back-btn { 
             left: 15px; 
             background: rgba(255, 255, 255, 0.1); 
@@ -60,31 +58,29 @@
         }
         .back-btn:hover { 
             background: white; 
-            color: var(--warna-utama); /* Saat disentuh, teks berubah jadi warna tema */
-            transform: translateY(-2px); /* Efek mengambang naik */
+            color: var(--warna-utama); 
+            transform: translateY(-2px); 
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); 
             border-color: white;
         }
 
-        /* Khusus Tombol Logout (Kanan) */
         .logout-btn { 
             right: 15px; 
-            background: rgba(220, 38, 38, 0.15); /* Merah sangat transparan */
+            background: rgba(220, 38, 38, 0.15); 
             color: #FFF1F2; 
             border-color: rgba(220, 38, 38, 0.3);
         }
         .logout-btn:hover { 
-            background: #DC2626; /* Merah solid saat disentuh */
+            background: #DC2626; 
             color: white; 
             transform: translateY(-2px); 
             box-shadow: 0 6px 15px rgba(220, 38, 38, 0.3); 
             border-color: #DC2626;
         }
 
-        /* Responsivitas Layar HP: Tombol mengecil agar tetap elegan */
         @media (max-width: 480px) {
             .back-btn, .logout-btn { padding: 6px 12px; font-size: 0.75rem; top: 12px;}
-            .header { padding-top: 55px; } /* Mendorong judul lebih ke bawah di HP */
+            .header { padding-top: 55px; } 
             .header h1 { font-size: 1.3rem; }
         }
         /* ========================================== */
@@ -124,7 +120,7 @@
         .btn-opsi:hover { background: #F3F4F6; border-color: var(--warna-utama); }
         .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); color: var(--warna-utama); font-weight: bold; }
 
-        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: margin-bottom: 10px; transition: 0.2s; }
+        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
         .btn-action:hover { background: #0E7490; }
         .btn-submit { background: var(--warna-aksen); }
         .btn-submit:hover { background: #0369A1; }
@@ -266,7 +262,8 @@
         const POIN_PENALTI_BANTUAN = 5; 
         const KKM = 100; 
 
-        const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzPcanC73JEFcHGfgKWDRfaUTNaztpOGZSmM61VqV_BfkiEYWebWNSHnZTE7Zx-4XDn/exec"; 
+        // URL GOOGLE APPS SCRIPT ASLI BAPAK
+        const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbwLnjVTKPKH54kitShhiA88wNw9aw3e2BP5MYYL3PvFNAiWEFcXtGjnka40k7ima7uN/exec"; 
 
         function inisialisasiDropdown() {
             if(typeof SISWA_BARU === 'undefined') { alert("File siswa.js tidak terbaca!"); return; }
@@ -400,10 +397,23 @@
                 document.getElementById('keterangan-hasil').innerText = "Status: BELUM TUNTAS. Silakan remedial.";
                 document.getElementById('tombol-ulang').style.display = "block"; document.getElementById('tombol-selesai').style.display = "none"; statusSiswa = "REMEDIAL";
             }
-            if(URL_APPS_SCRIPT !== "https://script.google.com/macros/s/AKfycbzPcanC73JEFcHGfgKWDRfaUTNaztpOGZSmM61VqV_BfkiEYWebWNSHnZTE7Zx-4XDn/exec") {
-                const dataKirim = new URLSearchParams({ namaSiswa: namaSiswa + " (" + kelasSiswa + ")", modul: "Dampak Sosial Informatika (DSI)", skor: skorAkhir, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, status: statusSiswa });
-                fetch(URL_APPS_SCRIPT, { method: 'POST', body: dataKirim }).then(response => { console.log("Data DSI terekam."); }).catch(error => { console.error("Gagal kirim:", error); });
-            }
+            
+            // JURUS PAMUNGKAS METODE GET (DIJAMIN MASUK KE 8 KOLOM SPREADSHEET)
+            const parameterData = new URLSearchParams({ 
+                namaSiswa: namaSiswa,         // Mengirim Nama
+                kelasSiswa: kelasSiswa,       // Mengirim Kelas secara terpisah
+                modul: "Dampak Sosial Informatika (DSI)", // Nama Modul
+                skor: skorAkhir, 
+                bantuan: totalKaliBantuan, 
+                percobaan: jumlahPercobaan, 
+                status: statusSiswa 
+            }).toString();
+            
+            const urlKirimData = URL_APPS_SCRIPT + "?" + parameterData;
+            
+            fetch(urlKirimData, { method: 'GET', mode: 'no-cors' })
+                .then(response => { console.log("Perintah kirim selesai."); })
+                .catch(error => { console.error("Gagal kirim:", error); });
         }
 
         function ulangiMateri() { tampilkanMateri(); }
