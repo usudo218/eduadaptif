@@ -20,9 +20,34 @@
         body { background-color: var(--warna-latar); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; color: var(--warna-teks); }
         .app-container { background: white; width: 100%; max-width: 650px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
-        .header { background: var(--warna-utama); color: white; padding: 45px 20px 25px 20px; text-align: center; position: relative; }
+        .header { background: var(--warna-utama); color: white; padding: 50px 20px 30px 20px; text-align: center; position: relative; }
         .header h1 { margin: 0; font-size: 1.5rem; font-weight: 700; }
-        .back-btn { position: absolute; top: 15px; left: 15px; color: white; text-decoration: none; background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 50px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.2); cursor: pointer;}
+        
+        /* TOMBOL HEADER SERAGAM (HOME & LOGOUT) */
+        .btn-header { 
+            position: absolute; 
+            top: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            gap: 6px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            height: 36px;
+            width: 100px;
+            border-radius: 8px; 
+            text-decoration: none; 
+            color: white; 
+            border: 1px solid rgba(255, 255, 255, 0.4); 
+            cursor: pointer; 
+            background: rgba(255, 255, 255, 0.15); 
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .btn-header:hover { background: white; color: var(--warna-utama); border-color: white; transform: translateY(-1px); }
+        
+        .home-pos { left: 15px; }
+        .logout-pos { right: 15px; }
 
         .content { padding: 25px 20px; flex-grow: 1; }
         
@@ -32,7 +57,7 @@
 
         .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); align-items: center; }
         .mentor-box.peringatan { border-left-color: var(--warna-kuning); background-color: #FEF3C7; }
-        .mentor-avatar { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 2px solid var(--warna-utama); background: white; flex-shrink: 0;}
+        .mentor-avatar { width: 65px; height: 65px; border-radius: 50%; overflow: hidden; border: 2px solid var(--warna-utama); background: white; flex-shrink: 0;}
         .mentor-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
         .area-konten { display: none; }
@@ -41,9 +66,8 @@
 
         .teks-materi { background: #f9fafb; padding: 25px; border-radius: 12px; border: 1px solid #e5e7eb; height: 500px; overflow-y: auto; text-align: justify; line-height: 1.7; }
         .teks-materi h3 { color: var(--warna-utama); border-bottom: 2px solid #eee; padding-bottom: 8px; margin-top: 25px; }
-        .ilustrasi-mini { width: 100%; border-radius: 8px; margin: 15px 0; border: 1px solid #ddd; }
 
-        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; transition: 0.2s; }
+        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; }
         .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); font-weight: bold; color: var(--warna-utama); }
 
         .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
@@ -51,22 +75,13 @@
         .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
 
-        /* GAYA TOMBOL PDF MERAH UNTUK PLB */
-        .pdf-box { background: #F0FDF4; padding: 15px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
-        .btn-pdf-merah { 
-            background: var(--warna-merah) !important; 
-            color: white !important; 
-            text-decoration: none; 
-            display: inline-block; 
-            width: auto; 
-            padding: 12px 25px; 
-            border-radius: 8px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.05); }
+        /* Tombol PDF Merah Profesional */
+        .pdf-box { background: #F0FDF4; padding: 18px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
+        .btn-pdf-merah { background: var(--warna-merah) !important; color: white !important; text-decoration: none; display: inline-block; width: auto; padding: 12px 25px; border-radius: 8px; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 10px rgba(21, 128, 61, 0.2); }
+        .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.03); }
 
         .angka-skor { font-size: 4.5rem; font-weight: bold; color: var(--warna-utama); text-align: center; margin: 10px 0;}
+        .nama-hasil { font-size: 1.2rem; font-weight: 800; color: var(--warna-teks); text-align: center; margin-bottom: 5px; text-transform: uppercase; }
         .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 20px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; }
     </style>
 </head>
@@ -74,8 +89,9 @@
 
     <div class="app-container">
         <div class="header">
-            <a href="index.html" class="back-btn" onclick="hapusProgres()">🔙 Dashboard</a>
-            <h1>Praktik Lintas Bidang</h1>
+            <a href="index.html" class="btn-header home-pos">🏠 Home</a>
+            <button id="btn-logout" class="btn-header logout-pos" onclick="logoutSiswa()" style="display: none;">🚪 Logout</button>
+            <h1>Modul PLB</h1>
             <p>ELANG DIGITAL - SMA Negeri 1 Muncar</p>
         </div>
 
@@ -100,29 +116,18 @@
                     <div class="mentor-avatar"><img src="images/pak-cokro.png" alt="Pak Agus"></div>
                     <div class="mentor-message">
                         <span class="mentor-name">Pak Agus :</span>
-                        <span id="pesan-mentor">Selamat datang di misi terakhir!</span>
+                        <span id="pesan-mentor">Selamat datang di modul PLB!</span>
                     </div>
                 </div>
             </div>
 
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
-                    <h3>1. Apa itu Praktik Lintas Bidang (PLB)?</h3>
-                    <p>PLB adalah fase integrasi Informatika untuk memecahkan masalah masyarakat melalui <strong>Kerja Tim</strong> dan <strong>Inovasi Solutif</strong>.</p>
-
-                    <h3>2. Kolaborasi Inklusif</h3>
-                    <p>Kerja inklusif berarti menghargai perbedaan pendapat, membagi tugas secara adil, dan menjalin komunikasi transparan antar anggota tim.</p>
-
-                    <h3>3. Siklus Pengembangan Solusi</h3>
-                    <ul>
-                        <li><strong>Identifikasi Masalah:</strong> Mengamati fenomena di masyarakat.</li>
-                        <li><strong>Analisis Data:</strong> Mengolah informasi hasil riset.</li>
-                        <li><strong>Purwarupa:</strong> Merancang solusi digital awal.</li>
-                        <li><strong>Pengujian:</strong> Mencari bug dan menyempurnakan solusi.</li>
-                    </ul>
+                    <h3>Praktik Lintas Bidang (PLB)</h3>
+                    <p>Fase integrasi Informatika untuk memecahkan masalah nyata melalui kerja tim yang inklusif dan inovasi solutif.</p>
 
                     <div class="pdf-box">
-                        <p style="margin-bottom: 10px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi PLB versi lengkap?</p>
+                        <p style="margin-bottom: 12px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi lengkap?</p>
                         <a href="LINK_GOOGLE_DRIVE_PDF_PLB_BAPAK" target="_blank" class="btn-pdf-merah">
                             📥 Buka Naskah Materi (PDF)
                         </a>
@@ -135,18 +140,17 @@
                 <h4 id="indikator-soal">Soal 1/15</h4>
                 <h2 id="teks-soal" style="text-align: left; font-size: 1.1rem; min-height: 60px;">Memuat soal...</h2>
                 <div id="container-opsi"></div>
-                
                 <button class="btn-action btn-bantuan" id="tombol-bantuan" onclick="mintaBantuan()">💡 Tanya Pak Agus (-5 Poin)</button>
                 <button class="btn-action btn-disabled" id="tombol-lanjut" onclick="simpanJawaban()" disabled>Pilih Jawaban Dulu</button>
             </div>
 
             <div id="area-hasil" class="area-konten">
+                <div id="wrapper-nama-hasil" class="nama-hasil"></div>
                 <div class="angka-skor" id="teks-skor">0</div>
-                <p id="keterangan-hasil" style="text-align: center; font-weight: bold; font-size: 1.2rem;"></p>
+                <p id="keterangan-hasil" style="text-align: center; font-weight: bold; font-size: 1.2rem; margin-top: 0;"></p>
                 <p id="teks-penalti" style="text-align: center; color: var(--warna-merah); margin-top: 5px;"></p>
-                
-                <button id="tombol-ulang" class="btn-action" style="display: none;" onclick="tampilkanMateri()">🔄 Ulangi Persiapan Proyek</button>
-                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="kembaliKeDashboard()">🏆 Tamat - Selesai</button>
+                <button id="tombol-ulang" class="btn-action" style="display: none;" onclick="tampilkanMateri()">🔄 Remedial</button>
+                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="kembaliKeHome()">✅ Selesai</button>
             </div>
         </div>
 
@@ -163,6 +167,31 @@
         let indeksSoalSekarang = 0; let jumlahBenar = 0; let jawabanTerpilihSementara = null;
         let bantuanPerSoalDipakai = false; let totalKaliBantuan = 0; let jumlahPercobaan = 0;
         const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec"; 
+
+        function simpanProgres(fase) {
+            localStorage.setItem('progres_plb', JSON.stringify({ nama: namaSiswa, kelas: kelasSiswa, fase: fase, soal: daftarSoalBerjalan, indeks: indeksSoalSekarang, benar: jumlahBenar, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan }));
+        }
+
+        window.onload = function() {
+            const simpanan = localStorage.getItem('progres_plb');
+            if(simpanan) {
+                const p = JSON.parse(simpanan);
+                namaSiswa = p.nama; kelasSiswa = p.kelas; daftarSoalBerjalan = p.soal; indeksSoalSekarang = p.indeks;
+                jumlahBenar = p.benar; totalKaliBantuan = p.bantuan; jumlahPercobaan = p.percobaan;
+                document.getElementById('area-mentor-global').style.display = "block";
+                document.getElementById('btn-logout').style.display = "block";
+                if(p.fase === 'materi') tampilkanMateri(); else muatSoal();
+            } else {
+                inisialisasiDropdown();
+            }
+        };
+
+        function logoutSiswa() {
+            if(confirm("Apakah Anda ingin Logout? Progres belajar di modul ini akan dihapus.")) {
+                localStorage.removeItem('progres_plb');
+                window.location.reload();
+            }
+        }
 
         function inisialisasiDropdown() {
             const selectKelas = document.getElementById('pilih-kelas');
@@ -187,43 +216,41 @@
             });
         }
 
-        window.onload = inisialisasiDropdown;
-
         function simpanNamaSiswa() {
             namaSiswa = document.getElementById('pilih-nama').value;
             kelasSiswa = document.getElementById('pilih-kelas').value;
             if(!namaSiswa) return alert("Pilih namamu dulu!");
             document.getElementById('area-mentor-global').style.display = "block";
+            document.getElementById('btn-logout').style.display = "block";
             tampilkanMateri();
         }
 
         function tampilkanMateri() {
             ubahTampilan('area-materi');
-            /* PESAN MENTOR SESUAI INSTRUKSI */
-            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! , kamu bisa klik tombol merah di bawah untuk membaca materi lengkapnya ya!`;
+            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! Silakan klik tombol merah di bawah untuk membaca materi lengkapnya ya!`;
+            simpanProgres('materi');
         }
 
         function mulaiKuis() {
             ubahTampilan('area-kuis');
             jumlahPercobaan++;
-            daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
-            indeksSoalSekarang = 0; jumlahBenar = 0; totalKaliBantuan = 0;
+            if(daftarSoalBerjalan.length === 0) {
+                daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
+            }
             muatSoal();
         }
 
         function muatSoal() {
+            ubahTampilan('area-kuis');
             let s = daftarSoalBerjalan[indeksSoalSekarang];
             document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1}/15`;
             document.getElementById('teks-soal').innerText = s.p;
-            jawabanTerpilihSementara = null; 
-            bantuanPerSoalDipakai = false;
+            jawabanTerpilihSementara = null; bantuanPerSoalDipakai = false;
             document.getElementById('tombol-bantuan').disabled = false;
             document.getElementById('kotak-mentor').className = "mentor-box";
-            document.getElementById('pesan-mentor').innerText = "Analisislah manajemen proyeknya...";
-            
+            document.getElementById('pesan-mentor').innerText = "Menganalisis proyek membutuhkan kerjasama tim...";
             const btnLanjut = document.getElementById('tombol-lanjut');
             btnLanjut.disabled = true; btnLanjut.className = "btn-action btn-disabled";
-            
             const cont = document.getElementById('container-opsi'); cont.innerHTML = '';
             s.o.forEach((txt, i) => {
                 const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = txt;
@@ -234,6 +261,7 @@
                 };
                 cont.appendChild(btn);
             });
+            simpanProgres('kuis');
         }
 
         function mintaBantuan() {
@@ -242,6 +270,7 @@
             document.getElementById('kotak-mentor').className = "mentor-box peringatan";
             document.getElementById('pesan-mentor').innerText = `${daftarSoalBerjalan[indeksSoalSekarang].b}`;
             document.getElementById('tombol-bantuan').disabled = true;
+            simpanProgres('kuis');
         }
 
         function simpanJawaban() {
@@ -256,27 +285,26 @@
             let skorAwal = Math.round((jumlahBenar / Math.min(15, daftarSoalBerjalan.length)) * 100);
             let totalPenalti = totalKaliBantuan * 5;
             let skorAkhir = Math.max(0, skorAwal - totalPenalti);
+            
+            document.getElementById('wrapper-nama-hasil').innerText = namaSiswa;
             document.getElementById('teks-skor').innerText = skorAkhir;
+            
             const tuntas = skorAkhir >= 100;
-            document.getElementById('keterangan-hasil').innerText = tuntas ? "KOLABORASI SUKSES" : "PROYEK BUTUH REVISI";
-            document.getElementById('pesan-mentor').innerText = tuntas ? "Selamat! Kamu telah menguasai seluruh elemen Informatika Kelas X." : "Ayo perbaiki pemahaman proyekmu melalui remedial.";
+            document.getElementById('keterangan-hasil').innerText = tuntas ? "KOLABORASI SUKSES" : "PROYEK BELUM TUNTAS";
+            document.getElementById('pesan-mentor').innerText = tuntas ? "Selamat! Kamu telah menguasai seluruh elemen Informatika." : "Ayo perbaiki pemahaman proyekmu melalui remedial.";
             document.getElementById('teks-penalti').innerText = totalKaliBantuan > 0 ? `(Penalti bantuan: -${totalPenalti} poin)` : "";
             document.getElementById('tombol-selesai').style.display = tuntas ? "block" : "none";
             document.getElementById('tombol-ulang').style.display = tuntas ? "none" : "block";
             
-            fetch(URL_APPS_SCRIPT + "?" + new URLSearchParams({
-                namaSiswa, kelasSiswa, modul: "Praktik Lintas Bidang (PLB)", skor: skorAkhir, 
-                bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, 
-                status: tuntas ? "TUNTAS" : "REMEDIAL", browser: navigator.userAgent
-            }), { method: 'GET', mode: 'no-cors' });
+            fetch(URL_APPS_SCRIPT + "?" + new URLSearchParams({ namaSiswa, kelasSiswa, modul: "Praktik Lintas Bidang (PLB)", skor: skorAkhir, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, status: tuntas ? "TUNTAS" : "REMEDIAL", browser: navigator.userAgent }), { method: 'GET', mode: 'no-cors' });
+            localStorage.removeItem('progres_plb');
         }
 
         function ubahTampilan(id) {
             document.querySelectorAll('.area-konten').forEach(a => a.style.display = 'none');
             document.getElementById(id).style.display = 'block';
         }
-        function hapusProgres() { localStorage.removeItem('eduAdaptif_ModulPLB'); }
-        function kembaliKeDashboard() { window.location.href = "index.html"; }
+        function kembaliKeHome() { window.location.href = "index.html"; }
     </script>
 </body>
 </html>
