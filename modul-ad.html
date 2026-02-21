@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul Analisis Data - Elang Digital</title>
+    <title>Modul Analisis Data - ELANG DIGTAL</title>
     <style>
         :root {
             --warna-utama: #4F46E5; 
@@ -67,7 +67,7 @@
         }
         .login-card h2 { color: var(--warna-utama); margin: 0 0 10px 0; font-size: 1.6rem;}
 
-        /* CSS AVATAR PAK COKRO */
+        /* CSS AVATAR Pak Agus */
         .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); transition: all 0.3s; align-items: center; }
         .mentor-box.peringatan { border-left-color: var(--warna-kuning); background-color: #FEF3C7; }
         .mentor-avatar { 
@@ -116,7 +116,7 @@
         <div class="content">
             <div id="area-login" class="area-konten area-aktif">
                 <div class="login-card">
-                    <img src="images/pak-cokro.png" alt="Pak Cokro" class="login-illustration">
+                    <img src="images/pak-cokro.png" alt="Pak Agus" class="login-illustration">
                     <h2>Halo, Penjelajah Data!</h2>
                     <p>Pak Agus siap menemanimu mengungkap informasi dari data. Pilih namamu untuk memulai.</p>
                     
@@ -134,7 +134,7 @@
             <div id="area-mentor-global" style="display: none;">
                 <div class="mentor-box" id="kotak-mentor">
                     <div class="mentor-avatar" id="avatar-mentor">
-                        <img src="images/pak-cokro.png" alt="Pak Cokro">
+                        <img src="images/pak-cokro.png" alt="Pak Agus">
                     </div>
                     <div class="mentor-message">
                         <span class="mentor-name" id="nama-mentor">Pak Agus :</span>
@@ -169,7 +169,7 @@
                 <h2 id="teks-soal">Teks soal di sini...</h2>
                 <div id="container-opsi" class="opsi-container"></div>
                 
-                <button class="btn-action btn-bantuan" id="tombol-bantuan" onclick="mintaBantuan()">💡 Perlu Bantuan Pak Cokro?</button>
+                <button class="btn-action btn-bantuan" id="tombol-bantuan" onclick="mintaBantuan()">💡 Perlu Bantuan Pak Agus?</button>
                 <button class="btn-action btn-disabled" id="tombol-lanjut" onclick="simpanJawaban()" disabled>Pilih Jawaban Dulu</button>
             </div>
 
@@ -258,7 +258,7 @@
 
         function mulaiKuis() {
             ubahTampilan('area-kuis'); aturMentor("normal");
-            document.getElementById('pesan-mentor').innerText = `Siap kuis, ${namaSiswa}? Ingat, bantuan Pak Cokro akan mengurangi skormu.`;
+            document.getElementById('pesan-mentor').innerText = `Siap kuis, ${namaSiswa}? Ingat, bantuan Pak Agus akan mengurangi skormu.`;
             jumlahPercobaan++;
             daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
             simpanProgres('kuis'); muatSoal();
