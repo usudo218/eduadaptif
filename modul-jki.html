@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul Jaringan & Internet - EduAdaptif SMA</title>
+    <title>Modul JKI - ELANG DIGITAL</title>
     <style>
         :root {
-            --warna-utama: #EA580C; /* Warna Oranye untuk Jaringan */
+            --warna-utama: #EA580C; /* Oranye untuk Jaringan */
             --warna-aksen: #0284C7; 
             --warna-merah: #EF4444;
             --warna-kuning: #F59E0B; 
@@ -19,122 +19,41 @@
         body { background-color: var(--warna-latar); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; color: var(--warna-teks); }
         .app-container { background: white; width: 100%; max-width: 650px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
-        /* ==========================================
-           DESAIN HEADER & TOMBOL MENU ELEGAN 
-           ========================================== */
-        .header { 
-            background: var(--warna-utama); 
-            color: white; 
-            padding: 45px 20px 25px 20px; 
-            text-align: center; 
-            position: relative;
-        }
-        .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.5px;}
-        .header p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
-        
-        .back-btn, .logout-btn { 
-            position: absolute; 
-            top: 15px; 
-            display: flex; 
-            align-items: center; 
-            gap: 6px; 
-            font-size: 0.85rem; 
-            font-weight: 600; 
-            padding: 8px 16px; 
-            border-radius: 50px; 
-            text-decoration: none; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            border: 1px solid rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(8px); 
-            -webkit-backdrop-filter: blur(8px);
-            cursor: pointer; 
-            font-family: inherit;
-        }
-
-        .back-btn { 
-            left: 15px; 
-            background: rgba(255, 255, 255, 0.1); 
-            color: white; 
-        }
-        .back-btn:hover { 
-            background: white; 
-            color: var(--warna-utama); 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); 
-            border-color: white;
-        }
-
-        .logout-btn { 
-            right: 15px; 
-            background: rgba(220, 38, 38, 0.15); 
-            color: #FFF1F2; 
-            border-color: rgba(220, 38, 38, 0.3);
-        }
-        .logout-btn:hover { 
-            background: #DC2626; 
-            color: white; 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 15px rgba(220, 38, 38, 0.3); 
-            border-color: #DC2626;
-        }
-
-        @media (max-width: 480px) {
-            .back-btn, .logout-btn { padding: 6px 12px; font-size: 0.75rem; top: 12px;}
-            .header { padding-top: 55px; } 
-            .header h1 { font-size: 1.3rem; }
-        }
-        /* ========================================== */
+        .header { background: var(--warna-utama); color: white; padding: 45px 20px 25px 20px; text-align: center; position: relative; }
+        .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; }
+        .back-btn { position: absolute; top: 15px; left: 15px; color: white; text-decoration: none; background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 50px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.2); cursor: pointer;}
 
         .content { padding: 25px 20px; flex-grow: 1; }
         
-        .login-card { background: white; padding: 30px 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); text-align: center; border: 1px solid #E5E7EB; }
-        .login-illustration { width: 80%; max-width: 220px; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto; border-radius: 12px;}
-        .login-card h2 { color: var(--warna-utama); margin: 0 0 10px 0; font-size: 1.6rem;}
-        .login-card p { color: #6B7280; margin-bottom: 25px; line-height: 1.5;}
+        /* LOGIN CARD Pak Agus */
+        .login-card { background: white; padding: 30px 25px; border-radius: 20px; text-align: center; border: 1px solid #E5E7EB; }
+        .pak-cokro-img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--warna-utama); margin-bottom: 15px; object-fit: cover; }
+        select.input-nama { width: 100%; padding: 15px; border: 2px solid #E5E7EB; border-radius: 12px; font-size: 1rem; margin-bottom: 15px; font-weight: 600; cursor: pointer; }
 
-        select.input-nama { width: 100%; padding: 15px; border: 2px solid #E5E7EB; border-radius: 12px; font-size: 1rem; margin-bottom: 15px; text-align: center; background-color: #F9FAFB; cursor: pointer; font-weight: 600; color: var(--warna-teks); transition: all 0.3s;}
-        select.input-nama:focus { border-color: var(--warna-utama); background-color: white; outline: none; box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2);}
-        select.input-nama:disabled { background-color: #F3F4F6; color: #9CA3AF; cursor: not-allowed; border-color: #E5E7EB;}
-
-        .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); transition: all 0.3s; }
+        /* MENTOR BOX */
+        .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); align-items: center; }
         .mentor-box.peringatan { border-left-color: var(--warna-kuning); background-color: #FEF3C7; }
-        .mentor-avatar { font-size: 2.5rem; }
-        .mentor-message { flex: 1; line-height: 1.5; }
-        .mentor-name { font-weight: bold; color: var(--warna-utama); margin-bottom: 5px; display: block; }
-        .mentor-name.peringatan { color: #D97706; }
+        .mentor-avatar { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 2px solid var(--warna-utama); background: white; flex-shrink: 0;}
+        .mentor-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
         .area-konten { display: none; }
         .area-aktif { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .teks-materi { background: #f9fafb; padding: 25px; border-radius: 8px; border: 1px solid #e5e7eb; line-height: 1.7; text-align: justify; margin-bottom: 20px; font-size: 0.95rem; height: 500px; overflow-y: auto; }
-        .teks-materi h3 { margin-top: 30px; color: var(--warna-utama); border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;}
-        .teks-materi h3:first-child { margin-top: 0; }
-        .teks-materi h4 { margin-top: 15px; color: var(--warna-aksen); margin-bottom: 5px;}
-        .ilustrasi-mini { width: 100%; height: auto; min-height: 150px; background-color: #e5e7eb; object-fit: cover; border-radius: 8px; margin: 15px 0; border: 1px dashed #9ca3af; }
-        
-        .question-area { text-align: center; }
-        .question-area h2#teks-soal { font-size: 1.1rem; margin-bottom: 25px; color: #333; line-height: 1.5; text-align: left; font-weight: 600; }
-        .opsi-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; transition: 0.2s; color: var(--warna-teks); }
-        .btn-opsi:hover { background: #F3F4F6; border-color: var(--warna-utama); }
-        .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); color: var(--warna-utama); font-weight: bold; }
+        .teks-materi { background: #f9fafb; padding: 25px; border-radius: 12px; border: 1px solid #e5e7eb; height: 500px; overflow-y: auto; text-align: justify; line-height: 1.7; }
+        .teks-materi h3 { color: var(--warna-utama); border-bottom: 2px solid #eee; padding-bottom: 8px; margin-top: 25px; }
+        .ilustrasi-mini { width: 100%; border-radius: 8px; margin: 15px 0; border: 1px solid #ddd; }
 
-        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
-        .btn-action:hover { background: #C2410C; }
+        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; transition: 0.2s; }
+        .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); font-weight: bold; color: var(--warna-utama); }
+
+        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; }
         .btn-submit { background: var(--warna-aksen); }
-        .btn-submit:hover { background: #0369A1; }
-        .btn-ulang { background: var(--warna-merah); }
-        .btn-ulang:hover { background: #DC2626; }
-        .btn-bantuan { background: var(--warna-kuning); color: #fff; margin-bottom: 20px; }
-        .btn-bantuan:hover { background: #D97706; }
+        .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
 
-        .skor-box { text-align: center; margin: 20px 0; }
-        .angka-skor { font-size: 4rem; font-weight: bold; color: var(--warna-utama); margin: 10px 0; }
-        .teks-penalti { color: var(--warna-merah); font-weight: bold; font-size: 0.9rem; margin-top: 5px; }
-
-        .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 15px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; line-height: 1.5; }
+        .angka-skor { font-size: 4.5rem; font-weight: bold; color: var(--warna-utama); text-align: center; margin: 10px 0;}
+        .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 20px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; }
     </style>
 </head>
 <body>
@@ -142,98 +61,81 @@
     <div class="app-container">
         <div class="header">
             <a href="index.html" class="back-btn" onclick="hapusProgres()">🔙 Dashboard</a>
-            <button id="btn-logout" class="logout-btn" onclick="logoutSiswa()" style="display: none;">🚪 Logout</button>
-
-            <h1>Modul Jaringan & Internet</h1>
-            <p>Informatika Fase E - Kelas X</p>
+            <h1>Jaringan Komputer & Internet</h1>
+            <p>COKRO-LITE - SMA Negeri 1 Muncar</p>
         </div>
 
         <div class="content">
             <div id="area-login" class="area-konten area-aktif">
                 <div class="login-card">
-                    <img src="images/login-jki.png" alt="Ilustrasi Login JKI" class="login-illustration" onerror="this.style.display='none'">
-                    <h2>Koneksi Terputus? Ayo Sambungkan!</h2>
-                    <p>Pilih namamu dari server database untuk memulai akses pembelajaran jaringan.</p>
-                    
+                    <img src="images/pak-cokro.png" alt="Pak Agus" class="pak-cokro-img">
+                    <h2>Koneksi Stabil?</h2>
+                    <p>Halo, saya Pak Agus. Mari kita sambungkan logikamu dengan dunia jaringan global.</p>
                     <select id="pilih-kelas" class="input-nama" onchange="filterNama()">
                         <option value="">-- Pilih Kelas --</option>
                     </select>
-
                     <select id="pilih-nama" class="input-nama" disabled>
                         <option value="">-- Pilih Nama --</option>
                     </select>
-
-                    <button class="btn-action btn-submit" onclick="simpanNamaSiswa()" style="margin-top: 10px;">Hubungkan ke Server</button>
+                    <button class="btn-action btn-submit" onclick="simpanNamaSiswa()">🔗 Hubungkan Server</button>
                 </div>
             </div>
 
             <div id="area-mentor-global" style="display: none;">
                 <div class="mentor-box" id="kotak-mentor">
-                    <div class="mentor-avatar" id="avatar-mentor">👨‍🏫</div>
+                    <div class="mentor-avatar"><img src="images/pak-cokro.png" alt="Pak Agus"></div>
                     <div class="mentor-message">
-                        <span class="mentor-name" id="nama-mentor">Pak Agus :</span>
-                        <span id="pesan-mentor">Selamat datang!</span>
+                        <span class="mentor-name">Pak Agus :</span>
+                        <span id="pesan-mentor">Selamat datang di modul JKI!</span>
                     </div>
                 </div>
             </div>
 
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
-                    <h3>1. Jaringan Lokal vs Internet</h3>
-                    <p><strong>LAN (Local Area Network)</strong> adalah jaringan berskala kecil, misalnya di dalam satu ruang lab sekolah. Sedangkan <strong>Internet</strong> adalah jaringan komputer terluas (global) yang saling terhubung di seluruh dunia.</p>
-                    <img src="images/jaringan.jpg" alt="Ilustrasi Jaringan Lokal" class="ilustrasi-mini" onerror="this.style.display='none'">
+                    <h3>1. Jaringan Lokal (LAN) vs Internet</h3>
+                    <p><strong>LAN</strong> adalah jaringan terbatas di satu gedung/lab. <strong>Internet</strong> adalah "Network of Networks", jutaan jaringan lokal yang saling terhubung di seluruh dunia.</p>
                     
-                    <h3>2. Media Transmisi: Kabel & Nirkabel</h3>
-                    <p>Data butuh jalan untuk berpindah. Ada dua jenis jalan:</p>
+
+                    <h3>2. Media Transmisi</h3>
+                    <p>Bagaimana data berpindah?</p>
                     <ul>
-                        <li><strong>Kabel (Wired):</strong> Contohnya kabel UTP (kabel tembaga) dan <em>Fiber Optik</em> (serat kaca super cepat).</li>
-                        <li><strong>Nirkabel (Wireless):</strong> Contohnya Wi-Fi, Bluetooth, dan sinyal seluler (4G/5G).</li>
+                        <li><strong>Wired (Kabel):</strong> Menggunakan serat optik (Fiber) atau tembaga (UTP).</li>
+                        <li><strong>Wireless (Tanpa Kabel):</strong> Menggunakan Wi-Fi, Bluetooth, atau satelit.</li>
                     </ul>
-                    <img src="images/nirkabel.jpg" alt="Ilustrasi Nirkabel" class="ilustrasi-mini" onerror="this.style.display='none'">
-                    <p><em>Tethering (Personal Hotspot)</em>: Menggunakan HP kamu sebagai "router" dadakan agar perangkat lain bisa menumpang koneksi nirkabel.</p>
-
-                    <h3>3. Alamat IP & Perangkat Jaringan</h3>
-                    <p>Setiap perangkat di jaringan wajib punya nomor identitas unik yang disebut <strong>IP Address</strong>. Perangkat keras yang bertugas mencari rute tercepat dan meneruskan data dari jaringan lokalmu ke internet disebut <strong>Router</strong>.</p>
-
-                    <h3>4. Enkripsi & Keamanan Data</h3>
-                    <p><strong>Enkripsi</strong> adalah proses mengacak data agar tidak bisa dibaca oleh pencuri (Hacker). Saat di internet, pastikan alamat web menggunakan <strong>HTTPS</strong> (ada logo gembok hijau) yang menandakan data komunikasinya dienkripsi aman.</p>
-                    <img src="images/enkripsi.jpg" alt="Ilustrasi Enkripsi" class="ilustrasi-mini" onerror="this.style.display='none'">
                     
-                    <h4>Tips Proteksi Data Pribadi:</h4>
-                    <ul>
-                        <li>Hindari transaksi penting (misal banking) menggunakan *Wi-Fi publik gratis* (bisa disadap).</li>
-                        <li>Gunakan password kombinasi (huruf besar, kecil, angka, dan simbol).</li>
-                        <li>Waspada terhadap <strong>Phishing</strong> (situs palsu yang menyerupai situs asli untuk menjebakmu memasukkan password).</li>
-                    </ul>
-                    <img src="images/proteksi.jpg" alt="Ilustrasi Cyber Security" class="ilustrasi-mini" onerror="this.style.display='none'">
+
+                    <h3>3. Alamat IP & Router</h3>
+                    <p>Tiap komputer punya alamat unik (IP Address). <strong>Router</strong> adalah polisi lalu lintasnya; ia mengarahkan data ke rute tercepat.</p>
+
+                    <h3>4. Keamanan & Enkripsi</h3>
+                    <p>Data dikirim melalui jalur umum, maka perlu <strong>Enkripsi</strong> agar tidak bisa dibaca pencuri (hacker). Pastikan web menggunakan <strong>HTTPS</strong>.</p>
+                    
                 </div>
-                <button class="btn-action" onclick="mulaiKuis()">Saya Paham, Mulai Tantangan Kuis!</button>
+                <button class="btn-action" onclick="mulaiKuis()">Koneksi Aman, Mulai Kuis!</button>
             </div>
 
-            <div id="area-kuis" class="area-konten question-area">
-                <h2 id="indikator-soal">Soal 1 dari 15</h2>
-                <h2 id="teks-soal">Teks soal di sini...</h2>
-                <div id="container-opsi" class="opsi-container"></div>
+            <div id="area-kuis" class="area-konten">
+                <h4 id="indikator-soal">Soal 1/15</h4>
+                <h2 id="teks-soal" style="text-align: left; font-size: 1.1rem; min-height: 60px;">Memuat soal...</h2>
+                <div id="container-opsi"></div>
                 
-                <button class="btn-action btn-bantuan" id="tombol-bantuan" onclick="mintaBantuan()">💡 Perlu Bantuan Pak Agus?</button>
+                <button class="btn-action btn-bantuan" id="tombol-bantuan" onclick="mintaBantuan()">💡 Tanya Pak Agus (-5 Poin)</button>
                 <button class="btn-action btn-disabled" id="tombol-lanjut" onclick="simpanJawaban()" disabled>Pilih Jawaban Dulu</button>
             </div>
 
             <div id="area-hasil" class="area-konten">
-                <div class="skor-box">
-                    <h3>Skor Ketuntasan (Syarat: 100)</h3>
-                    <div class="angka-skor" id="teks-skor">0</div>
-                    <p id="keterangan-hasil">Menghitung skor...</p>
-                    <p class="teks-penalti" id="teks-penalti" style="display: none;">(Skor dikurangi karena menggunakan tombol bantuan)</p>
-                </div>
-                <button id="tombol-ulang" class="btn-action btn-ulang" style="display: none;" onclick="ulangiMateri()">Baca Ulang Materi & Remedial</button>
-                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="kembaliKeDashboard()">Selesai & Kembali ke Menu</button>
+                <div class="angka-skor" id="teks-skor">0</div>
+                <p id="keterangan-hasil" style="text-align: center; font-weight: bold; font-size: 1.2rem;"></p>
+                <p id="teks-penalti" style="text-align: center; color: var(--warna-merah); margin-top: 5px;"></p>
+                
+                <button id="tombol-ulang" class="btn-action" style="display: none;" onclick="tampilkanMateri()">🔄 Perbaiki Koneksi (Remedial)</button>
+                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="kembaliKeDashboard()">✅ Selesai</button>
             </div>
         </div>
 
         <div class="footer">
-            Design By Agus Suyatno, S.Kom<br>
-            SMA Negeri 1 Muncar &copy; 2026
+            Design by <b>Agus Suyatno, S.Kom</b><br>&copy; 2026 SMA Negeri 1 Muncar
         </div>
     </div>
 
@@ -241,182 +143,120 @@
     <script src="siswa.js"></script>
 
     <script>
-        let namaSiswa = ""; 
-        let kelasSiswa = "";
-        let daftarSoalBerjalan = [];
-        let indeksSoalSekarang = 0;
-        let jumlahBenar = 0;
-        let jawabanTerpilihSementara = null;
-        
-        let bantuanPerSoalDipakai = false; 
-        let totalKaliBantuan = 0;
-        let jumlahPercobaan = 0; 
-        const POIN_PENALTI_BANTUAN = 5; 
-        const KKM = 100; 
-
-        // ==========================================================
-        // LINK BARU BAPAK SUDAH DIPASANG DI SINI
-        // ==========================================================
+        let namaSiswa = ""; let kelasSiswa = ""; let daftarSoalBerjalan = [];
+        let indeksSoalSekarang = 0; let jumlahBenar = 0; let jawabanTerpilihSementara = null;
+        let bantuanPerSoalDipakai = false; let totalKaliBantuan = 0; let jumlahPercobaan = 0;
         const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec"; 
 
         function inisialisasiDropdown() {
-            if(typeof SISWA_BARU === 'undefined') { alert("File siswa.js tidak terbaca!"); return; }
-            const unikKelas = [...new Set(SISWA_BARU.map(s => s.kelas))].sort();
             const selectKelas = document.getElementById('pilih-kelas');
+            if (typeof SISWA_BARU === 'undefined') return;
+            const unikKelas = [...new Set(SISWA_BARU.map(s => s.kelas))].sort();
+            selectKelas.innerHTML = '<option value="">-- Pilih Kelas --</option>';
             unikKelas.forEach(k => {
-                let opt = document.createElement('option'); opt.value = k; opt.innerText = k; selectKelas.appendChild(opt);
+                let opt = document.createElement('option'); opt.value = k; opt.innerText = k;
+                selectKelas.appendChild(opt);
             });
         }
 
         function filterNama() {
-            const kelasDipilih = document.getElementById('pilih-kelas').value;
-            const selectNama = document.getElementById('pilih-nama');
-            selectNama.innerHTML = '<option value="">-- Pilih Nama --</option>';
-            if(kelasDipilih === "") { selectNama.disabled = true; return; }
-            selectNama.disabled = false;
-            const siswaKelas = SISWA_BARU.filter(s => s.kelas === kelasDipilih).sort((a,b) => a.nama.localeCompare(b.nama));
-            siswaKelas.forEach(s => {
-                let opt = document.createElement('option'); opt.value = s.nama; opt.innerText = s.nama; selectNama.appendChild(opt);
+            const kls = document.getElementById('pilih-kelas').value;
+            const selNama = document.getElementById('pilih-nama');
+            selNama.innerHTML = '<option value="">-- Pilih Nama --</option>';
+            if(!kls) { selNama.disabled = true; return; }
+            selNama.disabled = false;
+            SISWA_BARU.filter(s => s.kelas === kls).sort((a,b) => a.nama.localeCompare(b.nama)).forEach(s => {
+                let opt = document.createElement('option'); opt.value = s.nama; opt.innerText = s.nama;
+                selNama.appendChild(opt);
             });
         }
 
-        function simpanProgres(faseSistem) {
-            const progresState = { nama: namaSiswa, kelas: kelasSiswa, fase: faseSistem, soal: daftarSoalBerjalan, indeks: indeksSoalSekarang, benar: jumlahBenar, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan };
-            localStorage.setItem('eduAdaptif_ModulJKI', JSON.stringify(progresState));
-        }
-
-        function muatProgres() {
-            const simpanan = localStorage.getItem('eduAdaptif_ModulJKI');
-            if(simpanan) {
-                const p = JSON.parse(simpanan); namaSiswa = p.nama; kelasSiswa = p.kelas; daftarSoalBerjalan = p.soal; indeksSoalSekarang = p.indeks; jumlahBenar = p.benar; totalKaliBantuan = p.bantuan; jumlahPercobaan = p.percobaan;
-                
-                document.getElementById('area-mentor-global').style.display = "block";
-                document.getElementById('btn-logout').style.display = "block";
-
-                if (p.fase === 'materi') { tampilkanMateri(); } else if (p.fase === 'kuis') { ubahTampilan('area-kuis'); aturMentor("normal"); document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa}! Sinyal kembali terhubung, ayo lanjutkan kuisnya.`; muatSoal(); }
-            } else { inisialisasiDropdown(); }
-        }
-
-        function hapusProgres() { localStorage.removeItem('eduAdaptif_ModulJKI'); }
-
-        function logoutSiswa() {
-            if(confirm("Yakin ingin memutuskan koneksi (ganti akun)? Progres kuis saat ini akan diulang dari awal.")) {
-                hapusProgres(); 
-                window.location.reload();
-            }
-        }
-
-        window.onload = muatProgres;
+        window.onload = inisialisasiDropdown;
 
         function simpanNamaSiswa() {
-            kelasSiswa = document.getElementById('pilih-kelas').value;
             namaSiswa = document.getElementById('pilih-nama').value;
-            if (kelasSiswa === "" || namaSiswa === "") { alert("Pilih kelas dan namamu dulu ya!"); return; }
-            
-            document.getElementById('area-mentor-global').style.display = "block"; 
-            document.getElementById('btn-logout').style.display = "block";
+            kelasSiswa = document.getElementById('pilih-kelas').value;
+            if(!namaSiswa) return alert("Pilih namamu dulu!");
+            document.getElementById('area-mentor-global').style.display = "block";
             tampilkanMateri();
         }
 
-        function aturMentor(mode) {
-            const kotak = document.getElementById('kotak-mentor'); const nama = document.getElementById('nama-mentor');
-            if(mode === "normal") { kotak.classList.remove('peringatan'); nama.classList.remove('peringatan'); document.getElementById('avatar-mentor').innerText = "👨‍🏫"; } 
-            else if (mode === "bantuan") { kotak.classList.add('peringatan'); nama.classList.add('peringatan'); document.getElementById('avatar-mentor').innerText = "💡"; }
-        }
-
         function tampilkanMateri() {
-            ubahTampilan('area-materi'); aturMentor("normal");
-            document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa} dari ${kelasSiswa}! Mari pelajari dunia konektivitas dan keamanan data ini.`;
-            indeksSoalSekarang = 0; jumlahBenar = 0; totalKaliBantuan = 0; simpanProgres('materi'); 
+            ubahTampilan('area-materi');
+            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! Jaringan komputer adalah tentang bagaimana kita terhubung dengan aman.`;
         }
 
         function mulaiKuis() {
-            ubahTampilan('area-kuis'); aturMentor("normal");
-            document.getElementById('pesan-mentor').innerText = `Koneksi stabil, ${namaSiswa}! Jawab 15 soal Jaringan ini.`;
-            jumlahPercobaan++; 
-            if(typeof daftarSoalAsli === 'undefined') { alert("File soal-jki.js tidak terbaca!"); return; }
-            daftarSoalBerjalan = [...daftarSoalAsli];
-            for (let i = daftarSoalBerjalan.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [daftarSoalBerjalan[i], daftarSoalBerjalan[j]] = [daftarSoalBerjalan[j], daftarSoalBerjalan[i]]; }
-            simpanProgres('kuis'); muatSoal();
+            ubahTampilan('area-kuis');
+            jumlahPercobaan++;
+            daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
+            indeksSoalSekarang = 0; jumlahBenar = 0; totalKaliBantuan = 0;
+            muatSoal();
         }
 
         function muatSoal() {
-            let soalAktif = daftarSoalBerjalan[indeksSoalSekarang];
-            document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1} dari ${daftarSoalBerjalan.length}`;
-            document.getElementById('teks-soal').innerText = soalAktif.p;
+            let s = daftarSoalBerjalan[indeksSoalSekarang];
+            document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1}/15`;
+            document.getElementById('teks-soal').innerText = s.p;
             jawabanTerpilihSementara = null; bantuanPerSoalDipakai = false;
-            const btnBantuan = document.getElementById('tombol-bantuan'); btnBantuan.style.display = "block"; btnBantuan.disabled = false; btnBantuan.classList.remove('btn-disabled'); btnBantuan.innerText = "💡 Perlu Bantuan Pak Agus?";
-            aturMentor("normal"); document.getElementById('pesan-mentor').innerText = `Hati-hati, baca dengan teliti.`;
-            const tombolLanjut = document.getElementById('tombol-lanjut'); tombolLanjut.innerText = (indeksSoalSekarang === daftarSoalBerjalan.length - 1) ? "Kirim Semua Jawaban" : "Lanjut ke Soal Berikutnya"; tombolLanjut.classList.add('btn-disabled'); tombolLanjut.classList.remove('btn-submit'); tombolLanjut.disabled = true;
-            const containerOpsi = document.getElementById('container-opsi'); containerOpsi.innerHTML = ''; 
-            soalAktif.o.forEach((opsiTeks, index) => { const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = opsiTeks; btn.onclick = () => pilihOpsi(index, btn); containerOpsi.appendChild(btn); });
+            document.getElementById('tombol-bantuan').disabled = false;
+            document.getElementById('kotak-mentor').className = "mentor-box";
+            document.getElementById('pesan-mentor').innerText = "Analisislah infrastruktur jaringannya...";
+            const btnLanjut = document.getElementById('tombol-lanjut');
+            btnLanjut.disabled = true; btnLanjut.className = "btn-action btn-disabled";
+            const cont = document.getElementById('container-opsi'); cont.innerHTML = '';
+            s.o.forEach((txt, i) => {
+                const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = txt;
+                btn.onclick = () => {
+                    document.querySelectorAll('.btn-opsi').forEach(b => b.classList.remove('terpilih'));
+                    btn.classList.add('terpilih'); jawabanTerpilihSementara = i;
+                    btnLanjut.disabled = false; btnLanjut.className = "btn-action btn-submit";
+                };
+                cont.appendChild(btn);
+            });
         }
 
         function mintaBantuan() {
-            if(bantuanPerSoalDipakai) return; 
+            if(bantuanPerSoalDipakai) return;
             bantuanPerSoalDipakai = true; totalKaliBantuan++;
-            let soalAktif = daftarSoalBerjalan[indeksSoalSekarang];
-            aturMentor("bantuan"); document.getElementById('pesan-mentor').innerText = `PETUNJUK: ${soalAktif.b} (Peringatan: Penalti -${POIN_PENALTI_BANTUAN} poin).`;
-            const btnBantuan = document.getElementById('tombol-bantuan'); btnBantuan.disabled = true; btnBantuan.classList.add('btn-disabled'); btnBantuan.innerText = "✔️ Bantuan Telah Diberikan";
-            simpanProgres('kuis'); 
-        }
-
-        function pilihOpsi(indexPilihan, tombolDiklik) {
-            document.querySelectorAll('.btn-opsi').forEach(btn => btn.classList.remove('terpilih'));
-            tombolDiklik.classList.add('terpilih'); jawabanTerpilihSementara = indexPilihan;
-            const tombolLanjut = document.getElementById('tombol-lanjut'); tombolLanjut.classList.remove('btn-disabled'); tombolLanjut.classList.add('btn-submit'); tombolLanjut.disabled = false;
+            document.getElementById('kotak-mentor').className = "mentor-box peringatan";
+            document.getElementById('pesan-mentor').innerText = `Pak Agus: ${daftarSoalBerjalan[indeksSoalSekarang].b}`;
+            document.getElementById('tombol-bantuan').disabled = true;
         }
 
         function simpanJawaban() {
-            if (jawabanTerpilihSementara === null) return; 
-            if (jawabanTerpilihSementara.toString() === daftarSoalBerjalan[indeksSoalSekarang].k.toString()) { jumlahBenar++; }
+            if(jawabanTerpilihSementara === daftarSoalBerjalan[indeksSoalSekarang].k) jumlahBenar++;
             indeksSoalSekarang++;
-            if (indeksSoalSekarang < daftarSoalBerjalan.length) { simpanProgres('kuis'); muatSoal(); } else { hapusProgres(); tampilkanHasil(); }
+            if(indeksSoalSekarang < 15 && indeksSoalSekarang < daftarSoalBerjalan.length) muatSoal(); 
+            else tampilkanHasil();
         }
 
         function tampilkanHasil() {
-            ubahTampilan('area-hasil'); aturMentor("normal");
-            let skorAwal = Math.round((jumlahBenar / daftarSoalBerjalan.length) * 100);
-            let totalPenalti = totalKaliBantuan * POIN_PENALTI_BANTUAN;
-            let skorAkhir = skorAwal - totalPenalti; if (skorAkhir < 0) skorAkhir = 0;
+            ubahTampilan('area-hasil');
+            let skorAwal = Math.round((jumlahBenar / Math.min(15, daftarSoalBerjalan.length)) * 100);
+            let totalPenalti = totalKaliBantuan * 5;
+            let skorAkhir = Math.max(0, skorAwal - totalPenalti);
             document.getElementById('teks-skor').innerText = skorAkhir;
-            let teksPenaltiEl = document.getElementById('teks-penalti');
-            if (totalKaliBantuan > 0) { teksPenaltiEl.style.display = "block"; teksPenaltiEl.innerText = `(Terdapat penalti -${totalPenalti} poin karena menekan bantuan ${totalKaliBantuan} kali)`; } else { teksPenaltiEl.style.display = "none"; }
-            let statusSiswa = ""; 
-            if (skorAkhir >= KKM) {
-                document.getElementById('pesan-mentor').innerText = `Luar Biasa, ${namaSiswa}! Proteksimu sangat kuat. Tuntas 100% TANPA bantuan.`;
-                document.getElementById('keterangan-hasil').innerText = "Status: TUNTAS (Mastery Achieved).";
-                document.getElementById('tombol-selesai').style.display = "block"; document.getElementById('tombol-ulang').style.display = "none"; statusSiswa = "TUNTAS";
-            } else {
-                document.getElementById('pesan-mentor').innerText = (skorAwal === 100 && totalKaliBantuan > 0) ? `Skor 100, tapi ada jejak bantuan. Administrator jaringan harus bisa mengatasi masalah sendiri. Ulangi!` : `Skormu ${skorAkhir}. Masih ada celah keamanan di logikamu. Ayo remedial!`;
-                document.getElementById('keterangan-hasil').innerText = "Status: BELUM TUNTAS. Silakan remedial.";
-                document.getElementById('tombol-ulang').style.display = "block"; document.getElementById('tombol-selesai').style.display = "none"; statusSiswa = "REMEDIAL";
-            }
+            const tuntas = skorAkhir >= 100;
+            document.getElementById('keterangan-hasil').innerText = tuntas ? "KONEKSI TUNTAS" : "SINYAL LEMAH (BELUM TUNTAS)";
+            document.getElementById('pesan-mentor').innerText = tuntas ? "Pak Agus bangga! Keamanan datamu terjamin." : "Ayo perkuat pemahaman jaringannya melalui remedial.";
+            document.getElementById('teks-penalti').innerText = totalKaliBantuan > 0 ? `(Penalti bantuan: -${totalPenalti} poin)` : "";
+            document.getElementById('tombol-selesai').style.display = tuntas ? "block" : "none";
+            document.getElementById('tombol-ulang').style.display = tuntas ? "none" : "block";
             
-            // JURUS PAMUNGKAS METODE GET DENGAN PENANGKAP DEVICE SANG ANTI JOKI
-            const infoDevice = navigator.userAgent;
-
-            const parameterData = new URLSearchParams({ 
-                namaSiswa: namaSiswa,         
-                kelasSiswa: kelasSiswa,       
-                modul: "Jaringan Komputer & Internet (JKI)", // Nama Modul
-                skor: skorAkhir, 
-                bantuan: totalKaliBantuan, 
-                percobaan: jumlahPercobaan, 
-                status: statusSiswa,
-                browser: infoDevice           // INI DIA!
-            }).toString();
-            
-            const urlKirimData = URL_APPS_SCRIPT + "?" + parameterData;
-            
-            fetch(urlKirimData, { method: 'GET', mode: 'no-cors' })
-                .then(response => { console.log("Perintah kirim selesai."); })
-                .catch(error => { console.error("Gagal kirim:", error); });
+            fetch(URL_APPS_SCRIPT + "?" + new URLSearchParams({
+                namaSiswa, kelasSiswa, modul: "Jaringan Komputer & Internet (JKI)", skor: skorAkhir, 
+                bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, 
+                status: tuntas ? "TUNTAS" : "REMEDIAL", browser: navigator.userAgent
+            }), { method: 'GET', mode: 'no-cors' });
         }
 
-        function ulangiMateri() { tampilkanMateri(); }
-        function kembaliKeDashboard() { hapusProgres(); window.location.href = "index.html"; }
-        function ubahTampilan(idArea) { document.querySelectorAll('.area-konten').forEach(area => area.className = 'area-konten'); document.getElementById(idArea).className = 'area-konten area-aktif'; }
+        function ubahTampilan(id) {
+            document.querySelectorAll('.area-konten').forEach(a => a.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+        function hapusProgres() { localStorage.removeItem('eduAdaptif_ModulJKI'); }
+        function kembaliKeDashboard() { window.location.href = "index.html"; }
     </script>
 </body>
 </html>
