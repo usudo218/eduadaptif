@@ -20,20 +20,34 @@
         body { background-color: var(--warna-latar); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; color: var(--warna-teks); }
         .app-container { background: white; width: 100%; max-width: 650px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
-        .header { background: var(--warna-utama); color: white; padding: 45px 20px 25px 20px; text-align: center; position: relative; }
+        .header { background: var(--warna-utama); color: white; padding: 50px 20px 30px 20px; text-align: center; position: relative; }
         .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; }
         
-        /* GAYA TOMBOL HEADER (BACK & LOGOUT) */
-        .back-btn, .logout-btn { 
-            position: absolute; top: 15px; display: flex; align-items: center; gap: 6px; 
-            font-size: 0.85rem; font-weight: 600; padding: 8px 16px; border-radius: 50px; 
-            text-decoration: none; color: white; border: 1px solid rgba(255, 255, 255, 0.2); 
-            cursor: pointer; background: rgba(255, 255, 255, 0.1); transition: 0.3s;
+        /* TOMBOL HEADER SERAGAM (HOME & LOGOUT) */
+        .btn-header { 
+            position: absolute; 
+            top: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            gap: 6px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            height: 36px;
+            width: 100px;
+            border-radius: 8px; 
+            text-decoration: none; 
+            color: white; 
+            border: 1px solid rgba(255, 255, 255, 0.4); 
+            cursor: pointer; 
+            background: rgba(255, 255, 255, 0.15); 
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
-        .back-btn { left: 15px; }
-        .logout-btn { right: 15px; background: rgba(220, 38, 38, 0.2); border-color: rgba(220, 38, 38, 0.3); }
-        .back-btn:hover { background: white; color: var(--warna-utama); }
-        .logout-btn:hover { background: #DC2626; border-color: #DC2626; }
+        .btn-header:hover { background: white; color: var(--warna-utama); border-color: white; transform: translateY(-1px); }
+        
+        .home-pos { left: 15px; }
+        .logout-pos { right: 15px; }
 
         .content { padding: 25px 20px; flex-grow: 1; }
         
@@ -43,7 +57,7 @@
 
         .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); align-items: center; }
         .mentor-box.peringatan { border-left-color: var(--warna-kuning); background-color: #FEF3C7; }
-        .mentor-avatar { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 2px solid var(--warna-utama); background: white; flex-shrink: 0;}
+        .mentor-avatar { width: 65px; height: 65px; border-radius: 50%; overflow: hidden; border: 2px solid var(--warna-utama); background: white; flex-shrink: 0;}
         .mentor-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
         .area-konten { display: none; }
@@ -56,16 +70,18 @@
         .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; }
         .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); font-weight: bold; color: var(--warna-utama); }
 
-        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; }
+        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
         .btn-submit { background: var(--warna-aksen); }
         .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
 
-        .pdf-box { background: #FFF1F2; padding: 15px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
-        .btn-pdf-merah { background: var(--warna-merah) !important; color: white !important; text-decoration: none; display: inline-block; width: auto; padding: 12px 25px; border-radius: 8px; font-weight: bold; transition: 0.3s; }
-        .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.05); }
+        /* Tombol PDF Merah Profesional */
+        .pdf-box { background: #FFF1F2; padding: 18px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
+        .btn-pdf-merah { background: var(--warna-merah) !important; color: white !important; text-decoration: none; display: inline-block; width: auto; padding: 12px 25px; border-radius: 8px; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 10px rgba(225, 29, 72, 0.2); }
+        .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.03); }
 
         .angka-skor { font-size: 4.5rem; font-weight: bold; color: var(--warna-utama); text-align: center; margin: 10px 0;}
+        .nama-hasil { font-size: 1.2rem; font-weight: 800; color: var(--warna-teks); text-align: center; margin-bottom: 5px; text-transform: uppercase; }
         .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 20px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; }
     </style>
 </head>
@@ -73,8 +89,8 @@
 
     <div class="app-container">
         <div class="header">
-            <a href="index.html" class="back-btn" onclick="hapusProgresMemori()">🔙 Menu</a>
-            <button id="btn-logout" class="logout-btn" onclick="logoutSiswa()" style="display: none;">🚪 Keluar</button>
+            <a href="index.html" class="btn-header home-pos">🏠 Home</a>
+            <button id="btn-logout" class="btn-header logout-pos" onclick="logoutSiswa()" style="display: none;">🚪 Logout</button>
             <h1>Modul BK</h1>
         </div>
 
@@ -83,7 +99,7 @@
                 <div class="login-card">
                     <img src="images/pak-cokro.png" alt="Pak Agus" class="pak-cokro-img">
                     <h2>Halo, saya Pak Agus</h2>
-                    <p>Pilih identitasmu untuk melanjutkan progres belajar terakhirmu.</p>
+                    <p>Silakan pilih identitasmu untuk memulai atau melanjutkan progres belajar.</p>
                     <select id="pilih-kelas" class="input-nama" onchange="filterNama()">
                         <option value="">-- Pilih Kelas --</option>
                     </select>
@@ -99,7 +115,7 @@
                     <div class="mentor-avatar"><img src="images/pak-cokro.png" alt="Pak Agus"></div>
                     <div class="mentor-message">
                         <span class="mentor-name">Pak Agus :</span>
-                        <span id="pesan-mentor">Semangat belajar!</span>
+                        <span id="pesan-mentor">Selamat datang di modul CT!</span>
                     </div>
                 </div>
             </div>
@@ -110,7 +126,7 @@
                     <p>Berpikir komputasional adalah ilmu untuk menyelesaikan masalah secara efisien, efektif, dan optimal agar solusinya bisa dijalankan manusia maupun mesin.</p>
                     
                     <div class="pdf-box">
-                        <p style="margin-bottom: 10px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi versi lengkap?</p>
+                        <p style="margin-bottom: 12px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi lengkap?</p>
                         <a href="https://drive.google.com/file/d/1JnEyi4GkRpT8bV6PO1mQIMtVnX_lQJRB/view?usp=sharing" target="_blank" class="btn-pdf-merah">
                             📥 Buka Naskah Materi (PDF)
                         </a>
@@ -128,11 +144,12 @@
             </div>
 
             <div id="area-hasil" class="area-konten">
+                <div id="wrapper-nama-hasil" class="nama-hasil"></div>
                 <div class="angka-skor" id="teks-skor">0</div>
-                <p id="keterangan-hasil" style="text-align: center; font-weight: bold; font-size: 1.2rem;"></p>
+                <p id="keterangan-hasil" style="text-align: center; font-weight: bold; font-size: 1.2rem; margin-top: 0;"></p>
                 <p id="teks-penalti" style="text-align: center; color: var(--warna-merah); margin-top: 5px;"></p>
                 <button id="tombol-ulang" class="btn-action" style="display: none;" onclick="tampilkanMateri()">🔄 Remedial</button>
-                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="kembaliKeDashboard()">✅ Selesai</button>
+                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="kembaliKeHome()">✅ Selesai</button>
             </div>
         </div>
 
@@ -169,7 +186,7 @@
         };
 
         function logoutSiswa() {
-            if(confirm("Apakah kamu ingin keluar dan menghapus progres belajar di modul ini?")) {
+            if(confirm("Apakah Anda ingin Logout? Progres belajar di modul ini akan dihapus.")) {
                 localStorage.removeItem('progres_bk');
                 window.location.reload();
             }
@@ -209,7 +226,7 @@
 
         function tampilkanMateri() {
             ubahTampilan('area-materi');
-            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! , kamu bisa klik tombol merah di bawah untuk membaca materi lengkapnya ya!`;
+            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! Silakan klik tombol merah di bawah untuk membaca materi lengkapnya ya!`;
             simpanProgres('materi');
         }
 
@@ -267,7 +284,11 @@
             let skorAwal = Math.round((jumlahBenar / Math.min(15, daftarSoalBerjalan.length)) * 100);
             let totalPenalti = totalKaliBantuan * 5;
             let skorAkhir = Math.max(0, skorAwal - totalPenalti);
+            
+            // SERTAKAN NAMA SISWA PADA HASIL AKHIR
+            document.getElementById('wrapper-nama-hasil').innerText = namaSiswa;
             document.getElementById('teks-skor').innerText = skorAkhir;
+            
             const tuntas = skorAkhir >= 100;
             document.getElementById('keterangan-hasil').innerText = tuntas ? "LOGIKA TUNTAS" : "BELUM TUNTAS";
             document.getElementById('pesan-mentor').innerText = tuntas ? "Pak Agus kagum dengan logikamu!" : "Ayo asah lagi logikamu melalui remedial.";
@@ -283,7 +304,7 @@
             document.querySelectorAll('.area-konten').forEach(a => a.style.display = 'none');
             document.getElementById(id).style.display = 'block';
         }
-        function kembaliKeDashboard() { window.location.href = "index.html"; }
+        function kembaliKeHome() { window.location.href = "index.html"; }
     </script>
 </body>
 </html>
