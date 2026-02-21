@@ -8,7 +8,8 @@
         :root {
             --warna-utama: #312E81; /* Indigo Tua untuk nuansa Coding */
             --warna-aksen: #10B981; 
-            --warna-merah: #EF4444;
+            --warna-merah: #EF4444; /* Merah untuk Tombol PDF */
+            --warna-merah-hover: #DC2626;
             --warna-kuning: #F59E0B; 
             --warna-latar: #F3F4F6; 
             --warna-teks: #1F2937;  
@@ -49,6 +50,21 @@
         .btn-submit { background: var(--warna-aksen); }
         .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
+
+        /* GAYA TOMBOL PDF MERAH UNTUK AP */
+        .pdf-box { background: #EEF2FF; padding: 15px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
+        .btn-pdf-merah { 
+            background: var(--warna-merah) !important; 
+            color: white !important; 
+            text-decoration: none; 
+            display: inline-block; 
+            width: auto; 
+            padding: 12px 25px; 
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.05); }
 
         .angka-skor { font-size: 4.5rem; font-weight: bold; color: var(--warna-utama); text-align: center; margin: 10px 0;}
         .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 20px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; }
@@ -95,21 +111,15 @@
                     <p>Algoritma adalah urutan langkah-langkah logis untuk menyelesaikan sebuah masalah. Komputer hanya bisa bekerja jika diberikan instruksi yang jelas, urut, dan tidak bermakna ganda (ambigu).</p>
                     
                     <h3>2. Struktur Dasar Pemrograman</h3>
-                    <p>Dalam pemrograman, ada tiga struktur utama yang harus dipahami:</p>
+                    <p>Pemahaman struktur dasar sangat penting sebelum mulai menulis kode program. Ada tiga struktur utama:</p>
                     <ul>
                         <li><strong>Sekuensial:</strong> Instruksi dijalankan baris demi baris dari atas ke bawah.</li>
                         <li><strong>Percabangan (Branching):</strong> Program memilih jalur berdasarkan kondisi tertentu (Contoh: <code>if-else</code>).</li>
                         <li><strong>Perulangan (Looping):</strong> Program mengulang instruksi yang sama berkali-kali (Contoh: <code>for</code>, <code>while</code>).</li>
                     </ul>
-                    
 
                     <h3>3. Variabel dan Tipe Data</h3>
-                    <p>Variabel adalah wadah untuk menyimpan data. Setiap data memiliki tipe, seperti:</p>
-                    <ul>
-                        <li><strong>Integer (int):</strong> Angka bulat (Contoh: 10, -5).</li>
-                        <li><strong>String:</strong> Teks/Kumpulan karakter (Contoh: "Halo Dunia").</li>
-                        <li><strong>Boolean:</strong> Nilai logika (Hanya Benar/Salah).</li>
-                    </ul>
+                    <p>Variabel adalah wadah untuk menyimpan data. Setiap data memiliki tipe, seperti Integer (angka bulat), String (teks), dan Boolean (logika).</p>
 
                     <h3>4. Contoh Logika Percabangan</h3>
                     <div class="code-block">
@@ -118,7 +128,13 @@
                         ELSE<br>
                         &nbsp;&nbsp;PRINT "Remedial"
                     </div>
-                    
+
+                    <div class="pdf-box">
+                        <p style="margin-bottom: 10px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi Pemrograman versi lengkap?</p>
+                        <a href="LINK_GOOGLE_DRIVE_PDF_AP_BAPAK" target="_blank" class="btn-pdf-merah">
+                            📥 Buka Naskah Materi (PDF)
+                        </a>
+                    </div>
                 </div>
                 <button class="btn-action" onclick="mulaiKuis()">Saya Siap Uji Logika!</button>
             </div>
@@ -184,14 +200,15 @@
         function simpanNamaSiswa() {
             namaSiswa = document.getElementById('pilih-nama').value;
             kelasSiswa = document.getElementById('pilih-kelas').value;
-            if(!namaSiswa) return alert("Pilih namamu dulu ya!");
+            if(!namaSiswa) return alert("Pilih namamu dulu!");
             document.getElementById('area-mentor-global').style.display = "block";
             tampilkanMateri();
         }
 
         function tampilkanMateri() {
             ubahTampilan('area-materi');
-            document.getElementById('pesan-mentor').innerText = `Halo Programmer ${namaSiswa}! Coding itu mudah asal logikanya pas. Yuk dipelajari.`;
+            /* PESAN MENTOR SESUAI INSTRUKSI */
+            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! , kamu bisa klik tombol merah di bawah untuk membaca materi lengkapnya ya!`;
         }
 
         function mulaiKuis() {
@@ -206,13 +223,16 @@
             let s = daftarSoalBerjalan[indeksSoalSekarang];
             document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1}/15`;
             document.getElementById('teks-soal').innerText = s.p;
-            jawabanTerpilihSementara = null; bantuanPerSoalDipakai = false;
+            jawabanTerpilihSementara = null; 
+            bantuanPerSoalDipakai = false;
             document.getElementById('tombol-bantuan').disabled = false;
             document.getElementById('tombol-bantuan').classList.remove('btn-disabled');
             document.getElementById('kotak-mentor').className = "mentor-box";
             document.getElementById('pesan-mentor').innerText = "Ayo pecahkan instruksinya!";
+            
             const btnLanjut = document.getElementById('tombol-lanjut');
             btnLanjut.disabled = true; btnLanjut.className = "btn-action btn-disabled";
+            
             const cont = document.getElementById('container-opsi'); cont.innerHTML = '';
             s.o.forEach((txt, i) => {
                 const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = txt;
@@ -265,8 +285,8 @@
             document.querySelectorAll('.area-konten').forEach(a => a.style.display = 'none');
             document.getElementById(id).style.display = 'block';
         }
+        function hapusProgres() { localStorage.removeItem('eduAdaptif_ModulAP'); }
+        function kembaliKeDashboard() { window.location.href = "index.html"; }
     </script>
 </body>
 </html>
-
-
