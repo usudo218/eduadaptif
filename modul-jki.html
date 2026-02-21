@@ -8,7 +8,8 @@
         :root {
             --warna-utama: #EA580C; /* Oranye untuk Jaringan */
             --warna-aksen: #0284C7; 
-            --warna-merah: #EF4444;
+            --warna-merah: #EF4444; /* Merah untuk Tombol PDF */
+            --warna-merah-hover: #DC2626;
             --warna-kuning: #F59E0B; 
             --warna-latar: #F3F4F6; 
             --warna-teks: #1F2937;  
@@ -47,10 +48,25 @@
         .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; transition: 0.2s; }
         .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); font-weight: bold; color: var(--warna-utama); }
 
-        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; }
+        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
         .btn-submit { background: var(--warna-aksen); }
         .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
+
+        /* GAYA TOMBOL PDF MERAH UNTUK JKI */
+        .pdf-box { background: #FFF7ED; padding: 15px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
+        .btn-pdf-merah { 
+            background: var(--warna-merah) !important; 
+            color: white !important; 
+            text-decoration: none; 
+            display: inline-block; 
+            width: auto; 
+            padding: 12px 25px; 
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.05); }
 
         .angka-skor { font-size: 4.5rem; font-weight: bold; color: var(--warna-utama); text-align: center; margin: 10px 0;}
         .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 20px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; }
@@ -95,22 +111,22 @@
                 <div class="teks-materi">
                     <h3>1. Jaringan Lokal (LAN) vs Internet</h3>
                     <p><strong>LAN</strong> adalah jaringan terbatas di satu gedung/lab. <strong>Internet</strong> adalah "Network of Networks", jutaan jaringan lokal yang saling terhubung di seluruh dunia.</p>
-                    
 
                     <h3>2. Media Transmisi</h3>
-                    <p>Bagaimana data berpindah?</p>
-                    <ul>
-                        <li><strong>Wired (Kabel):</strong> Menggunakan serat optik (Fiber) atau tembaga (UTP).</li>
-                        <li><strong>Wireless (Tanpa Kabel):</strong> Menggunakan Wi-Fi, Bluetooth, atau satelit.</li>
-                    </ul>
-                    
+                    <p>Data butuh jalan untuk berpindah melalui media kabel (Fiber, UTP) maupun nirkabel (Wi-Fi, Bluetooth, satelit).</p>
 
                     <h3>3. Alamat IP & Router</h3>
-                    <p>Tiap komputer punya alamat unik (IP Address). <strong>Router</strong> adalah polisi lalu lintasnya; ia mengarahkan data ke rute tercepat.</p>
+                    <p>Tiap komputer punya alamat unik (IP Address). <strong>Router</strong> bertugas mengarahkan data ke rute tercepat.</p>
 
                     <h3>4. Keamanan & Enkripsi</h3>
-                    <p>Data dikirim melalui jalur umum, maka perlu <strong>Enkripsi</strong> agar tidak bisa dibaca pencuri (hacker). Pastikan web menggunakan <strong>HTTPS</strong>.</p>
-                    
+                    <p><strong>Enkripsi</strong> mengacak data agar tidak bisa dibaca pencuri. Gunakan selalu protokol <strong>HTTPS</strong> saat berinternet.</p>
+
+                    <div class="pdf-box">
+                        <p style="margin-bottom: 10px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi JKI versi lengkap?</p>
+                        <a href="LINK_GOOGLE_DRIVE_PDF_JKI_BAPAK" target="_blank" class="btn-pdf-merah">
+                            📥 Buka Naskah Materi (PDF)
+                        </a>
+                    </div>
                 </div>
                 <button class="btn-action" onclick="mulaiKuis()">Koneksi Aman, Mulai Kuis!</button>
             </div>
@@ -183,7 +199,8 @@
 
         function tampilkanMateri() {
             ubahTampilan('area-materi');
-            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! Jaringan komputer adalah tentang bagaimana kita terhubung dengan aman.`;
+            /* PESAN MENTOR SESUAI INSTRUKSI */
+            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! , kamu bisa klik tombol merah di bawah untuk membaca materi lengkapnya ya!`;
         }
 
         function mulaiKuis() {
@@ -198,12 +215,15 @@
             let s = daftarSoalBerjalan[indeksSoalSekarang];
             document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1}/15`;
             document.getElementById('teks-soal').innerText = s.p;
-            jawabanTerpilihSementara = null; bantuanPerSoalDipakai = false;
+            jawabanTerpilihSementara = null; 
+            bantuanPerSoalDipakai = false;
             document.getElementById('tombol-bantuan').disabled = false;
             document.getElementById('kotak-mentor').className = "mentor-box";
             document.getElementById('pesan-mentor').innerText = "Analisislah infrastruktur jaringannya...";
+            
             const btnLanjut = document.getElementById('tombol-lanjut');
             btnLanjut.disabled = true; btnLanjut.className = "btn-action btn-disabled";
+            
             const cont = document.getElementById('container-opsi'); cont.innerHTML = '';
             s.o.forEach((txt, i) => {
                 const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = txt;
