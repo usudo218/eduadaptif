@@ -8,7 +8,8 @@
         :root {
             --warna-utama: #7C3AED; /* Ungu untuk SK */
             --warna-aksen: #D946EF; 
-            --warna-merah: #EF4444;
+            --warna-merah: #EF4444; /* Merah untuk Tombol PDF */
+            --warna-merah-hover: #DC2626;
             --warna-kuning: #F59E0B; 
             --warna-latar: #F3F4F6; 
             --warna-teks: #1F2937;  
@@ -54,6 +55,21 @@
         .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
 
+        /* GAYA TOMBOL PDF MERAH UNTUK SK */
+        .pdf-box { background: #F5F3FF; padding: 15px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
+        .btn-pdf-merah { 
+            background: var(--warna-merah) !important; 
+            color: white !important; 
+            text-decoration: none; 
+            display: inline-block; 
+            width: auto; 
+            padding: 12px 25px; 
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.05); }
+
         .angka-skor { font-size: 4.5rem; font-weight: bold; color: var(--warna-utama); text-align: center; margin: 10px 0;}
         .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 20px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; }
     </style>
@@ -96,13 +112,7 @@
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
                     <h3>1. Pilar Utama Sistem Komputer</h3>
-                    <p>Komputer adalah kesatuan dari tiga elemen yang tidak bisa dipisahkan:</p>
-                    <ul>
-                        <li><strong>Hardware:</strong> Perangkat keras (fisik).</li>
-                        <li><strong>Software:</strong> Perangkat lunak (aplikasi/OS).</li>
-                        <li><strong>Brainware:</strong> Manusia sebagai pengguna.</li>
-                    </ul>
-                    
+                    <p>Komputer adalah kesatuan dari tiga elemen yang tidak bisa dipisahkan: <strong>Hardware</strong> (fisik), <strong>Software</strong> (aplikasi/OS), dan <strong>Brainware</strong> (pengguna).</p>
 
                     <h3>2. Klasifikasi Hardware</h3>
                     <table class="tabel-materi">
@@ -112,14 +122,19 @@
                         <tr><td>Output</td><td>Hasil keluar</td><td>Monitor, Printer, Speaker</td></tr>
                         <tr><td>Storage</td><td>Data disimpan</td><td>SSD, Harddisk, Flashdisk</td></tr>
                     </table>
-                    
 
                     <h3>3. Sistem Operasi (OS)</h3>
-                    <p>OS adalah perangkat lunak utama yang mengelola sumber daya hardware. Contoh: Windows, Linux, macOS, dan Android.</p>
-                    
+                    <p>OS adalah perangkat lunak utama yang mengelola sumber daya hardware agar dapat digunakan oleh user dan aplikasi.</p>
 
                     <h3>4. Siklus Pengolahan Data</h3>
-                    <p>Input &rarr; Proses &rarr; Output &rarr; Storage. Semua komponen ini harus sinkron agar komputer berjalan lancar.</p>
+                    <p>Komputer bekerja melalui tahapan Input &rarr; Proses &rarr; Output &rarr; Storage secara sinkron.</p>
+
+                    <div class="pdf-box">
+                        <p style="margin-bottom: 10px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi Sistem Komputer versi lengkap?</p>
+                        <a href="LINK_GOOGLE_DRIVE_PDF_SK_BAPAK" target="_blank" class="btn-pdf-merah">
+                            📥 Buka Naskah Materi (PDF)
+                        </a>
+                    </div>
                 </div>
                 <button class="btn-action" onclick="mulaiKuis()">Peralatan Siap, Mulai Kuis!</button>
             </div>
@@ -192,7 +207,8 @@
 
         function tampilkanMateri() {
             ubahTampilan('area-materi');
-            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! Komputer itu seperti tubuh manusia, ada fisik dan ada jiwanya. Mari kita pelajari!`;
+            /* PESAN MENTOR SESUAI INSTRUKSI */
+            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! , kamu bisa klik tombol merah di bawah untuk membaca materi lengkapnya ya!`;
         }
 
         function mulaiKuis() {
@@ -207,12 +223,15 @@
             let s = daftarSoalBerjalan[indeksSoalSekarang];
             document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1}/15`;
             document.getElementById('teks-soal').innerText = s.p;
-            jawabanTerpilihSementara = null; bantuanPerSoalDipakai = false;
+            jawabanTerpilihSementara = null; 
+            bantuanPerSoalDipakai = false;
             document.getElementById('tombol-bantuan').disabled = false;
             document.getElementById('kotak-mentor').className = "mentor-box";
             document.getElementById('pesan-mentor').innerText = "Analisislah komponen sistemnya...";
+            
             const btnLanjut = document.getElementById('tombol-lanjut');
             btnLanjut.disabled = true; btnLanjut.className = "btn-action btn-disabled";
+            
             const cont = document.getElementById('container-opsi'); cont.innerHTML = '';
             s.o.forEach((txt, i) => {
                 const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = txt;
