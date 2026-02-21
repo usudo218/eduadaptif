@@ -267,8 +267,10 @@ END IF
         const POIN_PENALTI_BANTUAN = 5; 
         const KKM = 100; 
 
-        // URL GOOGLE APPS SCRIPT YANG BARU BAPAK BERIKAN
-        const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbwLnjVTKPKH54kitShhiA88wNw9aw3e2BP5MYYL3PvFNAiWEFcXtGjnka40k7ima7uN/exec"; 
+        // ==========================================================
+        // SILAKAN PASTE LINK APPS SCRIPT BAPAK YANG BARU DI SINI:
+        // ==========================================================
+        const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec"; 
 
         function inisialisasiDropdown() {
             if(typeof SISWA_BARU === 'undefined') { alert("File siswa.js tidak terbaca!"); return; }
@@ -310,7 +312,6 @@ END IF
 
         function hapusProgres() { localStorage.removeItem('eduAdaptif_ModulAP'); }
 
-        // FUNGSI LOGOUT 
         function logoutSiswa() {
             if(confirm("Yakin ingin ganti akun? Progres kuis saat ini akan diulang dari awal.")) {
                 hapusProgres();
@@ -405,15 +406,18 @@ END IF
                 document.getElementById('tombol-ulang').style.display = "block"; document.getElementById('tombol-selesai').style.display = "none"; statusSiswa = "REMEDIAL";
             }
             
-            // JURUS PAMUNGKAS METODE GET (DIJAMIN MASUK KE 8 KOLOM SPREADSHEET)
+            // JURUS PAMUNGKAS (Dengan pelacak Browser)
+            const infoDevice = navigator.userAgent;
+
             const parameterData = new URLSearchParams({ 
-                namaSiswa: namaSiswa,         // Mengirim Nama saja
-                kelasSiswa: kelasSiswa,       // Mengirim Kelas terpisah
-                modul: "Algoritma & Pemrograman (AP)", // Nama Modul Disesuaikan
+                namaSiswa: namaSiswa,         
+                kelasSiswa: kelasSiswa,       
+                modul: "Algoritma & Pemrograman (AP)", 
                 skor: skorAkhir, 
                 bantuan: totalKaliBantuan, 
                 percobaan: jumlahPercobaan, 
-                status: statusSiswa 
+                status: statusSiswa,
+                browser: infoDevice           // MENGIRIM DATA DEVICE KE KOLOM I
             }).toString();
             
             const urlKirimData = URL_APPS_SCRIPT + "?" + parameterData;
