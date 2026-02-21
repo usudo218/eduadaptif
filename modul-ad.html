@@ -245,7 +245,7 @@
         const POIN_PENALTI_BANTUAN = 5; 
         const KKM = 100; 
 
-        // URL APPS SCRIPT ASLI BAPAK (SUDAH DIMASUKKAN)
+        // URL APPS SCRIPT ASLI BAPAK
         const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbwLnjVTKPKH54kitShhiA88wNw9aw3e2BP5MYYL3PvFNAiWEFcXtGjnka40k7ima7uN/exec"; 
 
         function inisialisasiDropdown() {
@@ -382,15 +382,18 @@
                 document.getElementById('tombol-ulang').style.display = "block"; document.getElementById('tombol-selesai').style.display = "none"; statusSiswa = "REMEDIAL";
             }
             
-            // MENGIRIM DATA DENGAN METODE GET LANGSUNG KE URL BAPAK
-           const parameterData = new URLSearchParams({ 
-                namaSiswa: namaSiswa,         // Hanya mengirim Nama
-                kelasSiswa: kelasSiswa,       // Mengirim Kelas secara terpisah
+            // JURUS PAMUNGKAS: Menangkap info HP/Laptop Siswa
+            const infoDevice = navigator.userAgent;
+
+            const parameterData = new URLSearchParams({ 
+                namaSiswa: namaSiswa,         
+                kelasSiswa: kelasSiswa,       
                 modul: "Analisis Data (AD)", 
                 skor: skorAkhir, 
                 bantuan: totalKaliBantuan, 
                 percobaan: jumlahPercobaan, 
-                status: statusSiswa 
+                status: statusSiswa,
+                browser: infoDevice           // MENGIRIM DATA DEVICE KE KOLOM I
             }).toString();
             
             const urlKirimData = URL_APPS_SCRIPT + "?" + parameterData;
