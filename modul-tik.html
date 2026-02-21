@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul Aplikasi Perkantoran - EduAdaptif SMA</title>
+    <title>Modul TIK - EduAdaptif SMA</title>
     <style>
         :root {
-            --warna-utama: #0D9488; /* Warna Teal/Emerald untuk Modul TIK */
-            --warna-aksen: #0284C7; 
+            --warna-utama: #0D9488; /* Teal / Hijau Kebiruan untuk TIK */
+            --warna-aksen: #0F766E; 
             --warna-merah: #EF4444;
             --warna-kuning: #F59E0B; 
             --warna-latar: #F3F4F6; 
@@ -20,19 +20,18 @@
         .app-container { background: white; width: 100%; max-width: 650px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
         /* ==========================================
-           DESAIN HEADER & TOMBOL MENU ELEGAN (BARU)
+           DESAIN HEADER & TOMBOL MENU ELEGAN 
            ========================================== */
         .header { 
             background: var(--warna-utama); 
             color: white; 
-            padding: 45px 20px 25px 20px; /* Padding atas agar tidak menabrak tombol */
+            padding: 45px 20px 25px 20px; 
             text-align: center; 
             position: relative;
         }
         .header h1 { margin: 0; font-size: 1.5rem; font-weight: 700; letter-spacing: 0.5px;}
         .header p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
         
-        /* Desain Dasar Tombol Kapsul (Pill) dengan Efek Kaca */
         .back-btn, .logout-btn { 
             position: absolute; 
             top: 15px; 
@@ -42,11 +41,11 @@
             font-size: 0.85rem; 
             font-weight: 600; 
             padding: 8px 16px; 
-            border-radius: 50px; /* Membentuk kapsul */
+            border-radius: 50px; 
             text-decoration: none; 
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
             border: 1px solid rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(8px); /* Efek Kaca */
+            backdrop-filter: blur(8px); 
             -webkit-backdrop-filter: blur(8px);
             cursor: pointer; 
             font-family: inherit;
@@ -82,14 +81,14 @@
         @media (max-width: 480px) {
             .back-btn, .logout-btn { padding: 6px 12px; font-size: 0.75rem; top: 12px;}
             .header { padding-top: 55px; } 
-            .header h1 { font-size: 1.3rem; }
+            .header h1 { font-size: 1.2rem; }
         }
         /* ========================================== */
 
         .content { padding: 25px 20px; flex-grow: 1; }
         
         .login-card { background: white; padding: 30px 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); text-align: center; border: 1px solid #E5E7EB; }
-        .login-illustration { width: 80%; max-width: 220px; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;}
+        .login-illustration { width: 80%; max-width: 220px; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto; border-radius: 12px;}
         .login-card h2 { color: var(--warna-utama); margin: 0 0 10px 0; font-size: 1.6rem;}
         .login-card p { color: #6B7280; margin-bottom: 25px; line-height: 1.5;}
 
@@ -108,16 +107,12 @@
         .area-aktif { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Format Materi Lebih Rapi */
         .teks-materi { background: #f9fafb; padding: 25px; border-radius: 8px; border: 1px solid #e5e7eb; line-height: 1.7; text-align: justify; margin-bottom: 20px; font-size: 0.95rem; height: 500px; overflow-y: auto; }
         .teks-materi h3 { margin-top: 30px; color: var(--warna-utama); border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;}
         .teks-materi h3:first-child { margin-top: 0; }
         .teks-materi h4 { margin-top: 15px; color: var(--warna-aksen); margin-bottom: 5px;}
-        .ilustrasi-mini { width: 100%; height: auto; min-height: 150px; background-color: #e5e7eb; object-fit: contain; border-radius: 8px; margin: 15px 0; border: 1px dashed #9ca3af; }
-        .tabel-materi { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.9rem;}
-        .tabel-materi th, .tabel-materi td { border: 1px solid #D1D5DB; padding: 8px; text-align: left; }
-        .tabel-materi th { background-color: var(--latar-mentor); }
-
+        .ilustrasi-mini { width: 100%; height: auto; min-height: 150px; background-color: #e5e7eb; object-fit: cover; border-radius: 8px; margin: 15px 0; border: 1px dashed #9ca3af; }
+        
         .question-area { text-align: center; }
         .question-area h2#teks-soal { font-size: 1.1rem; margin-bottom: 25px; color: #333; line-height: 1.5; text-align: left; font-weight: 600; }
         .opsi-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
@@ -126,9 +121,9 @@
         .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); color: var(--warna-utama); font-weight: bold; }
 
         .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
-        .btn-action:hover { background: #0F766E; }
+        .btn-action:hover { background: #115E59; }
         .btn-submit { background: var(--warna-aksen); }
-        .btn-submit:hover { background: #0369A1; }
+        .btn-submit:hover { background: #0F766E; }
         .btn-ulang { background: var(--warna-merah); }
         .btn-ulang:hover { background: #DC2626; }
         .btn-bantuan { background: var(--warna-kuning); color: #fff; margin-bottom: 20px; }
@@ -149,7 +144,7 @@
             <a href="index.html" class="back-btn" onclick="hapusProgres()">🔙 Dashboard</a>
             <button id="btn-logout" class="logout-btn" onclick="logoutSiswa()" style="display: none;">🚪 Logout</button>
 
-            <h1>Modul Aplikasi Perkantoran</h1>
+            <h1>Modul TIK</h1>
             <p>Informatika Fase E - Kelas X</p>
         </div>
 
@@ -157,8 +152,8 @@
             <div id="area-login" class="area-konten area-aktif">
                 <div class="login-card">
                     <img src="images/login-tik.png" alt="Ilustrasi Login TIK" class="login-illustration" onerror="this.style.display='none'">
-                    <h2>Selamat Datang, Profesional Muda!</h2>
-                    <p>Mari belajar mengolah dokumen, angka, dan presentasi seperti seorang ahli. Pilih namamu untuk memulai.</p>
+                    <h2>Selamat Datang, Master Office!</h2>
+                    <p>Mari belajar mengintegrasikan dokumen, tabel, dan presentasi agar kerjamu makin efisien.</p>
                     
                     <select id="pilih-kelas" class="input-nama" onchange="filterNama()">
                         <option value="">-- Pilih Kelas --</option>
@@ -168,7 +163,7 @@
                         <option value="">-- Pilih Nama --</option>
                     </select>
 
-                    <button class="btn-action btn-submit" onclick="simpanNamaSiswa()" style="margin-top: 10px;">Masuk ke Modul</button>
+                    <button class="btn-action btn-submit" onclick="simpanNamaSiswa()" style="margin-top: 10px;">Buka Aplikasi</button>
                 </div>
             </div>
 
@@ -184,38 +179,34 @@
 
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
-                    <h3>Bab 1: Pengolah Kata (Word Processing)</h3>
-                    <p>Aplikasi seperti Microsoft Word digunakan untuk membuat laporan, surat, dan dokumen teks. Fitur lanjutannya meliputi pembuatan Daftar Isi otomatis (menggunakan <em>Styles: Heading 1, 2</em>) dan fitur <strong>Mail Merge</strong>.</p>
-                    <img src="images/word.jpg" alt="Ilustrasi Word" class="ilustrasi-mini" onerror="this.style.display='none'">
-                    <p><strong>Mail Merge (Surat Massal):</strong> Memungkinkan kita mencetak ribuan surat undangan hanya dengan satu template Word yang dihubungkan ke data nama penerima di Excel.</p>
-
-                    <h3>Bab 2: Pengolah Angka (Spreadsheet)</h3>
-                    <p>Aplikasi seperti Microsoft Excel dirancang untuk manipulasi data numerik, akuntansi, dan logika. Kolom ditandai dengan Huruf (A, B, C), sedangkan Baris ditandai dengan Angka (1, 2, 3).</p>
-                    <img src="images/excel.jpg" alt="Ilustrasi Excel" class="ilustrasi-mini" onerror="this.style.display='none'">
-                    <h4>Fungsi & Rumus Penting:</h4>
-                    <table class="tabel-materi">
-                        <tr><th>Rumus</th><th>Fungsi Utama</th></tr>
-                        <tr><td>=SUM()</td><td>Menjumlahkan total angka</td></tr>
-                        <tr><td>=AVERAGE()</td><td>Mencari nilai rata-rata</td></tr>
-                        <tr><td>=IF()</td><td>Pengujian logika (Benar/Salah)</td></tr>
-                        <tr><td>=VLOOKUP()</td><td>Mencari data secara vertikal dari tabel lain</td></tr>
-                    </table>
-
-                    <h3>Bab 3: Pengolah Presentasi (PowerPoint)</h3>
-                    <p>Digunakan untuk membuat salindia (slide) untuk memaparkan ide. Kunci presentasi yang baik adalah visual yang kuat dan sedikit teks (bukan memindahkan buku ke layar).</p>
-                    <img src="images/ppt.jpg" alt="Ilustrasi PowerPoint" class="ilustrasi-mini" onerror="this.style.display='none'">
+                    <h3>1. Integrasi Aplikasi Perkantoran</h3>
+                    <p>Aplikasi perkantoran (Word, Excel, PowerPoint) dibuat agar bisa saling bertukar data. Konsep utamanya adalah:</p>
                     <ul>
-                        <li><strong>Transition:</strong> Efek animasi saat berpindah dari satu slide ke slide lain.</li>
-                        <li><strong>Animation:</strong> Efek gerak pada teks, gambar, atau elemen <em>di dalam</em> satu slide.</li>
-                        <li><strong>Slide Master:</strong> Fitur untuk mengatur template desain dasar agar semua slide seragam.</li>
+                        <li><strong>Cut / Copy & Paste:</strong> Menyalin data, tetapi jika data sumber berubah, data salinan <em>tidak</em> ikut berubah.</li>
+                        <li><strong>OLE (Object Linking & Embedding):</strong> Menggabungkan objek (misal: grafik Excel ke dalam Word). Jika data di Excel diubah, grafik di Word akan <strong>otomatis ikut berubah</strong> (ter-update).</li>
+                    </ul>
+                    <img src="images/integrasi.jpg" alt="Integrasi Aplikasi" class="ilustrasi-mini" onerror="this.style.display='none'">
+
+                    <h3>2. Fitur Lanjut Pengolah Kata (Word)</h3>
+                    <p>Dalam menyusun laporan, ada fitur yang sangat menghemat waktu:</p>
+                    <ul>
+                        <li><strong>Mail Merge (Surat Massal):</strong> Membuat banyak surat/sertifikat sekaligus dengan format sama, tapi nama/data penerima berbeda (mengambil data dari Excel).</li>
+                        <li><strong>Table of Contents:</strong> Membuat daftar isi secara otomatis berdasarkan *Heading* (judul bab) yang sudah diatur.</li>
                     </ul>
 
-                    <h3>Bab 4: Integrasi Antar Aplikasi (OLE)</h3>
-                    <p>Sistem operasi menyediakan teknologi <strong>OLE (Object Linking and Embedding)</strong> yang memungkinkan Word, Excel, dan PowerPoint saling "berkomunikasi".</p>
-                    <img src="images/integrasi.jpg" alt="Ilustrasi Integrasi" class="ilustrasi-mini" onerror="this.style.display='none'">
+                    <h3>3. Fitur Lanjut Pengolah Angka (Excel)</h3>
+                    <p>Excel bukan cuma kalkulator biasa. Fungsi penting yang wajib dikuasai:</p>
                     <ul>
-                        <li><strong>Paste Link (Menautkan):</strong> Memasukkan grafik Excel ke PPT. Jika angka di Excel diganti, grafik di PPT ikut berubah secara otomatis secara real-time.</li>
-                        <li><strong>Embed (Menanamkan):</strong> Memasukkan tabel Excel ke Word. Tabel bisa diedit dengan menu Excel langsung di dalam Word, namun tidak mengubah file asli Excel-nya.</li>
+                        <li><strong>IF:</strong> Fungsi logika. <em>(Contoh: Jika nilai > 75, maka "Lulus", selain itu "Remedial").</em></li>
+                        <li><strong>VLOOKUP:</strong> Mencari data secara vertikal (kolom) dari tabel referensi lain.</li>
+                        <li><strong>HLOOKUP:</strong> Mencari data secara horizontal (baris) dari tabel referensi lain.</li>
+                    </ul>
+
+                    <h3>4. Fitur Lanjut Presentasi (PowerPoint)</h3>
+                    <p>Presentasi yang memukau bukan yang banyak tulisannya, tapi yang visual dan interaktif.</p>
+                    <ul>
+                        <li><strong>Hyperlink:</strong> Membuat teks/tombol yang jika diklik akan melompat ke slide lain atau membuka file/web.</li>
+                        <li><strong>Slide Master:</strong> Mengatur tema dasar (logo, warna, font) agar konsisten di semua slide tanpa harus mengedit satu-satu.</li>
                     </ul>
                 </div>
                 <button class="btn-action" onclick="mulaiKuis()">Saya Paham, Mulai Tantangan Kuis!</button>
@@ -265,8 +256,8 @@
         const POIN_PENALTI_BANTUAN = 5; 
         const KKM = 100; 
 
-        // GANTI DENGAN URL APPS SCRIPT ANDA
-        const URL_APPS_SCRIPT = "PASTE_URL_APPS_SCRIPT_ANDA_DI_SINI"; 
+        // URL GOOGLE APPS SCRIPT ASLI BAPAK
+        const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbwLnjVTKPKH54kitShhiA88wNw9aw3e2BP5MYYL3PvFNAiWEFcXtGjnka40k7ima7uN/exec"; 
 
         function inisialisasiDropdown() {
             if(typeof SISWA_BARU === 'undefined') { alert("File siswa.js tidak terbaca!"); return; }
@@ -300,7 +291,7 @@
                 const p = JSON.parse(simpanan); namaSiswa = p.nama; kelasSiswa = p.kelas; daftarSoalBerjalan = p.soal; indeksSoalSekarang = p.indeks; jumlahBenar = p.benar; totalKaliBantuan = p.bantuan; jumlahPercobaan = p.percobaan;
                 
                 document.getElementById('area-mentor-global').style.display = "block";
-                document.getElementById('btn-logout').style.display = "block"; // Munculkan tombol logout
+                document.getElementById('btn-logout').style.display = "block";
 
                 if (p.fase === 'materi') { tampilkanMateri(); } else if (p.fase === 'kuis') { ubahTampilan('area-kuis'); aturMentor("normal"); document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa}! Ayo lanjutkan kuisnya.`; muatSoal(); }
             } else { inisialisasiDropdown(); }
@@ -308,7 +299,6 @@
 
         function hapusProgres() { localStorage.removeItem('eduAdaptif_ModulTIK'); }
 
-        // FUNGSI LOGOUT BARU
         function logoutSiswa() {
             if(confirm("Yakin ingin ganti akun? Progres kuis saat ini akan diulang dari awal.")) {
                 hapusProgres(); window.location.reload();
@@ -323,7 +313,7 @@
             if (kelasSiswa === "" || namaSiswa === "") { alert("Pilih kelas dan namamu dulu ya!"); return; }
             
             document.getElementById('area-mentor-global').style.display = "block"; 
-            document.getElementById('btn-logout').style.display = "block"; // Munculkan tombol logout
+            document.getElementById('btn-logout').style.display = "block";
             tampilkanMateri();
         }
 
@@ -335,13 +325,13 @@
 
         function tampilkanMateri() {
             ubahTampilan('area-materi'); aturMentor("normal");
-            document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa} dari ${kelasSiswa}! Pelajari integrasi Office ini dengan saksama ya.`;
+            document.getElementById('pesan-mentor').innerText = `Halo, ${namaSiswa} dari ${kelasSiswa}! Mari pelajari rahasia mempercepat pekerjaan kantoran.`;
             indeksSoalSekarang = 0; jumlahBenar = 0; totalKaliBantuan = 0; simpanProgres('materi'); 
         }
 
         function mulaiKuis() {
             ubahTampilan('area-kuis'); aturMentor("normal");
-            document.getElementById('pesan-mentor').innerText = `Fokus, ${namaSiswa}! Jawab 15 soal Perkantoran ini.`;
+            document.getElementById('pesan-mentor').innerText = `Ayo, ${namaSiswa}! Terapkan rumus dan logikamu di kuis ini.`;
             jumlahPercobaan++; 
             if(typeof daftarSoalAsli === 'undefined') { alert("File soal-tik.js tidak terbaca!"); return; }
             daftarSoalBerjalan = [...daftarSoalAsli];
@@ -355,7 +345,7 @@
             document.getElementById('teks-soal').innerText = soalAktif.p;
             jawabanTerpilihSementara = null; bantuanPerSoalDipakai = false;
             const btnBantuan = document.getElementById('tombol-bantuan'); btnBantuan.style.display = "block"; btnBantuan.disabled = false; btnBantuan.classList.remove('btn-disabled'); btnBantuan.innerText = "💡 Perlu Bantuan Pak Agus?";
-            aturMentor("normal"); document.getElementById('pesan-mentor').innerText = `Ingat-ingat materinya. Kamu pasti bisa!`;
+            aturMentor("normal"); document.getElementById('pesan-mentor').innerText = `Pikirkan rumus yang paling tepat.`;
             const tombolLanjut = document.getElementById('tombol-lanjut'); tombolLanjut.innerText = (indeksSoalSekarang === daftarSoalBerjalan.length - 1) ? "Kirim Semua Jawaban" : "Lanjut ke Soal Berikutnya"; tombolLanjut.classList.add('btn-disabled'); tombolLanjut.classList.remove('btn-submit'); tombolLanjut.disabled = true;
             const containerOpsi = document.getElementById('container-opsi'); containerOpsi.innerHTML = ''; 
             soalAktif.o.forEach((opsiTeks, index) => { const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = opsiTeks; btn.onclick = () => pilihOpsi(index, btn); containerOpsi.appendChild(btn); });
@@ -393,18 +383,31 @@
             if (totalKaliBantuan > 0) { teksPenaltiEl.style.display = "block"; teksPenaltiEl.innerText = `(Terdapat penalti -${totalPenalti} poin karena menekan bantuan ${totalKaliBantuan} kali)`; } else { teksPenaltiEl.style.display = "none"; }
             let statusSiswa = ""; 
             if (skorAkhir >= KKM) {
-                document.getElementById('pesan-mentor').innerText = `Hebat, ${namaSiswa}! Kamu siap bekerja di perkantoran profesional TANPA minta bantuan sama sekali.`;
+                document.getElementById('pesan-mentor').innerText = `Hebat sekali, ${namaSiswa}! Pemahaman integrasi aplikasimu sempurna 100% tanpa bantuan.`;
                 document.getElementById('keterangan-hasil').innerText = "Status: TUNTAS (Mastery Achieved).";
                 document.getElementById('tombol-selesai').style.display = "block"; document.getElementById('tombol-ulang').style.display = "none"; statusSiswa = "TUNTAS";
             } else {
-                document.getElementById('pesan-mentor').innerText = (skorAwal === 100 && totalKaliBantuan > 0) ? `Skor awal 100, tapi ada penalti bantuan. Profesional sejati harus mandiri. Ayo ulangi!` : `Skormu ${skorAkhir}. Masih ada fitur yang belum dipahami. Ayo remedial!`;
+                document.getElementById('pesan-mentor').innerText = (skorAwal === 100 && totalKaliBantuan > 0) ? `Skor 100, tapi masih mengandalkan bantuan. Coba kerjakan secara mandiri ya!` : `Skormu ${skorAkhir}. Masih ada rumus yang meleset. Ayo remedial!`;
                 document.getElementById('keterangan-hasil').innerText = "Status: BELUM TUNTAS. Silakan remedial.";
                 document.getElementById('tombol-ulang').style.display = "block"; document.getElementById('tombol-selesai').style.display = "none"; statusSiswa = "REMEDIAL";
             }
-            if(URL_APPS_SCRIPT !== "https://script.google.com/macros/s/AKfycbzPcanC73JEFcHGfgKWDRfaUTNaztpOGZSmM61VqV_BfkiEYWebWNSHnZTE7Zx-4XDn/exec") {
-                const dataKirim = new URLSearchParams({ namaSiswa: namaSiswa + " (" + kelasSiswa + ")", modul: "Aplikasi Perkantoran (TIK)", skor: skorAkhir, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, status: statusSiswa });
-                fetch(URL_APPS_SCRIPT, { method: 'POST', body: dataKirim }).then(response => { console.log("Data TIK terekam."); }).catch(error => { console.error("Gagal kirim:", error); });
-            }
+            
+            // JURUS PAMUNGKAS METODE GET (DIJAMIN MASUK KE 8 KOLOM SPREADSHEET)
+            const parameterData = new URLSearchParams({ 
+                namaSiswa: namaSiswa,         // Mengirim Nama
+                kelasSiswa: kelasSiswa,       // Mengirim Kelas secara terpisah
+                modul: "Teknologi Informasi & Komunikasi (TIK)", // Nama Modul
+                skor: skorAkhir, 
+                bantuan: totalKaliBantuan, 
+                percobaan: jumlahPercobaan, 
+                status: statusSiswa 
+            }).toString();
+            
+            const urlKirimData = URL_APPS_SCRIPT + "?" + parameterData;
+            
+            fetch(urlKirimData, { method: 'GET', mode: 'no-cors' })
+                .then(response => { console.log("Perintah kirim selesai."); })
+                .catch(error => { console.error("Gagal kirim:", error); });
         }
 
         function ulangiMateri() { tampilkanMateri(); }
