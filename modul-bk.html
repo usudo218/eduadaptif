@@ -9,6 +9,7 @@
             --warna-utama: #E11D48; /* Crimson untuk BK */
             --warna-aksen: #059669; 
             --warna-merah: #EF4444;
+            --warna-merah-hover: #DC2626;
             --warna-kuning: #F59E0B; 
             --warna-latar: #F3F4F6; 
             --warna-teks: #1F2937;  
@@ -52,18 +53,30 @@
         .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
 
+        /* GAYA TOMBOL PDF MERAH */
+        .pdf-box { background: #FFF1F2; padding: 15px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
+        .btn-pdf-merah { 
+            background: var(--warna-merah) !important; 
+            color: white !important; 
+            text-decoration: none; 
+            display: inline-block; 
+            width: auto; 
+            padding: 12px 25px; 
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.05); }
+
         .angka-skor { font-size: 4.5rem; font-weight: bold; color: var(--warna-utama); text-align: center; margin: 10px 0;}
         .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 20px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; }
-        
-        /* Gaya Khusus Tombol PDF */
-        .pdf-box { background: #FFF1F2; padding: 15px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
         <div class="header">
-            <a href="index.html" class="back-btn">🔙 Dashboard</a>
+            <a href="index.html" class="back-btn" onclick="hapusProgres()">🔙 Dashboard</a>
             <h1>Modul Berpikir Komputasional</h1>
             <p>ELANG DIGITAL - SMA Negeri 1 Muncar</p>
         </div>
@@ -97,7 +110,7 @@
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
                     <h3>1. Apa itu Berpikir Komputasional?</h3>
-                    <p><em>Computational Thinking</em> (CT) adalah metode pemecahan masalah dengan menerapkan teknik ilmu komputer. Ada 4 fondasi utama:</p>
+                    <p><em>Computational Thinking</em> adalah metode pemecahan masalah dengan melibatkan teknik software engineer. Ada 4 fondasi utama:</p>
                     
                     <table class="tabel-materi">
                         <tr><th>Fondasi</th><th>Penjelasan</th></tr>
@@ -108,20 +121,20 @@
                     </table>
 
                     <h3>2. Pencarian (Searching)</h3>
-                    <p>Mencari data spesifik di dalam sekumpulan data. <strong>Binary Search</strong> dilakukan dengan membagi data menjadi dua bagian terus-menerus, namun syaratnya data harus <strong>terurut</strong>.</p>
+                    <p>Mencari data spesifik di dalam sekumpulan data. <strong>Binary Search</strong> dilakukan pada data <strong>terurut</strong>.</p>
 
                     <h3>3. Pengurutan (Sorting)</h3>
-                    <p>Mengatur data agar diletakkan mengikuti aturan tertentu (Naik/Turun). Contoh: <em>Bubble Sort</em> (berpasangan), <em>Selection Sort</em> (pemilihan), dan <em>Insertion Sort</em> (penyisipan).</p>
+                    <p>Mengatur data mengikuti aturan tertentu. Contoh: <em>Bubble Sort</em>, <em>Selection Sort</em>, dan <em>Insertion Sort</em>.</p>
 
                     <h3>4. Stack & Queue</h3>
                     <ul>
-                        <li><strong>Stack (Tumpukan):</strong> LIFO (Last In First Out). Contoh: Tumpukan piring.</li>
-                        <li><strong>Queue (Antrean):</strong> FIFO (First In First Out). Contoh: Antrean kasir.</li>
+                        <li><strong>Stack (Tumpukan):</strong> Prinsip LIFO (Last In First Out).</li>
+                        <li><strong>Queue (Antrean):</strong> Prinsip FIFO (First In First Out).</li>
                     </ul>
 
                     <div class="pdf-box">
-                        <p style="margin-bottom: 10px; font-weight: bold; color: var(--warna-utama);">📖 Ingin membaca naskah materi versi lengkap?</p>
-                        <a href="https://drive.google.com/file/d/1JnEyi4GkRpT8bV6PO1mQIMtVnX_lQJRB/view?usp=sharing" target="_blank" class="btn-action" style="text-decoration: none; display: inline-block; width: auto; padding: 10px 25px;">
+                        <p style="margin-bottom: 10px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi versi lengkap?</p>
+                        <a href="https://drive.google.com/file/d/1JnEyi4GkRpT8bV6PO1mQIMtVnX_lQJRB/view?usp=sharing" target="_blank" class="btn-pdf-merah">
                             📥 Buka Naskah Materi (PDF)
                         </a>
                     </div>
@@ -162,6 +175,12 @@
         let bantuanPerSoalDipakai = false; let totalKaliBantuan = 0; let jumlahPercobaan = 0;
         const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec"; 
 
+        // SISTEM SIMPAN PROGRES (STATE PERSISTENCE)
+        function simpanProgres(fase) {
+            const data = { nama: namaSiswa, kelas: kelasSiswa, fase: fase, soal: daftarSoalBerjalan, indeks: indeksSoalSekarang, benar: jumlahBenar, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan };
+            localStorage.setItem('progres_bk', JSON.stringify(data));
+        }
+
         function inisialisasiDropdown() {
             const selectKelas = document.getElementById('pilih-kelas');
             if (typeof SISWA_BARU === 'undefined') return;
@@ -185,7 +204,19 @@
             });
         }
 
-        window.onload = inisialisasiDropdown;
+        // LOGIKA WINDOW LOAD ANTI-REFRESH
+        window.onload = function() {
+            const simpanan = localStorage.getItem('progres_bk');
+            if(simpanan) {
+                const p = JSON.parse(simpanan);
+                namaSiswa = p.nama; kelasSiswa = p.kelas; daftarSoalBerjalan = p.soal; indeksSoalSekarang = p.indeks;
+                jumlahBenar = p.benar; totalKaliBantuan = p.bantuan; jumlahPercobaan = p.percobaan;
+                document.getElementById('area-mentor-global').style.display = "block";
+                if(p.fase === 'materi') tampilkanMateri(); else muatSoal();
+            } else {
+                inisialisasiDropdown();
+            }
+        };
 
         function simpanNamaSiswa() {
             namaSiswa = document.getElementById('pilih-nama').value;
@@ -197,19 +228,21 @@
 
         function tampilkanMateri() {
             ubahTampilan('area-materi');
-            // PESAN MENTOR DENGAN INSTRUKSI PDF
-            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! Kamu bisa klik tombol merah di bawah untuk membaca materi lengkapnya ya!`;
+            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! , kamu bisa klik tombol merah di bawah untuk membaca materi lengkapnya ya!`;
+            simpanProgres('materi');
         }
 
         function mulaiKuis() {
             ubahTampilan('area-kuis');
             jumlahPercobaan++;
-            daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
-            indeksSoalSekarang = 0; jumlahBenar = 0; totalKaliBantuan = 0;
+            if(daftarSoalBerjalan.length === 0) {
+                daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
+            }
             muatSoal();
         }
 
         function muatSoal() {
+            ubahTampilan('area-kuis');
             let s = daftarSoalBerjalan[indeksSoalSekarang];
             document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1}/15`;
             document.getElementById('teks-soal').innerText = s.p;
@@ -229,14 +262,16 @@
                 };
                 cont.appendChild(btn);
             });
+            simpanProgres('kuis');
         }
 
         function mintaBantuan() {
             if(bantuanPerSoalDipakai) return;
             bantuanPerSoalDipakai = true; totalKaliBantuan++;
             document.getElementById('kotak-mentor').className = "mentor-box peringatan";
-            document.getElementById('pesan-mentor').innerText = `Pak Agus: ${daftarSoalBerjalan[indeksSoalSekarang].b}`;
+            document.getElementById('pesan-mentor').innerText = `${daftarSoalBerjalan[indeksSoalSekarang].b}`;
             document.getElementById('tombol-bantuan').disabled = true;
+            simpanProgres('kuis');
         }
 
         function simpanJawaban() {
@@ -259,18 +294,15 @@
             document.getElementById('tombol-selesai').style.display = tuntas ? "block" : "none";
             document.getElementById('tombol-ulang').style.display = tuntas ? "none" : "block";
             
-            fetch(URL_APPS_SCRIPT + "?" + new URLSearchParams({
-                namaSiswa, kelasSiswa, modul: "Berpikir Komputasional (BK)", skor: skorAkhir, 
-                bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, 
-                status: tuntas ? "TUNTAS" : "REMEDIAL", browser: navigator.userAgent
-            }), { method: 'GET', mode: 'no-cors' });
+            fetch(URL_APPS_SCRIPT + "?" + new URLSearchParams({ namaSiswa, kelasSiswa, modul: "Berpikir Komputasional (BK)", skor: skorAkhir, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, status: tuntas ? "TUNTAS" : "REMEDIAL", browser: navigator.userAgent }), { method: 'GET', mode: 'no-cors' });
+            localStorage.removeItem('progres_bk');
         }
 
         function ubahTampilan(id) {
             document.querySelectorAll('.area-konten').forEach(a => a.style.display = 'none');
             document.getElementById(id).style.display = 'block';
         }
-        function hapusProgres() { localStorage.removeItem('eduAdaptif_ModulBK'); }
+        function hapusProgres() { localStorage.removeItem('progres_bk'); }
         function kembaliKeDashboard() { window.location.href = "index.html"; }
     </script>
 </body>
