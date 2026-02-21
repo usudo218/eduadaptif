@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COKRO-LITE - Modul Analisis Data</title>
+    <title>Modul Analisis Data - COKRO-LITE</title>
     <style>
         :root {
             --warna-utama: #4F46E5; 
@@ -17,137 +17,131 @@
 
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--warna-latar); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; color: var(--warna-teks); }
-        .app-container { background: white; width: 100%; max-width: 600px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
+        .app-container { background: white; width: 100%; max-width: 650px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
-        .header { 
-            background: var(--warna-utama); 
-            color: white; 
-            padding: 45px 20px 25px 20px; 
-            text-align: center; 
-            position: relative;
-        }
+        .header { background: var(--warna-utama); color: white; padding: 45px 20px 25px 20px; text-align: center; position: relative; }
         .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; }
-        
-        .back-btn, .logout-btn { 
-            position: absolute; top: 15px; display: flex; align-items: center; gap: 6px; 
-            font-size: 0.85rem; font-weight: 600; padding: 8px 16px; border-radius: 50px; 
-            text-decoration: none; color: white; border: 1px solid rgba(255, 255, 255, 0.2); 
-            cursor: pointer; background: rgba(255, 255, 255, 0.1);
-        }
-        .back-btn { left: 15px; }
-        .logout-btn { right: 15px; background: rgba(220, 38, 38, 0.2); }
+        .back-btn { position: absolute; top: 15px; left: 15px; color: white; text-decoration: none; background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 50px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.2); }
 
         .content { padding: 25px 20px; flex-grow: 1; }
         
-        /* DESAIN LOGIN DENGAN PAK COKRO */
+        /* LOGIN CARD */
         .login-card { background: white; padding: 30px 25px; border-radius: 20px; text-align: center; border: 1px solid #E5E7EB; }
-        .pak-cokro-img { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--warna-utama); margin-bottom: 15px; object-fit: cover; }
-        
+        .pak-cokro-img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--warna-utama); margin-bottom: 15px; object-fit: cover; }
         select.input-nama { width: 100%; padding: 15px; border: 2px solid #E5E7EB; border-radius: 12px; font-size: 1rem; margin-bottom: 15px; font-weight: 600; cursor: pointer; }
 
         /* MENTOR BOX */
         .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); align-items: center; }
         .mentor-box.peringatan { border-left-color: var(--warna-kuning); background-color: #FEF3C7; }
-        .mentor-avatar { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 2px solid var(--warna-utama); background: white; }
+        .mentor-avatar { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 2px solid var(--warna-utama); background: white; flex-shrink: 0;}
         .mentor-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .mentor-name { font-weight: bold; color: var(--warna-utama); display: block; }
 
         .area-konten { display: none; }
         .area-aktif { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .teks-materi { background: #f9fafb; padding: 20px; border-radius: 8px; border: 1px solid #e5e7eb; height: 450px; overflow-y: auto; text-align: justify; }
-        .ilustrasi-mini { width: 100%; border-radius: 8px; margin: 10px 0; border: 1px solid #ddd; }
+        /* TEKS MATERI LENGKAP */
+        .teks-materi { background: #f9fafb; padding: 25px; border-radius: 12px; border: 1px solid #e5e7eb; height: 500px; overflow-y: auto; text-align: justify; line-height: 1.7; }
+        .teks-materi h3 { color: var(--warna-utama); border-bottom: 2px solid #eee; padding-bottom: 8px; margin-top: 25px; }
+        .teks-materi h3:first-child { margin-top: 0; }
+        .ilustrasi-mini { width: 100%; border-radius: 8px; margin: 15px 0; border: 1px solid #ddd; }
 
-        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; }
-        .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); font-weight: bold; }
+        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; transition: 0.2s; }
+        .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); font-weight: bold; color: var(--warna-utama); }
 
         .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; }
         .btn-submit { background: var(--warna-aksen); }
-        .btn-bantuan { background: var(--warna-kuning); color: white; }
+        .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
 
-        .angka-skor { font-size: 4rem; font-weight: bold; color: var(--warna-utama); text-align: center; }
-        .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 15px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; }
+        .angka-skor { font-size: 4.5rem; font-weight: bold; color: var(--warna-utama); text-align: center; margin: 10px 0;}
+        .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 20px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
         <div class="header">
-            <a href="index.html" class="back-btn">🔙 Menu</a>
-            <button id="btn-logout" class="logout-btn" onclick="logoutSiswa()" style="display: none;">🚪 Keluar</button>
+            <a href="index.html" class="back-btn">🔙 Dashboard</a>
             <h1>Modul Analisis Data</h1>
-            <p>Elang Digital - SMA Negeri 1 Muncar</p>
+            <p>Informatika Fase E - Kelas X</p>
         </div>
 
         <div class="content">
             <div id="area-login" class="area-konten area-aktif">
                 <div class="login-card">
                     <img src="images/pak-cokro.png" alt="Pak Cokro" class="pak-cokro-img">
-                    <h2>Halo! Saya Pak Agus</h2>
-                    <p>Siap belajar visualisasi data hari ini? Masukkan identitasmu dulu ya.</p>
-                    
+                    <h2>Halo! Saya Pak Cokro</h2>
+                    <p>Siap mengungkap rahasia di balik data hari ini? Silakan pilih identitasmu.</p>
                     <select id="pilih-kelas" class="input-nama" onchange="filterNama()">
                         <option value="">-- Pilih Kelas --</option>
                     </select>
                     <select id="pilih-nama" class="input-nama" disabled>
                         <option value="">-- Pilih Nama --</option>
                     </select>
-
-                    <button class="btn-action btn-submit" onclick="simpanNamaSiswa()" style="margin-top: 10px;">🚀 Mulai Belajar</button>
+                    <button class="btn-action btn-submit" onclick="simpanNamaSiswa()">🚀 Mulai Petualangan Data</button>
                 </div>
             </div>
 
             <div id="area-mentor-global" style="display: none;">
                 <div class="mentor-box" id="kotak-mentor">
-                    <div class="mentor-avatar">
-                        <img src="images/pak-cokro.png" alt="Pak Cokro">
-                    </div>
+                    <div class="mentor-avatar"><img src="images/pak-cokro.png" alt="Pak Cokro"></div>
                     <div class="mentor-message">
-                        <span class="mentor-name">Pak Agus :</span>
-                        <span id="pesan-mentor">Semangat belajarnya!</span>
+                        <span class="mentor-name">Pak Cokro :</span>
+                        <span id="pesan-mentor">Semangat belajar!</span>
                     </div>
                 </div>
             </div>
 
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
-                    <h3>Visualisasi Data</h3>
-                    <p>Visualisasi data adalah cara kita mengubah angka menjadi gambar agar mudah dibaca oleh orang lain.</p>
+                    <h3>1. Pengantar Visualisasi Data</h3>
+                    <p>Visualisasi data adalah proses mengubah data mentah (angka) menjadi bentuk visual seperti grafik atau diagram. Tujuannya agar pola, tren, dan korelasi data mudah dipahami oleh pembaca.</p>
                     
-                    <h4>Tipe Grafik Umum:</h4>
-                    <ul>
-                        <li><b>Bar Chart:</b> Membandingkan data antar kategori.</li>
-                        <li><b>Pie Chart:</b> Melihat persentase bagian dari total.</li>
-                        <li><b>Line Chart:</b> Melihat tren dari waktu ke waktu.</li>
-                    </ul>
-                    <img src="images/batang.jpg" class="ilustrasi-mini" onerror="this.style.display='none'">
+                    <h3>2. Diagram Batang (Bar Chart)</h3>
+                    <p><strong>Kegunaan Utama: Perbandingan.</strong> Grafik ini paling efektif digunakan untuk membandingkan kuantitas atau nilai antar kategori yang berbeda.</p>
+                    <img src="images/batang.jpg" alt="Contoh Diagram Batang" class="ilustrasi-mini" onerror="this.style.display='none'">
+                    <p><em>Contoh:</em> Membandingkan jumlah panen jagung di 5 desa berbeda.</p>
+
+                    <h3>3. Grafik Lingkaran (Pie Chart)</h3>
+                    <p><strong>Kegunaan Utama: Proporsi.</strong> Digunakan untuk menunjukkan bagian-bagian dari satu kesatuan (total 100%).</p>
+                    <img src="images/pie.jpg" alt="Contoh Pie Chart" class="ilustrasi-mini" onerror="this.style.display='none'">
+                    <p><em>Peringatan:</em> Hindari menggunakan Pie Chart jika kategori terlalu banyak karena akan sulit dibaca.</p>
+
+                    <h3>4. Grafik Garis (Line Chart)</h3>
+                    <p><strong>Kegunaan Utama: Tren Waktu.</strong> Sangat cocok untuk melihat perubahan data yang berkelanjutan dalam kurun waktu tertentu (Harian, Bulanan, Tahunan).</p>
+                    <img src="images/garis.jpg" alt="Contoh Grafik Garis" class="ilustrasi-mini" onerror="this.style.display='none'">
+                    <p><em>Contoh:</em> Grafik harga emas selama 12 bulan terakhir.</p>
+
+                    <h3>5. Diagram Pencar (Scatter Plot)</h3>
+                    <p><strong>Kegunaan Utama: Korelasi.</strong> Digunakan untuk melihat hubungan antara dua variabel berbeda, apakah saling mempengaruhi atau tidak.</p>
+                    <img src="images/pencar.jpg" alt="Contoh Scatter Plot" class="ilustrasi-mini" onerror="this.style.display='none'">
+                    <p><em>Contoh:</em> Hubungan antara lama belajar dengan nilai ujian siswa.</p>
                 </div>
-                <button class="btn-action" onclick="mulaiKuis()">Selesai Baca, Ayo Kuis!</button>
+                <button class="btn-action" onclick="mulaiKuis()">Saya Sudah Paham, Mulai Kuis!</button>
             </div>
 
             <div id="area-kuis" class="area-konten">
                 <h4 id="indikator-soal">Soal 1/15</h4>
-                <h2 id="teks-soal" style="text-align: left; font-size: 1.1rem;">Memuat soal...</h2>
+                <h2 id="teks-soal" style="text-align: left; font-size: 1.1rem; min-height: 60px;">Memuat soal...</h2>
                 <div id="container-opsi"></div>
                 
-                <button class="btn-action btn-bantuan" id="tombol-bantuan" onclick="mintaBantuan()">💡 Tanya Pak Agus (-5 Poin)</button>
+                <button class="btn-action btn-bantuan" id="tombol-bantuan" onclick="mintaBantuan()">💡 Tanya Pak Cokro (-5 Poin)</button>
                 <button class="btn-action btn-disabled" id="tombol-lanjut" onclick="simpanJawaban()" disabled>Pilih Jawaban Dulu</button>
             </div>
 
             <div id="area-hasil" class="area-konten">
                 <div class="angka-skor" id="teks-skor">0</div>
-                <p id="keterangan-hasil" style="text-align: center; font-weight: bold;"></p>
-                <p id="teks-penalti" style="text-align: center; color: var(--warna-merah); font-size: 0.8rem;"></p>
+                <p id="keterangan-hasil" style="text-align: center; font-weight: bold; font-size: 1.2rem;"></p>
+                <p id="teks-penalti" style="text-align: center; color: var(--warna-merah); margin-top: 5px;"></p>
                 
-                <button id="tombol-ulang" class="btn-action" style="display: none;" onclick="tampilkanMateri()">🔄 Ulangi Materi</button>
-                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="window.location.href='index.html'">✅ Selesai</button>
+                <button id="tombol-ulang" class="btn-action" style="display: none;" onclick="tampilkanMateri()">🔄 Pelajari Lagi & Remedial</button>
+                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="window.location.href='index.html'">✅ Selesai & Kembali</button>
             </div>
         </div>
 
         <div class="footer">
-            Design by Agus Suyatno, S.Kom<br>&copy; 2026 SMA Negeri 1 Muncar
+            Design by <b>Agus Suyatno, S.Kom</b><br>&copy; 2026 SMA Negeri 1 Muncar
         </div>
     </div>
 
@@ -155,19 +149,15 @@
     <script src="siswa.js"></script>
 
     <script>
-        // INISIALISASI VARIABEL
         let namaSiswa = ""; let kelasSiswa = ""; let daftarSoalBerjalan = [];
         let indeksSoalSekarang = 0; let jumlahBenar = 0; let jawabanTerpilihSementara = null;
         let bantuanPerSoalDipakai = false; let totalKaliBantuan = 0; let jumlahPercobaan = 0;
         const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec"; 
 
-        // 1. FUNGSI DROP DOWN (INI PERBAIKANNYA)
+        // DROPDOWN FIX
         function inisialisasiDropdown() {
             const selectKelas = document.getElementById('pilih-kelas');
-            if (typeof SISWA_BARU === 'undefined') {
-                alert("Data siswa.js tidak ditemukan!");
-                return;
-            }
+            if (typeof SISWA_BARU === 'undefined') return;
             const unikKelas = [...new Set(SISWA_BARU.map(s => s.kelas))].sort();
             selectKelas.innerHTML = '<option value="">-- Pilih Kelas --</option>';
             unikKelas.forEach(k => {
@@ -188,33 +178,22 @@
             });
         }
 
-        // 2. LOGIKA FLOW APLIKASI
-        window.onload = function() {
-            inisialisasiDropdown();
-            const p = JSON.parse(localStorage.getItem('progres_ad'));
-            if(p) {
-                namaSiswa = p.nama; kelasSiswa = p.kelas; indeksSoalSekarang = p.indeks;
-                document.getElementById('area-mentor-global').style.display = "block";
-                tampilkanMateri();
-            }
-        };
+        window.onload = inisialisasiDropdown;
 
         function simpanNamaSiswa() {
             namaSiswa = document.getElementById('pilih-nama').value;
             kelasSiswa = document.getElementById('pilih-kelas').value;
-            if(!namaSiswa) return alert("Pilih nama dulu!");
+            if(!namaSiswa) return alert("Pilih namamu dulu ya!");
             document.getElementById('area-mentor-global').style.display = "block";
-            document.getElementById('btn-logout').style.display = "block";
             tampilkanMateri();
         }
 
         function tampilkanMateri() {
             ubahTampilan('area-materi');
-            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}, pelajari materinya dulu ya sebelum Pak Agus beri kuis.`;
+            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}, Pak Cokro sudah siapkan materi. Baca pelan-pelan ya!`;
         }
 
         function mulaiKuis() {
-            if(typeof daftarSoalAsli === 'undefined') return alert("Soal tidak ada!");
             ubahTampilan('area-kuis');
             jumlahPercobaan++;
             daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
@@ -231,7 +210,7 @@
             document.getElementById('tombol-bantuan').disabled = false;
             document.getElementById('tombol-bantuan').classList.remove('btn-disabled');
             document.getElementById('kotak-mentor').className = "mentor-box";
-            document.getElementById('pesan-mentor').innerText = "Pikirkan baik-baik jawabannya...";
+            document.getElementById('pesan-mentor').innerText = "Ayo dianalisis, mana jawaban yang paling tepat?";
             
             const btnLanjut = document.getElementById('tombol-lanjut');
             btnLanjut.disabled = true; btnLanjut.className = "btn-action btn-disabled";
@@ -252,7 +231,7 @@
             if(bantuanPerSoalDipakai) return;
             bantuanPerSoalDipakai = true; totalKaliBantuan++;
             document.getElementById('kotak-mentor').className = "mentor-box peringatan";
-            document.getElementById('pesan-mentor').innerText = `PETUNJUK: ${daftarSoalBerjalan[indeksSoalSekarang].b}`;
+            document.getElementById('pesan-mentor').innerText = `PAK COKRO: ${daftarSoalBerjalan[indeksSoalSekarang].b}`;
             document.getElementById('tombol-bantuan').disabled = true;
             document.getElementById('tombol-bantuan').classList.add('btn-disabled');
         }
@@ -267,17 +246,21 @@
         function tampilkanHasil() {
             ubahTampilan('area-hasil');
             let skorAwal = Math.round((jumlahBenar / Math.min(15, daftarSoalBerjalan.length)) * 100);
-            let skorAkhir = Math.max(0, skorAwal - (totalKaliBantuan * 5));
+            let totalPenalti = totalKaliBantuan * 5;
+            let skorAkhir = Math.max(0, skorAwal - totalPenalti);
+            
             document.getElementById('teks-skor').innerText = skorAkhir;
             const tuntas = skorAkhir >= 100;
-            document.getElementById('keterangan-hasil').innerText = tuntas ? "LULUS (TUNTAS)" : "BELUM TUNTAS";
-            document.getElementById('pesan-mentor').innerText = tuntas ? "Hebat! Kamu tuntas sempurna." : "Ayo ulangi lagi belajarnya.";
+            document.getElementById('keterangan-hasil').innerText = tuntas ? "STATUS: TUNTAS" : "STATUS: BELUM TUNTAS";
+            document.getElementById('pesan-mentor').innerText = tuntas ? "Selamat! Kamu luar biasa." : "Ayo belajar lagi, Pak Cokro yakin kamu bisa!";
+            document.getElementById('teks-penalti').innerText = totalKaliBantuan > 0 ? `(Penalti bantuan: -${totalPenalti} poin)` : "";
+            
             document.getElementById('tombol-selesai').style.display = tuntas ? "block" : "none";
             document.getElementById('tombol-ulang').style.display = tuntas ? "none" : "block";
             
-            // KIRIM DATA ANTI-JOKI
+            // ANTI-JOKI TRANSMISSION
             fetch(URL_APPS_SCRIPT + "?" + new URLSearchParams({
-                namaSiswa, kelasSiswa, modul: "Analisis Data", skor: skorAkhir, 
+                namaSiswa, kelasSiswa, modul: "Analisis Data (AD)", skor: skorAkhir, 
                 bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, 
                 status: tuntas ? "TUNTAS" : "REMEDIAL", browser: navigator.userAgent
             }), { method: 'GET', mode: 'no-cors' });
@@ -287,8 +270,6 @@
             document.querySelectorAll('.area-konten').forEach(a => a.style.display = 'none');
             document.getElementById(id).style.display = 'block';
         }
-
-        function logoutSiswa() { localStorage.removeItem('progres_ad'); window.location.reload(); }
     </script>
 </body>
 </html>
