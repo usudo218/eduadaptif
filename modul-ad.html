@@ -383,8 +383,9 @@
             }
             
             // MENGIRIM DATA DENGAN METODE GET LANGSUNG KE URL BAPAK
-            const parameterData = new URLSearchParams({ 
-                namaSiswa: namaSiswa + " (" + kelasSiswa + ")", 
+           const parameterData = new URLSearchParams({ 
+                namaSiswa: namaSiswa,         // Hanya mengirim Nama
+                kelasSiswa: kelasSiswa,       // Mengirim Kelas secara terpisah
                 modul: "Analisis Data (AD)", 
                 skor: skorAkhir, 
                 bantuan: totalKaliBantuan, 
