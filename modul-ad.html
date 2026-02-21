@@ -85,9 +85,9 @@
 
             <div id="area-mentor-global" style="display: none;">
                 <div class="mentor-box" id="kotak-mentor">
-                    <div class="mentor-avatar"><img src="images/pak-cokro.png" alt="Pak Cokro"></div>
+                    <div class="mentor-avatar"><img src="images/pak-cokro.png" alt="Pak Agus"></div>
                     <div class="mentor-message">
-                        <span class="mentor-name">Pak Cokro :</span>
+                        <span class="mentor-name">Pak Agus :</span>
                         <span id="pesan-mentor">Semangat belajar!</span>
                     </div>
                 </div>
@@ -231,7 +231,7 @@
             if(bantuanPerSoalDipakai) return;
             bantuanPerSoalDipakai = true; totalKaliBantuan++;
             document.getElementById('kotak-mentor').className = "mentor-box peringatan";
-            document.getElementById('pesan-mentor').innerText = `PAK COKRO: ${daftarSoalBerjalan[indeksSoalSekarang].b}`;
+            document.getElementById('pesan-mentor').innerText = `PAK AGUS: ${daftarSoalBerjalan[indeksSoalSekarang].b}`;
             document.getElementById('tombol-bantuan').disabled = true;
             document.getElementById('tombol-bantuan').classList.add('btn-disabled');
         }
@@ -252,7 +252,7 @@
             document.getElementById('teks-skor').innerText = skorAkhir;
             const tuntas = skorAkhir >= 100;
             document.getElementById('keterangan-hasil').innerText = tuntas ? "STATUS: TUNTAS" : "STATUS: BELUM TUNTAS";
-            document.getElementById('pesan-mentor').innerText = tuntas ? "Selamat! Kamu luar biasa." : "Ayo belajar lagi, Pak Cokro yakin kamu bisa!";
+            document.getElementById('pesan-mentor').innerText = tuntas ? "Selamat! Kamu luar biasa." : "Ayo belajar lagi, Pak Agus yakin kamu bisa!";
             document.getElementById('teks-penalti').innerText = totalKaliBantuan > 0 ? `(Penalti bantuan: -${totalPenalti} poin)` : "";
             
             document.getElementById('tombol-selesai').style.display = tuntas ? "block" : "none";
