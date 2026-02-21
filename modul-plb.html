@@ -20,19 +20,18 @@
         .app-container { background: white; width: 100%; max-width: 650px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
         /* ==========================================
-           DESAIN HEADER & TOMBOL MENU ELEGAN (BARU)
+           DESAIN HEADER & TOMBOL MENU ELEGAN 
            ========================================== */
         .header { 
             background: var(--warna-utama); 
             color: white; 
-            padding: 45px 20px 25px 20px; /* Padding atas agar tidak menabrak tombol */
+            padding: 45px 20px 25px 20px; 
             text-align: center; 
             position: relative;
         }
         .header h1 { margin: 0; font-size: 1.5rem; font-weight: 700; letter-spacing: 0.5px;}
         .header p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
         
-        /* Desain Dasar Tombol Kapsul (Pill) dengan Efek Kaca */
         .back-btn, .logout-btn { 
             position: absolute; 
             top: 15px; 
@@ -42,11 +41,11 @@
             font-size: 0.85rem; 
             font-weight: 600; 
             padding: 8px 16px; 
-            border-radius: 50px; /* Membentuk kapsul */
+            border-radius: 50px; 
             text-decoration: none; 
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
             border: 1px solid rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(8px); /* Efek Kaca */
+            backdrop-filter: blur(8px); 
             -webkit-backdrop-filter: blur(8px);
             cursor: pointer; 
             font-family: inherit;
@@ -254,8 +253,8 @@
         const POIN_PENALTI_BANTUAN = 5; 
         const KKM = 100; 
 
-        // GANTI DENGAN URL APPS SCRIPT ANDA
-        const URL_APPS_SCRIPT = "PASTE_URL_APPS_SCRIPT_ANDA_DI_SINI"; 
+        // URL GOOGLE APPS SCRIPT ASLI BAPAK
+        const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbwLnjVTKPKH54kitShhiA88wNw9aw3e2BP5MYYL3PvFNAiWEFcXtGjnka40k7ima7uN/exec"; 
 
         function inisialisasiDropdown() {
             if(typeof SISWA_BARU === 'undefined') { alert("File siswa.js tidak terbaca!"); return; }
@@ -389,10 +388,23 @@
                 document.getElementById('keterangan-hasil').innerText = "Status: BELUM TUNTAS. Silakan remedial.";
                 document.getElementById('tombol-ulang').style.display = "block"; document.getElementById('tombol-selesai').style.display = "none"; statusSiswa = "REMEDIAL";
             }
-            if(URL_APPS_SCRIPT !== "https://script.google.com/macros/s/AKfycbzPcanC73JEFcHGfgKWDRfaUTNaztpOGZSmM61VqV_BfkiEYWebWNSHnZTE7Zx-4XDn/exec") {
-                const dataKirim = new URLSearchParams({ namaSiswa: namaSiswa + " (" + kelasSiswa + ")", modul: "Praktik Lintas Bidang (PLB)", skor: skorAkhir, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, status: statusSiswa });
-                fetch(URL_APPS_SCRIPT, { method: 'POST', body: dataKirim }).then(response => { console.log("Data PLB terekam."); }).catch(error => { console.error("Gagal kirim:", error); });
-            }
+            
+            // JURUS PAMUNGKAS METODE GET (DIJAMIN MASUK KE 8 KOLOM SPREADSHEET)
+            const parameterData = new URLSearchParams({ 
+                namaSiswa: namaSiswa,         // Mengirim Nama
+                kelasSiswa: kelasSiswa,       // Mengirim Kelas terpisah
+                modul: "Praktik Lintas Bidang (PLB)", // Nama Modul
+                skor: skorAkhir, 
+                bantuan: totalKaliBantuan, 
+                percobaan: jumlahPercobaan, 
+                status: statusSiswa 
+            }).toString();
+            
+            const urlKirimData = URL_APPS_SCRIPT + "?" + parameterData;
+            
+            fetch(urlKirimData, { method: 'GET', mode: 'no-cors' })
+                .then(response => { console.log("Perintah kirim selesai."); })
+                .catch(error => { console.error("Gagal kirim:", error); });
         }
 
         function ulangiMateri() { tampilkanMateri(); }
