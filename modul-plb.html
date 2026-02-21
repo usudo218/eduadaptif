@@ -8,7 +8,8 @@
         :root {
             --warna-utama: #15803D; /* Hijau untuk PLB */
             --warna-aksen: #D97706; 
-            --warna-merah: #EF4444;
+            --warna-merah: #EF4444; /* Merah untuk Tombol PDF */
+            --warna-merah-hover: #DC2626;
             --warna-kuning: #F59E0B; 
             --warna-latar: #F3F4F6; 
             --warna-teks: #1F2937;  
@@ -25,12 +26,10 @@
 
         .content { padding: 25px 20px; flex-grow: 1; }
         
-        /* LOGIN CARD Pak Agus */
         .login-card { background: white; padding: 30px 25px; border-radius: 20px; text-align: center; border: 1px solid #E5E7EB; }
         .pak-cokro-img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--warna-utama); margin-bottom: 15px; object-fit: cover; }
         select.input-nama { width: 100%; padding: 15px; border: 2px solid #E5E7EB; border-radius: 12px; font-size: 1rem; margin-bottom: 15px; font-weight: 600; cursor: pointer; }
 
-        /* MENTOR BOX */
         .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); align-items: center; }
         .mentor-box.peringatan { border-left-color: var(--warna-kuning); background-color: #FEF3C7; }
         .mentor-avatar { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 2px solid var(--warna-utama); background: white; flex-shrink: 0;}
@@ -47,10 +46,25 @@
         .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; transition: 0.2s; }
         .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); font-weight: bold; color: var(--warna-utama); }
 
-        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; }
+        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
         .btn-submit { background: var(--warna-aksen); }
         .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
+
+        /* GAYA TOMBOL PDF MERAH UNTUK PLB */
+        .pdf-box { background: #F0FDF4; padding: 15px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
+        .btn-pdf-merah { 
+            background: var(--warna-merah) !important; 
+            color: white !important; 
+            text-decoration: none; 
+            display: inline-block; 
+            width: auto; 
+            padding: 12px 25px; 
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.05); }
 
         .angka-skor { font-size: 4.5rem; font-weight: bold; color: var(--warna-utama); text-align: center; margin: 10px 0;}
         .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 20px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; }
@@ -86,7 +100,7 @@
                     <div class="mentor-avatar"><img src="images/pak-cokro.png" alt="Pak Agus"></div>
                     <div class="mentor-message">
                         <span class="mentor-name">Pak Agus :</span>
-                        <span id="pesan-mentor">Selamat datang di modul PLB!</span>
+                        <span id="pesan-mentor">Selamat datang di misi terakhir!</span>
                     </div>
                 </div>
             </div>
@@ -94,24 +108,25 @@
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
                     <h3>1. Apa itu Praktik Lintas Bidang (PLB)?</h3>
-                    <p>PLB adalah fase integrasi di mana kamu menerapkan seluruh elemen Informatika untuk memecahkan masalah masyarakat. Fokus utamanya adalah <strong>Kerja Tim</strong> dan <strong>Inovasi Solutif</strong>.</p>
-                    
+                    <p>PLB adalah fase integrasi Informatika untuk memecahkan masalah masyarakat melalui <strong>Kerja Tim</strong> dan <strong>Inovasi Solutif</strong>.</p>
 
                     <h3>2. Kolaborasi Inklusif</h3>
-                    <p>Dalam tim, setiap anggota memiliki peran penting. Kerja inklusif berarti menghargai pendapat anggota tanpa memandang perbedaan, membagi beban kerja secara adil, dan berkomunikasi secara transparan.</p>
-                    
+                    <p>Kerja inklusif berarti menghargai perbedaan pendapat, membagi tugas secara adil, dan menjalin komunikasi transparan antar anggota tim.</p>
 
                     <h3>3. Siklus Pengembangan Solusi</h3>
                     <ul>
-                        <li><strong>Identifikasi Masalah:</strong> Mengamati masalah nyata (Misal: Digitalisasi UMKM lokal).</li>
-                        <li><strong>Pengumpulan & Analisis Data:</strong> Melakukan survei atau riset lapangan.</li>
-                        <li><strong>Perancangan & Coding:</strong> Membuat purwarupa (prototype) solusi digital.</li>
-                        <li><strong>Testing:</strong> Menguji solusi dan memperbaiki kesalahan (debugging).</li>
+                        <li><strong>Identifikasi Masalah:</strong> Mengamati fenomena di masyarakat.</li>
+                        <li><strong>Analisis Data:</strong> Mengolah informasi hasil riset.</li>
+                        <li><strong>Purwarupa:</strong> Merancang solusi digital awal.</li>
+                        <li><strong>Pengujian:</strong> Mencari bug dan menyempurnakan solusi.</li>
                     </ul>
-                    
 
-                    <h3>4. Dokumentasi & Presentasi</h3>
-                    <p>Hasil karya harus didokumentasikan dalam bentuk laporan formal dan video presentasi publik. Ingatlah etika digital saat mengunggah karya ke internet!</p>
+                    <div class="pdf-box">
+                        <p style="margin-bottom: 10px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi PLB versi lengkap?</p>
+                        <a href="LINK_GOOGLE_DRIVE_PDF_PLB_BAPAK" target="_blank" class="btn-pdf-merah">
+                            📥 Buka Naskah Materi (PDF)
+                        </a>
+                    </div>
                 </div>
                 <button class="btn-action" onclick="mulaiKuis()">Tim Siap, Mulai Kuis Akhir!</button>
             </div>
@@ -184,7 +199,8 @@
 
         function tampilkanMateri() {
             ubahTampilan('area-materi');
-            document.getElementById('pesan-mentor').innerText = `Hebat ${namaSiswa}! PLB adalah pembuktian seluruh ilmumu. Mari berkolaborasi!`;
+            /* PESAN MENTOR SESUAI INSTRUKSI */
+            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! , kamu bisa klik tombol merah di bawah untuk membaca materi lengkapnya ya!`;
         }
 
         function mulaiKuis() {
@@ -199,12 +215,15 @@
             let s = daftarSoalBerjalan[indeksSoalSekarang];
             document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1}/15`;
             document.getElementById('teks-soal').innerText = s.p;
-            jawabanTerpilihSementara = null; bantuanPerSoalDipakai = false;
+            jawabanTerpilihSementara = null; 
+            bantuanPerSoalDipakai = false;
             document.getElementById('tombol-bantuan').disabled = false;
             document.getElementById('kotak-mentor').className = "mentor-box";
             document.getElementById('pesan-mentor').innerText = "Analisislah manajemen proyeknya...";
+            
             const btnLanjut = document.getElementById('tombol-lanjut');
             btnLanjut.disabled = true; btnLanjut.className = "btn-action btn-disabled";
+            
             const cont = document.getElementById('container-opsi'); cont.innerHTML = '';
             s.o.forEach((txt, i) => {
                 const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = txt;
@@ -239,7 +258,7 @@
             let skorAkhir = Math.max(0, skorAwal - totalPenalti);
             document.getElementById('teks-skor').innerText = skorAkhir;
             const tuntas = skorAkhir >= 100;
-            document.getElementById('keterangan-hasil').innerText = tuntas ? "KOLABORASI SUKSES (TUNTAS)" : "PROYEK BUTUH REVISI (REMEDIAL)";
+            document.getElementById('keterangan-hasil').innerText = tuntas ? "KOLABORASI SUKSES" : "PROYEK BUTUH REVISI";
             document.getElementById('pesan-mentor').innerText = tuntas ? "Selamat! Kamu telah menguasai seluruh elemen Informatika Kelas X." : "Ayo perbaiki pemahaman proyekmu melalui remedial.";
             document.getElementById('teks-penalti').innerText = totalKaliBantuan > 0 ? `(Penalti bantuan: -${totalPenalti} poin)` : "";
             document.getElementById('tombol-selesai').style.display = tuntas ? "block" : "none";
