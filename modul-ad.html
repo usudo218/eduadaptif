@@ -8,7 +8,7 @@
         :root {
             --warna-utama: #4F46E5; 
             --warna-aksen: #10B981; 
-            --warna-merah: #EF4444; /* Merah untuk Tombol PDF */
+            --warna-merah: #EF4444; 
             --warna-merah-hover: #DC2626;
             --warna-kuning: #F59E0B; 
             --warna-latar: #F3F4F6; 
@@ -23,34 +23,11 @@
         .header { background: var(--warna-utama); color: white; padding: 50px 20px 30px 20px; text-align: center; position: relative; }
         .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; }
         
-        /* TOMBOL HEADER SERAGAM */
-        .btn-header { 
-            position: absolute; 
-            top: 15px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            gap: 6px; 
-            font-size: 0.85rem; 
-            font-weight: 600; 
-            height: 36px;
-            width: 100px;
-            border-radius: 8px; 
-            text-decoration: none; 
-            color: white; 
-            border: 1px solid rgba(255, 255, 255, 0.4); 
-            cursor: pointer; 
-            background: rgba(255, 255, 255, 0.15); 
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
+        .btn-header { position: absolute; top: 15px; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.85rem; font-weight: 600; height: 36px; width: 100px; border-radius: 8px; text-decoration: none; color: white; border: 1px solid rgba(255, 255, 255, 0.4); cursor: pointer; background: rgba(255, 255, 255, 0.15); transition: all 0.3s ease; }
         .btn-header:hover { background: white; color: var(--warna-utama); border-color: white; transform: translateY(-1px); }
-        
-        .home-pos { left: 15px; }
-        .logout-pos { right: 15px; }
+        .home-pos { left: 15px; } .logout-pos { right: 15px; }
 
         .content { padding: 25px 20px; flex-grow: 1; }
-        
         .login-card { background: white; padding: 30px 25px; border-radius: 20px; text-align: center; border: 1px solid #E5E7EB; }
         .pak-cokro-img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--warna-utama); margin-bottom: 15px; object-fit: cover; }
         select.input-nama { width: 100%; padding: 15px; border: 2px solid #E5E7EB; border-radius: 12px; font-size: 1rem; margin-bottom: 15px; font-weight: 600; cursor: pointer; }
@@ -75,7 +52,6 @@
         .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
 
-        /* Tombol PDF Merah */
         .pdf-box { background: #F0F4FF; padding: 18px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
         .btn-pdf-merah { background: var(--warna-merah) !important; color: white !important; text-decoration: none; display: inline-block; width: auto; padding: 12px 25px; border-radius: 8px; font-weight: bold; transition: 0.3s; }
         .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.03); }
@@ -98,15 +74,11 @@
         <div class="content">
             <div id="area-login" class="area-konten area-aktif">
                 <div class="login-card">
-                    <img src="images/pak-cokro.png" alt="Pak Cokro" class="pak-cokro-img">
+                    <img src="images/pak-cokro.png" alt="Pak Agus" class="pak-cokro-img">
                     <h2>Halo! Saya Pak Agus</h2>
                     <p>Siap mengungkap rahasia di balik data hari ini? Silakan pilih identitasmu.</p>
-                    <select id="pilih-kelas" class="input-nama" onchange="filterNama()">
-                        <option value="">-- Pilih Kelas --</option>
-                    </select>
-                    <select id="pilih-nama" class="input-nama" disabled>
-                        <option value="">-- Pilih Nama --</option>
-                    </select>
+                    <select id="pilih-kelas" class="input-nama" onchange="filterNama()"><option value="">-- Pilih Kelas --</option></select>
+                    <select id="pilih-nama" class="input-nama" disabled><option value="">-- Pilih Nama --</option></select>
                     <button class="btn-action btn-submit" onclick="simpanNamaSiswa()">🚀 Mulai Petualangan</button>
                 </div>
             </div>
@@ -125,15 +97,11 @@
                 <div class="teks-materi">
                     <h3>1. Pengantar Visualisasi Data</h3>
                     <p>Visualisasi data adalah proses mengubah data mentah (angka) menjadi bentuk visual agar pola dan tren mudah dipahami.</p>
-                    
                     <h3>2. Ragam Grafik Dasar</h3>
                     <p>Gunakan Diagram Batang untuk perbandingan, Grafik Lingkaran untuk proporsi, dan Grafik Garis untuk tren waktu.</p>
-
                     <div class="pdf-box">
-                        <p style="margin-bottom: 12px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi lengkap?</p>
-                        <a href="LINK_GOOGLE_DRIVE_PDF_AD_BAPAK" target="_blank" class="btn-pdf-merah">
-                            📥 Buka Naskah Materi (PDF)
-                        </a>
+                        <p style="margin-bottom: 12px; font-weight: bold;">📖 Ingin membaca naskah materi lengkap?</p>
+                        <a href="LINK_GOOGLE_DRIVE_PDF_AD_BAPAK" target="_blank" class="btn-pdf-merah">📥 Buka Naskah Materi (PDF)</a>
                     </div>
                 </div>
                 <button class="btn-action" onclick="mulaiKuis()">Data Siap, Mulai Kuis!</button>
@@ -157,9 +125,7 @@
             </div>
         </div>
 
-        <div class="footer">
-            Design by <b>Agus Suyatno, S.Kom</b><br>&copy; 2026 SMA Negeri 1 Muncar
-        </div>
+        <div class="footer">Design by <b>Agus Suyatno, S.Kom</b><br>&copy; 2026 SMA Negeri 1 Muncar</div>
     </div>
 
     <script src="soal-ad.js"></script>
@@ -171,9 +137,7 @@
         let bantuanPerSoalDipakai = false; let totalKaliBantuan = 0; let jumlahPercobaan = 0;
         const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec"; 
 
-        function simpanProgres(fase) {
-            localStorage.setItem('progres_ad', JSON.stringify({ nama: namaSiswa, kelas: kelasSiswa, fase: fase, soal: daftarSoalBerjalan, indeks: indeksSoalSekarang, benar: jumlahBenar, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan }));
-        }
+        function simpanProgres(fase) { localStorage.setItem('progres_ad', JSON.stringify({ nama: namaSiswa, kelas: kelasSiswa, fase: fase, soal: daftarSoalBerjalan, indeks: indeksSoalSekarang, benar: jumlahBenar, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan })); }
 
         window.onload = function() {
             const simpanan = localStorage.getItem('progres_ad');
@@ -182,49 +146,32 @@
                 namaSiswa = p.nama; kelasSiswa = p.kelas; daftarSoalBerjalan = p.soal; indeksSoalSekarang = p.indeks;
                 jumlahBenar = p.benar; totalKaliBantuan = p.bantuan; jumlahPercobaan = p.percobaan;
                 document.getElementById('area-mentor-global').style.display = "block";
-                document.getElementById('btn-logout').style.display = "block";
+                document.getElementById('btn-logout').style.display = "flex";
                 if(p.fase === 'materi') tampilkanMateri(); else muatSoal();
-            } else {
-                inisialisasiDropdown();
-            }
+            } else { inisialisasiDropdown(); }
         };
 
-        function logoutSiswa() {
-            if(confirm("Apakah Anda ingin Logout? Progres belajar di modul ini akan dihapus.")) {
-                localStorage.removeItem('progres_ad');
-                window.location.reload();
-            }
-        }
+        function logoutSiswa() { if(confirm("Logout? Progres dihapus.")) { localStorage.removeItem('progres_ad'); window.location.reload(); } }
 
         function inisialisasiDropdown() {
             const selectKelas = document.getElementById('pilih-kelas');
             if (typeof SISWA_BARU === 'undefined') return;
             const unikKelas = [...new Set(SISWA_BARU.map(s => s.kelas))].sort();
-            selectKelas.innerHTML = '<option value="">-- Pilih Kelas --</option>';
-            unikKelas.forEach(k => {
-                let opt = document.createElement('option'); opt.value = k; opt.innerText = k;
-                selectKelas.appendChild(opt);
-            });
+            unikKelas.forEach(k => { let opt = document.createElement('option'); opt.value = k; opt.innerText = k; selectKelas.appendChild(opt); });
         }
 
         function filterNama() {
             const kls = document.getElementById('pilih-kelas').value;
-            const selNama = document.getElementById('pilih-nama');
-            selNama.innerHTML = '<option value="">-- Pilih Nama --</option>';
-            if(!kls) { selNama.disabled = true; return; }
-            selNama.disabled = false;
-            SISWA_BARU.filter(s => s.kelas === kls).sort((a,b) => a.nama.localeCompare(b.nama)).forEach(s => {
-                let opt = document.createElement('option'); opt.value = s.nama; opt.innerText = s.nama;
-                selNama.appendChild(opt);
-            });
+            const selNama = document.getElementById('pilih-nama'); selNama.innerHTML = '<option value="">-- Pilih Nama --</option>';
+            if(!kls) { selNama.disabled = true; return; } selNama.disabled = false;
+            SISWA_BARU.filter(s => s.kelas === kls).sort((a,b) => a.nama.localeCompare(b.nama)).forEach(s => { let opt = document.createElement('option'); opt.value = s.nama; opt.innerText = s.nama; selNama.appendChild(opt); });
         }
 
         function simpanNamaSiswa() {
-            namaSiswa = document.getElementById('pilih-nama').value;
-            kelasSiswa = document.getElementById('pilih-kelas').value;
-            if(!namaSiswa) return alert("Pilih namamu dulu!");
+            namaSiswa = document.getElementById('pilih-nama').value; kelasSiswa = document.getElementById('pilih-kelas').value;
+            if(!namaSiswa) return alert("Pilih namamu!");
             document.getElementById('area-mentor-global').style.display = "block";
-            document.getElementById('btn-logout').style.display = "block";
+            document.getElementById('btn-logout').style.display = "flex";
             tampilkanMateri();
         }
 
@@ -234,79 +181,51 @@
             simpanProgres('materi');
         }
 
-        function mulaiKuis() {
-            ubahTampilan('area-kuis');
-            jumlahPercobaan++;
-            if(daftarSoalBerjalan.length === 0) {
-                daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
-            }
-            muatSoal();
-        }
+        function mulaiKuis() { ubahTampilan('area-kuis'); jumlahPercobaan++; if(daftarSoalBerjalan.length === 0) { daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5); } muatSoal(); }
 
         function muatSoal() {
-            ubahTampilan('area-kuis');
-            let s = daftarSoalBerjalan[indeksSoalSekarang];
+            ubahTampilan('area-kuis'); let s = daftarSoalBerjalan[indeksSoalSekarang];
             document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1}/15`;
             document.getElementById('teks-soal').innerText = s.p;
             jawabanTerpilihSementara = null; bantuanPerSoalDipakai = false;
             document.getElementById('tombol-bantuan').disabled = false;
             document.getElementById('kotak-mentor').className = "mentor-box";
-            document.getElementById('pesan-mentor').innerText = "Menganalisis data membutuhkan ketelitian...";
-            const btnLanjut = document.getElementById('tombol-lanjut');
-            btnLanjut.disabled = true; btnLanjut.className = "btn-action btn-disabled";
+            document.getElementById('pesan-mentor').innerText = "Analisislah data dengan teliti...";
+            const btnLanjut = document.getElementById('tombol-lanjut'); btnLanjut.disabled = true; btnLanjut.className = "btn-action btn-disabled";
             const cont = document.getElementById('container-opsi'); cont.innerHTML = '';
             s.o.forEach((txt, i) => {
                 const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = txt;
-                btn.onclick = () => {
-                    document.querySelectorAll('.btn-opsi').forEach(b => b.classList.remove('terpilih'));
-                    btn.classList.add('terpilih'); jawabanTerpilihSementara = i;
-                    btnLanjut.disabled = false; btnLanjut.className = "btn-action btn-submit";
-                };
+                btn.onclick = () => { document.querySelectorAll('.btn-opsi').forEach(b => b.classList.remove('terpilih')); btn.classList.add('terpilih'); jawabanTerpilihSementara = i; btnLanjut.disabled = false; btnLanjut.className = "btn-action btn-submit"; };
                 cont.appendChild(btn);
             });
             simpanProgres('kuis');
         }
 
         function mintaBantuan() {
-            if(bantuanPerSoalDipakai) return;
-            bantuanPerSoalDipakai = true; totalKaliBantuan++;
+            if(bantuanPerSoalDipakai) return; bantuanPerSoalDipakai = true; totalKaliBantuan++;
             document.getElementById('kotak-mentor').className = "mentor-box peringatan";
-            document.getElementById('pesan-mentor').innerText = `${daftarSoalBerjalan[indeksSoalSekarang].b}`;
-            document.getElementById('tombol-bantuan').disabled = true;
-            simpanProgres('kuis');
+            document.getElementById('pesan-mentor').innerText = `Pak Agus: ${daftarSoalBerjalan[indeksSoalSekarang].b}`;
+            document.getElementById('tombol-bantuan').disabled = true; simpanProgres('kuis');
         }
 
-        function simpanJawaban() {
-            if(jawabanTerpilihSementara === daftarSoalBerjalan[indeksSoalSekarang].k) jumlahBenar++;
-            indeksSoalSekarang++;
-            if(indeksSoalSekarang < 15 && indeksSoalSekarang < daftarSoalBerjalan.length) muatSoal(); 
-            else tampilkanHasil();
-        }
+        function simpanJawaban() { if(jawabanTerpilihSementara === daftarSoalBerjalan[indeksSoalSekarang].k) jumlahBenar++; indeksSoalSekarang++; if(indeksSoalSekarang < 15 && indeksSoalSekarang < daftarSoalBerjalan.length) muatSoal(); else tampilkanHasil(); }
 
         function tampilkanHasil() {
             ubahTampilan('area-hasil');
             let skorAwal = Math.round((jumlahBenar / Math.min(15, daftarSoalBerjalan.length)) * 100);
-            let totalPenalti = totalKaliBantuan * 5;
-            let skorAkhir = Math.max(0, skorAwal - totalPenalti);
-            
-            document.getElementById('wrapper-nama-hasil').innerText = namaSiswa;
-            document.getElementById('teks-skor').innerText = skorAkhir;
-            
+            let totalPenalti = totalKaliBantuan * 5; let skorAkhir = Math.max(0, skorAwal - totalPenalti);
+            document.getElementById('wrapper-nama-hasil').innerText = namaSiswa; document.getElementById('teks-skor').innerText = skorAkhir;
             const tuntas = skorAkhir >= 100;
             document.getElementById('keterangan-hasil').innerText = tuntas ? "ANALISIS DATA TUNTAS" : "ANALISIS DATA BELUM TUNTAS";
             document.getElementById('pesan-mentor').innerText = tuntas ? "Luar biasa! Kamu adalah Data Scientist masa depan." : "Jangan menyerah, asah kembali kemampuan analisismu.";
             document.getElementById('teks-penalti').innerText = totalKaliBantuan > 0 ? `(Penalti bantuan: -${totalPenalti} poin)` : "";
             document.getElementById('tombol-selesai').style.display = tuntas ? "block" : "none";
             document.getElementById('tombol-ulang').style.display = tuntas ? "none" : "block";
-            
             fetch(URL_APPS_SCRIPT + "?" + new URLSearchParams({ namaSiswa, kelasSiswa, modul: "Analisis Data (AD)", skor: skorAkhir, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, status: tuntas ? "TUNTAS" : "REMEDIAL", browser: navigator.userAgent }), { method: 'GET', mode: 'no-cors' });
             localStorage.removeItem('progres_ad');
         }
 
-        function ubahTampilan(id) {
-            document.querySelectorAll('.area-konten').forEach(a => a.style.display = 'none');
-            document.getElementById(id).style.display = 'block';
-        }
+        function ubahTampilan(id) { document.querySelectorAll('.area-konten').forEach(a => a.style.display = 'none'); document.getElementById(id).style.display = 'block'; }
     </script>
 </body>
 </html>
