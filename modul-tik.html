@@ -92,7 +92,7 @@
             <a href="index.html" class="btn-header home-pos">🏠 Home</a>
             <button id="btn-logout" class="btn-header logout-pos" onclick="logoutSiswa()" style="display: none;">🚪 Logout</button>
             <h1>Modul TIK</h1>
-            <p>ELANG DIGITAL - SMA Negeri 1 Muncar</p>
+            <p>Elang Digital SMA Negeri 1 Muncar</p>
         </div>
 
         <div class="content">
@@ -268,7 +268,7 @@
             if(bantuanPerSoalDipakai) return;
             bantuanPerSoalDipakai = true; totalKaliBantuan++;
             document.getElementById('kotak-mentor').className = "mentor-box peringatan";
-            document.getElementById('pesan-mentor').innerText = `${daftarSoalBerjalan[indeksSoalSekarang].b}`;
+            document.getElementById('pesan-mentor').innerText = ` ${daftarSoalBerjalan[indeksSoalSekarang].b}`;
             document.getElementById('tombol-bantuan').disabled = true;
             simpanProgres('kuis');
         }
