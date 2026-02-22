@@ -26,7 +26,140 @@
             padding: 20px; 
             margin: 0;
         }
+<style>
+    :root {
+        --warna-utama: #E11D48; 
+        --warna-merah: #EF4444; 
+        --warna-merah-hover: #DC2626;
+        --warna-latar: #F8FAFC; /* Abu-abu lebih cerah & profesional */
+        --warna-teks-utama: #0F172A; /* Slate gelap untuk teks */
+        --warna-teks-lembut: #475569;
+        --latar-mentor: #FFE4E6; 
+    }
 
+    * { 
+        box-sizing: border-box; 
+        /* Menggunakan font system yang modern dan bersih */
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+    }
+
+    body { 
+        background-color: var(--warna-latar); 
+        color: var(--warna-teks-utama);
+        display: flex; 
+        justify-content: center; 
+        padding: 20px; 
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .app-container { 
+        background: white; 
+        width: 100%; 
+        max-width: 650px; 
+        border-radius: 20px; /* Lebih rounded agar modern */
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        overflow: hidden; 
+        margin-top: 20px; 
+        display: flex; 
+        flex-direction: column;
+    }
+
+    /* TIPOGRAFI HEADER */
+    .header h1 {
+        font-size: 1.75rem;
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        margin: 0;
+    }
+
+    /* KONTEN MATERI */
+    .teks-materi { 
+        background: #ffffff; 
+        padding: 30px; 
+        border-radius: 12px; 
+        border: 1px solid #f1f5f9; 
+        height: 480px; 
+        overflow-y: auto; 
+        text-align: left; /* Aligment kiri lebih enak dibaca untuk materi panjang */
+        line-height: 1.8; /* Jarak baris yang lega */
+        color: var(--warna-teks-lembut);
+    }
+
+    .teks-materi h2 {
+        font-size: 1.5rem;
+        color: var(--warna-teks-utama);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+
+    .teks-materi h3 {
+        font-size: 1.2rem;
+        color: var(--warna-utama);
+        font-weight: 600;
+        margin-top: 1.5rem;
+    }
+
+    /* TABEL PROFESIONAL */
+    table { 
+        width: 100%; 
+        border-collapse: separate; 
+        border-spacing: 0;
+        margin: 20px 0; 
+        font-size: 0.95rem; 
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th, td { 
+        padding: 14px; 
+        border-bottom: 1px solid #e2e8f0; 
+    }
+
+    th { 
+        background: #f8fafc; 
+        font-weight: 600;
+        color: var(--warna-teks-utama);
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+    }
+
+    /* TOMBOL OPSI KUIS */
+    .btn-opsi { 
+        background: #fff; 
+        border: 1px solid #e2e8f0; 
+        padding: 16px 20px; 
+        border-radius: 12px; 
+        font-size: 1rem;
+        color: var(--warna-teks-utama);
+        margin-bottom: 12px; 
+        transition: all 0.2s ease;
+    }
+
+    .btn-opsi:hover {
+        border-color: var(--warna-utama);
+        background: #fff1f2;
+    }
+
+    .btn-opsi.terpilih { 
+        background: var(--warna-utama); 
+        border-color: var(--warna-utama); 
+        color: white; 
+        box-shadow: 0 4px 6px -1px rgba(225, 29, 72, 0.3);
+    }
+
+    /* FOOTER */
+    .footer { 
+        padding: 25px; 
+        text-align: center; 
+        font-size: 0.85rem; 
+        color: #94a3b8; 
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+    }
+</style>
         /* Layout Utama */
         .app-container { 
             background: white; 
