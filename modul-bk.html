@@ -6,180 +6,57 @@
     <title>Modul BK - ELANG DIGITAL</title>
     <style>
         :root {
-            --warna-utama: #E11D48; /* Crimson untuk BK */
+            --warna-utama: #E11D48; 
             --warna-merah: #EF4444; 
             --warna-merah-hover: #DC2626;
-            --warna-latar: #F3F4F6; 
-            --warna-teks: #1F2937;  
+            --warna-latar: #F8FAFC; 
+            --warna-teks-utama: #0F172A; 
+            --warna-teks-lembut: #475569;
             --latar-mentor: #FFE4E6; 
         }
 
         * { 
             box-sizing: border-box; 
-            font-family: 'Segoe UI', sans-serif; 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
         }
 
         body { 
             background-color: var(--warna-latar); 
+            color: var(--warna-teks-utama);
             display: flex; 
             justify-content: center; 
             padding: 20px; 
             margin: 0;
+            -webkit-font-smoothing: antialiased;
         }
-<style>
-    :root {
-        --warna-utama: #E11D48; 
-        --warna-merah: #EF4444; 
-        --warna-merah-hover: #DC2626;
-        --warna-latar: #F8FAFC; /* Abu-abu lebih cerah & profesional */
-        --warna-teks-utama: #0F172A; /* Slate gelap untuk teks */
-        --warna-teks-lembut: #475569;
-        --latar-mentor: #FFE4E6; 
-    }
 
-    * { 
-        box-sizing: border-box; 
-        /* Menggunakan font system yang modern dan bersih */
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-    }
-
-    body { 
-        background-color: var(--warna-latar); 
-        color: var(--warna-teks-utama);
-        display: flex; 
-        justify-content: center; 
-        padding: 20px; 
-        margin: 0;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    .app-container { 
-        background: white; 
-        width: 100%; 
-        max-width: 650px; 
-        border-radius: 20px; /* Lebih rounded agar modern */
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        overflow: hidden; 
-        margin-top: 20px; 
-        display: flex; 
-        flex-direction: column;
-    }
-
-    /* TIPOGRAFI HEADER */
-    .header h1 {
-        font-size: 1.75rem;
-        font-weight: 800;
-        letter-spacing: -0.025em;
-        margin: 0;
-    }
-
-    /* KONTEN MATERI */
-    .teks-materi { 
-        background: #ffffff; 
-        padding: 30px; 
-        border-radius: 12px; 
-        border: 1px solid #f1f5f9; 
-        height: 480px; 
-        overflow-y: auto; 
-        text-align: left; /* Aligment kiri lebih enak dibaca untuk materi panjang */
-        line-height: 1.8; /* Jarak baris yang lega */
-        color: var(--warna-teks-lembut);
-    }
-
-    .teks-materi h2 {
-        font-size: 1.5rem;
-        color: var(--warna-teks-utama);
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-    }
-
-    .teks-materi h3 {
-        font-size: 1.2rem;
-        color: var(--warna-utama);
-        font-weight: 600;
-        margin-top: 1.5rem;
-    }
-
-    /* TABEL PROFESIONAL */
-    table { 
-        width: 100%; 
-        border-collapse: separate; 
-        border-spacing: 0;
-        margin: 20px 0; 
-        font-size: 0.95rem; 
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    th, td { 
-        padding: 14px; 
-        border-bottom: 1px solid #e2e8f0; 
-    }
-
-    th { 
-        background: #f8fafc; 
-        font-weight: 600;
-        color: var(--warna-teks-utama);
-        text-transform: uppercase;
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-    }
-
-    /* TOMBOL OPSI KUIS */
-    .btn-opsi { 
-        background: #fff; 
-        border: 1px solid #e2e8f0; 
-        padding: 16px 20px; 
-        border-radius: 12px; 
-        font-size: 1rem;
-        color: var(--warna-teks-utama);
-        margin-bottom: 12px; 
-        transition: all 0.2s ease;
-    }
-
-    .btn-opsi:hover {
-        border-color: var(--warna-utama);
-        background: #fff1f2;
-    }
-
-    .btn-opsi.terpilih { 
-        background: var(--warna-utama); 
-        border-color: var(--warna-utama); 
-        color: white; 
-        box-shadow: 0 4px 6px -1px rgba(225, 29, 72, 0.3);
-    }
-
-    /* FOOTER */
-    .footer { 
-        padding: 25px; 
-        text-align: center; 
-        font-size: 0.85rem; 
-        color: #94a3b8; 
-        background: #f8fafc;
-        border-top: 1px solid #e2e8f0;
-    }
-</style>
         /* Layout Utama */
         .app-container { 
             background: white; 
             width: 100%; 
             max-width: 650px; 
-            border-radius: 16px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            border-radius: 20px; 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             overflow: hidden; 
             margin-top: 20px; 
             display: flex; 
             flex-direction: column;
         }
 
-        /* Header */
+        /* Header & Navigation */
         .header { 
             background: var(--warna-utama); 
             color: white; 
             padding: 50px 20px 30px; 
             text-align: center; 
             position: relative; 
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin: 0;
         }
 
         .btn-header { 
@@ -197,20 +74,22 @@
             color: white; 
             border: 1px solid rgba(255, 255, 255, 0.4); 
             background: rgba(255, 255, 255, 0.15); 
+            transition: 0.3s;
         }
 
+        .btn-header:hover { background: rgba(255, 255, 255, 0.3); }
         .home-pos { left: 15px; } 
         .logout-pos { right: 15px; }
 
         /* Konten */
-        .content { padding: 25px 20px; }
+        .content { padding: 30px 25px; }
 
         .mentor-box { 
             display: flex; 
             gap: 15px; 
             background: var(--latar-mentor); 
-            padding: 15px; 
-            border-radius: 12px; 
+            padding: 20px; 
+            border-radius: 16px; 
             margin-bottom: 25px; 
             border-left: 5px solid var(--warna-utama); 
             align-items: center; 
@@ -223,43 +102,81 @@
             overflow: hidden; 
             border: 2px solid var(--warna-utama); 
             background: white; 
+            flex-shrink: 0;
         }
 
+        /* Tipografi Materi */
         .teks-materi { 
-            background: #f9fafb; 
-            padding: 25px; 
-            border-radius: 12px; 
-            border: 1px solid #e5e7eb; 
-            height: 450px; 
+            background: #ffffff; 
+            padding: 10px 5px; 
+            height: 480px; 
             overflow-y: auto; 
-            text-align: justify; 
-            line-height: 1.7; 
+            line-height: 1.8; 
+            color: var(--warna-teks-lembut);
+            font-size: 1.05rem;
         }
 
-        /* Tabel & List di Materi */
-        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background: #f3f4f6; }
+        .teks-materi h2 {
+            font-size: 1.6rem;
+            color: var(--warna-teks-utama);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .teks-materi h3 {
+            font-size: 1.25rem;
+            color: var(--warna-utama);
+            font-weight: 600;
+            margin-top: 1.8rem;
+        }
+
+        /* Tabel Profesional */
+        table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0;
+            margin: 20px 0; 
+            font-size: 0.95rem; 
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td { padding: 16px; border-bottom: 1px solid #e2e8f0; text-align: left; }
+        th { 
+            background: #f8fafc; 
+            font-weight: 600; 
+            color: var(--warna-teks-utama); 
+            text-transform: uppercase; 
+            font-size: 0.75rem; 
+            letter-spacing: 0.05em;
+        }
+
         .highlight { color: var(--warna-utama); font-weight: bold; }
 
-        /* Tombol & Aksi */
+        /* Tombol Opsi Kuis */
         .btn-opsi { 
             background: white; 
-            border: 2px solid #D1D5DB; 
-            padding: 15px; 
-            border-radius: 8px; 
+            border: 1.5px solid #e2e8f0; 
+            padding: 18px 20px; 
+            border-radius: 12px; 
             text-align: left; 
             width: 100%; 
-            margin-bottom: 10px; 
+            margin-bottom: 12px; 
             cursor: pointer; 
-            transition: 0.2s;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            color: var(--warna-teks-utama);
         }
 
+        .btn-opsi:hover { border-color: var(--warna-utama); background: #fff1f2; }
+
         .btn-opsi.terpilih { 
-            background: var(--latar-mentor); 
+            background: var(--warna-utama); 
             border-color: var(--warna-utama); 
-            font-weight: bold; 
-            color: var(--warna-utama); 
+            color: white; 
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.25);
         }
 
         .btn-action { 
@@ -267,34 +184,47 @@
             background: var(--warna-utama); 
             color: white; 
             border: none; 
-            padding: 15px; 
-            border-radius: 8px; 
+            padding: 18px; 
+            border-radius: 12px; 
             font-weight: bold; 
+            font-size: 1rem;
             cursor: pointer; 
-            margin-top: 10px; 
+            margin-top: 15px; 
+            transition: 0.3s;
         }
+
+        .btn-action:hover { background: var(--warna-merah-hover); transform: translateY(-1px); }
 
         .pdf-box { 
             background: #FFF1F2; 
-            padding: 15px; 
+            padding: 20px; 
             border: 1px dashed var(--warna-utama); 
-            border-radius: 12px; 
+            border-radius: 16px; 
             text-align: center; 
-            margin: 15px 0; 
+            margin: 25px 0; 
         }
 
         .btn-pdf { 
             background: var(--warna-merah); 
             color: white; 
             text-decoration: none; 
-            padding: 10px 20px; 
-            border-radius: 8px; 
+            padding: 12px 24px; 
+            border-radius: 10px; 
             font-weight: bold; 
             display: inline-block; 
+            margin-top: 10px;
         }
 
         .area-konten { display: none; }
-        .footer { padding: 20px; text-align: center; font-size: 0.8rem; color: #666; background: #eee; }
+
+        .footer { 
+            padding: 25px; 
+            text-align: center; 
+            font-size: 0.85rem; 
+            color: #94a3b8; 
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
     </style>
 </head>
 <body>
@@ -311,13 +241,13 @@
                 <div style="text-align:center">
                     <img src="images/pak-cokro.png" style="width:110px; border-radius:50%; border:3px solid var(--warna-utama); margin-bottom:15px;">
                     <h2>Halo, Saya Pak Agus</h2>
-                    <p>Silakan pilih identitasmu untuk mulai belajar Berpikir Komputasional.</p>
+                    <p style="color: var(--warna-teks-lembut)">Silakan pilih identitasmu untuk mulai belajar Berpikir Komputasional.</p>
                     
-                    <select id="pilih-kelas" style="width:100%; padding:15px; border-radius:12px; margin-bottom:10px;" onchange="filterNama()">
+                    <select id="pilih-kelas" style="width:100%; padding:15px; border-radius:12px; border: 1px solid #e2e8f0; margin-bottom:10px;" onchange="filterNama()">
                         <option value="">-- Pilih Kelas --</option>
                     </select>
                     
-                    <select id="pilih-nama" style="width:100%; padding:15px; border-radius:12px; margin-bottom:15px;" disabled>
+                    <select id="pilih-nama" style="width:100%; padding:15px; border-radius:12px; border: 1px solid #e2e8f0; margin-bottom:15px;" disabled>
                         <option value="">-- Pilih Nama --</option>
                     </select>
                     
@@ -329,19 +259,19 @@
                 <div class="mentor-box">
                     <div class="mentor-avatar"><img src="images/pak-cokro.png" style="width:100%"></div>
                     <div class="mentor-message">
-                        <b style="color:var(--warna-utama); display:block">Pak Agus :</b>
-                        <span id="pesan-mentor">Semangat belajar!</span>
+                        <b style="color:var(--warna-utama); display:block; font-size: 0.9rem; text-transform: uppercase;">Pak Agus Suyatno:</b>
+                        <span id="pesan-mentor" style="font-weight: 500;">Semangat belajar!</span>
                     </div>
                 </div>
             </div>
 
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
-                    <h2 style="text-align: center;">Ringkasan Materi Berpikir Komputasional (CT)</h2>
-                    <hr>
+                    <h2 style="text-align: center;">Berpikir Komputasional</h2>
+                    <p>Berpikir komputasional adalah metode pemecahan masalah dengan menerapkan teknik yang digunakan oleh <em>software engineer</em> dalam menulis algoritma.</p>
+                    
                     <section>
                         <h3>1. Empat Fondasi CT</h3>
-                        <p>Berpikir komputasional adalah metode pemecahan masalah dengan menerapkan teknik yang digunakan oleh <em>software engineer</em>.</p>
                         <ul>
                             <li><strong>Dekomposisi:</strong> Memecah masalah besar menjadi bagian kecil.</li>
                             <li><strong>Abstraksi:</strong> Fokus pada informasi penting saja.</li>
@@ -357,18 +287,18 @@
                                 <tr>
                                     <th>Metode</th>
                                     <th>Cara Kerja</th>
-                                    <th>Syarat</th>
+                                    <th>Syarat Utama</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td><strong>Sequential</strong></td>
-                                    <td>Cek satu per satu.</td>
+                                    <td>Cek data satu per satu.</td>
                                     <td>Data Acak/Urut.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Binary</strong></td>
-                                    <td>Bagi dua (tengah).</td>
+                                    <td>Bagi dua di nilai tengah.</td>
                                     <td><span class="highlight">Wajib Terurut</span></td>
                                 </tr>
                             </tbody>
@@ -377,30 +307,32 @@
 
                     <section>
                         <h3>3. Struktur Data</h3>
-                        <p><strong>Stack (LIFO):</strong> Terakhir masuk, pertama keluar (Contoh: Undo, Tumpukan piring).</p>
-                        <p><strong>Queue (FIFO):</strong> Pertama masuk, pertama keluar (Contoh: Antrean tiket, Print).</p>
+                        <p><strong>Stack (LIFO):</strong> Terakhir masuk, pertama keluar (Contoh: Fitur <em>Undo</em>, Tumpukan piring).</p>
+                        <p><strong>Queue (FIFO):</strong> Pertama masuk, pertama keluar (Contoh: Antrean tiket, Antrean <em>Print</em>).</p>
                     </section>
 
                     <div class="pdf-box">
-                        <p style="font-size:0.9rem; font-weight:bold">📖 Ingin membaca naskah materi lengkap?</p>
-                        <a href="https://drive.google.com/file/d/1JnEyi4GkRpT8bV6PO1mQIMtVnX_lQJRB/view?usp=sharing" target="_blank" class="btn-pdf">📥 Buka PDF</a>
+                        <p style="font-size:1rem; font-weight:bold; color: var(--warna-teks-utama)">📖 Butuh materi lebih mendalam?</p>
+                        <a href="https://drive.google.com/file/d/1JnEyi4GkRpT8bV6PO1mQIMtVnX_lQJRB/view?usp=sharing" target="_blank" class="btn-pdf">📥 Buka Naskah PDF</a>
                     </div>
                 </div>
                 <button class="btn-action" onclick="mulaiKuis()">Logika Siap, Mulai Kuis!</button>
             </div>
 
             <div id="area-kuis" class="area-konten">
-                <h4 id="indikator">Soal 1</h4>
-                <h2 id="teks-soal" style="font-size:1.1rem; min-height:60px">Memuat soal...</h2>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                    <span id="indikator" style="font-weight:700; color:var(--warna-utama)">Soal 1</span>
+                </div>
+                <h2 id="teks-soal" style="font-size:1.2rem; line-height:1.5; min-height:60px; margin-bottom:20px;">Memuat soal...</h2>
                 <div id="container-opsi"></div>
-                <button id="btn-lanjut" class="btn-action" onclick="simpanJawaban()" disabled style="opacity:0.5">Pilih Jawaban Dulu</button>
+                <button id="btn-lanjut" class="btn-action" onclick="simpanJawaban()" disabled style="opacity:0.5">Pilih Jawaban Terlebih Dahulu</button>
             </div>
 
             <div id="area-hasil" class="area-konten">
-                <div id="res-nama" style="font-size:1.2rem; font-weight:800; text-align:center; text-transform:uppercase"></div>
-                <div style="font-size:4.5rem; font-weight:bold; text-align:center; color:var(--warna-utama)" id="res-skor">0</div>
-                <p id="res-status" style="text-align:center; font-weight:bold"></p>
-                <button class="btn-action" onclick="location.href='index.html'">✅ Selesai</button>
+                <div id="res-nama" style="font-size:1.2rem; font-weight:800; text-align:center; text-transform:uppercase; color: var(--warna-teks-lembut)"></div>
+                <div style="font-size:5rem; font-weight:900; text-align:center; color:var(--warna-utama); margin: 10px 0;" id="res-skor">0</div>
+                <p id="res-status" style="text-align:center; font-size: 1.1rem; font-weight:bold"></p>
+                <button class="btn-action" onclick="location.href='index.html'">✅ Selesai & Kembali</button>
             </div>
         </div>
 
@@ -428,9 +360,11 @@
                 if(p.f==='materi') showMateri(); else muatSoal(); 
             } else { 
                 const sk = document.getElementById('pilih-kelas'); 
-                [...new Set(SISWA_BARU.map(x=>x.kelas))].sort().forEach(k=>{
-                    let o=document.createElement('option'); o.value=k; o.innerText=k; sk.appendChild(o);
-                }); 
+                if(typeof SISWA_BARU !== 'undefined') {
+                    [...new Set(SISWA_BARU.map(x=>x.kelas))].sort().forEach(k=>{
+                        let o=document.createElement('option'); o.value=k; o.innerText=k; sk.appendChild(o);
+                    });
+                }
             }
         };
 
@@ -462,9 +396,11 @@
         }
 
         function mulaiKuis() { 
-            dS=[...daftarSoalAsli].sort(()=>Math.random()-0.5); 
-            idx=0; benar=0; 
-            muatSoal(); 
+            if(typeof daftarSoalAsli !== 'undefined') {
+                dS=[...daftarSoalAsli].sort(()=>Math.random()-0.5); 
+                idx=0; benar=0; 
+                muatSoal(); 
+            }
         }
 
         function muatSoal() {
@@ -472,11 +408,12 @@
             document.getElementById('area-kuis').style.display='block'; 
             terpilih=null; 
             let q=dS[idx];
-            document.getElementById('indikator').innerText=`Soal ${idx+1}/${dS.length}`; 
+            document.getElementById('indikator').innerText=`Soal ${idx+1} dari ${dS.length}`; 
             document.getElementById('teks-soal').innerText=q.p;
             
             const bl=document.getElementById('btn-lanjut'); 
             bl.disabled=true; bl.style.opacity="0.5";
+            bl.innerText = "Pilih Jawaban Terlebih Dahulu";
             
             const co=document.getElementById('container-opsi'); 
             co.innerHTML='';
@@ -489,6 +426,7 @@
                     b.classList.add('terpilih'); 
                     terpilih=i; 
                     bl.disabled=false; bl.style.opacity="1";
+                    bl.innerText = "Simpan & Lanjut";
                 }; 
                 co.appendChild(b); 
             }); 
@@ -507,9 +445,8 @@
             let skor = Math.round((benar/dS.length)*100);
             document.getElementById('res-nama').innerText=nS; 
             document.getElementById('res-skor').innerText=skor; 
-            document.getElementById('res-status').innerText=skor>=100?"LOGIKA TUNTAS":"BELUM TUNTAS";
+            document.getElementById('res-status').innerText=skor>=100?"LOGIKA TUNTAS (SEMPURNA)":"BELUM TUNTAS";
             
-            // Integrasi Google Sheets (Optional)
             fetch("https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec?"+new URLSearchParams({namaSiswa:nS, kelasSiswa:kS, modul:"BK", skor:skor}),{mode:'no-cors'}); 
             localStorage.removeItem('pro_bk');
         }
@@ -519,7 +456,7 @@
         }
 
         function logoutSiswa() { 
-            if(confirm("Hapus progres?")) { 
+            if(confirm("Apakah Anda yakin ingin keluar dan menghapus progres belajar?")) { 
                 localStorage.removeItem('pro_bk'); 
                 location.reload(); 
             } 
