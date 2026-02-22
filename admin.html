@@ -12,24 +12,23 @@
         }
         * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: var(--bg); color: var(--teks); margin: 0; padding: 20px; }
-        
         .container { background: white; max-width: 1300px; margin: auto; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); padding: 30px; }
         
         /* Login Box */
         .login-box { text-align: center; padding: 50px 20px; }
         .img-admin { width: 100px; border-radius: 50%; border: 3px solid var(--aksen); margin-bottom: 15px; }
+        input[type="password"] { padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; width: 250px; }
         
         /* Dashboard */
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px; }
-        
         .filter-bar { background: #f1f5f9; padding: 20px; border-radius: 12px; display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; align-items: flex-end; }
         .filter-group { display: flex; flex-direction: column; gap: 5px; }
-        select, input { padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.9rem; }
+        select { padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.9rem; background: white; }
         
         /* Table */
         .table-area { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th { background: var(--utama); color: white; padding: 12px; text-align: left; position: sticky; top: 0; }
+        th { background: var(--utama); color: white; padding: 12px; text-align: left; }
         td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; }
         tr:hover { background: #f8fafc; }
         
@@ -128,6 +127,7 @@
 
 <script>
     const SECRET_KEY = "ADMIN2026";
+    // MASUKKAN URL HASIL DEPLOY APPS SCRIPT ANDA DI BAWAH INI
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec"; 
     
     let dbData = [];
@@ -138,7 +138,7 @@
             document.getElementById('dashboard-section').style.display = 'block';
             fetchData();
         } else {
-            alert("Kode Salah!");
+            alert("Kode Akses Salah!");
         }
     }
 
@@ -147,12 +147,17 @@
         body.innerHTML = "<tr><td colspan='9' style='text-align:center;'>⏳ Mengambil data dari Cloud...</td></tr>";
         
         try {
-            const response = await fetch(WEB_APP_URL + "?action=readData");
+            // Menambahkan redirect: 'follow' untuk menangani URL Google Script
+            const response = await fetch(WEB_APP_URL + "?action=readData", {
+                method: 'GET',
+                redirect: 'follow'
+            });
             const json = await response.json();
-            dbData = json.slice(1); // Lewati header spreadsheet
+            dbData = json.slice(1); // Menghapus header baris pertama
             applyFilters();
         } catch (e) {
-            body.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red;'>❌ Gagal memuat data. Periksa koneksi atau izin Apps Script.</td></tr>";
+            console.error(e);
+            body.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red;'>❌ Gagal memuat data. Periksa koneksi atau Deploy Apps Script Anda (Setel akses ke 'Anyone').</td></tr>";
         }
     }
 
@@ -191,7 +196,7 @@
                     <td>${r[3]}</td>
                     <td style="font-weight:bold">${r[4]}</td>
                     <td>${r[5]}x</td>
-                    <td>${r[6]}</td>
+                    <td>Ke-${r[6]}</td>
                     <td><span class="badge ${statusClass}">${r[7]}</span></td>
                     <td style="font-size:0.7rem; color:#94a3b8; max-width:150px; overflow:hidden;">${r[8]}</td>
                 </tr>
