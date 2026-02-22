@@ -18,13 +18,30 @@
         
         .app-container { background: white; width: 100%; max-width: 1200px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
-        .header { background: var(--warna-utama); color: white; padding: 35px 20px; text-align: center; }
-        .header h1 { margin: 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; }
-        .header p { margin: 10px 0 0; font-size: 1rem; opacity: 0.9; }
+        /* HEADER DENGAN LOGO DI KIRI */
+        .header { 
+            background: var(--warna-utama); 
+            color: white; 
+            padding: 35px 20px; 
+            text-align: center; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 25px; 
+        }
+        .header-logo {
+            width: 85px;
+            height: auto;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        .header-text { text-align: left; }
+        .header h1 { margin: 0; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
+        .header p { margin: 10px 0 0; font-size: 1rem; opacity: 0.9; line-height: 1.4; }
         
         .content { padding: 30px 20px; flex-grow: 1; }
         
-        /* MODIFIKASI KOTAK MENTOR PAK AGUS */
+        /* MENTOR BOX PAK AGUS */
         .mentor-box { 
             display: flex; 
             gap: 20px; 
@@ -70,6 +87,13 @@
             .grid-modul { grid-template-columns: repeat(4, 1fr); }
         }
 
+        /* RESPONSIVE HEADER UNTUK HP */
+        @media (max-width: 650px) {
+            .header { flex-direction: column; text-align: center; gap: 15px; }
+            .header-text { text-align: center; }
+            .header-logo { width: 70px; }
+        }
+
         .card {
             background: white;
             border: 1px solid #E5E7EB;
@@ -105,80 +129,82 @@
 
     <div class="app-container">
         <div class="header">
-            <h1>ELANG DIGITAL</h1>
-            <p>Edu-Learning Analitik & Guard Digital.<br/>
-                Inovasi Micro-Learning Informatika - SMA Negeri 1 Muncar</p>
+            <img src="tut-wuri.jpg" alt="Logo Tut Wuri Handayani" class="header-logo">
+            <div class="header-text">
+                <h1>ELANG DIGITAL</h1>
+                <p>Edu-Learning Analitik & Guard Digital.<br/>
+                    Inovasi Micro-Learning Informatika - SMA Negeri 1 Muncar</p>
+            </div>
         </div>
 
         <div class="content">
             <div class="mentor-box">
                 <div class="mentor-avatar">
-                    <img src="images/Pak-Agus.png" alt="Pak AGUS">
+                    <img src="images/pak-cokro.png" alt="Pak Cokro">
                 </div>
                 <div class="mentor-message">
-                    <span class="mentor-name">Pak Agus : </span>
+                    <span class="mentor-name">Pak Cokro : </span>
                     <span id="pesan-mentor">Selamat datang di <b>Elang Digital</b>! Saya akan menemanimu menuntaskan 8 elemen Informatika. Pilih modul di bawah ini, dan ingat: kejujuran adalah kunci ketuntasan sejati!</span>
                 </div>
             </div>
-<div class="grid-modul">
+
+            <div class="grid-modul">
                 <a href="modul-bk.html" class="card">
                     <div class="card-elemen">Elemen BK</div>
                     <h3 class="card-judul">Berpikir Komputasional</h3>
-                    <p class="card-deskripsi">Algoritma pencarian, pengurutan, stack, dan queue.</p>
+                    <p class="card-deskripsi">Algoritma pencarian, pengurutan, tumpukan (stack), dan antrean (queue).</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
-            
                 <a href="modul-tik.html" class="card">
                     <div class="card-elemen">Elemen TIK</div>
-                    <h3 class="card-judul">Teknologi Informasi dan Komunikasi - Aplikasi Perkantoran</h3>
-                    <p class="card-deskripsi">Integrasi pengolah kata, angka, presentasi, dan fitur Mail Merge.</p>
+                    <h3 class="card-judul">Teknologi Informasi dan Komunikasi</h3>
+                    <p class="card-deskripsi">Integrasi aplikasi perkantoran dan fitur otomatisasi dokumen.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-sk.html" class="card">
                     <div class="card-elemen">Elemen SK</div>
                     <h3 class="card-judul">Sistem Komputer</h3>
-                    <p class="card-deskripsi">Hardware, Software, Sistem Operasi, dan Interaksi Manusia Komputer.</p>
+                    <p class="card-deskripsi">Komponen hardware, software, dan interaksi manusia-komputer.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-jki.html" class="card">
                     <div class="card-elemen">Elemen JKI</div>
-                    <h3 class="card-judul">Jaringan Komputer</h3>
-                    <p class="card-deskripsi">Konektivitas internet, jaringan lokal, dan keamanan data.</p>
+                    <h3 class="card-judul">Jaringan Komputer & Internet</h3>
+                    <p class="card-deskripsi">Topologi jaringan, protokol internet, dan keamanan data nirkabel.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-ad.html" class="card">
                     <div class="card-elemen">Elemen AD</div>
                     <h3 class="card-judul">Analisis Data</h3>
-                    <p class="card-deskripsi">Siklus data, pengolahan angka, dan visualisasi informasi.</p>
+                    <p class="card-deskripsi">Siklus pengolahan data dan teknik visualisasi informasi yang efektif.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-ap.html" class="card">
                     <div class="card-elemen">Elemen AP</div>
                     <h3 class="card-judul">Algoritma & Pemrograman</h3>
-                    <p class="card-deskripsi">Coding dasar, variabel, struktur kontrol, dan array.</p>
+                    <p class="card-deskripsi">Logika pemrograman dasar menggunakan struktur kontrol dan variabel.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-dsi.html" class="card">
                     <div class="card-elemen">Elemen DSI</div>
-                    <h3 class="card-judul">Dampak Sosial TIK</h3>
-                    <p class="card-deskripsi">HAKI, UU ITE, sejarah informatika, dan peluang karier IT.</p>
+                    <h3 class="card-judul">Dampak Sosial Informatika</h3>
+                    <p class="card-deskripsi">Mempelajari etika digital, hukum ITE, dan sejarah tokoh informatika.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
 
                 <a href="modul-plb.html" class="card">
                     <div class="card-elemen">Elemen PLB</div>
                     <h3 class="card-judul">Praktik Lintas Bidang</h3>
-                    <p class="card-deskripsi">Kolaborasi proyek nyata menyelesaikan masalah masyarakat dengan TIK.</p>
+                    <p class="card-deskripsi">Kolaborasi tim untuk memecahkan masalah nyata dengan solusi TIK.</p>
                     <div class="card-status status-aktif">▶️ Mulai Belajar</div>
                 </a>
- 
-           </div>
+            </div>
         </div>
 
         <div class="footer">
@@ -186,6 +212,5 @@
             SMA Negeri 1 Muncar &copy; 2026
         </div>
     </div>
-
 </body>
 </html>
