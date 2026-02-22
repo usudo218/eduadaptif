@@ -142,24 +142,33 @@
         }
     }
 
-    async function fetchData() {
-        const body = document.getElementById('table-body');
-        body.innerHTML = "<tr><td colspan='9' style='text-align:center;'>⏳ Mengambil data dari Cloud...</td></tr>";
-        
-        try {
-            // Menambahkan redirect: 'follow' untuk menangani URL Google Script
-            const response = await fetch(WEB_APP_URL + "?action=readData", {
-                method: 'GET',
-                redirect: 'follow'
-            });
-            const json = await response.json();
-            dbData = json.slice(1); // Menghapus header baris pertama
-            applyFilters();
-        } catch (e) {
-            console.error(e);
-            body.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red;'>❌ Gagal memuat data. Periksa koneksi atau Deploy Apps Script Anda (Setel akses ke 'Anyone').</td></tr>";
-        }
+  async function fetchData() {
+    const body = document.getElementById('table-body');
+    body.innerHTML = "<tr><td colspan='9' style='text-align:center;'>⏳ Mengambil data dari Cloud...</td></tr>";
+    
+    // Tambahkan parameter unik agar browser tidak mengambil data lama (cache)
+    const fetchUrl = WEB_APP_URL + "?action=readData&t=" + new Date().getTime();
+
+    try {
+        const response = await fetch(fetchUrl, {
+            method: 'GET',
+            mode: 'cors', // Pastikan mode CORS aktif
+            redirect: 'follow' // WAJIB: Google Script melakukan redirect ke URL lain
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const json = await response.json();
+        dbData = json.slice(1); // Potong baris pertama (header spreadsheet)
+        applyFilters();
+    } catch (e) {
+        console.error("Detail Error:", e);
+        body.innerHTML = `<tr><td colspan='9' style='text-align:center; color:red;'>
+            ❌ Gagal memuat data.<br>
+            <small>Solusi: Pastikan URL di WEB_APP_URL sudah yang terbaru dari hasil Deploy.</small>
+        </td></tr>`;
     }
+}
 
     function applyFilters() {
         const kls = document.getElementById('filt-kelas').value;
@@ -212,3 +221,4 @@
 </script>
 </body>
 </html>
+
