@@ -13,132 +13,256 @@
             --warna-teks: #1F2937;  
             --latar-mentor: #FFE4E6; 
         }
-        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: var(--warna-latar); display: flex; justify-content: center; padding: 20px; }
-        .app-container { background: white; width: 100%; max-width: 650px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
-        .header { background: var(--warna-utama); color: white; padding: 50px 20px 30px; text-align: center; position: relative; }
-        .btn-header { position: absolute; top: 15px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; height: 36px; width: 90px; border-radius: 8px; text-decoration: none; color: white; border: 1px solid rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.15); }
-        .home-pos { left: 15px; } .logout-pos { right: 15px; }
+
+        * { 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', sans-serif; 
+        }
+
+        body { 
+            background-color: var(--warna-latar); 
+            display: flex; 
+            justify-content: center; 
+            padding: 20px; 
+            margin: 0;
+        }
+
+        /* Layout Utama */
+        .app-container { 
+            background: white; 
+            width: 100%; 
+            max-width: 650px; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            overflow: hidden; 
+            margin-top: 20px; 
+            display: flex; 
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header { 
+            background: var(--warna-utama); 
+            color: white; 
+            padding: 50px 20px 30px; 
+            text-align: center; 
+            position: relative; 
+        }
+
+        .btn-header { 
+            position: absolute; 
+            top: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 0.8rem; 
+            font-weight: bold; 
+            height: 36px; 
+            width: 90px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            color: white; 
+            border: 1px solid rgba(255, 255, 255, 0.4); 
+            background: rgba(255, 255, 255, 0.15); 
+        }
+
+        .home-pos { left: 15px; } 
+        .logout-pos { right: 15px; }
+
+        /* Konten */
         .content { padding: 25px 20px; }
-        .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); align-items: center; }
-        .mentor-avatar { width: 65px; height: 65px; border-radius: 50%; overflow: hidden; border: 2px solid var(--warna-utama); background: white; }
-        .teks-materi { background: #f9fafb; padding: 25px; border-radius: 12px; border: 1px solid #e5e7eb; height: 450px; overflow-y: auto; text-align: justify; line-height: 1.7; }
-        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; width: 100%; margin-bottom: 10px; cursor: pointer; }
-        .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); font-weight: bold; color: var(--warna-utama); }
-        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .pdf-box { background: #FFF1F2; padding: 15px; border: 1px dashed var(--warna-utama); border-radius: 12px; text-align: center; margin: 15px 0; }
-        .btn-pdf { background: var(--warna-merah); color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; display: inline-block; }
+
+        .mentor-box { 
+            display: flex; 
+            gap: 15px; 
+            background: var(--latar-mentor); 
+            padding: 15px; 
+            border-radius: 12px; 
+            margin-bottom: 25px; 
+            border-left: 5px solid var(--warna-utama); 
+            align-items: center; 
+        }
+
+        .mentor-avatar { 
+            width: 65px; 
+            height: 65px; 
+            border-radius: 50%; 
+            overflow: hidden; 
+            border: 2px solid var(--warna-utama); 
+            background: white; 
+        }
+
+        .teks-materi { 
+            background: #f9fafb; 
+            padding: 25px; 
+            border-radius: 12px; 
+            border: 1px solid #e5e7eb; 
+            height: 450px; 
+            overflow-y: auto; 
+            text-align: justify; 
+            line-height: 1.7; 
+        }
+
+        /* Tabel & List di Materi */
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #f3f4f6; }
+        .highlight { color: var(--warna-utama); font-weight: bold; }
+
+        /* Tombol & Aksi */
+        .btn-opsi { 
+            background: white; 
+            border: 2px solid #D1D5DB; 
+            padding: 15px; 
+            border-radius: 8px; 
+            text-align: left; 
+            width: 100%; 
+            margin-bottom: 10px; 
+            cursor: pointer; 
+            transition: 0.2s;
+        }
+
+        .btn-opsi.terpilih { 
+            background: var(--latar-mentor); 
+            border-color: var(--warna-utama); 
+            font-weight: bold; 
+            color: var(--warna-utama); 
+        }
+
+        .btn-action { 
+            width: 100%; 
+            background: var(--warna-utama); 
+            color: white; 
+            border: none; 
+            padding: 15px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 10px; 
+        }
+
+        .pdf-box { 
+            background: #FFF1F2; 
+            padding: 15px; 
+            border: 1px dashed var(--warna-utama); 
+            border-radius: 12px; 
+            text-align: center; 
+            margin: 15px 0; 
+        }
+
+        .btn-pdf { 
+            background: var(--warna-merah); 
+            color: white; 
+            text-decoration: none; 
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            display: inline-block; 
+        }
+
         .area-konten { display: none; }
+        .footer { padding: 20px; text-align: center; font-size: 0.8rem; color: #666; background: #eee; }
     </style>
 </head>
 <body>
+
     <div class="app-container">
         <div class="header">
             <a href="index.html" class="btn-header home-pos">🏠 Home</a>
             <button id="btn-logout" class="btn-header logout-pos" onclick="logoutSiswa()" style="display: none;">🚪 Logout</button>
             <h1>Modul BK</h1>
         </div>
+
         <div class="content">
             <div id="area-login" class="area-konten" style="display:block">
                 <div style="text-align:center">
                     <img src="images/pak-cokro.png" style="width:110px; border-radius:50%; border:3px solid var(--warna-utama); margin-bottom:15px;">
                     <h2>Halo, Saya Pak Agus</h2>
                     <p>Silakan pilih identitasmu untuk mulai belajar Berpikir Komputasional.</p>
-                    <select id="pilih-kelas" style="width:100%; padding:15px; border-radius:12px; margin-bottom:10px;" onchange="filterNama()"><option value="">-- Pilih Kelas --</option></select>
-                    <select id="pilih-nama" style="width:100%; padding:15px; border-radius:12px; margin-bottom:15px;" disabled><option value="">-- Pilih Nama --</option></select>
+                    
+                    <select id="pilih-kelas" style="width:100%; padding:15px; border-radius:12px; margin-bottom:10px;" onchange="filterNama()">
+                        <option value="">-- Pilih Kelas --</option>
+                    </select>
+                    
+                    <select id="pilih-nama" style="width:100%; padding:15px; border-radius:12px; margin-bottom:15px;" disabled>
+                        <option value="">-- Pilih Nama --</option>
+                    </select>
+                    
                     <button class="btn-action" onclick="simpanNamaSiswa()">🧠 Masuk Modul</button>
                 </div>
             </div>
+
             <div id="area-mentor-global" style="display: none;">
                 <div class="mentor-box">
                     <div class="mentor-avatar"><img src="images/pak-cokro.png" style="width:100%"></div>
-                    <div class="mentor-message"><b style="color:var(--warna-utama); display:block">Pak Agus :</b><span id="pesan-mentor">Semangat belajar!</span></div>
+                    <div class="mentor-message">
+                        <b style="color:var(--warna-utama); display:block">Pak Agus :</b>
+                        <span id="pesan-mentor">Semangat belajar!</span>
+                    </div>
                 </div>
             </div>
+
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
-                    <h1>Ringkasan Materi Berpikir Komputasional (CT)</h1>
+                    <h2 style="text-align: center;">Ringkasan Materi Berpikir Komputasional (CT)</h2>
+                    <hr>
+                    <section>
+                        <h3>1. Empat Fondasi CT</h3>
+                        <p>Berpikir komputasional adalah metode pemecahan masalah dengan menerapkan teknik yang digunakan oleh <em>software engineer</em>.</p>
+                        <ul>
+                            <li><strong>Dekomposisi:</strong> Memecah masalah besar menjadi bagian kecil.</li>
+                            <li><strong>Abstraksi:</strong> Fokus pada informasi penting saja.</li>
+                            <li><strong>Pengenalan Pola:</strong> Mencari kesamaan dalam masalah.</li>
+                            <li><strong>Algoritma:</strong> Menyusun langkah instruksi yang urut.</li>
+                        </ul>
+                    </section>
 
-    <section>
-        <h2>1. Empat Fondasi Berpikir Komputasional (CT)</h2>
-        <p>Berpikir komputasional adalah metode pemecahan masalah dengan menerapkan teknik yang digunakan oleh <em>software engineer</em> dalam menulis algoritma. Perlu diingat bahwa CT adalah cara berpikir, bukan sekadar menulis kode pemrograman (coding).</p>
-        <ul>
-            <li><strong>Dekomposisi:</strong> Memecah masalah besar dan kompleks menjadi bagian-bagian kecil yang lebih sederhana agar lebih mudah dikelola.</li>
-            <li><strong>Abstraksi:</strong> Fokus hanya pada informasi penting dan mengabaikan detail yang tidak relevan.</li>
-            <li><strong>Pengenalan Pola (Pattern Recognition):</strong> Mencari kesamaan atau repetisi dalam masalah-masalah yang ada.</li>
-            <li><strong>Algoritma:</strong> Menyusun langkah-langkah instruksi yang terurut, jelas, dan tidak ambigu untuk menyelesaikan masalah.</li>
-        </ul>
-    </section>
+                    <section>
+                        <h3>2. Algoritma Pencarian (Searching)</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Metode</th>
+                                    <th>Cara Kerja</th>
+                                    <th>Syarat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Sequential</strong></td>
+                                    <td>Cek satu per satu.</td>
+                                    <td>Data Acak/Urut.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Binary</strong></td>
+                                    <td>Bagi dua (tengah).</td>
+                                    <td><span class="highlight">Wajib Terurut</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
 
-    <section>
-        <h2>2. Algoritma Pencarian (Searching)</h2>
-        <p>Pencarian adalah proses menemukan data tertentu di dalam sekumpulan data.</p>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Metode</th>
-                    <th>Cara Kerja</th>
-                    <th>Syarat / Karakteristik</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Sequential / Linear Search</strong></td>
-                    <td>Mengecek data satu per satu dari awal sampai akhir.</td>
-                    <td>Bisa digunakan pada data yang acak.</td>
-                </tr>
-                <tr>
-                    <td><strong>Binary Search</strong></td>
-                    <td>Menebak nilai tengah dan membelah data menjadi dua bagian terus-menerus.</td>
-                    <td><span class="highlight">Wajib terurut (Sorted)</span> agar bisa berjalan.</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+                    <section>
+                        <h3>3. Struktur Data</h3>
+                        <p><strong>Stack (LIFO):</strong> Terakhir masuk, pertama keluar (Contoh: Undo, Tumpukan piring).</p>
+                        <p><strong>Queue (FIFO):</strong> Pertama masuk, pertama keluar (Contoh: Antrean tiket, Print).</p>
+                    </section>
 
-    <section>
-        <h2>3. Algoritma Pengurutan (Sorting)</h2>
-        <p>Sorting adalah proses mengatur data agar tersusun menurut aturan tertentu.</p>
-        <p><strong>Jenis Urutan:</strong></p>
-        <ul>
-            <li><strong>Ascending:</strong> Urutan naik (A-Z atau 1-100).</li>
-            <li><strong>Descending:</strong> Urutan menurun (Z-A atau 100-1).</li>
-        </ul>
-        <p><strong>Metode Bubble Sort:</strong> Algoritma yang membandingkan dua elemen yang berdekatan dan menukarnya jika urutannya salah, hingga elemen terbesar "mengapung" ke posisi akhir seperti gelembung.</p>
-    </section>
-
-    <section>
-        <h2>4. Struktur Data (Stack & Queue)</h2>
-        <p>Struktur data adalah cara menyimpan dan mengatur data di dalam komputer agar dapat digunakan secara efisien.</p>
-
-        <h3>A. Stack (Tumpukan)</h3>
-        <ul>
-            <li><strong>Prinsip:</strong> <span class="highlight">LIFO</span> (<em>Last In, First Out</em>). Data yang terakhir masuk akan menjadi yang pertama keluar.</li>
-            <li><strong>Contoh Dunia Nyata:</strong> Tumpukan piring.</li>
-            <li><strong>Contoh Aplikasi:</strong> Fitur <em>Undo</em> (CTRL+Z) pada Microsoft Word.</li>
-        </ul>
-
-        <h3>B. Queue (Antrean)</h3>
-        <ul>
-            <li><strong>Prinsip:</strong> <span class="highlight">FIFO</span> (<em>First In, First Out</em>). Data yang pertama masuk akan menjadi yang pertama keluar.</li>
-            <li><strong>Contoh Dunia Nyata:</strong> Antrean tiket bioskop.</li>
-            <li><strong>Contoh Aplikasi:</strong> Proses <em>Printing</em> dokumen.</li>
-        </ul>
-    </section>
                     <div class="pdf-box">
                         <p style="font-size:0.9rem; font-weight:bold">📖 Ingin membaca naskah materi lengkap?</p>
-                        <a href="https://drive.google.com/file/d/1JnEyi4GkRpT8bV6PO1mQIMtVnX_lQJRB/view?usp=sharing" target="_blank" class="btn-pdf">📥 Buka Naskah Materi (PDF)</a>
+                        <a href="https://drive.google.com/file/d/1JnEyi4GkRpT8bV6PO1mQIMtVnX_lQJRB/view?usp=sharing" target="_blank" class="btn-pdf">📥 Buka PDF</a>
                     </div>
                 </div>
                 <button class="btn-action" onclick="mulaiKuis()">Logika Siap, Mulai Kuis!</button>
             </div>
+
             <div id="area-kuis" class="area-konten">
                 <h4 id="indikator">Soal 1</h4>
                 <h2 id="teks-soal" style="font-size:1.1rem; min-height:60px">Memuat soal...</h2>
                 <div id="container-opsi"></div>
                 <button id="btn-lanjut" class="btn-action" onclick="simpanJawaban()" disabled style="opacity:0.5">Pilih Jawaban Dulu</button>
             </div>
+
             <div id="area-hasil" class="area-konten">
                 <div id="res-nama" style="font-size:1.2rem; font-weight:800; text-align:center; text-transform:uppercase"></div>
                 <div style="font-size:4.5rem; font-weight:bold; text-align:center; color:var(--warna-utama)" id="res-skor">0</div>
@@ -146,39 +270,127 @@
                 <button class="btn-action" onclick="location.href='index.html'">✅ Selesai</button>
             </div>
         </div>
-        <div class="footer">Design by <b>Agus Suyatno, S.Kom</b><br>&copy; 2026 SMA Negeri 1 Muncar</div>
+
+        <div class="footer">
+            Design by <b>Agus Suyatno, S.Kom</b><br>
+            &copy; 2026 SMA Negeri 1 Muncar
+        </div>
     </div>
-    <script src="soal-bk.js"></script><script src="siswa.js"></script>
+
+    <script src="soal-bk.js"></script>
+    <script src="siswa.js"></script>
     <script>
         let nS="", kS="", dS=[], idx=0, benar=0, terpilih=null;
-        function save(f) { localStorage.setItem('pro_bk', JSON.stringify({n:nS, k:kS, f:f, s:dS, i:idx, b:benar})); }
+
+        const save = (f) => {
+            localStorage.setItem('pro_bk', JSON.stringify({n:nS, k:kS, f:f, s:dS, i:idx, b:benar}));
+        };
+
         window.onload = function() {
             const p = JSON.parse(localStorage.getItem('pro_bk'));
-            if(p) { nS=p.n; kS=p.k; dS=p.s; idx=p.i; benar=p.b; document.getElementById('area-mentor-global').style.display="block"; document.getElementById('btn-logout').style.display="flex"; if(p.f==='materi') showMateri(); else muatSoal(); }
-            else { const sk = document.getElementById('pilih-kelas'); [...new Set(SISWA_BARU.map(x=>x.kelas))].sort().forEach(k=>{let o=document.createElement('option');o.value=k;o.innerText=k;sk.appendChild(o);}); }
+            if(p) { 
+                nS=p.n; kS=p.k; dS=p.s; idx=p.i; benar=p.b; 
+                document.getElementById('area-mentor-global').style.display="block"; 
+                document.getElementById('btn-logout').style.display="flex"; 
+                if(p.f==='materi') showMateri(); else muatSoal(); 
+            } else { 
+                const sk = document.getElementById('pilih-kelas'); 
+                [...new Set(SISWA_BARU.map(x=>x.kelas))].sort().forEach(k=>{
+                    let o=document.createElement('option'); o.value=k; o.innerText=k; sk.appendChild(o);
+                }); 
+            }
         };
+
         function filterNama() {
-            const k = document.getElementById('pilih-kelas').value; const sn = document.getElementById('pilih-nama'); sn.innerHTML='<option value="">-- Pilih Nama --</option>';
-            if(!k) return sn.disabled=true; sn.disabled=false; SISWA_BARU.filter(x=>x.kelas===k).sort((a,b)=>a.nama.localeCompare(b.nama)).forEach(x=>{let o=document.createElement('option');o.value=x.nama;o.innerText=x.nama;sn.appendChild(o);});
+            const k = document.getElementById('pilih-kelas').value; 
+            const sn = document.getElementById('pilih-nama'); 
+            sn.innerHTML='<option value="">-- Pilih Nama --</option>';
+            if(!k) return sn.disabled=true; 
+            sn.disabled=false; 
+            SISWA_BARU.filter(x=>x.kelas===k).sort((a,b)=>a.nama.localeCompare(b.nama)).forEach(x=>{
+                let o=document.createElement('option'); o.value=x.nama; o.innerText=x.nama; sn.appendChild(o);
+            });
         }
-        function simpanNamaSiswa() { nS=document.getElementById('pilih-nama').value; kS=document.getElementById('pilih-kelas').value; if(!nS) return alert("Pilih Nama!"); document.getElementById('area-mentor-global').style.display="block"; document.getElementById('btn-logout').style.display="flex"; showMateri(); }
-        function showMateri() { hideAll(); document.getElementById('area-materi').style.display='block'; document.getElementById('pesan-mentor').innerText=`Halo ${nS}, ayo pelajari materinya!`; save('materi'); }
-        function mulaiKuis() { dS=[...daftarSoalAsli].sort(()=>Math.random()-0.5); idx=0; benar=0; muatSoal(); }
+
+        function simpanNamaSiswa() { 
+            nS=document.getElementById('pilih-nama').value; 
+            kS=document.getElementById('pilih-kelas').value; 
+            if(!nS) return alert("Pilih Nama!"); 
+            document.getElementById('area-mentor-global').style.display="block"; 
+            document.getElementById('btn-logout').style.display="flex"; 
+            showMateri(); 
+        }
+
+        function showMateri() { 
+            hideAll(); 
+            document.getElementById('area-materi').style.display='block'; 
+            document.getElementById('pesan-mentor').innerText=`Halo ${nS}, ayo pelajari materinya!`; 
+            save('materi'); 
+        }
+
+        function mulaiKuis() { 
+            dS=[...daftarSoalAsli].sort(()=>Math.random()-0.5); 
+            idx=0; benar=0; 
+            muatSoal(); 
+        }
+
         function muatSoal() {
-            hideAll(); document.getElementById('area-kuis').style.display='block'; terpilih=null; let q=dS[idx];
-            document.getElementById('indikator').innerText=`Soal ${idx+1}/${dS.length}`; document.getElementById('teks-soal').innerText=q.p;
-            const bl=document.getElementById('btn-lanjut'); bl.disabled=true; bl.style.opacity="0.5";
-            const co=document.getElementById('container-opsi'); co.innerHTML='';
-            q.o.forEach((t,i)=>{ const b=document.createElement('button'); b.className='btn-opsi'; b.innerText=t; b.onclick=()=>{document.querySelectorAll('.btn-opsi').forEach(x=>x.classList.remove('terpilih')); b.classList.add('terpilih'); terpilih=i; bl.disabled=false; bl.style.opacity="1";}; co.appendChild(b); }); save('kuis');
+            hideAll(); 
+            document.getElementById('area-kuis').style.display='block'; 
+            terpilih=null; 
+            let q=dS[idx];
+            document.getElementById('indikator').innerText=`Soal ${idx+1}/${dS.length}`; 
+            document.getElementById('teks-soal').innerText=q.p;
+            
+            const bl=document.getElementById('btn-lanjut'); 
+            bl.disabled=true; bl.style.opacity="0.5";
+            
+            const co=document.getElementById('container-opsi'); 
+            co.innerHTML='';
+            q.o.forEach((t,i)=>{ 
+                const b=document.createElement('button'); 
+                b.className='btn-opsi'; 
+                b.innerText=t; 
+                b.onclick=()=>{
+                    document.querySelectorAll('.btn-opsi').forEach(x=>x.classList.remove('terpilih')); 
+                    b.classList.add('terpilih'); 
+                    terpilih=i; 
+                    bl.disabled=false; bl.style.opacity="1";
+                }; 
+                co.appendChild(b); 
+            }); 
+            save('kuis');
         }
-        function simpanJawaban() { if(terpilih===dS[idx].k) benar++; idx++; if(idx<dS.length) muatSoal(); else tampilkanHasil(); }
+
+        function simpanJawaban() { 
+            if(terpilih===dS[idx].k) benar++; 
+            idx++; 
+            if(idx<dS.length) muatSoal(); else tampilkanHasil(); 
+        }
+
         function tampilkanHasil() {
-            hideAll(); document.getElementById('area-hasil').style.display='block'; let skor = Math.round((benar/dS.length)*100);
-            document.getElementById('res-nama').innerText=nS; document.getElementById('res-skor').innerText=skor; document.getElementById('res-status').innerText=skor>=100?"LOGIKA TUNTAS":"BELUM TUNTAS";
-            fetch("https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec?"+new URLSearchParams({namaSiswa:nS, kelasSiswa:kS, modul:"BK", skor:skor}),{mode:'no-cors'}); localStorage.removeItem('pro_bk');
+            hideAll(); 
+            document.getElementById('area-hasil').style.display='block'; 
+            let skor = Math.round((benar/dS.length)*100);
+            document.getElementById('res-nama').innerText=nS; 
+            document.getElementById('res-skor').innerText=skor; 
+            document.getElementById('res-status').innerText=skor>=100?"LOGIKA TUNTAS":"BELUM TUNTAS";
+            
+            // Integrasi Google Sheets (Optional)
+            fetch("https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec?"+new URLSearchParams({namaSiswa:nS, kelasSiswa:kS, modul:"BK", skor:skor}),{mode:'no-cors'}); 
+            localStorage.removeItem('pro_bk');
         }
-        function hideAll() { document.querySelectorAll('.area-konten').forEach(a=>a.style.display='none'); }
-        function logoutSiswa() { if(confirm("Hapus progres?")) { localStorage.removeItem('pro_bk'); location.reload(); } }
+
+        function hideAll() { 
+            document.querySelectorAll('.area-konten').forEach(a=>a.style.display='none'); 
+        }
+
+        function logoutSiswa() { 
+            if(confirm("Hapus progres?")) { 
+                localStorage.removeItem('pro_bk'); 
+                location.reload(); 
+            } 
+        }
     </script>
 </body>
 </html>
