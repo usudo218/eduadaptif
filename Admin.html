@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - ELANG DIGITAL</title>
+    <style>
+        :root {
+            --warna-utama: #1e293b;
+            --warna-aksen: #4f46e5;
+            --warna-latar: #f8fafc;
+            --warna-teks: #334155;
+            --warna-sukses: #10b981;
+            --warna-bahaya: #ef4444;
+        }
+
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--warna-latar); color: var(--warna-teks); margin: 0; padding: 20px; }
+        
+        .admin-container { 
+            background: white; 
+            max-width: 1200px; 
+            margin: 20px auto; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+            overflow: hidden; 
+            padding: 30px;
+        }
+
+        /* LOGIN STYLING */
+        .login-box { text-align: center; padding: 60px 20px; }
+        .Pak-Agus-admin { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--warna-aksen); margin-bottom: 20px; }
+        input[type="password"] { 
+            padding: 12px; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 8px; 
+            width: 100%; 
+            max-width: 300px; 
+            font-size: 1rem;
+            margin-bottom: 15px;
+            outline: none;
+        }
+        input:focus { border-color: var(--warna-aksen); }
+
+        /* DASHBOARD STYLING */
+        .header-dashboard { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .filter-section {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            margin-bottom: 25px;
+        }
+
+        .filter-group { display: flex; flex-direction: column; gap: 5px; }
+        .filter-group label { font-size: 0.85rem; font-weight: bold; color: var(--warna-utama); }
+        select { 
+            padding: 10px; 
+            border-radius: 6px; 
+            border: 1px solid #cbd5e1; 
+            background: white; 
+            min-width: 200px;
+            cursor: pointer;
+        }
+
+        /* TABLE STYLING */
+        .table-responsive { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { background: var(--warna-utama); color: white; padding: 15px; text-align: left; font-size: 0.9rem; }
+        td { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; }
+        tr:hover { background-color: #f8fafc; }
+
+        .badge { padding: 5px 10px; border-radius: 6px; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; }
+        .tuntas { background: #dcfce7; color: #166534; }
+        .remedial { background: #fee2e2; color: #991b1b; }
+
+        .btn-action { 
+            background: var(--warna-aksen); 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s;
+        }
+        .btn-action:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        .footer { text-align: center; margin-top: 30px; font-size: 0.85rem; color: #94a3b8; }
+    </style>
+</head>
+<body>
+
+<div class="admin-container">
+    <div id="area-login-admin" class="login-box">
+        <img src="images/Pak-Agus.png" alt="Pak Agus Admin" class="Pak-Agus-admin">
+        <h2>Panel Kendali Elang Digital</h2>
+        <p>Gunakan kode akses khusus pengajar untuk mengelola data siswa.</p>
+        <input type="password" id="input-pass-admin" placeholder="Masukkan Kode Admin"><br>
+        <button class="btn-action" onclick="validasiLogin()">Buka Dashboard</button>
+    </div>
+
+    <div id="area-dashboard-admin" style="display:none;">
+        <div class="header-dashboard">
+            <div>
+                <h1 style="margin:0; font-size: 1.5rem;">Monitoring Progres Siswa</h1>
+                <p style="margin: 5px 0 0; opacity: 0.7;">SMA Negeri 1 Muncar - Tahun 2026</p>
+            </div>
+            <button class="btn-action" onclick="ambilDataServer()">🔄 Refresh Data</button>
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-group">
+                <label>Filter Kelas:</label>
+                <select id="sel-kelas" onchange="eksekusiFilter()">
+                    <option value="SEMUA">-- Semua Kelas --</option>
+                    <option value="KELAS 10-1">KELAS 10-1</option>
+                    <option value="KELAS 10-2">KELAS 10-2</option>
+                    <option value="KELAS 10-3">KELAS 10-3</option>
+                    <option value="KELAS 10-4">KELAS 10-4</option>
+                    <option value="KELAS 10-5">KELAS 10-5</option>
+                    <option value="KELAS 10-6">KELAS 10-6</option>
+                    <option value="KELAS 10-7">KELAS 10-7</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Filter Modul:</label>
+                <select id="sel-modul" onchange="eksekusiFilter()">
+                    <option value="SEMUA">-- Semua Modul --</option>
+                    <option value="BK">Berpikir Komputasional (BK)</option>
+                    <option value="TIK">Teknologi Informasi (TIK)</option>
+                    <option value="SK">Sistem Komputer (SK)</option>
+                    <option value="JKI">Jaringan Komputer (JKI)</option>
+                    <option value="AD">Analisis Data (AD)</option>
+                    <option value="AP">Algoritma Pemrograman (AP)</option>
+                    <option value="DSI">Dampak Sosial (DSI)</option>
+                    <option value="PLB">Praktik Lintas Bidang (PLB)</option>
+                </select>
+            </div>
+            <div style="margin-left: auto; text-align: right;">
+                <span id="label-count" style="font-weight: bold; color: var(--warna-aksen);">Ditemukan: 0 Data</span>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Nama Siswa</th>
+                        <th>Kelas</th>
+                        <th>Elemen Modul</th>
+                        <th>Skor</th>
+                        <th>Bantuan</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tabel-body-admin">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    Dikembangkan oleh <b>Agus Suyatno, S.Kom</b><br>
+    Sistem Analitik Edu-Learning & Guard Digital &copy; 2026
+</div>
+
+<script>
+    const KODE_AKSES = "ADMIN2026"; // Ganti sesuai kebutuhan
+    const URL_GAS = "https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec"; 
+    
+    let cacheDataSiswa = [];
+
+    function validasiLogin() {
+        const pass = document.getElementById('input-pass-admin').value;
+        if(pass === KODE_AKSES) {
+            document.getElementById('area-login-admin').style.display = 'none';
+            document.getElementById('area-dashboard-admin').style.display = 'block';
+            ambilDataServer();
+        } else {
+            alert("Akses Ditolak: Kode Salah!");
+        }
+    }
+
+    async function ambilDataServer() {
+        const tbody = document.getElementById('tabel-body-admin');
+        tbody.innerHTML = "<tr><td colspan='7' style='text-align:center'>Menghubungkan ke Database...</td></tr>";
+        
+        try {
+            const respons = await fetch(URL_GAS + "?action=readData");
+            const hasil = await respons.json();
+            // Simpan data tanpa header (indeks 0)
+            cacheDataSiswa = hasil.slice(1); 
+            eksekusiFilter();
+        } catch (error) {
+            tbody.innerHTML = "<tr><td colspan='7' style='text-align:center; color:red;'>Gagal memuat data. Periksa izin CORS atau koneksi internet.</td></tr>";
+        }
+    }
+
+    function eksekusiFilter() {
+        const fKelas = document.getElementById('sel-kelas').value;
+        const fModul = document.getElementById('sel-modul').value;
+        const tbody = document.getElementById('tabel-body-admin');
+        
+        const dataTerfilter = cacheDataSiswa.filter(row => {
+            const cekKelas = (fKelas === "SEMUA" || row[2] === fKelas);
+            const cekModul = (fModul === "SEMUA" || row[3].includes(fModul));
+            return cekKelas && cekModul;
+        });
+
+        renderTabel(dataTerfilter);
+        document.getElementById('label-count').innerText = `Ditemukan: ${dataTerfilter.length} Data`;
+    }
+
+    function renderTabel(dataArray) {
+        const tbody = document.getElementById('tabel-body-admin');
+        tbody.innerHTML = "";
+
+        if(dataArray.length === 0) {
+            tbody.innerHTML = "<tr><td colspan='7' style='text-align:center'>Tidak ada data ditemukan.</td></tr>";
+            return;
+        }
+
+        dataArray.forEach(row => {
+            const isTuntas = row[6] === "TUNTAS";
+            const statusBadge = isTuntas ? 'tuntas' : 'remedial';
+            
+            tbody.innerHTML += `
+                <tr>
+                    <td>${row[0] || '-'}</td>
+                    <td><b>${row[1]}</b></td>
+                    <td>${row[2]}</td>
+                    <td>${row[3]}</td>
+                    <td style="font-weight:bold; color: ${isTuntas ? '#166534' : '#991b1b'}">${row[4]}</td>
+                    <td>${row[5]}x</td>
+                    <td><span class="badge ${statusBadge}">${row[6]}</span></td>
+                </tr>
+            `;
+        });
+    }
+</script>
+
+</body>
+</html>
