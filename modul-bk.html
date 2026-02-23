@@ -6,254 +6,338 @@
     <title>Modul BK - ELANG DIGITAL</title>
     <style>
         :root {
-            --warna-utama: #E11D48; 
+            --warna-utama: #E11D48; /* Rose/Merah BK */
+            --warna-aksen: #BE123C; 
             --warna-merah: #EF4444; 
             --warna-merah-hover: #DC2626;
             --warna-kuning: #F59E0B; 
             --warna-latar: #F8FAFC; 
-            --warna-teks-utama: #0F172A; 
+            --warna-teks: #1F2937;  
             --latar-mentor: #FFE4E6; 
         }
 
-        * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
-        body { background-color: var(--warna-latar); display: flex; justify-content: center; padding: 20px; margin: 0; }
-        .app-container { background: white; width: 100%; max-width: 650px; border-radius: 20px; box-shadow: 0 20px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
-        .header { background: var(--warna-utama); color: white; padding: 50px 20px 30px; text-align: center; position: relative; }
-        .btn-header { position: absolute; top: 15px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; height: 36px; width: 90px; border-radius: 8px; text-decoration: none; color: white; border: 1px solid rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.15); transition: 0.3s; }
-        .btn-header:hover { background: rgba(255, 255, 255, 0.3); }
-        .home-pos { left: 15px; } .logout-pos { right: 15px; }
-        .content { padding: 30px 25px; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--warna-latar); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 20px; color: var(--warna-teks); }
+        .app-container { background: white; width: 100%; max-width: 650px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
-        /* MENTOR BOX */
-        .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 20px; border-radius: 16px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); align-items: center; transition: 0.3s; }
+        .header { background: var(--warna-utama); color: white; padding: 50px 20px 30px 20px; text-align: center; position: relative; }
+        .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; }
+        
+        .btn-header { 
+            position: absolute; 
+            top: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            gap: 6px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            height: 36px;
+            width: 100px;
+            border-radius: 8px; 
+            text-decoration: none; 
+            color: white; 
+            border: 1px solid rgba(255, 255, 255, 0.4); 
+            cursor: pointer; 
+            background: rgba(255, 255, 255, 0.15); 
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .btn-header:hover { background: white; color: var(--warna-utama); border-color: white; transform: translateY(-1px); }
+        
+        .home-pos { left: 15px; }
+        .logout-pos { right: 15px; }
+
+        .content { padding: 25px 20px; flex-grow: 1; }
+        
+        .login-card { background: white; padding: 30px 25px; border-radius: 20px; text-align: center; border: 1px solid #E5E7EB; }
+        .Pak-Agus-img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--warna-utama); margin-bottom: 15px; object-fit: cover; }
+        select.input-nama { width: 100%; padding: 15px; border: 2px solid #E5E7EB; border-radius: 12px; font-size: 1rem; margin-bottom: 15px; font-weight: 600; cursor: pointer; }
+
+        .mentor-box { display: flex; gap: 15px; background: var(--latar-mentor); padding: 15px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--warna-utama); align-items: center; }
         .mentor-box.peringatan { border-left-color: var(--warna-kuning); background-color: #FEF3C7; }
-        .mentor-avatar { width: 65px; height: 65px; border-radius: 50%; overflow: hidden; border: 2px solid var(--warna-utama); background: white; flex-shrink: 0; }
-        
-        .teks-materi { background: #ffffff; padding: 10px 5px; height: 480px; overflow-y: auto; line-height: 1.8; font-size: 1.05rem; }
-        .btn-opsi { background: white; border: 1.5px solid #e2e8f0; padding: 18px 20px; border-radius: 12px; text-align: left; width: 100%; margin-bottom: 12px; cursor: pointer; transition: 0.2s; }
-        .btn-opsi.terpilih { background: var(--warna-utama); border-color: var(--warna-utama); color: white; font-weight: 600; }
-        
-        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 15px; }
-        .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 10px;}
-        .btn-disabled { background: #9CA3AF; cursor: not-allowed; opacity: 0.5; }
-        .btn-remedial { background: var(--warna-kuning); color: white; margin-top: 10px; }
-        
-        .pdf-box { background: #FFF1F2; padding: 20px; border: 1px dashed var(--warna-utama); border-radius: 16px; text-align: center; margin: 25px 0; }
-        .btn-pdf { background: var(--warna-merah); color: white; text-decoration: none; padding: 12px 24px; border-radius: 10px; font-weight: bold; display: inline-block; }
-        .angka-skor { font-size: 5rem; font-weight: 900; text-align: center; color: var(--warna-utama); margin: 10px 0; }
+        .mentor-avatar { width: 65px; height: 65px; border-radius: 50%; overflow: hidden; border: 2px solid var(--warna-utama); background: white; flex-shrink: 0;}
+        .mentor-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
         .area-konten { display: none; }
-        .footer { padding: 25px; text-align: center; font-size: 0.85rem; color: #94a3b8; background: #f8fafc; border-top: 1px solid #e2e8f0; }
+        .area-aktif { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .teks-materi { background: #f9fafb; padding: 25px; border-radius: 12px; border: 1px solid #e5e7eb; height: 500px; overflow-y: auto; text-align: justify; line-height: 1.7; }
+        .teks-materi h3 { color: var(--warna-utama); border-bottom: 2px solid #eee; padding-bottom: 8px; margin-top: 25px; }
+
+        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; transition: 0.2s; }
+        .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); font-weight: bold; color: var(--warna-utama); }
+
+        .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
+        .btn-submit { background: #10B981; } /* Warna Hijau Sukses */
+        .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
+        .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
+
+        .pdf-box { background: #FFF1F2; padding: 18px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
+        .btn-pdf-merah { background: var(--warna-merah) !important; color: white !important; text-decoration: none; display: inline-block; width: auto; padding: 12px 25px; border-radius: 8px; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 10px rgba(225, 29, 72, 0.2); }
+        .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.03); }
+
+        .angka-skor { font-size: 4.5rem; font-weight: bold; color: var(--warna-utama); text-align: center; margin: 10px 0;}
+        .nama-hasil { font-size: 1.2rem; font-weight: 800; color: var(--warna-teks); text-align: center; margin-bottom: 5px; text-transform: uppercase; }
+        .footer { background-color: #f9fafb; color: #6b7280; text-align: center; padding: 20px; font-size: 0.85rem; border-top: 1px solid #e5e7eb; }
     </style>
 </head>
 <body>
+
     <div class="app-container">
         <div class="header">
             <a href="index.html" class="btn-header home-pos">🏠 Home</a>
             <button id="btn-logout" class="btn-header logout-pos" onclick="logoutSiswa()" style="display: none;">🚪 Logout</button>
-            <h1>Modul Berpikir Komputasi</h1>
-            <p>Elang Digital - SMA Negeri 1 Muncar</p>
+            <h1>Modul Berpikir Komputasional</h1>
+            <p>ELANG DIGITAL - SMA Negeri 1 Muncar</p>
         </div>
+
         <div class="content">
-            <div id="area-login" class="area-konten" style="display:block">
-                <div style="text-align:center">
-                    <img src="images/Pak-Agus.png" style="width:110px; border-radius:50%; border:3px solid var(--warna-utama); margin-bottom:15px;">
-                    <h2>Halo, Para Petualang Muda </h2>
-                    <p>Saya Pak Agus, saya akan menemanimu berpetualangan...</p>
-                    <select id="pilih-kelas" style="width:100%; padding:15px; border-radius:12px; margin-bottom:10px;" onchange="filterNama()"><option value="">-- Pilih Kelas --</option></select>
-                    <select id="pilih-nama" style="width:100%; padding:15px; border-radius:12px; margin-bottom:10px;" disabled><option value="">-- Pilih Nama --</option></select>
-                    <button class="btn-action" onclick="simpanNamaSiswa()">🧠 Masuk Modul</button>
+            <div id="area-login" class="area-konten area-aktif">
+                <div class="login-card">
+                    <img src="images/Pak-Agus.png" alt="Pak Agus" class="Pak-Agus-img">
+                    <h2>Halo Petualang Logika!</h2>
+                    <p>Pak Agus akan membantumu menguasai fondasi berpikir komputasional.</p>
+                    <select id="pilih-kelas" class="input-nama" onchange="filterNama()">
+                        <option value="">-- Pilih Kelas --</option>
+                    </select>
+                    <select id="pilih-nama" class="input-nama" disabled>
+                        <option value="">-- Pilih Nama --</option>
+                    </select>
+                    <button class="btn-action btn-submit" onclick="simpanNamaSiswa()">🧠 Masuk Modul</button>
                 </div>
             </div>
 
             <div id="area-mentor-global" style="display: none;">
                 <div class="mentor-box" id="kotak-mentor">
-                    <div class="mentor-avatar"><img src="images/Pak-Agus.png" style="width:100%"></div>
-                    <div class="mentor-message"><b id="ui-guru" style="color:var(--warna-utama); display:block;">Pak Agus :</b><span id="pesan-mentor">Semangat belajar!</span></div>
+                    <div class="mentor-avatar"><img src="images/Pak-Agus.png" alt="Pak Agus"></div>
+                    <div class="mentor-message">
+                        <span class="mentor-name">Pak Agus :</span>
+                        <span id="pesan-mentor">Semangat belajar!</span>
+                    </div>
                 </div>
             </div>
 
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
-                   <div class="pdf-box"><a href="https://drive.google.com/file/d/1JnEyi4GkRpT8bV6PO1mQIMtVnX_lQJRB/view?usp=sharing" target="_blank" class="btn-pdf">📥 Buka Naskah PDF</a></div>
+                    <p style="text-align: center;"><strong>Berpikir Komputasional (Computational Thinking)</strong></p>
+                    <p>Berpikir komputasional merupakan ilmu yang mempelajari bagaimana cara menyelesaikan suatu masalah dengan solusi yang efisien, efektif, dan optimal sehingga solusinya bisa dijalankan oleh manusia maupun mesin.</p>
+                    <h3>4 Fondasi Utama:</h3>
+                    <ul>
+                        <li><strong>Abstraksi:</strong> Fokus pada informasi penting saja.</li>
+                        <li><strong>Algoritma:</strong> Menyusun langkah terurut.</li>
+                        <li><strong>Dekomposisi:</strong> Memecah masalah besar menjadi kecil.</li>
+                        <li><strong>Pengenalan Pola:</strong> Mencari kesamaan antar persoalan.</li>
+                    </ul>
+                    <h3>Struktur Data:</h3>
+                    <ul>
+                        <li><strong>Stack (Tumpukan):</strong> Prinsip LIFO (Last In First Out).</li>
+                        <li><strong>Queue (Antrean):</strong> Prinsip FIFO (First In First Out).</li>
+                    </ul>
+                    
+                    <div class="pdf-box">
+                        <p style="margin-bottom: 12px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi lengkap?</p>
+                        <a href="https://drive.google.com/file/d/1JnEyi4GkRpT8bV6PO1mQIMtVnX_lQJRB/view?usp=sharing" target="_blank" class="btn-pdf-merah">
+                            📥 Buka Naskah Materi (PDF)
+                        </a>
+                    </div>
                 </div>
                 <button class="btn-action" onclick="mulaiKuis()">Logika Siap, Mulai Kuis!</button>
             </div>
 
             <div id="area-kuis" class="area-konten">
-                <h4 id="indikator" style="font-weight:700; color:var(--warna-utama)">Soal 1</h4>
-                <h2 id="teks-soal" style="font-size:1.2rem; min-height:60px; margin-bottom:20px;">Memuat soal...</h2>
+                <h4 id="indikator-soal">Soal 1/15</h4>
+                <h2 id="teks-soal" style="text-align: left; font-size: 1.1rem; min-height: 60px;">Memuat soal...</h2>
                 <div id="container-opsi"></div>
                 <button class="btn-action btn-bantuan" id="tombol-bantuan" onclick="mintaBantuan()">💡 Tanya Pak Agus (-5 Poin)</button>
-                <button id="btn-lanjut" class="btn-action btn-disabled" onclick="simpanJawaban()" disabled>Pilih Jawaban Dulu</button>
+                <button class="btn-action btn-disabled" id="tombol-lanjut" onclick="simpanJawaban()" disabled>Pilih Jawaban Dulu</button>
             </div>
 
             <div id="area-hasil" class="area-konten">
-                <div id="res-nama" style="font-size:1.2rem; font-weight:800; text-align:center; text-transform:uppercase"></div>
-                <div class="angka-skor" id="res-skor">0</div>
-                <p id="teks-percobaan" style="text-align: center; font-weight: bold; color: var(--warna-utama); margin: 0;"></p>
+                <div id="wrapper-nama-hasil" class="nama-hasil"></div>
+                <div class="angka-skor" id="teks-skor">0</div>
+                <p id="keterangan-hasil" style="text-align: center; font-weight: bold; font-size: 1.2rem; margin-top: 0;"></p>
+                <p id="teks-percobaan" style="text-align: center; font-weight: bold; color: var(--warna-utama); margin: 5px 0;"></p>
                 <p id="teks-penalti" style="text-align: center; color: var(--warna-merah); margin-top: 5px;"></p>
                 
-                <div id="wrapper-tombol-hasil">
-                    <button id="btn-remedial" class="btn-action btn-remedial" onclick="mulaiKuis()">🔄 Remedial (Ulangi Kuis)</button>
-                    <button class="btn-action" onclick="location.href='index.html'">✅ Selesai & Kembali</button>
-                </div>
+                <button id="tombol-ulang" class="btn-action" style="display: none;" onclick="jalankanRemedial()">🔄 Remedial (Ulangi Kuis)</button>
+                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="kembaliKeHome()">✅ Selesai</button>
             </div>
         </div>
-        <div class="footer">Design by <b>Agus Suyatno, S.Kom</b><br>&copy; 2026</div>
+
+        <div class="footer">
+            Design by <b>Agus Suyatno, S.Kom</b><br>&copy; 2026 SMA Negeri 1 Muncar
+        </div>
     </div>
 
     <script src="soal-bk.js"></script>
     <script src="siswa.js"></script>
-    <script>
-        let nS="", kS="", dS=[], idx=0, benar=0, terpilih=null, bantuanPakai=false, totalBantuan=0, totalPercobaan=1;
 
-        // Fungsi simpan menyertakan totalPercobaan
-        function save(f) { 
-            localStorage.setItem('pro_bk', JSON.stringify({
-                n:nS, k:kS, f:f, s:dS, i:idx, b:benar, tb:totalBantuan, tp:totalPercobaan
-            })); 
+    <script>
+        let namaSiswa = ""; let kelasSiswa = ""; let daftarSoalBerjalan = [];
+        let indeksSoalSekarang = 0; let jumlahBenar = 0; let jawabanTerpilihSementara = null;
+        let bantuanPerSoalDipakai = false; let totalKaliBantuan = 0; let jumlahPercobaan = 1;
+        const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbwYvmlH091izhAxBnT4klb1d9CQd61RCTb33b9sDrZfuA5I9j8Sxjzoz0ySK6Rd2GEt/exec"; 
+
+        function simpanProgres(fase) {
+            localStorage.setItem('progres_bk', JSON.stringify({ 
+                nama: namaSiswa, kelas: kelasSiswa, fase: fase, soal: daftarSoalBerjalan, 
+                indeks: indeksSoalSekarang, benar: jumlahBenar, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan 
+            }));
         }
 
         window.onload = function() {
-            const p = JSON.parse(localStorage.getItem('pro_bk'));
-            if(p){ 
-                nS=p.n; kS=p.k; dS=p.s; idx=p.i; benar=p.b; 
-                totalBantuan=p.tb; 
-                totalPercobaan=p.tp || 1; // Default 1 jika data lama
-                document.getElementById('area-mentor-global').style.display="block";
-                document.getElementById('btn-logout').style.display="flex";
-                if(p.f==='materi') showMateri(); else muatSoal();
-            } else { inisialisasi(); }
+            const simpanan = localStorage.getItem('progres_bk');
+            if(simpanan) {
+                const p = JSON.parse(simpanan);
+                namaSiswa = p.nama; kelasSiswa = p.kelas; daftarSoalBerjalan = p.soal; indeksSoalSekarang = p.indeks;
+                jumlahBenar = p.benar; totalKaliBantuan = p.bantuan; jumlahPercobaan = p.percobaan || 1;
+                document.getElementById('area-mentor-global').style.display = "block";
+                document.getElementById('btn-logout').style.display = "block";
+                if(p.fase === 'materi') tampilkanMateri(); else if(p.fase === 'hasil') tampilkanHasil(); else muatSoal();
+            } else { inisialisasiDropdown(); }
         };
 
-        function inisialisasi(){
-            const sk = document.getElementById('pilih-kelas');
-            [...new Set(SISWA_BARU.map(x=>x.kelas))].sort().forEach(k=>{let o=document.createElement('option');o.value=k;o.innerText=k;sk.appendChild(o);});
-        }
-
-        function filterNama(){
-            const k = document.getElementById('pilih-kelas').value; 
-            const sn = document.getElementById('pilih-nama'); 
-            sn.innerHTML='<option value="">-- Pilih Nama --</option>';
-            if(!k) return sn.disabled=true; sn.disabled=false;
-            SISWA_BARU.filter(x=>x.kelas===k).forEach(x=>{let o=document.createElement('option');o.value=x.nama;o.innerText=x.nama;sn.appendChild(o);});
-        }
-
-        function simpanNamaSiswa(){ 
-            nS=document.getElementById('pilih-nama').value; 
-            kS=document.getElementById('pilih-kelas').value; 
-            if(!nS) return alert("Pilih Nama!"); 
-            document.getElementById('area-mentor-global').style.display="block"; 
-            document.getElementById('btn-logout').style.display="flex"; 
-            showMateri(); 
-        }
-
-        function showMateri(){ 
-            hideAll(); 
-            document.getElementById('area-materi').style.display='block'; 
-            document.getElementById('pesan-mentor').innerText=`Halo ${nS}, ayo belajar!`; 
-            save('materi'); 
-        }
-
-        function mulaiKuis(){ 
-            // Jika masuk sini dari tombol Remedial, totalPercobaan bertambah
-            const p = JSON.parse(localStorage.getItem('pro_bk'));
-            if (p && p.f === 'hasil') {
-                totalPercobaan++;
+        function logoutSiswa() {
+            if(confirm("Logout? Progres modul ini akan dihapus.")) {
+                localStorage.removeItem('progres_bk');
+                window.location.reload();
             }
-            
-            dS=[...daftarSoalAsli].sort(()=>Math.random()-0.5); 
-            idx=0; benar=0; totalBantuan=0; 
-            muatSoal(); 
         }
 
-        function muatSoal(){
-            hideAll(); 
-            document.getElementById('area-kuis').style.display='block'; 
-            terpilih=null; bantuanPakai=false;
-            let q=dS[idx]; 
-            document.getElementById('indikator').innerText=`Soal ${idx+1}/${dS.length}`;
-            document.getElementById('teks-soal').innerText=q.p;
-            document.getElementById('tombol-bantuan').disabled=false; 
-            document.getElementById('tombol-bantuan').classList.remove('btn-disabled');
-            document.getElementById('kotak-mentor').className="mentor-box"; 
-            document.getElementById('pesan-mentor').innerText="Gunakan logika terbaikmu!";
-            const bl=document.getElementById('btn-lanjut'); 
-            bl.disabled=true; bl.className="btn-action btn-disabled";
-            const co=document.getElementById('container-opsi'); co.innerHTML='';
-            q.o.forEach((t,i)=>{
-                const b=document.createElement('button'); b.className='btn-opsi'; b.innerText=t;
-                b.onclick=()=>{
-                    document.querySelectorAll('.btn-opsi').forEach(x=>x.classList.remove('terpilih')); 
-                    b.classList.add('terpilih'); terpilih=i; 
-                    bl.disabled=false; bl.className="btn-action";
+        function inisialisasiDropdown() {
+            const selectKelas = document.getElementById('pilih-kelas');
+            if (typeof SISWA_BARU === 'undefined') return;
+            const unikKelas = [...new Set(SISWA_BARU.map(s => s.kelas))].sort();
+            selectKelas.innerHTML = '<option value="">-- Pilih Kelas --</option>';
+            unikKelas.forEach(k => {
+                let opt = document.createElement('option'); opt.value = k; opt.innerText = k;
+                selectKelas.appendChild(opt);
+            });
+        }
+
+        function filterNama() {
+            const kls = document.getElementById('pilih-kelas').value;
+            const selNama = document.getElementById('pilih-nama');
+            selNama.innerHTML = '<option value="">-- Pilih Nama --</option>';
+            if(!kls) { selNama.disabled = true; return; }
+            selNama.disabled = false;
+            SISWA_BARU.filter(s => s.kelas === kls).sort((a,b) => a.nama.localeCompare(b.nama)).forEach(s => {
+                let opt = document.createElement('option'); opt.value = s.nama; opt.innerText = s.nama;
+                selNama.appendChild(opt);
+            });
+        }
+
+        function simpanNamaSiswa() {
+            namaSiswa = document.getElementById('pilih-nama').value;
+            kelasSiswa = document.getElementById('pilih-kelas').value;
+            if(!namaSiswa) return alert("Pilih namamu dulu!");
+            document.getElementById('area-mentor-global').style.display = "block";
+            document.getElementById('btn-logout').style.display = "block";
+            tampilkanMateri();
+        }
+
+        function tampilkanMateri() {
+            ubahTampilan('area-materi');
+            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! Silakan klik tombol merah di bawah untuk membaca materi ya!`;
+            simpanProgres('materi');
+        }
+
+        function mulaiKuis() {
+            ubahTampilan('area-kuis');
+            if(daftarSoalBerjalan.length === 0) {
+                daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
+            }
+            muatSoal();
+        }
+
+        function jalankanRemedial() {
+            jumlahPercobaan++;
+            indeksSoalSekarang = 0;
+            jumlahBenar = 0;
+            totalKaliBantuan = 0;
+            daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
+            mulaiKuis();
+        }
+
+        function muatSoal() {
+            ubahTampilan('area-kuis');
+            let s = daftarSoalBerjalan[indeksSoalSekarang];
+            document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1}/15`;
+            document.getElementById('teks-soal').innerText = s.p;
+            jawabanTerpilihSementara = null; bantuanPerSoalDipakai = false;
+            document.getElementById('tombol-bantuan').disabled = false;
+            document.getElementById('kotak-mentor').className = "mentor-box";
+            document.getElementById('pesan-mentor').innerText = "Gunakan logika berpikir komputasional...";
+            const btnLanjut = document.getElementById('tombol-lanjut');
+            btnLanjut.disabled = true; btnLanjut.className = "btn-action btn-disabled";
+            btnLanjut.innerText = "Pilih Jawaban Dulu";
+            
+            const cont = document.getElementById('container-opsi'); cont.innerHTML = '';
+            s.o.forEach((txt, i) => {
+                const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = txt;
+                btn.onclick = () => {
+                    document.querySelectorAll('.btn-opsi').forEach(b => b.classList.remove('terpilih'));
+                    btn.classList.add('terpilih'); jawabanTerpilihSementara = i;
+                    btnLanjut.disabled = false; btnLanjut.className = "btn-action btn-submit";
+                    btnLanjut.innerText = "Simpan & Lanjut";
                 };
-                co.appendChild(b);
+                cont.appendChild(btn);
             });
-            save('kuis');
+            simpanProgres('kuis');
         }
 
-        function mintaBantuan(){
-            if(bantuanPakai) return; 
-            bantuanPakai=true; totalBantuan++;
-            document.getElementById('kotak-mentor').className="mentor-box peringatan";
-            document.getElementById('pesan-mentor').innerText=`Pak Agus: ${dS[idx].b}`;
-            document.getElementById('tombol-bantuan').disabled=true; 
-            document.getElementById('tombol-bantuan').classList.add('btn-disabled');
+        function mintaBantuan() {
+            if(bantuanPerSoalDipakai) return;
+            bantuanPerSoalDipakai = true; totalKaliBantuan++;
+            document.getElementById('kotak-mentor').className = "mentor-box peringatan";
+            document.getElementById('pesan-mentor').innerText = ` ${daftarSoalBerjalan[indeksSoalSekarang].b}`;
+            document.getElementById('tombol-bantuan').disabled = true;
+            simpanProgres('kuis');
         }
 
-        function simpanJawaban(){ 
-            if(terpilih===dS[idx].k) benar++; 
-            idx++; 
-            if(idx<dS.length) muatSoal(); 
-            else tampilkanHasil(); 
+        function simpanJawaban() {
+            if(jawabanTerpilihSementara === daftarSoalBerjalan[indeksSoalSekarang].k) jumlahBenar++;
+            indeksSoalSekarang++;
+            if(indeksSoalSekarang < 15 && indeksSoalSekarang < daftarSoalBerjalan.length) muatSoal(); 
+            else tampilkanHasil();
         }
 
-        function tampilkanHasil(){
-            hideAll(); 
-            document.getElementById('area-hasil').style.display='block';
-            let skorAwal = Math.round((benar/dS.length)*100); 
-            let penalti = totalBantuan*5; 
-            let skorAkhir = Math.max(0, skorAwal-penalti);
+        function tampilkanHasil() {
+            ubahTampilan('area-hasil');
+            let skorAwal = Math.round((jumlahBenar / Math.min(15, daftarSoalBerjalan.length)) * 100);
+            let totalPenalti = totalKaliBantuan * 5;
+            let skorAkhir = Math.max(0, skorAwal - totalPenalti);
             
-            document.getElementById('res-nama').innerText=nS; 
-            document.getElementById('res-skor').innerText=skorAkhir;
-            document.getElementById('teks-percobaan').innerText = `Percobaan Ke-${totalPercobaan}`;
-            document.getElementById('teks-penalti').innerText = totalBantuan > 0 ? `(Penalti bantuan: -${penalti} poin)` : "";
+            document.getElementById('wrapper-nama-hasil').innerText = namaSiswa;
+            document.getElementById('teks-skor').innerText = skorAkhir;
+            document.getElementById('teks-percobaan').innerText = `Percobaan Ke-${jumlahPercobaan}`;
             
-            // Tampilkan tombol remedial hanya jika skor di bawah 100 (atau sesuai kriteria Anda)
-            const btnRemed = document.getElementById('btn-remedial');
-            if(skorAkhir >= 100) {
-                btnRemed.style.display = 'none';
-                document.getElementById('pesan-mentor').innerText = "Luar biasa! Logikamu sempurna.";
-            } else {
-                btnRemed.style.display = 'block';
-                document.getElementById('pesan-mentor').innerText = "Jangan menyerah, asah terus logika berpikirmu!";
-            }
-
-            // Kirim data ke Spreadsheet (termasuk totalPercobaan)
-            const params = new URLSearchParams({
-                namaSiswa: nS, 
-                kelasSiswa: kS, 
-                modul: "BK", 
-                skor: skorAkhir, 
-                bantuan: totalBantuan, 
-                percobaan: totalPercobaan,
-                status: skorAkhir >= 100 ? "TUNTAS" : "REMEDIAL"
-            });
+            const tuntas = skorAkhir >= 100;
+            document.getElementById('keterangan-hasil').innerText = tuntas ? "LOGIKA KOMPUTASI TUNTAS" : "BELUM TUNTAS";
+            document.getElementById('pesan-mentor').innerText = tuntas ? "Luar biasa! Fondasi berpikirmu sangat kuat." : "Jangan menyerah, Programmer hebat lahir dari banyak mencoba!";
+            document.getElementById('teks-penalti').innerText = totalKaliBantuan > 0 ? `(Penalti bantuan: -${totalPenalti} poin)` : "";
             
-            fetch("https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec?" + params, {mode:'no-cors'});
+            document.getElementById('tombol-selesai').style.display = tuntas ? "block" : "none";
+            document.getElementById('tombol-ulang').style.display = tuntas ? "none" : "block";
             
-            save('hasil');
+            fetch(URL_APPS_SCRIPT + "?" + new URLSearchParams({ 
+                namaSiswa, kelasSiswa, modul: "Berpikir Komputasional (BK)", skor: skorAkhir, 
+                bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, 
+                status: tuntas ? "TUNTAS" : "REMEDIAL", browser: navigator.userAgent 
+            }), { method: 'GET', mode: 'no-cors' });
+            
+            simpanProgres('hasil');
         }
 
-        function hideAll(){ document.querySelectorAll('.area-konten').forEach(a=>a.style.display='none'); }
-        
-        function logoutSiswa(){ 
-            if(confirm("Keluar? Progres belajar akan dihapus.")) { 
-                localStorage.removeItem('pro_bk'); 
-                location.reload(); 
-            } 
+        function ubahTampilan(id) {
+            document.querySelectorAll('.area-konten').forEach(a => a.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+        function kembaliKeHome() { 
+            localStorage.removeItem('progres_bk');
+            window.location.href = "index.html"; 
         }
     </script>
 </body>
