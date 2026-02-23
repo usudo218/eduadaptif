@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Admin - ELANG DIGITAL</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
             --utama: #1e293b; --aksen: #4f46e5; --sukses: #10b981;
@@ -13,7 +14,7 @@
         * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg); color: var(--teks); margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
         
-        /* Area Login */
+        /* Area Login Profesional */
         #login-screen { 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
             position: fixed; inset: 0; background: var(--bg); z-index: 1000;
@@ -23,12 +24,25 @@
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 400px; 
         }
         .img-pak-agus { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--aksen); margin-bottom: 20px; object-fit: cover; background: #f8fafc; }
+        
+        /* Wrapper Password dengan Ikon Mata */
+        .password-wrapper { position: relative; width: 100%; margin-bottom: 20px; }
+        .password-wrapper input {
+            width: 100%; padding: 14px; padding-right: 45px; border-radius: 12px;
+            border: 1px solid #cbd5e1; font-size: 1rem; outline: none; transition: 0.3s;
+        }
+        .password-wrapper input:focus { border-color: var(--aksen); ring: 2px var(--aksen); }
+        .eye-icon {
+            position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
+            cursor: pointer; color: #64748b; transition: 0.2s;
+        }
+        .eye-icon:hover { color: var(--aksen); }
 
         /* Area Dashboard */
         #main-dashboard { display: none; padding: 20px; width: 100%; max-width: 1400px; margin: auto; }
         .container { background: var(--putih); border-radius: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); overflow: hidden; }
 
-        /* Header */
+        /* Header Dashboard */
         .header { 
             background: var(--utama); color: white; padding: 25px 30px; 
             display: flex; justify-content: space-between; align-items: center;
@@ -43,14 +57,14 @@
         .btn-logout { background: var(--bahaya); color: white; }
         .btn-nav:hover { opacity: 0.9; transform: translateY(-1px); }
 
-        /* Filter Area */
+        /* Toolbar Filter & Sort */
         .toolbar { padding: 25px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
         .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-items: flex-end; }
         .filter-group { display: flex; flex-direction: column; gap: 8px; }
         .filter-group label { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; }
         select, input { padding: 10px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 0.9rem; width: 100%; }
 
-        /* Tabel */
+        /* Tabel Progres */
         .table-area { overflow-x: auto; background: white; }
         table { width: 100%; border-collapse: collapse; min-width: 1000px; }
         th { background: #f8fafc; color: #475569; padding: 15px 20px; text-align: left; font-size: 0.75rem; border-bottom: 2px solid #e2e8f0; }
@@ -59,18 +73,25 @@
         .badge { padding: 5px 12px; border-radius: 20px; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; }
         .tuntas { background: #dcfce7; color: #166534; }
         .remedial { background: #fee2e2; color: #991b1b; }
-        .stat-total { background: var(--utama); color: white; padding: 10px 20px; border-radius: 10px; font-weight: bold; text-align: center; }
+        .stat-total { background: var(--aksen); color: white; padding: 10px 20px; border-radius: 10px; font-weight: bold; text-align: center; }
     </style>
 </head>
 <body>
 
 <div id="login-screen">
     <div class="login-card">
-        <img src="images/pak-agus.png" class="img-pak-agus" alt="Pak Agus">
-        <h2 style="margin:0 0 10px">Admin Elang Digital</h2>
-        <p style="color:#64748b; font-size:0.9rem; margin-bottom:25px">Monitoring Progres Siswa Real-Time</p>
-        <input type="password" id="admin-pass" placeholder="Password Akses" style="margin-bottom:15px">
-        <button onclick="cekLogin()" style="width:100%; padding:14px; background:var(--aksen); color:white; border:none; border-radius:12px; font-weight:bold; cursor:pointer">Buka Dashboard</button>
+        <img src="pak-agus.png" class="img-pak-agus" alt="Pak Agus">
+        <h2 style="margin:0 0 5px">Admin Elang Digital</h2>
+        <p style="color:#64748b; font-size:0.85rem; margin-bottom:25px">Monitoring Progres Siswa Real-Time</p>
+        
+        <div class="password-wrapper">
+            <input type="password" id="admin-pass" placeholder="Password Akses">
+            <div class="eye-icon" onclick="togglePassword()">
+                <i data-lucide="eye" id="eye-icon-svg"></i>
+            </div>
+        </div>
+        
+        <button onclick="cekLogin()" style="width:100%; padding:14px; background:var(--aksen); color:white; border:none; border-radius:12px; font-weight:bold; cursor:pointer; transition:0.3s">Buka Dashboard</button>
     </div>
 </div>
 
@@ -78,16 +99,22 @@
     <div class="container">
         <div class="header">
             <div style="display:flex; align-items:center; gap:15px">
-                <img src="images/pak-agus.png" style="width:45px; height:45px; border-radius:50%; border:2px solid white">
+                <img src="pak-agus.png" style="width:45px; height:45px; border-radius:50%; border:2px solid white; background:white">
                 <div>
-                    <h1 style="margin:0; font-size:1.3rem">Monitoring Siswa</h1>
-                    <p style="margin:0; font-size:0.75rem; opacity:0.8">Dashboard Elang Digital 2026</p>
+                    <h1 style="margin:0; font-size:1.2rem">Monitoring Siswa</h1>
+                    <p style="margin:0; font-size:0.75rem; opacity:0.8">Pak Agus AI Tutor • 2026</p>
                 </div>
             </div>
             <div class="nav-buttons">
-                <button class="btn-nav btn-reload" onclick="muatData()">🔄 Ambil Data</button>
-                <button class="btn-nav btn-excel" onclick="eksporExcel()">📥 Ekspor Excel</button>
-                <button class="btn-nav btn-logout" onclick="logout()">🚪 Logout</button>
+                <button class="btn-nav btn-reload" onclick="muatData()">
+                    <i data-lucide="refresh-cw" style="width:16px"></i> Ambil Data
+                </button>
+                <button class="btn-nav btn-excel" onclick="eksporExcel()">
+                    <i data-lucide="download" style="width:16px"></i> Excel
+                </button>
+                <button class="btn-nav btn-logout" onclick="logout()">
+                    <i data-lucide="log-out" style="width:16px"></i> Keluar
+                </button>
             </div>
         </div>
 
@@ -113,23 +140,23 @@
                 <div class="filter-group">
                     <label>Filter Modul</label>
                     <select id="filt-modul" onchange="filterData()">
-                        <option value="SEMUA">Semua Modul (8)</option>
-                        <option value="BK">Berpikir Komputasional (BK)</option>
-                        <option value="TIK">Teknologi Informasi (TIK)</option>
-                        <option value="SK">Sistem Komputer (SK)</option>
-                        <option value="JKI">Jaringan Komputer (JKI)</option>
-                        <option value="AD">Analisis Data (AD)</option>
-                        <option value="AP">Algoritma Pemrograman (AP)</option>
-                        <option value="DSI">Dampak Sosial (DSI)</option>
-                        <option value="PLB">Praktik Lintas Bidang (PLB)</option>
+                        <option value="SEMUA">Semua Modul</option>
+                        <option value="BK">BK (Berpikir Komputasional)</option>
+                        <option value="TIK">TIK (Teknologi Informasi)</option>
+                        <option value="SK">SK (Sistem Komputer)</option>
+                        <option value="JKI">JKI (Jaringan Komputer)</option>
+                        <option value="AD">AD (Analisis Data)</option>
+                        <option value="AP">AP (Algoritma Pemrograman)</option>
+                        <option value="DSI">DSI (Dampak Sosial)</option>
+                        <option value="PLB">PLB (Praktik Lintas Bidang)</option>
                     </select>
                 </div>
                 <div class="filter-group">
                     <label>Urutkan Skor</label>
                     <select id="sort-skor" onchange="filterData()">
-                        <option value="DEFAULT">Waktu Input</option>
-                        <option value="TINGGI">Skor Tertinggi</option>
-                        <option value="RENDAH">Skor Terendah</option>
+                        <option value="DEFAULT">Urutan Terbaru</option>
+                        <option value="TINGGI">Tertinggi</option>
+                        <option value="RENDAH">Terendah</option>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -142,7 +169,15 @@
             <table id="tabel-utama">
                 <thead>
                     <tr>
-                        <th>Waktu</th><th>Nama Siswa</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Coba</th><th>Status</th><th>Device</th>
+                        <th>Waktu</th>
+                        <th>Nama Siswa</th>
+                        <th>Kelas</th>
+                        <th>Modul</th>
+                        <th>Skor</th>
+                        <th>Bantuan</th>
+                        <th>Percobaan</th>
+                        <th>Status</th>
+                        <th>Device/Info</th>
                     </tr>
                 </thead>
                 <tbody id="isi-tabel"></tbody>
@@ -152,11 +187,28 @@
 </div>
 
 <script>
-    const KODE_RAHASIA = "admin2026";
+    const KODE_RAHASIA = "ADMIN2026";
     const URL_GAS = "https://script.google.com/macros/s/AKfycbywzkacgm1ChC2PPvDPU9w4JIvGK8wMZiDBuRWKmdv8qFtSmDhUUDsahE6Azypztow0/exec"; 
     let cacheData = [];
 
-    // Cek Sesi saat Refresh
+    // Inisialisasi Ikon Lucide
+    lucide.createIcons();
+
+    // Fungsi Intip Password
+    function togglePassword() {
+        const passInput = document.getElementById('admin-pass');
+        const eyeIcon = document.getElementById('eye-icon-svg');
+        if (passInput.type === "password") {
+            passInput.type = "text";
+            eyeIcon.setAttribute('data-lucide', 'eye-off');
+        } else {
+            passInput.type = "password";
+            eyeIcon.setAttribute('data-lucide', 'eye');
+        }
+        lucide.createIcons();
+    }
+
+    // Cek Sesi saat Refresh agar tidak logout
     window.onload = function() {
         if(localStorage.getItem("admin_session") === "active") {
             showDashboard();
@@ -164,10 +216,13 @@
     }
 
     function cekLogin() {
-        if(document.getElementById('admin-pass').value === KODE_RAHASIA) {
+        const pass = document.getElementById('admin-pass').value;
+        if(pass === KODE_RAHASIA) {
             localStorage.setItem("admin_session", "active");
             showDashboard();
-        } else { alert("Password Salah!"); }
+        } else { 
+            alert("Password Salah! Gunakan: ADMIN2026"); 
+        }
     }
 
     function showDashboard() {
@@ -177,7 +232,7 @@
     }
 
     function logout() {
-        if(confirm("Keluar dari sistem?")) {
+        if(confirm("Keluar dari sistem admin?")) {
             localStorage.removeItem("admin_session");
             location.reload();
         }
@@ -185,14 +240,14 @@
 
     async function muatData() {
         const tbody = document.getElementById('isi-tabel');
-        tbody.innerHTML = "<tr><td colspan='8' style='text-align:center; padding:50px;'>⏳ Menghubungkan ke Cloud...</td></tr>";
+        tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; padding:50px;'>⏳ Menghubungkan ke Cloud Database...</td></tr>";
         try {
             const res = await fetch(URL_GAS + "?action=readData", { redirect: 'follow' });
             const data = await res.json();
             cacheData = data.slice(1);
             filterData();
         } catch (err) {
-            tbody.innerHTML = "<tr><td colspan='8' style='text-align:center; color:red; padding:50px;'>❌ Gagal memuat data.</td></tr>";
+            tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red; padding:50px;'>❌ Gagal memuat data. Cek Izin Deployment Script.</td></tr>";
         }
     }
 
@@ -222,19 +277,20 @@
                 <tr>
                     <td style="color:#64748b; font-size:0.75rem">${r[0] ? new Date(r[0]).toLocaleString('id-ID') : '-'}</td>
                     <td style="font-weight:700">${r[1] || '-'}</td>
-                    <td>${r[2] || '-'}</td>
+                    <td><span style="font-weight:600; color:var(--aksen)">${r[2] || '-'}</span></td>
                     <td style="font-size:0.8rem">${r[3] || '-'}</td>
-                    <td style="font-weight:800; color:var(--aksen)">${r[4] || '0'}</td>
+                    <td style="font-weight:800; color:var(--utama)">${r[4] || '0'}</td>
+                    <td>${r[5] || '0'}x</td>
                     <td>Ke-${r[6] || '1'}</td>
                     <td><span class="badge ${stClass}">${r[7] || '-'}</span></td>
-                    <td style="font-size:0.7rem; color:#94a3b8">${r[8] || '-'}</td>
+                    <td style="font-size:0.7rem; color:#94a3b8; max-width:150px; overflow:hidden; text-overflow:ellipsis">${r[8] || '-'}</td>
                 </tr>`;
         });
     }
 
     function eksporExcel() {
         const wb = XLSX.utils.table_to_book(document.getElementById('tabel-utama'));
-        XLSX.writeFile(wb, "Data_Monitoring_ElangDigital_2026.xlsx");
+        XLSX.writeFile(wb, "Rekap_Progres_ElangDigital_2026.xlsx");
     }
 </script>
 </body>
