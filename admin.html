@@ -20,25 +20,28 @@
         .img-admin { width: 110px; border-radius: 50%; border: 4px solid var(--aksen); margin-bottom: 20px; }
         input[type="password"] { padding: 12px; border-radius: 8px; border: 2px solid #e2e8f0; width: 300px; font-size: 1rem; outline: none; }
         
-        /* Dashboard Content */
+        /* Header Dashboard */
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px; }
-        .btn { border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; transition: 0.2s; }
+        .btn { border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
         .btn-blue { background: var(--aksen); }
         .btn-green { background: var(--sukses); }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
         /* Filter */
-        .filter-bar { background: #f1f5f9; padding: 15px; border-radius: 12px; display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-end; }
-        select { padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; background: white; }
+        .filter-bar { background: #f1f5f9; padding: 15px; border-radius: 12px; display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; align-items: flex-end; }
+        select { padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; background: var(--putih); min-width: 180px; }
 
         /* Tabel */
         .table-area { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th { background: var(--utama); color: white; padding: 12px; text-align: left; }
+        th { background: var(--utama); color: white; padding: 12px; text-align: left; white-space: nowrap; }
         td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; }
+        tr:hover { background: #f8fafc; }
         
         .badge { padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.7rem; text-transform: uppercase; }
         .tuntas { background: #dcfce7; color: #166534; }
         .remedial { background: #fee2e2; color: #991b1b; }
+        .device-info { font-size: 0.7rem; color: #94a3b8; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     </style>
 </head>
 <body>
@@ -47,19 +50,19 @@
     <div id="area-login" class="login-box">
         <img src="images/Pak-Agus.png" class="img-admin" alt="Pak Agus">
         <h2>Panel Kendali Elang Digital</h2>
-        <input type="password" id="admin-pass" placeholder="Masukkan Kode khusus"><br><br>
+        <input type="password" id="admin-pass" placeholder="Masukkan Kode ADMIN2026"><br><br>
         <button class="btn btn-blue" onclick="cekLogin()">🔓 Buka Dashboard</button>
     </div>
 
     <div id="area-dashboard" style="display:none;">
         <div class="header">
             <div>
-                <h1 style="margin:0;">Monitoring Progres Siswa</h1>
-                <p style="margin:5px 0 0; opacity:0.7;">Analitik Data Real-Time &copy; 2026</p>
+                <h1 style="margin:0; font-size: 1.6rem;">Monitoring Progres Siswa</h1>
+                <p style="margin:5px 0 0; opacity:0.7;">Analitik Data 9 Kolom &copy; 2026</p>
             </div>
             <div>
-                <button class="btn btn-blue" onclick="muatData()">🔄 Refresh</button>
-                <button class="btn btn-green" onclick="eksporKeExcel()">📥 Excel</button>
+                <button class="btn btn-blue" onclick="muatData()">🔄 Refresh Data</button>
+                <button class="btn btn-green" onclick="eksporExcel()">📥 Ekspor Excel</button>
             </div>
         </div>
 
@@ -68,14 +71,17 @@
                 <label style="font-size:0.8rem; font-weight:bold;">Filter Kelas:</label><br>
                 <select id="filt-kelas" onchange="filterDataAdmin()">
                     <option value="SEMUA">-- Semua Kelas --</option>
-                    <option value="KELAS 10-1">10-1</option><option value="KELAS 10-2">10-2</option>
-                    <option value="KELAS 10-3">10-3</option><option value="KELAS 10-4">10-4</option>
-                    <option value="KELAS 10-5">10-5</option><option value="KELAS 10-6">10-6</option>
+                    <option value="KELAS 10-1">10-1</option>
+                    <option value="KELAS 10-2">10-2</option>
+                    <option value="KELAS 10-3">10-3</option>
+                    <option value="KELAS 10-4">10-4</option>
+                    <option value="KELAS 10-5">10-5</option>
+                    <option value="KELAS 10-6">10-6</option>
                     <option value="KELAS 10-7">10-7</option>
                 </select>
             </div>
-            <div style="margin-left:auto;">
-                <b>Total Terfilter: <span id="label-total">0</span> Data</b>
+            <div style="margin-left:auto; text-align:right;">
+                <b>Ditemukan: <span id="label-total">0</span> Data</b>
             </div>
         </div>
 
@@ -83,7 +89,15 @@
             <table id="tabel-utama">
                 <thead>
                     <tr>
-                        <th>Waktu</th><th>Nama Siswa</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Bantuan</th><th>Status</th>
+                        <th>Waktu</th>
+                        <th>Nama Siswa</th>
+                        <th>Kelas</th>
+                        <th>Modul</th>
+                        <th>Skor</th>
+                        <th>Bantuan</th>
+                        <th>Coba Ke-</th>
+                        <th>Status</th>
+                        <th>Device/Browser</th>
                     </tr>
                 </thead>
                 <tbody id="isi-tabel">
@@ -95,8 +109,7 @@
 
 <script>
     const KODE_RAHASIA = "ADMIN2026";
-    // MASUKKAN URL WEB APP ANDA DI SINI
-    const URL_GAS = "https://script.google.com/macros/s/AKfycbywzkacgm1ChC2PPvDPU9w4JIvGK8wMZiDBuRWKmdv8qFtSmDhUUDsahE6Azypztow0/exec"; 
+    const URL_GAS = "https://script.google.com/macros/s/AKfycbwYvmlH091izhAxBnT4klb1d9CQd61RCTb33b9sDrZfuA5I9j8Sxjzoz0ySK6Rd2GEt/exec"; 
     
     let cacheDataSiswa = [];
 
@@ -107,21 +120,22 @@
             document.getElementById('area-dashboard').style.display = 'block';
             muatData();
         } else {
-            alert("Kode Salah! Gunakan ADMIN2026");
+            alert("Kode Akses Salah!");
         }
     }
 
     async function muatData() {
         const tbody = document.getElementById('isi-tabel');
-        tbody.innerHTML = "<tr><td colspan='7' style='text-align:center;'>⏳ Mengambil data...</td></tr>";
+        tbody.innerHTML = "<tr><td colspan='9' style='text-align:center;'>⏳ Mengambil data dari server...</td></tr>";
 
         try {
             const res = await fetch(URL_GAS + "?action=readData", { redirect: 'follow' });
             const data = await res.json();
-            cacheDataSiswa = data.slice(1); // Potong baris header
+            cacheDataSiswa = data.slice(1); // Lewati baris header
             filterDataAdmin();
         } catch (err) {
-            tbody.innerHTML = "<tr><td colspan='7' style='text-align:center; color:red;'>❌ Gagal muat data. Cek Izin Deployment 'Anyone'.</td></tr>";
+            console.error(err);
+            tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red;'>❌ Gagal muat data. Periksa koneksi atau izin Deployment.</td></tr>";
         }
     }
 
@@ -134,26 +148,29 @@
         document.getElementById('label-total').innerText = filtered.length;
 
         filtered.forEach(r => {
-            const tuntas = r[7] === "TUNTAS";
+            // Mapping Kolom: A(0), B(1), C(2), D(3), E(4), F(5), G(6), H(7), I(8)
+            const dateStr = r[0] ? new Date(r[0]).toLocaleString('id-ID') : "-";
+            const stClass = (r[7] && r[7].toString().toUpperCase() === "TUNTAS") ? "tuntas" : "remedial";
+            
             tbody.innerHTML += `
                 <tr>
-                    <td>${new Date(r[0]).toLocaleDateString()}</td>
-                    <td><b>${r[1]}</b></td>
-                    <td>${r[2]}</td>
-                    <td>${r[3]}</td>
-                    <td style="font-weight:bold">${r[4]}</td>
-                    <td>${r[5]}x</td>
-                    <td><span class="badge ${tuntas ? 'tuntas' : 'remedial'}">${r[7]}</span></td>
+                    <td>${dateStr}</td>
+                    <td><b>${r[1] || '-'}</b></td>
+                    <td>${r[2] || '-'}</td>
+                    <td>${r[3] || '-'}</td>
+                    <td style="font-weight:bold">${r[4] || '0'}</td>
+                    <td>${r[5] || '0'}x</td>
+                    <td>${r[6] || '1'}</td>
+                    <td><span class="badge ${stClass}">${r[7] || '-'}</span></td>
+                    <td class="device-info" title="${r[8]}">${r[8] || '-'}</td>
                 </tr>`;
         });
     }
 
-    function eksporKeExcel() {
+    function eksporExcel() {
         const wb = XLSX.utils.table_to_book(document.getElementById('tabel-utama'));
-        XLSX.writeFile(wb, "Rekap_Nilai_ElangDigital.xlsx");
+        XLSX.writeFile(wb, "Rekap_Nilai_ElangDigital_2026.xlsx");
     }
 </script>
 </body>
 </html>
-
-
