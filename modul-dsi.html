@@ -8,7 +8,7 @@
         :root {
             --warna-utama: #0891B2; /* Cyan untuk DSI */
             --warna-aksen: #0284C7; 
-            --warna-merah: #EF4444; /* Merah untuk Tombol PDF */
+            --warna-merah: #EF4444; 
             --warna-merah-hover: #DC2626;
             --warna-kuning: #F59E0B; 
             --warna-latar: #F3F4F6; 
@@ -23,7 +23,6 @@
         .header { background: var(--warna-utama); color: white; padding: 50px 20px 30px 20px; text-align: center; position: relative; }
         .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; }
         
-        /* TOMBOL HEADER SERAGAM (HOME & LOGOUT) */
         .btn-header { 
             position: absolute; 
             top: 15px; 
@@ -67,17 +66,16 @@
         .teks-materi { background: #f9fafb; padding: 25px; border-radius: 12px; border: 1px solid #e5e7eb; height: 500px; overflow-y: auto; text-align: justify; line-height: 1.7; }
         .teks-materi h3 { color: var(--warna-utama); border-bottom: 2px solid #eee; padding-bottom: 8px; margin-top: 25px; }
 
-        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; }
+        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; transition: 0.2s; }
         .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); font-weight: bold; color: var(--warna-utama); }
 
         .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
-        .btn-submit { background: var(--warna-aksen); }
+        .btn-submit { background: var(--warna-aksen); } 
         .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
 
-        /* Tombol PDF Merah Profesional */
-        .pdf-box { background: #ECFEFF; padding: 18px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
-        .btn-pdf-merah { background: var(--warna-merah) !important; color: white !important; text-decoration: none; display: inline-block; width: auto; padding: 12px 25px; border-radius: 8px; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 10px rgba(225, 29, 72, 0.2); }
+        .pdf-box { background: #CFFAFE; padding: 18px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
+        .btn-pdf-merah { background: var(--warna-merah) !important; color: white !important; text-decoration: none; display: inline-block; width: auto; padding: 12px 25px; border-radius: 8px; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 10px rgba(8, 145, 178, 0.2); }
         .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.03); }
 
         .angka-skor { font-size: 4.5rem; font-weight: bold; color: var(--warna-utama); text-align: center; margin: 10px 0;}
@@ -99,8 +97,8 @@
             <div id="area-login" class="area-konten area-aktif">
                 <div class="login-card">
                     <img src="images/Pak-Agus.png" alt="Pak Agus" class="Pak-Agus-img">
-                    <h2>Halo, Warga Digital!</h2>
-                    <p>Pak Agus akan membimbingmu memahami etika dan sejarah penting dunia digital kita.</p>
+                    <h2>Halo Warga Digital!</h2>
+                    <p>Pak Agus akan membimbingmu memahami etika, sejarah, dan dampak dunia digital bagi masyarakat.</p>
                     <select id="pilih-kelas" class="input-nama" onchange="filterNama()">
                         <option value="">-- Pilih Kelas --</option>
                     </select>
@@ -116,17 +114,23 @@
                     <div class="mentor-avatar"><img src="images/Pak-Agus.png" alt="Pak Agus"></div>
                     <div class="mentor-message">
                         <span class="mentor-name">Pak Agus :</span>
-                        <span id="pesan-mentor">Selamat datang di modul DSI!</span>
+                        <span id="pesan-mentor">Semangat belajar!</span>
                     </div>
                 </div>
             </div>
 
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
-                    <b>Sejarah dan Tokoh Informatika </b><br /><br />Perkembangan teknologi komputer tidak lepas dari peran para pionir dunia: <br /><b>Charles Babbage</b>: Dijuluki sebagai "Bapak Komputer" karena menggagas konsep Analytical Engine, mesin komputasi pertama yang dapat diprogram. <br /><br /><b>Ada Lovelace</b>: Diakui sebagai Programmer Pertama di dunia karena menulis algoritma pertama untuk mesin buatan Babbage. <br /><br /><b>Tim Berners-Lee</b>: Ilmuwan yang menemukan World Wide Web (WWW) di lab CERN pada tahun 1989, yang memungkinkan informasi dibagikan secara global secara gratis. <br /><br /><b>Perkembangan Perangkat Keras (Generasi Komputer) </b><br />Teknologi komputer terus berevolusi dalam hal ukuran dan efisiensi: <br />Komputer Generasi Pertama (1946): Contohnya adalah ENIAC. Ukurannya sebesar ruangan karena menggunakan Tabung Hampa Udara (Vacuum Tube) sebagai komponen utamanya. Komponen ini mudah panas dan boros listrik. <br /><br /><b>Etika dan Hukum dalam Informatika </b><br />Dalam berinteraksi di dunia digital, terdapat aturan dan etika yang harus dipatuhi: <br /><b>UU ITE (Informasi dan Transaksi Elektronik)</b>:&nbsp;<div>Peraturan hukum di Indonesia yang mengatur penggunaan teknologi informasi, termasuk sanksi bagi penyebar berita palsu (Hoax) dan ujaran kebencian. <br /><b>Hak Kekayaan Intelektual (HKI):</b>&nbsp;</div><div>Perlindungan hukum terhadap karya pikiran manusia (foto, tulisan, software). Menggunakan karya orang lain tanpa izin melanggar HKI. <br /><b>Netiquette (Network Etiquette)</b>:&nbsp;</div><div>Etika dan sopan santun dalam berkomunikasi melalui internet. <br /><b>Jejak Digital (Digital Footprint):</b>&nbsp;</div><div>Seluruh riwayat aktivitas atau data yang ditinggalkan pengguna saat menggunakan internet yang dapat dilacak oleh orang lain.</div><div>&nbsp; <br /><b>Lisensi Perangkat Lunak (Software) </b><br />Berdasarkan keterbukaan kode dan hak gunanya, software dibagi menjadi: <br /><b>Open Source Software</b>:&nbsp;</div><div>Perangkat lunak yang kode sumbernya dibuka untuk publik. Siapa saja boleh melihat, memodifikasi, dan mendistribusikan ulang secara gratis. <br /><b>Proprietary Software (Berpemilik):</b>&nbsp;</div><div>Software dengan lisensi tertutup dan berbayar. Pengguna dilarang memodifikasi kodenya (Contoh: Microsoft Windows). <br /><b>Pembajakan (Piracy)</b>:&nbsp;</div><div>Tindakan mendistribusikan atau menjual software berbayar tanpa izin resmi. <br /><br /><b>Dampak Sosial dan Implementasi TIK </b><br />Teknologi Informasi dan Komunikasi (TIK) memiliki pengaruh besar dalam berbagai bidang: <br /><b>Bidang Kesehatan:</b>&nbsp;</div><div>Penggunaan Telemedicine, yaitu layanan konsultasi dokter jarak jauh melalui aplikasi. <br /><b>Dampak Negatif</b>:&nbsp;</div><div>Munculnya fenomena Cyberbullying dan penyebaran berita palsu (Hoax). <br /><b>Dampak Positif</b>:&nbsp;</div><div>Memudahkan akses pendidikan (E-learning) dan perdagangan (E-commerce). <br /><br /><b>Profesi di Bidang Informatika </b><br />Perkembangan teknologi menciptakan peluang karier baru, antara lain: <br /><b>Software Engineer / Programmer</b>:&nbsp;</div><div>Merancang dan menulis kode bahasa pemrograman untuk membuat aplikasi. <br /><b>Data Scientist / Data Analyst:</b>&nbsp;</div><div>Mengumpulkan dan menganalisis kumpulan data besar (Big Data) untuk mencari tren atau informasi berharga bagi organisasi. <br /><br /> </div>
-
+                    <h3>Etika dan Dampak Sosial</h3>
+                    <p>Informatika tidak hanya soal teknis, tapi juga soal bagaimana teknologi mempengaruhi kehidupan manusia, hukum yang berlaku (UU ITE), serta etika berinternet (Netiquette).</p>
+                    <h3>Sejarah Singkat:</h3>
+                    <ul>
+                        <li><strong>Charles Babbage:</strong> Bapak Komputer Dunia.</li>
+                        <li><strong>Ada Lovelace:</strong> Programmer wanita pertama.</li>
+                        <li><strong>Generasi ENIAC:</strong> Komputer pertama berukuran raksasa.</li>
+                    </ul>
                     <div class="pdf-box">
-                        <p style="margin-bottom: 12px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi lengkap?</p>
+                        <p style="margin-bottom: 12px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi DSI lengkap?</p>
                         <a href="LINK_GOOGLE_DRIVE_PDF_DSI_BAPAK" target="_blank" class="btn-pdf-merah">
                             📥 Buka Naskah Materi (PDF)
                         </a>
@@ -147,9 +151,11 @@
                 <div id="wrapper-nama-hasil" class="nama-hasil"></div>
                 <div class="angka-skor" id="teks-skor">0</div>
                 <p id="keterangan-hasil" style="text-align: center; font-weight: bold; font-size: 1.2rem; margin-top: 0;"></p>
+                <p id="teks-percobaan" style="text-align: center; font-weight: bold; color: var(--warna-utama); margin: 5px 0;"></p>
                 <p id="teks-penalti" style="text-align: center; color: var(--warna-merah); margin-top: 5px;"></p>
-                <button id="tombol-ulang" class="btn-action" style="display: none;" onclick="tampilkanMateri()">🔄 Remedial</button>
-                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="window.location.href='index.html'">✅ Selesai</button>
+                
+                <button id="tombol-ulang" class="btn-action" style="display: none;" onclick="jalankanRemedial()">🔄 Remedial (Ulangi Kuis)</button>
+                <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="kembaliKeHome()">✅ Selesai</button>
             </div>
         </div>
 
@@ -164,11 +170,14 @@
     <script>
         let namaSiswa = ""; let kelasSiswa = ""; let daftarSoalBerjalan = [];
         let indeksSoalSekarang = 0; let jumlahBenar = 0; let jawabanTerpilihSementara = null;
-        let bantuanPerSoalDipakai = false; let totalKaliBantuan = 0; let jumlahPercobaan = 0;
+        let bantuanPerSoalDipakai = false; let totalKaliBantuan = 0; let jumlahPercobaan = 1;
         const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec"; 
 
         function simpanProgres(fase) {
-            localStorage.setItem('progres_dsi', JSON.stringify({ nama: namaSiswa, kelas: kelasSiswa, fase: fase, soal: daftarSoalBerjalan, indeks: indeksSoalSekarang, benar: jumlahBenar, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan }));
+            localStorage.setItem('progres_dsi', JSON.stringify({ 
+                nama: namaSiswa, kelas: kelasSiswa, fase: fase, soal: daftarSoalBerjalan, 
+                indeks: indeksSoalSekarang, benar: jumlahBenar, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan 
+            }));
         }
 
         window.onload = function() {
@@ -176,17 +185,15 @@
             if(simpanan) {
                 const p = JSON.parse(simpanan);
                 namaSiswa = p.nama; kelasSiswa = p.kelas; daftarSoalBerjalan = p.soal; indeksSoalSekarang = p.indeks;
-                jumlahBenar = p.benar; totalKaliBantuan = p.bantuan; jumlahPercobaan = p.percobaan;
+                jumlahBenar = p.benar; totalKaliBantuan = p.bantuan; jumlahPercobaan = p.percobaan || 1;
                 document.getElementById('area-mentor-global').style.display = "block";
                 document.getElementById('btn-logout').style.display = "block";
-                if(p.fase === 'materi') tampilkanMateri(); else muatSoal();
-            } else {
-                inisialisasiDropdown();
-            }
+                if(p.fase === 'materi') tampilkanMateri(); else if(p.fase === 'hasil') tampilkanHasil(); else muatSoal();
+            } else { inisialisasiDropdown(); }
         };
 
         function logoutSiswa() {
-            if(confirm("Apakah Anda ingin Logout? Progres belajar di modul ini akan dihapus.")) {
+            if(confirm("Logout? Progres modul ini akan dihapus.")) {
                 localStorage.removeItem('progres_dsi');
                 window.location.reload();
             }
@@ -226,37 +233,56 @@
 
         function tampilkanMateri() {
             ubahTampilan('area-materi');
-            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! Silakan klik tombol merah di bawah untuk membaca materi lengkapnya ya!`;
+            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! Silakan klik tombol merah di bawah untuk membaca materi ya!`;
             simpanProgres('materi');
         }
 
         function mulaiKuis() {
             ubahTampilan('area-kuis');
-            jumlahPercobaan++;
             if(daftarSoalBerjalan.length === 0) {
                 daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
             }
             muatSoal();
         }
 
+        function jalankanRemedial() {
+            jumlahPercobaan++;
+            indeksSoalSekarang = 0;
+            jumlahBenar = 0;
+            totalKaliBantuan = 0;
+            jawabanTerpilihSementara = null;
+            bantuanPerSoalDipakai = false;
+            daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
+            muatSoal();
+        }
+
         function muatSoal() {
             ubahTampilan('area-kuis');
             let s = daftarSoalBerjalan[indeksSoalSekarang];
+            jawabanTerpilihSementara = null; 
+            bantuanPerSoalDipakai = false;
+            
             document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1}/15`;
             document.getElementById('teks-soal').innerText = s.p;
-            jawabanTerpilihSementara = null; bantuanPerSoalDipakai = false;
             document.getElementById('tombol-bantuan').disabled = false;
             document.getElementById('kotak-mentor').className = "mentor-box";
             document.getElementById('pesan-mentor').innerText = "Jadilah warga digital yang bijak dengan jawaban tepat.";
+            
             const btnLanjut = document.getElementById('tombol-lanjut');
-            btnLanjut.disabled = true; btnLanjut.className = "btn-action btn-disabled";
+            btnLanjut.disabled = true; 
+            btnLanjut.className = "btn-action btn-disabled";
+            btnLanjut.innerText = "Pilih Jawaban Dulu";
+            
             const cont = document.getElementById('container-opsi'); cont.innerHTML = '';
             s.o.forEach((txt, i) => {
                 const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = txt;
                 btn.onclick = () => {
                     document.querySelectorAll('.btn-opsi').forEach(b => b.classList.remove('terpilih'));
-                    btn.classList.add('terpilih'); jawabanTerpilihSementara = i;
-                    btnLanjut.disabled = false; btnLanjut.className = "btn-action btn-submit";
+                    btn.classList.add('terpilih'); 
+                    jawabanTerpilihSementara = i;
+                    btnLanjut.disabled = false; 
+                    btnLanjut.className = "btn-action btn-submit";
+                    btnLanjut.innerText = "Simpan & Lanjut";
                 };
                 cont.appendChild(btn);
             });
@@ -267,7 +293,7 @@
             if(bantuanPerSoalDipakai) return;
             bantuanPerSoalDipakai = true; totalKaliBantuan++;
             document.getElementById('kotak-mentor').className = "mentor-box peringatan";
-            document.getElementById('pesan-mentor').innerText = `${daftarSoalBerjalan[indeksSoalSekarang].b}`;
+            document.getElementById('pesan-mentor').innerText = ` ${daftarSoalBerjalan[indeksSoalSekarang].b}`;
             document.getElementById('tombol-bantuan').disabled = true;
             simpanProgres('kuis');
         }
@@ -287,21 +313,32 @@
             
             document.getElementById('wrapper-nama-hasil').innerText = namaSiswa;
             document.getElementById('teks-skor').innerText = skorAkhir;
+            document.getElementById('teks-percobaan').innerText = `Percobaan Ke-${jumlahPercobaan}`;
             
             const tuntas = skorAkhir >= 100;
-            document.getElementById('keterangan-hasil').innerText = tuntas ? "WARGA DIGITAL UNGGUL" : "PERLU LITERASI LAGI";
-            document.getElementById('pesan-mentor').innerText = tuntas ? "Pak Agus bangga! Kamu paham etika digital." : "Jangan lelah belajar etika berinternet ya!";
+            document.getElementById('keterangan-hasil').innerText = tuntas ? "WARGA DIGITAL UNGGUL" : "PERLU LITERASI LAGI (BELUM TUNTAS)";
+            document.getElementById('pesan-mentor').innerText = tuntas ? "Luar biasa! Kamu memahami etika dan sejarah digital dengan sangat baik." : "Jangan menyerah, Programmer hebat lahir dari banyak mencoba!";
             document.getElementById('teks-penalti').innerText = totalKaliBantuan > 0 ? `(Penalti bantuan: -${totalPenalti} poin)` : "";
+            
             document.getElementById('tombol-selesai').style.display = tuntas ? "block" : "none";
             document.getElementById('tombol-ulang').style.display = tuntas ? "none" : "block";
             
-            fetch(URL_APPS_SCRIPT + "?" + new URLSearchParams({ namaSiswa, kelasSiswa, modul: "Dampak Sosial Informatika (DSI)", skor: skorAkhir, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, status: tuntas ? "TUNTAS" : "REMEDIAL", browser: navigator.userAgent }), { method: 'GET', mode: 'no-cors' });
-            localStorage.removeItem('progres_dsi');
+            fetch(URL_APPS_SCRIPT + "?" + new URLSearchParams({ 
+                namaSiswa, kelasSiswa, modul: "Dampak Sosial Informatika (DSI)", skor: skorAkhir, 
+                bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, 
+                status: tuntas ? "TUNTAS" : "REMEDIAL", browser: navigator.userAgent 
+            }), { method: 'GET', mode: 'no-cors' });
+            
+            simpanProgres('hasil');
         }
 
         function ubahTampilan(id) {
             document.querySelectorAll('.area-konten').forEach(a => a.style.display = 'none');
             document.getElementById(id).style.display = 'block';
+        }
+        function kembaliKeHome() { 
+            localStorage.removeItem('progres_dsi');
+            window.location.href = "index.html"; 
         }
     </script>
 </body>
