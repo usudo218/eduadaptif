@@ -2,72 +2,51 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Admin - ELANG DIGITAL</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
-        :root {
-            --utama: #1e293b; --aksen: #4f46e5; --sukses: #10b981;
-            --bg: #f8fafc; --teks: #334155; --bahaya: #ef4444;
-        }
+        :root { --utama: #1e293b; --aksen: #4f46e5; --sukses: #10b981; --bg: #f8fafc; }
         * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: var(--bg); color: var(--teks); margin: 0; padding: 20px; }
-        .container { background: white; max-width: 1400px; margin: auto; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); padding: 30px; }
-        
-        /* Login Box */
+        body { background: var(--bg); margin: 0; padding: 20px; color: #334155; }
+        .container { background: white; max-width: 1300px; margin: auto; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); padding: 30px; }
         .login-box { text-align: center; padding: 50px 20px; }
         .img-admin { width: 100px; border-radius: 50%; border: 3px solid var(--aksen); margin-bottom: 15px; }
-        
-        /* Dashboard */
+        input[type="password"] { padding: 12px; border-radius: 8px; border: 1px solid #ddd; width: 280px; font-size: 1rem; }
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px; }
-        .filter-bar { background: #f1f5f9; padding: 20px; border-radius: 12px; display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; align-items: flex-end; }
-        .filter-group { display: flex; flex-direction: column; gap: 5px; }
-        select, input { padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.9rem; }
-        
-        /* Table */
-        .table-area { overflow-x: auto; }
+        .btn { border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; transition: 0.2s; }
+        .btn-blue { background: var(--aksen); }
+        .btn-green { background: var(--sukses); }
+        .filter-bar { background: #f1f5f9; padding: 15px; border-radius: 12px; display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-end; }
         table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th { background: var(--utama); color: white; padding: 12px; text-align: left; position: sticky; top: 0; }
+        th { background: var(--utama); color: white; padding: 12px; text-align: left; }
         td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; }
-        tr:hover { background: #f8fafc; }
-        
         .badge { padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.7rem; text-transform: uppercase; }
         .tuntas { background: #dcfce7; color: #166534; }
         .remedial { background: #fee2e2; color: #991b1b; }
-        
-        .btn { border: none; padding: 10px 18px; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; transition: 0.2s; }
-        .btn-blue { background: var(--aksen); }
-        .btn-green { background: var(--sukses); }
-        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
-
-        .stat-card { background: var(--aksen); color: white; padding: 15px 25px; border-radius: 10px; display: inline-block; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div id="login-section" class="login-box">
-        <img src="images/Pak-Agus.png" class="img-admin" alt="Pak Agus">
+        <img src="images/Pak-Agus.png" class="img-admin">
         <h2>Panel Admin Elang Digital</h2>
-        <input type="password" id="admin-pass" placeholder="Kode Akses Admin"><br><br>
-        <button class="btn btn-blue" onclick="handleLogin()">Masuk Dashboard</button>
+        <input type="password" id="admin-pass" placeholder="Kode Akses (ADMIN2026)"><br><br>
+        <button class="btn btn-blue" onclick="handleLogin()">🔓 Masuk Dashboard</button>
     </div>
 
     <div id="dashboard-section" style="display:none;">
         <div class="header">
+            <h1>Monitoring Progres Siswa</h1>
             <div>
-                <h1 style="margin:0;">Monitoring Progres Siswa</h1>
-                <p style="margin:5px 0 0; opacity:0.7;">Edu-Learning Analitik & Guard Digital &copy; 2026</p>
-            </div>
-            <div>
-                <button class="btn btn-blue" onclick="fetchData()">🔄 Segarkan Data</button>
+                <button class="btn btn-blue" onclick="fetchData()">🔄 Segarkan</button>
                 <button class="btn btn-green" onclick="exportExcel()">📥 Ekspor Excel</button>
             </div>
         </div>
 
         <div class="filter-bar">
-            <div class="filter-group">
-                <label>Pilih Kelas:</label>
+            <div>
+                <label>Kelas:</label><br>
                 <select id="filt-kelas" onchange="applyFilters()">
                     <option value="SEMUA">-- Semua Kelas --</option>
                     <option value="KELAS 10-1">KELAS 10-1</option>
@@ -79,46 +58,27 @@
                     <option value="KELAS 10-7">KELAS 10-7</option>
                 </select>
             </div>
-            <div class="filter-group">
-                <label>Pilih Modul:</label>
+            <div>
+                <label>Modul:</label><br>
                 <select id="filt-modul" onchange="applyFilters()">
                     <option value="SEMUA">-- Semua Modul --</option>
-                    <option value="BK">BK (Berpikir Komputasional)</option>
-                    <option value="TIK">TIK (Teknologi Informasi)</option>
-                    <option value="SK">SK (Sistem Komputer)</option>
-                    <option value="JKI">JKI (Jaringan Komputer)</option>
-                    <option value="AD">AD (Analisis Data)</option>
-                    <option value="AP">AP (Algoritma Pemrograman)</option>
-                    <option value="DSI">DSI (Dampak Sosial)</option>
-                    <option value="PLB">PLB (Praktik Lintas Bidang)</option>
+                    <option value="BK">BK</option><option value="TIK">TIK</option>
+                    <option value="SK">SK</option><option value="JKI">JKI</option>
+                    <option value="AD">AD</option><option value="AP">AP</option>
+                    <option value="DSI">DSI</option><option value="PLB">PLB</option>
                 </select>
             </div>
-            <div style="margin-left:auto; text-align:right;">
-                <div class="stat-card">
-                    <small>Data Terfilter</small><br>
-                    <b id="total-count" style="font-size: 1.2rem;">0</b> Data
-                </div>
-            </div>
+            <div style="margin-left:auto;"><b>Total: <span id="total-count">0</span> Data</b></div>
         </div>
 
-        <div class="table-area">
+        <div style="overflow-x:auto;">
             <table id="main-table">
                 <thead>
                     <tr>
-                        <th>Waktu</th>
-                        <th>Nama Siswa</th>
-                        <th>Kelas</th>
-                        <th>Modul</th>
-                        <th>Skor</th>
-                        <th>Bantuan</th>
-                        <th>Coba Ke-</th>
-                        <th>Status</th>
-                        <th>Browser/Info</th>
+                        <th>Waktu</th><th>Nama</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Bantuan</th><th>Percobaan</th><th>Status</th><th>Browser</th>
                     </tr>
                 </thead>
-                <tbody id="table-body">
-                    <tr><td colspan="9" style="text-align:center;">Menunggu instruksi...</td></tr>
-                </tbody>
+                <tbody id="table-body"></tbody>
             </table>
         </div>
     </div>
@@ -126,8 +86,9 @@
 
 <script>
     const SECRET_KEY = "ADMIN2026";
-    // PASTI-KAN URL DI BAWAH ADALAH HASIL DEPLOY TERBARU (ANYONE)
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwYvmlH091izhAxBnT4klb1d9CQd61RCTb33b9sDrZfuA5I9j8Sxjzoz0ySK6Rd2GEt/exec"; 
+    // MASUKKAN URL HASIL DEPLOY TERBARU ANDA DI SINI
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwAdmksUF4knlPXBSnW8BACYslLR9nho_Of4DO3deFwtIEMKRs563aKF5KRm2PF3yQg/exec
+"; 
     
     let dbData = [];
 
@@ -136,39 +97,30 @@
             document.getElementById('login-section').style.display = 'none';
             document.getElementById('dashboard-section').style.display = 'block';
             fetchData();
-        } else {
-            alert("Kode Salah!");
-        }
+        } else { alert("Kode Akses Salah!"); }
     }
 
     async function fetchData() {
         const body = document.getElementById('table-body');
-        body.innerHTML = "<tr><td colspan='9' style='text-align:center;'>⏳ Mengambil data dari Cloud...</td></tr>";
-        
+        body.innerHTML = "<tr><td colspan='9' style='text-align:center;'>⏳ Menghubungkan ke Cloud...</td></tr>";
         try {
-            const response = await fetch(WEB_APP_URL + "?action=readData", {
-                method: 'GET',
-                redirect: 'follow'
-            });
-            const json = await response.json();
-            dbData = json.slice(1); // Lewati baris header spreadsheet
+            // Menggunakan redirect 'follow' agar tidak error CORS
+            const res = await fetch(WEB_APP_URL + "?action=readData", { redirect: 'follow' });
+            const json = await res.json();
+            dbData = json.slice(1); 
             applyFilters();
         } catch (e) {
-            console.error(e);
-            body.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red;'>❌ Gagal memuat data. Periksa koneksi atau Izin Deploy Apps Script (Setel ke 'Anyone').</td></tr>";
+            body.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red;'>❌ Gagal memuat data. Periksa URL Web App atau Izin Deploy (Setel ke 'Anyone').</td></tr>";
         }
     }
 
     function applyFilters() {
         const kls = document.getElementById('filt-kelas').value;
         const mdl = document.getElementById('filt-modul').value;
-        const body = document.getElementById('table-body');
         
         const filtered = dbData.filter(row => {
             const matchKelas = (kls === "SEMUA" || row[2] === kls);
-            // Gunakan includes agar pencarian modul lebih fleksibel (contoh: "BK" di dalam "Elemen BK")
-            const cellModul = (row[3] || "").toString().toUpperCase();
-            const matchModul = (mdl === "SEMUA" || cellModul.includes(mdl.toUpperCase()));
+            const matchModul = (mdl === "SEMUA" || (row[3] && row[3].toString().includes(mdl)));
             return matchKelas && matchModul;
         });
         
@@ -181,36 +133,26 @@
         document.getElementById('total-count').innerText = data.length;
 
         if(data.length === 0) {
-            body.innerHTML = "<tr><td colspan="9" style="text-align:center;">Pesan: Tidak ada data yang cocok.</td></tr>";
+            body.innerHTML = "<tr><td colspan='9' style='text-align:center;'>Pesan: Tidak ada data yang cocok.</td></tr>";
             return;
         }
 
         data.forEach(r => {
-            // Kolom: A(0)=Waktu, B(1)=Nama, C(2)=Kelas, D(3)=Modul, E(4)=Skor, F(5)=Bantuan, G(6)=Percobaan, H(7)=Status, I(8)=Browser
             const dateStr = r[0] ? new Date(r[0]).toLocaleString('id-ID') : "-";
-            const statusCell = (r[7] || "").toString().toUpperCase();
-            const statusClass = statusCell === "TUNTAS" ? "tuntas" : "remedial";
-            
+            const stClass = (r[7] || "").toString() === "TUNTAS" ? "tuntas" : "remedial";
             body.innerHTML += `
                 <tr>
-                    <td>${dateStr}</td>
-                    <td><b>${r[1] || '-'}</b></td>
-                    <td>${r[2] || '-'}</td>
-                    <td>${r[3] || '-'}</td>
-                    <td style="font-weight:bold">${r[4] || '0'}</td>
-                    <td>${r[5] || '0'}x</td>
-                    <td>${r[6] || '1'}</td>
-                    <td><span class="badge ${statusClass}">${r[7] || 'REMEDIAL'}</span></td>
-                    <td style="font-size:0.7rem; color:#94a3b8; max-width:150px; overflow:hidden;">${r[8] || '-'}</td>
-                </tr>
-            `;
+                    <td>${dateStr}</td><td><b>${r[1]}</b></td><td>${r[2]}</td><td>${r[3]}</td>
+                    <td>${r[4]}</td><td>${r[5]}x</td><td>Ke-${r[6]}</td>
+                    <td><span class="badge ${stClass}">${r[7]}</span></td>
+                    <td style="font-size:0.7rem; color:#94a3b8; max-width:150px; overflow:hidden;">${r[8]}</td>
+                </tr>`;
         });
     }
 
     function exportExcel() {
-        const tbl = document.getElementById('main-table');
-        const wb = XLSX.utils.table_to_book(tbl, {sheet: "Laporan Siswa"});
-        XLSX.writeFile(wb, `Laporan_ElangDigital_2026.xlsx`);
+        const wb = XLSX.utils.table_to_book(document.getElementById('main-table'));
+        XLSX.writeFile(wb, "Laporan_ElangDigital_2026.xlsx");
     }
 </script>
 </body>
