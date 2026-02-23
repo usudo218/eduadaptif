@@ -8,41 +8,45 @@
     <style>
         :root {
             --utama: #1e293b; --aksen: #4f46e5; --sukses: #10b981;
-            --bg: #f8fafc; --teks: #334155; --bahaya: #ef4444;
+            --bg: #f8fafc; --teks: #334155; --putih: #ffffff;
         }
-        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: var(--bg); color: var(--teks); margin: 0; padding: 20px; }
         
-        .container { background: white; max-width: 1300px; margin: auto; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); padding: 30px; }
+        .container { background: var(--putih); max-width: 1400px; margin: auto; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); padding: 30px; }
         
-        /* Login Box */
-        .login-box { text-align: center; padding: 50px 20px; }
-        .img-admin { width: 100px; border-radius: 50%; border: 3px solid var(--aksen); margin-bottom: 15px; }
+        /* Area Login */
+        .login-box { text-align: center; padding: 60px 20px; }
+        .img-admin { width: 110px; border-radius: 50%; border: 4px solid var(--aksen); margin-bottom: 20px; }
+        input[type="password"] { padding: 12px; border-radius: 8px; border: 2px solid #e2e8f0; width: 300px; font-size: 1rem; outline: none; transition: 0.3s; }
+        input[type="password"]:focus { border-color: var(--aksen); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
         
-        /* Dashboard */
+        /* Header Dashboard */
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px; }
-        
-        .filter-bar { background: #f1f5f9; padding: 20px; border-radius: 12px; display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; align-items: flex-end; }
-        .filter-group { display: flex; flex-direction: column; gap: 5px; }
-        select, input { padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.9rem; }
-        
-        /* Table */
-        .table-area { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th { background: var(--utama); color: white; padding: 12px; text-align: left; position: sticky; top: 0; }
-        td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; }
-        tr:hover { background: #f8fafc; }
-        
-        .badge { padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.7rem; }
-        .tuntas { background: #dcfce7; color: #166534; }
-        .remedial { background: #fee2e2; color: #991b1b; }
-        
-        .btn { border: none; padding: 10px 18px; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; transition: 0.2s; }
+        .btn { border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
         .btn-blue { background: var(--aksen); }
         .btn-green { background: var(--sukses); }
         .btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
-        .stat-card { background: var(--aksen); color: white; padding: 15px 25px; border-radius: 10px; display: inline-block; margin-bottom: 10px; }
+        /* Filter */
+        .filter-bar { background: #f1f5f9; padding: 20px; border-radius: 12px; display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 25px; align-items: flex-end; }
+        .filter-group { display: flex; flex-direction: column; gap: 6px; }
+        .filter-group label { font-size: 0.8rem; font-weight: bold; color: var(--utama); }
+        select { padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.9rem; background: var(--putih); min-width: 200px; cursor: pointer; }
+
+        /* Tabel */
+        .table-area { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th { background: var(--utama); color: white; padding: 15px; text-align: left; }
+        td { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; }
+        tr:hover { background: #f8fafc; }
+        
+        .badge { padding: 5px 10px; border-radius: 6px; font-weight: bold; font-size: 0.7rem; }
+        .tuntas { background: #dcfce7; color: #166534; }
+        .remedial { background: #fee2e2; color: #991b1b; }
+        .browser-info { font-size: 0.7rem; color: #94a3b8; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        .loading-text { font-weight: bold; color: var(--aksen); text-align: center; padding: 20px; }
     </style>
 </head>
 <body>
@@ -50,16 +54,17 @@
 <div class="container">
     <div id="login-section" class="login-box">
         <img src="images/Pak-Agus.png" class="img-admin" alt="Pak Agus">
-        <h2>Panel Admin Elang Digital</h2>
-        <input type="password" id="admin-pass" placeholder="Kode Akses Admin"><br><br>
-        <button class="btn btn-blue" onclick="handleLogin()">Masuk Dashboard</button>
+        <h2>Panel Kendali Elang Digital</h2>
+        <p>Gunakan kode akses admin untuk memantau data secara real-time.</p>
+        <input type="password" id="admin-pass" placeholder="Masukkan Kode Akses Admin"><br><br>
+        <button class="btn btn-blue" onclick="handleLogin()">🔓 Buka Dashboard</button>
     </div>
 
     <div id="dashboard-section" style="display:none;">
         <div class="header">
             <div>
-                <h1 style="margin:0;">Monitoring Progres Siswa</h1>
-                <p style="margin:5px 0 0; opacity:0.7;">Edu-Learning Analitik & Guard Digital &copy; 2026</p>
+                <h1 style="margin:0; font-size: 1.6rem;">Monitoring Progres Siswa</h1>
+                <p style="margin:5px 0 0; opacity:0.7;">SMA Negeri 1 Muncar &copy; 2026</p>
             </div>
             <div>
                 <button class="btn btn-blue" onclick="fetchData()">🔄 Segarkan Data</button>
@@ -69,7 +74,7 @@
 
         <div class="filter-bar">
             <div class="filter-group">
-                <label>Pilih Kelas:</label>
+                <label>Filter Kelas:</label>
                 <select id="filt-kelas" onchange="applyFilters()">
                     <option value="SEMUA">-- Semua Kelas --</option>
                     <option value="KELAS 10-1">KELAS 10-1</option>
@@ -82,7 +87,7 @@
                 </select>
             </div>
             <div class="filter-group">
-                <label>Pilih Modul:</label>
+                <label>Filter Modul:</label>
                 <select id="filt-modul" onchange="applyFilters()">
                     <option value="SEMUA">-- Semua Modul --</option>
                     <option value="BK">Berpikir Komputasional (BK)</option>
@@ -96,9 +101,9 @@
                 </select>
             </div>
             <div style="margin-left:auto; text-align:right;">
-                <div class="stat-card">
-                    <small>Data Terpilih</small><br>
-                    <b id="total-count" style="font-size: 1.2rem;">0</b> Data
+                <div style="background: var(--aksen); color: white; padding: 12px 20px; border-radius: 10px;">
+                    <small>Ditemukan</small><br>
+                    <b id="total-count" style="font-size: 1.3rem;">0</b> Data
                 </div>
             </div>
         </div>
@@ -119,7 +124,7 @@
                     </tr>
                 </thead>
                 <tbody id="table-body">
-                    <tr><td colspan="9" style="text-align:center;">Menunggu instruksi...</td></tr>
+                    <tr><td colspan="9" class="loading-text">Menunggu instruksi...</td></tr>
                 </tbody>
             </table>
         </div>
@@ -127,33 +132,41 @@
 </div>
 
 <script>
+    // KODE AKSES ADMIN
     const SECRET_KEY = "ADMIN2026";
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxhnf2aRSA8OUE3o49k10oDFgZPkrr_z1InUl0ORitik1UbPtkWdiSR9ANVp6wxjwdb/exec
+    // PASTI-KAN URL INI ADALAH URL HASIL DEPLOY TERBARU ANDA
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbywzkacgm1ChC2PPvDPU9w4JIvGK8wMZiDBuRWKmdv8qFtSmDhUUDsahE6Azypztow0/exec
 "; 
     
     let dbData = [];
 
     function handleLogin() {
-        if(document.getElementById('admin-pass').value === SECRET_KEY) {
+        const pass = document.getElementById('admin-pass').value;
+        if(pass === SECRET_KEY) {
             document.getElementById('login-section').style.display = 'none';
             document.getElementById('dashboard-section').style.display = 'block';
             fetchData();
         } else {
-            alert("Kode Salah!");
+            alert("Kode Akses Salah! Gunakan ADMIN2026");
         }
     }
 
     async function fetchData() {
         const body = document.getElementById('table-body');
-        body.innerHTML = "<tr><td colspan='9' style='text-align:center;'>⏳ Mengambil data dari Cloud...</td></tr>";
+        body.innerHTML = "<tr><td colspan='9' class='loading-text'>⏳ Sedang menyinkronkan data dengan Cloud...</td></tr>";
         
         try {
-            const response = await fetch(WEB_APP_URL + "?action=readData");
+            // Menggunakan redirect follow untuk menangani URL Google Script
+            const response = await fetch(WEB_APP_URL + "?action=readData", {
+                method: 'GET',
+                redirect: 'follow'
+            });
             const json = await response.json();
-            dbData = json.slice(1); // Lewati header spreadsheet
+            dbData = json.slice(1); // Potong header baris pertama
             applyFilters();
         } catch (e) {
-            body.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red;'>❌ Gagal memuat data. Periksa koneksi atau izin Apps Script.</td></tr>";
+            console.error(e);
+            body.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red; padding:20px;'>❌ Gagal menarik data. Pastikan URL sudah benar dan izin Deployment disetel ke 'Anyone'.</td></tr>";
         }
     }
 
@@ -163,7 +176,8 @@
         
         const filtered = dbData.filter(row => {
             const matchKelas = (kls === "SEMUA" || row[2] === kls);
-            const matchModul = (mdl === "SEMUA" || row[3].includes(mdl));
+            // Gunakan .includes agar pencarian modul fleksibel
+            const matchModul = (mdl === "SEMUA" || (row[3] && row[3].toString().includes(mdl)));
             return matchKelas && matchModul;
         });
         
@@ -176,25 +190,25 @@
         document.getElementById('total-count').innerText = data.length;
 
         if(data.length === 0) {
-            body.innerHTML = "<tr><td colspan='9' style='text-align:center;'>Tidak ada data yang cocok.</td></tr>";
+            body.innerHTML = "<tr><td colspan='9' style='text-align:center; padding:30px;'>Tidak ada data yang cocok dengan filter.</td></tr>";
             return;
         }
 
         data.forEach(r => {
             const dateStr = r[0] ? new Date(r[0]).toLocaleString('id-ID') : "-";
-            const statusClass = r[7] === "TUNTAS" ? "tuntas" : "remedial";
+            const statusClass = (r[7] && r[7].toString().toUpperCase() === "TUNTAS") ? "tuntas" : "remedial";
             
             body.innerHTML += `
                 <tr>
                     <td>${dateStr}</td>
-                    <td><b>${r[1]}</b></td>
-                    <td>${r[2]}</td>
-                    <td>${r[3]}</td>
-                    <td style="font-weight:bold">${r[4]}</td>
-                    <td>${r[5]}x</td>
-                    <td>${r[6]}</td>
-                    <td><span class="badge ${statusClass}">${r[7]}</span></td>
-                    <td style="font-size:0.7rem; color:#94a3b8; max-width:150px; overflow:hidden;">${r[8]}</td>
+                    <td><b>${r[1] || '-'}</b></td>
+                    <td>${r[2] || '-'}</td>
+                    <td>${r[3] || '-'}</td>
+                    <td style="font-weight:bold">${r[4] || '0'}</td>
+                    <td>${r[5] || '0'}x</td>
+                    <td>${r[6] || '1'}</td>
+                    <td><span class="badge ${statusClass}">${r[7] || '-'}</span></td>
+                    <td class="browser-info" title="${r[8]}">${r[8] || '-'}</td>
                 </tr>
             `;
         });
@@ -202,7 +216,7 @@
 
     function exportExcel() {
         const tbl = document.getElementById('main-table');
-        const wb = XLSX.utils.table_to_book(tbl, {sheet: "Laporan Siswa"});
+        const wb = XLSX.utils.table_to_book(tbl, {sheet: "Rekap Nilai"});
         XLSX.writeFile(wb, `Laporan_ElangDigital_2026.xlsx`);
     }
 </script>
