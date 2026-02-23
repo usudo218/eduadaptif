@@ -14,7 +14,7 @@
         * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg); color: var(--teks); margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
         
-        /* Area Login Profesional */
+        /* Area Login */
         #login-screen { 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
             position: fixed; inset: 0; background: var(--bg); z-index: 1000;
@@ -23,31 +23,26 @@
             background: var(--putih); padding: 40px; border-radius: 24px; 
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 400px; 
         }
-        .img-pak-agus { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--aksen); margin-bottom: 20px; object-fit: cover; background: #f8fafc; }
+        .img-login { width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--aksen); margin-bottom: 20px; object-fit: cover; background: #fff; }
         
-        /* Wrapper Password dengan Ikon Mata */
         .password-wrapper { position: relative; width: 100%; margin-bottom: 20px; }
         .password-wrapper input {
             width: 100%; padding: 14px; padding-right: 45px; border-radius: 12px;
             border: 1px solid #cbd5e1; font-size: 1rem; outline: none; transition: 0.3s;
         }
-        .password-wrapper input:focus { border-color: var(--aksen); ring: 2px var(--aksen); }
         .eye-icon {
             position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
-            cursor: pointer; color: #64748b; transition: 0.2s;
+            cursor: pointer; color: #64748b;
         }
-        .eye-icon:hover { color: var(--aksen); }
 
         /* Area Dashboard */
-        #main-dashboard { display: none; padding: 20px; width: 100%; max-width: 1400px; margin: auto; }
-        .container { background: var(--putih); border-radius: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); overflow: hidden; }
+        #main-dashboard { display: none; padding: 20px; width: 100%; max-width: 1400px; margin: auto; flex: 1; }
+        .container { background: var(--putih); border-radius: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 30px; }
 
-        /* Header Dashboard */
         .header { 
             background: var(--utama); color: white; padding: 25px 30px; 
             display: flex; justify-content: space-between; align-items: center;
         }
-        .nav-buttons { display: flex; gap: 10px; }
         .btn-nav { 
             padding: 10px 15px; border-radius: 8px; border: none; cursor: pointer; 
             font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; transition: 0.3s;
@@ -55,18 +50,14 @@
         .btn-reload { background: var(--aksen); color: white; }
         .btn-excel { background: var(--sukses); color: white; }
         .btn-logout { background: var(--bahaya); color: white; }
-        .btn-nav:hover { opacity: 0.9; transform: translateY(-1px); }
 
-        /* Toolbar Filter & Sort */
         .toolbar { padding: 25px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
         .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-items: flex-end; }
-        .filter-group { display: flex; flex-direction: column; gap: 8px; }
-        .filter-group label { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; }
+        .filter-group label { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; display: block; margin-bottom: 8px; }
         select, input { padding: 10px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 0.9rem; width: 100%; }
 
-        /* Tabel Progres */
         .table-area { overflow-x: auto; background: white; }
-        table { width: 100%; border-collapse: collapse; min-width: 1000px; }
+        table { width: 100%; border-collapse: collapse; min-width: 1100px; }
         th { background: #f8fafc; color: #475569; padding: 15px 20px; text-align: left; font-size: 0.75rem; border-bottom: 2px solid #e2e8f0; }
         td { padding: 15px 20px; border-bottom: 1px solid #f1f5f9; font-size: 0.85rem; }
         
@@ -74,24 +65,28 @@
         .tuntas { background: #dcfce7; color: #166534; }
         .remedial { background: #fee2e2; color: #991b1b; }
         .stat-total { background: var(--aksen); color: white; padding: 10px 20px; border-radius: 10px; font-weight: bold; text-align: center; }
+
+        /* Footer */
+        .footer {
+            text-align: center; padding: 25px; color: #64748b; font-size: 0.9rem; line-height: 1.5;
+        }
+        .footer b { color: var(--utama); }
     </style>
 </head>
 <body>
 
 <div id="login-screen">
     <div class="login-card">
-        <img src="pak-agus.png" class="img-pak-agus" alt="Pak Agus">
+        <img src="pak-agus.png" class="img-login" alt="Pak Agus">
         <h2 style="margin:0 0 5px">Admin Elang Digital</h2>
         <p style="color:#64748b; font-size:0.85rem; margin-bottom:25px">Monitoring Progres Siswa Real-Time</p>
-        
         <div class="password-wrapper">
             <input type="password" id="admin-pass" placeholder="Password Akses">
             <div class="eye-icon" onclick="togglePassword()">
                 <i data-lucide="eye" id="eye-icon-svg"></i>
             </div>
         </div>
-        
-        <button onclick="cekLogin()" style="width:100%; padding:14px; background:var(--aksen); color:white; border:none; border-radius:12px; font-weight:bold; cursor:pointer; transition:0.3s">Buka Dashboard</button>
+        <button onclick="cekLogin()" style="width:100%; padding:14px; background:var(--aksen); color:white; border:none; border-radius:12px; font-weight:bold; cursor:pointer">Buka Dashboard</button>
     </div>
 </div>
 
@@ -99,41 +94,32 @@
     <div class="container">
         <div class="header">
             <div style="display:flex; align-items:center; gap:15px">
-                <img src="pak-agus.png" style="width:45px; height:45px; border-radius:50%; border:2px solid white; background:white">
+                <img src="pak-agus.png" style="width:50px; height:50px; border-radius:50%; border:2px solid white; background:#fff;">
                 <div>
                     <h1 style="margin:0; font-size:1.2rem">Monitoring Siswa</h1>
-                    <p style="margin:0; font-size:0.75rem; opacity:0.8">Pak Agus AI Tutor • 2026</p>
+                    <p style="margin:0; font-size:0.75rem; opacity:0.8">Elang Digital Dashboard 2026</p>
                 </div>
             </div>
             <div class="nav-buttons">
-                <button class="btn-nav btn-reload" onclick="muatData()">
-                    <i data-lucide="refresh-cw" style="width:16px"></i> Ambil Data
-                </button>
-                <button class="btn-nav btn-excel" onclick="eksporExcel()">
-                    <i data-lucide="download" style="width:16px"></i> Excel
-                </button>
-                <button class="btn-nav btn-logout" onclick="logout()">
-                    <i data-lucide="log-out" style="width:16px"></i> Keluar
-                </button>
+                <button class="btn-nav btn-reload" onclick="muatData()"><i data-lucide="refresh-cw" style="width:16px"></i> Ambil Data</button>
+                <button class="btn-nav btn-excel" onclick="eksporExcel()"><i data-lucide="file-down" style="width:16px"></i> Excel</button>
+                <button class="btn-nav btn-logout" onclick="logout()"><i data-lucide="log-out" style="width:16px"></i> Keluar</button>
             </div>
         </div>
 
         <div class="toolbar">
             <div class="filter-grid">
                 <div class="filter-group">
-                    <label>Cari Nama</label>
+                    <label>Cari Nama Siswa</label>
                     <input type="text" id="cari-nama" placeholder="Ketik nama..." onkeyup="filterData()">
                 </div>
                 <div class="filter-group">
                     <label>Filter Kelas</label>
                     <select id="filt-kelas" onchange="filterData()">
                         <option value="SEMUA">Semua Kelas</option>
-                        <option value="KELAS 10-1">10-1</option>
-                        <option value="KELAS 10-2">10-2</option>
-                        <option value="KELAS 10-3">10-3</option>
-                        <option value="KELAS 10-4">10-4</option>
-                        <option value="KELAS 10-5">10-5</option>
-                        <option value="KELAS 10-6">10-6</option>
+                        <option value="KELAS 10-1">10-1</option><option value="KELAS 10-2">10-2</option>
+                        <option value="KELAS 10-3">10-3</option><option value="KELAS 10-4">10-4</option>
+                        <option value="KELAS 10-5">10-5</option><option value="KELAS 10-6">10-6</option>
                         <option value="KELAS 10-7">10-7</option>
                     </select>
                 </div>
@@ -155,34 +141,31 @@
                     <label>Urutkan Skor</label>
                     <select id="sort-skor" onchange="filterData()">
                         <option value="DEFAULT">Urutan Terbaru</option>
-                        <option value="TINGGI">Tertinggi</option>
-                        <option value="RENDAH">Terendah</option>
+                        <option value="TINGGI">Skor Tertinggi</option>
+                        <option value="RENDAH">Skor Terendah</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <div class="stat-total">Total: <span id="label-total">0</span></div>
+                    <div class="stat-total">Total: <span id="label-total">0</span> Data</div>
                 </div>
             </div>
         </div>
 
         <div class="table-area">
-            <table id="tabel-utama">
+            <table>
                 <thead>
                     <tr>
-                        <th>Waktu</th>
-                        <th>Nama Siswa</th>
-                        <th>Kelas</th>
-                        <th>Modul</th>
-                        <th>Skor</th>
-                        <th>Bantuan</th>
-                        <th>Percobaan</th>
-                        <th>Status</th>
-                        <th>Device/Info</th>
+                        <th>Waktu</th><th>Nama Siswa</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Bantuan</th><th>Percobaan</th><th>Status</th><th>Device/Info</th>
                     </tr>
                 </thead>
                 <tbody id="isi-tabel"></tbody>
             </table>
         </div>
+    </div>
+
+    <div class="footer">
+        Design By <b>Agus Suyatno, S.Kom</b><br>
+        SMA Negeri 1 Muncar &copy; 2026
     </div>
 </div>
 
@@ -191,10 +174,8 @@
     const URL_GAS = "https://script.google.com/macros/s/AKfycbywzkacgm1ChC2PPvDPU9w4JIvGK8wMZiDBuRWKmdv8qFtSmDhUUDsahE6Azypztow0/exec"; 
     let cacheData = [];
 
-    // Inisialisasi Ikon Lucide
     lucide.createIcons();
 
-    // Fungsi Intip Password
     function togglePassword() {
         const passInput = document.getElementById('admin-pass');
         const eyeIcon = document.getElementById('eye-icon-svg');
@@ -208,21 +189,15 @@
         lucide.createIcons();
     }
 
-    // Cek Sesi saat Refresh agar tidak logout
     window.onload = function() {
-        if(localStorage.getItem("admin_session") === "active") {
-            showDashboard();
-        }
+        if(localStorage.getItem("admin_session") === "active") showDashboard();
     }
 
     function cekLogin() {
-        const pass = document.getElementById('admin-pass').value;
-        if(pass === KODE_RAHASIA) {
+        if(document.getElementById('admin-pass').value === KODE_RAHASIA) {
             localStorage.setItem("admin_session", "active");
             showDashboard();
-        } else { 
-            alert("Password Salah! Gunakan: ADMIN2026"); 
-        }
+        } else { alert("Password Salah!"); }
     }
 
     function showDashboard() {
@@ -232,10 +207,7 @@
     }
 
     function logout() {
-        if(confirm("Keluar dari sistem admin?")) {
-            localStorage.removeItem("admin_session");
-            location.reload();
-        }
+        if(confirm("Keluar?")) { localStorage.removeItem("admin_session"); location.reload(); }
     }
 
     async function muatData() {
@@ -247,7 +219,7 @@
             cacheData = data.slice(1);
             filterData();
         } catch (err) {
-            tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red; padding:50px;'>❌ Gagal memuat data. Cek Izin Deployment Script.</td></tr>";
+            tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red; padding:50px;'>❌ Gagal muat data.</td></tr>";
         }
     }
 
@@ -276,20 +248,20 @@
             tbody.innerHTML += `
                 <tr>
                     <td style="color:#64748b; font-size:0.75rem">${r[0] ? new Date(r[0]).toLocaleString('id-ID') : '-'}</td>
-                    <td style="font-weight:700">${r[1] || '-'}</td>
-                    <td><span style="font-weight:600; color:var(--aksen)">${r[2] || '-'}</span></td>
-                    <td style="font-size:0.8rem">${r[3] || '-'}</td>
-                    <td style="font-weight:800; color:var(--utama)">${r[4] || '0'}</td>
-                    <td>${r[5] || '0'}x</td>
-                    <td>Ke-${r[6] || '1'}</td>
-                    <td><span class="badge ${stClass}">${r[7] || '-'}</span></td>
-                    <td style="font-size:0.7rem; color:#94a3b8; max-width:150px; overflow:hidden; text-overflow:ellipsis">${r[8] || '-'}</td>
+                    <td style="font-weight:700">${r[1]}</td>
+                    <td><span style="font-weight:600; color:var(--aksen)">${r[2]}</span></td>
+                    <td style="font-size:0.8rem">${r[3]}</td>
+                    <td style="font-weight:800; color:var(--utama)">${r[4]}</td>
+                    <td>${r[5]}x</td>
+                    <td>Ke-${r[6]}</td>
+                    <td><span class="badge ${stClass}">${r[7]}</span></td>
+                    <td style="font-size:0.7rem; color:#94a3b8; max-width:150px; overflow:hidden; text-overflow:ellipsis">${r[8]}</td>
                 </tr>`;
         });
     }
 
     function eksporExcel() {
-        const wb = XLSX.utils.table_to_book(document.getElementById('tabel-utama'));
+        const wb = XLSX.utils.table_to_book(document.querySelector('table'));
         XLSX.writeFile(wb, "Rekap_Progres_ElangDigital_2026.xlsx");
     }
 </script>
