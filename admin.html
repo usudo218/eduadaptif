@@ -3,61 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - ELANG DIGITAL</title>
+    <title>Panel Admin - ELANG DIGITAL</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --utama: #1e293b; --aksen: #4f46e5; --sukses: #10b981;
-            --bg: #f1f5f9; --teks: #334155; --putih: #ffffff; --bahaya: #ef4444;
+            --utama: #1e293b; 
+            --aksen: #4f46e5; 
+            --sukses: #10b981;
+            --bg: #f1f5f9; 
+            --teks: #334155; 
+            --putih: #ffffff; 
+            --bahaya: #ef4444;
         }
-        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
-        /* Teknik agar footer selalu di bawah */
         html, body { height: 100%; margin: 0; }
-        body { background-color: var(--bg); display: flex; flex-direction: column; }
+        body { 
+            background-color: var(--bg); 
+            color: var(--teks); 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
+        }
+
+        /* Wrapper Konten Utama */
         .main-content { flex: 1 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
 
-        /* Login Card */
-        #login-screen { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        /* Login Card - Profesional Style */
+        #login-screen { width: 100%; display: flex; justify-content: center; padding: 20px; animation: fadeIn 0.5s ease; }
         .login-card { 
-            background: var(--putih); padding: 40px; border-radius: 24px; 
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 400px; 
+            background: var(--putih); padding: 40px; border-radius: 20px; 
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 420px; 
+            border: 1px solid #E5E7EB;
         }
-        .img-karakter { 
-            width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--aksen); 
+        /* Menggunakan standar ukuran dan folder yang sama dengan modul-tik */
+        .Pak-Agus-img { 
+            width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--aksen); 
             margin-bottom: 20px; object-fit: cover; background: #fff;
         }
         
-        /* Input & Mata */
         .password-wrapper { position: relative; width: 100%; margin-bottom: 20px; }
         .password-wrapper input {
-            width: 100%; padding: 14px; padding-right: 45px; border-radius: 12px;
-            border: 1px solid #cbd5e1; font-size: 1rem; outline: none;
+            width: 100%; padding: 15px; padding-right: 45px; border-radius: 12px;
+            border: 2px solid #E5E7EB; font-size: 1rem; outline: none; transition: 0.3s;
         }
+        .password-wrapper input:focus { border-color: var(--aksen); }
         .eye-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #64748b; display: flex; }
 
-        /* Dashboard */
-        #main-dashboard { display: none; width: 100%; max-width: 1400px; padding: 20px; }
-        .container-box { background: var(--putih); border-radius: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); overflow: hidden; }
-        .header { background: var(--utama); color: white; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
-        .btn-nav { padding: 10px 15px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; color: white; display: flex; align-items: center; gap: 8px; }
+        /* Dashboard Area */
+        #main-dashboard { display: none; width: 100%; max-width: 1300px; padding: 20px; margin-top: 10px; animation: fadeIn 0.5s ease; }
+        .container-box { background: var(--putih); border-radius: 16px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #E5E7EB; }
 
-        /* Toolbar */
+        .header { 
+            background: var(--utama); color: white; padding: 20px 30px; 
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+        }
+        .header-profile { display: flex; align-items: center; gap: 15px; }
+        .img-mini { width: 48px; height: 48px; border-radius: 50%; border: 2px solid #fff; background: #fff; object-fit: cover; }
+
+        .btn-nav { 
+            padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; 
+            font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; color: white; transition: 0.2s;
+        }
+        .btn-reload { background: var(--aksen); }
+        .btn-excel { background: var(--sukses); }
+        .btn-logout { background: var(--bahaya); }
+        .btn-nav:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        /* Toolbar & Filter */
         .toolbar { padding: 25px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
         .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-items: flex-end; }
-        select, input { padding: 10px; border-radius: 10px; border: 1px solid #cbd5e1; width: 100%; }
+        .filter-group label { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        select, input { padding: 12px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 0.9rem; width: 100%; outline: none; }
 
-        /* Tabel */
+        /* Table */
         .table-area { overflow-x: auto; background: white; }
         table { width: 100%; border-collapse: collapse; min-width: 1100px; }
-        th { background: #f8fafc; padding: 15px 20px; text-align: left; font-size: 0.75rem; border-bottom: 2px solid #e2e8f0; }
+        th { background: #f8fafc; color: #475569; padding: 15px 20px; text-align: left; font-size: 0.75rem; border-bottom: 2px solid #e2e8f0; text-transform: uppercase; }
         td { padding: 15px 20px; border-bottom: 1px solid #f1f5f9; font-size: 0.85rem; }
+        
+        .badge { padding: 5px 12px; border-radius: 20px; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; }
+        .tuntas { background: #dcfce7; color: #166534; }
+        .remedial { background: #fee2e2; color: #991b1b; }
 
-        /* Footer */
-        .main-footer {
-            flex-shrink: 0; text-align: center; padding: 30px; color: #64748b; font-size: 0.9rem; border-top: 1px solid #e2e8f0; background: var(--putih);
+        /* Footer - Standar Sesuai Permintaan */
+        .footer {
+            flex-shrink: 0; text-align: center; padding: 25px; font-size: 0.85rem; color: #6b7280; background: #f9fafb; border-top: 1px solid #e5e7eb; width: 100%;
         }
+        .footer b { color: var(--teks); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -65,69 +101,135 @@
 <div class="main-content">
     <div id="login-screen">
         <div class="login-card">
-            <img src="images/pak-agus.png" class="img-karakter" alt="Logo Pak Agus">
-            <h2 style="margin:0 0 5px">Admin Elang Digital</h2>
-            <p style="color:#64748b; margin-bottom:25px">Monitoring Progres Siswa</p>
+            <img src="images/Pak-Agus.png" class="Pak-Agus-img" alt="Pak Agus AI Tutor">
+            <h2 style="margin:0 0 5px; color: var(--utama)">Admin Elang Digital</h2>
+            <p style="color:#64748b; font-size:0.85rem; margin-bottom:25px">Monitoring Progres Siswa Real-Time</p>
+            
             <div class="password-wrapper">
                 <input type="password" id="admin-pass" placeholder="Password Akses">
-                <div class="eye-icon" onclick="togglePassword()"><i data-lucide="eye" id="eye-icon-svg"></i></div>
+                <div class="eye-icon" onclick="togglePassword()">
+                    <i data-lucide="eye" id="eye-icon-svg" style="width:20px"></i>
+                </div>
             </div>
-            <button onclick="cekLogin()" style="width:100%; padding:14px; background:var(--aksen); color:white; border:none; border-radius:12px; font-weight:bold; cursor:pointer">Buka Dashboard</button>
+            <button onclick="cekLogin()" style="width:100%; padding:15px; background:var(--aksen); color:white; border:none; border-radius:12px; font-weight:bold; cursor:pointer; font-size: 1rem;">Buka Dashboard</button>
         </div>
     </div>
 
     <div id="main-dashboard">
         <div class="container-box">
             <div class="header">
-                <div style="display:flex; align-items:center; gap:15px">
-                    <img src="images/pak-agus.png" style="width:45px; height:45px; border-radius:50%; border:2px solid #fff;">
-                    <h1 style="margin:0; font-size:1.1rem">Monitoring Progres</h1>
+                <div class="header-profile">
+                    <img src="images/Pak-Agus.png" class="img-mini" alt="Profile">
+                    <div>
+                        <h1 style="margin:0; font-size:1.2rem">Monitoring Siswa</h1>
+                        <p style="margin:0; font-size:0.75rem; opacity:0.8">Elang Digital Dashboard • 2026</p>
+                    </div>
                 </div>
                 <div style="display:flex; gap:10px">
-                    <button class="btn-nav" style="background:var(--aksen)" onclick="muatData()">Reload</button>
-                    <button class="btn-nav" style="background:var(--sukses)" onclick="eksporExcel()">Excel</button>
-                    <button class="btn-nav" style="background:var(--bahaya)" onclick="logout()">Logout</button>
+                    <button class="btn-nav btn-reload" onclick="muatData()"><i data-lucide="refresh-cw" style="width:16px"></i> Ambil Data</button>
+                    <button class="btn-nav btn-excel" onclick="eksporExcel()"><i data-lucide="download" style="width:16px"></i> Excel</button>
+                    <button class="btn-nav btn-logout" onclick="logout()"><i data-lucide="log-out" style="width:16px"></i> Logout</button>
                 </div>
             </div>
+
             <div class="toolbar">
                 <div class="filter-grid">
-                    <div><label>Cari Nama</label><input type="text" id="cari-nama" onkeyup="filterData()"></div>
-                    <div><label>Kelas</label><select id="filt-kelas" onchange="filterData()"><option value="SEMUA">Semua Kelas</option><option value="KELAS 10-1">10-1</option><option value="KELAS 10-2">10-2</option><option value="KELAS 10-3">10-3</option><option value="KELAS 10-4">10-4</option><option value="KELAS 10-5">10-5</option><option value="KELAS 10-6">10-6</option><option value="KELAS 10-7">10-7</option></select></div>
-                    <div><label>Modul</label><select id="filt-modul" onchange="filterData()"><option value="SEMUA">Semua Modul</option><option value="BK">BK</option><option value="TIK">TIK</option><option value="SK">SK</option><option value="JKI">JKI</option><option value="AD">AD</option><option value="AP">AP</option><option value="DSI">DSI</option><option value="PLB">PLB</option></select></div>
-                    <div><label>Urutan Skor</label><select id="sort-skor" onchange="filterData()"><option value="DEFAULT">Waktu</option><option value="TINGGI">Tertinggi</option><option value="RENDAH">Terendah</option></select></div>
+                    <div class="filter-group">
+                        <label>Cari Nama</label>
+                        <input type="text" id="cari-nama" placeholder="Ketik nama..." onkeyup="filterData()">
+                    </div>
+                    <div class="filter-group">
+                        <label>Filter Kelas</label>
+                        <select id="filt-kelas" onchange="filterData()">
+                            <option value="SEMUA">Semua Kelas</option>
+                            <option value="KELAS 10-1">10-1</option><option value="KELAS 10-2">10-2</option>
+                            <option value="KELAS 10-3">10-3</option><option value="KELAS 10-4">10-4</option>
+                            <option value="KELAS 10-5">10-5</option><option value="KELAS 10-6">10-6</option>
+                            <option value="KELAS 10-7">10-7</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Filter Modul</label>
+                        <select id="filt-modul" onchange="filterData()">
+                            <option value="SEMUA">Semua Modul</option>
+                            <option value="BK">BK (Berpikir Komputasional)</option>
+                            <option value="TIK">TIK (Teknologi Informasi)</option>
+                            <option value="SK">SK (Sistem Komputer)</option>
+                            <option value="JKI">JKI (Jaringan Komputer)</option>
+                            <option value="AD">AD (Analisis Data)</option>
+                            <option value="AP">AP (Algoritma Pemrograman)</option>
+                            <option value="DSI">DSI (Dampak Sosial)</option>
+                            <option value="PLB">PLB (Praktik Lintas Bidang)</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Urutkan Skor</label>
+                        <select id="sort-skor" onchange="filterData()">
+                            <option value="DEFAULT">Urutan Terbaru</option>
+                            <option value="TINGGI">Tertinggi</option>
+                            <option value="RENDAH">Terendah</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <div style="background:var(--utama); color:white; padding:12px; border-radius:10px; text-align:center; font-weight:bold; font-size: 0.9rem;">
+                            Total: <span id="label-total">0</span> Data
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="table-area"><table><thead><tr><th>Waktu</th><th>Nama</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Bantuan</th><th>Coba</th><th>Status</th><th>Device</th></tr></thead><tbody id="isi-tabel"></tbody></table></div>
+
+            <div class="table-area">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Waktu</th><th>Nama Siswa</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Bantuan</th><th>Coba</th><th>Status</th><th>Device/Info</th>
+                        </tr>
+                    </thead>
+                    <tbody id="isi-tabel"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
-<footer class="main-footer">
+<footer class="footer">
     Design By <b>Agus Suyatno, S.Kom</b><br>
     SMA Negeri 1 Muncar &copy; 2026
 </footer>
 
 <script>
-    const KODE = "ADMIN2026";
-    const URL_GAS = "https://script.google.com/macros/s/AKfycbywzkacgm1ChC2PPvDPU9w4JIvGK8wMZiDBuRWKmdv8qFtSmDhUUDsahE6Azypztow0/exec";
+    const KODE_RAHASIA = "ADMIN2026";
+    const URL_GAS = "https://script.google.com/macros/s/AKfycbywzkacgm1ChC2PPvDPU9w4JIvGK8wMZiDBuRWKmdv8qFtSmDhUUDsahE6Azypztow0/exec"; 
     let cacheData = [];
 
     lucide.createIcons();
-    window.onload = function() { if(localStorage.getItem("admin_session") === "active") showDashboard(); }
 
     function togglePassword() {
         const input = document.getElementById('admin-pass');
         const icon = document.getElementById('eye-icon-svg');
-        input.type = input.type === "password" ? "text" : "password";
-        icon.setAttribute('data-lucide', input.type === "password" ? 'eye' : 'eye-off');
+        if (input.type === "password") {
+            input.type = "text";
+            icon.setAttribute('data-lucide', 'eye-off');
+        } else {
+            input.type = "password";
+            icon.setAttribute('data-lucide', 'eye');
+        }
         lucide.createIcons();
     }
 
+    window.onload = function() {
+        if(localStorage.getItem("admin_session") === "active") {
+            showDashboard();
+        }
+    }
+
     function cekLogin() {
-        if(document.getElementById('admin-pass').value === KODE) {
+        if(document.getElementById('admin-pass').value === KODE_RAHASIA) {
             localStorage.setItem("admin_session", "active");
             showDashboard();
-        } else alert("Salah!");
+        } else { 
+            alert("⚠️ Password Salah! Gunakan ADMIN2026"); 
+        }
     }
 
     function showDashboard() {
@@ -136,17 +238,24 @@
         muatData();
     }
 
-    function logout() { localStorage.removeItem("admin_session"); location.reload(); }
+    function logout() {
+        if(confirm("Keluar dari sistem admin?")) {
+            localStorage.removeItem("admin_session");
+            location.reload();
+        }
+    }
 
     async function muatData() {
         const tbody = document.getElementById('isi-tabel');
-        tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; padding:50px;'>⏳ Memuat data...</td></tr>";
+        tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; padding:50px;'>⏳ Sedang mengambil data terbaru...</td></tr>";
         try {
             const res = await fetch(URL_GAS + "?action=readData", { redirect: 'follow' });
             const data = await res.json();
             cacheData = data.slice(1);
             filterData();
-        } catch (err) { tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red; padding:50px;'>❌ Error Koneksi.</td></tr>"; }
+        } catch (err) {
+            tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red; padding:50px;'>❌ Gagal koneksi database. Periksa Script Deployment Anda.</td></tr>";
+        }
     }
 
     function filterData() {
@@ -155,18 +264,41 @@
         const cari = document.getElementById('cari-nama').value.toUpperCase();
         const sort = document.getElementById('sort-skor').value;
 
-        let filtered = cacheData.filter(r => (kls==="SEMUA" || r[2]===kls) && (mdl==="SEMUA" || r[3].includes(mdl)) && r[1].toUpperCase().includes(cari));
+        let filtered = cacheData.filter(r => {
+            const mKls = (kls === "SEMUA" || r[2] === kls);
+            const mMdl = (mdl === "SEMUA" || (r[3] && r[3].includes(mdl)));
+            const mNm = (r[1] || "").toString().toUpperCase().includes(cari);
+            return mKls && mMdl && mNm;
+        });
+
         if(sort === "TINGGI") filtered.sort((a,b) => b[4] - a[4]);
         if(sort === "RENDAH") filtered.sort((a,b) => a[4] - b[4]);
 
         const tbody = document.getElementById('isi-tabel');
         tbody.innerHTML = "";
+        document.getElementById('label-total').innerText = filtered.length;
+
         filtered.forEach(r => {
-            tbody.innerHTML += `<tr><td>${r[0]?new Date(r[0]).toLocaleString('id-ID'):'-'}</td><td style="font-weight:700">${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td style="font-weight:800; color:var(--aksen)">${r[4]}</td><td>${r[5]}x</td><td>Ke-${r[6]}</td><td>${r[7]}</td><td style="font-size:0.7rem; color:#94a3b8">${r[8]}</td></tr>`;
+            const isTuntas = (r[7] || "").toString().toUpperCase() === "TUNTAS";
+            tbody.innerHTML += `
+                <tr>
+                    <td style="color:#64748b; font-size:0.75rem">${r[0] ? new Date(r[0]).toLocaleString('id-ID') : '-'}</td>
+                    <td style="font-weight:700">${r[1]}</td>
+                    <td><span style="font-weight:600; color:var(--aksen)">${r[2]}</span></td>
+                    <td style="font-size:0.8rem">${r[3]}</td>
+                    <td style="font-weight:800; color:var(--utama)">${r[4]}</td>
+                    <td>${r[5]}x</td>
+                    <td>Ke-${r[6]}</td>
+                    <td><span class="badge ${isTuntas ? 'tuntas' : 'remedial'}">${r[7]}</span></td>
+                    <td style="font-size:0.65rem; color:#94a3b8; max-width:140px; overflow:hidden; text-overflow:ellipsis" title="${r[8]}">${r[8]}</td>
+                </tr>`;
         });
     }
 
-    function eksporExcel() { XLSX.writeFile(XLSX.utils.table_to_book(document.querySelector('table')), "Data_Monitoring_2026.xlsx"); }
+    function eksporExcel() {
+        const wb = XLSX.utils.table_to_book(document.querySelector('table'));
+        XLSX.writeFile(wb, "Rekap_Monitoring_2026.xlsx");
+    }
 </script>
 </body>
 </html>
