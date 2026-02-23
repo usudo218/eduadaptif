@@ -36,6 +36,7 @@
         .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 15px; }
         .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 10px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; opacity: 0.5; }
+        .btn-remedial { background: var(--warna-kuning); color: white; margin-top: 10px; }
         
         .pdf-box { background: #FFF1F2; padding: 20px; border: 1px dashed var(--warna-utama); border-radius: 16px; text-align: center; margin: 25px 0; }
         .btn-pdf { background: var(--warna-merah); color: white; text-decoration: none; padding: 12px 24px; border-radius: 10px; font-weight: bold; display: inline-block; }
@@ -57,136 +58,27 @@
                 <div style="text-align:center">
                     <img src="images/Pak-Agus.png" style="width:110px; border-radius:50%; border:3px solid var(--warna-utama); margin-bottom:15px;">
                     <h2>Halo, Para Petualang Muda </h2>
-                    <p>Saya Pak Agus, saya akan menemanimu berpetualangan dalam 8 tantangan dengan penyelesaian masalah yang sistematis, logis, dan terstruktur, meniru cara kerja ilmuwan komputer untuk merancang solusi yang dapat dieksekusi oleh manusia atau mesin</p>
+                    <p>Saya Pak Agus, saya akan menemanimu berpetualangan...</p>
                     <select id="pilih-kelas" style="width:100%; padding:15px; border-radius:12px; margin-bottom:10px;" onchange="filterNama()"><option value="">-- Pilih Kelas --</option></select>
-                    <select id="pilih-nama" style="width:100%; padding:15px; border-radius:12px; margin-bottom:15px;" disabled><option value="">-- Pilih Nama --</option></select>
+                    <select id="pilih-nama" style="width:100%; padding:15px; border-radius:12px; margin-bottom:10px;" disabled><option value="">-- Pilih Nama --</option></select>
                     <button class="btn-action" onclick="simpanNamaSiswa()">🧠 Masuk Modul</button>
                 </div>
             </div>
+
             <div id="area-mentor-global" style="display: none;">
                 <div class="mentor-box" id="kotak-mentor">
                     <div class="mentor-avatar"><img src="images/Pak-Agus.png" style="width:100%"></div>
                     <div class="mentor-message"><b id="ui-guru" style="color:var(--warna-utama); display:block;">Pak Agus :</b><span id="pesan-mentor">Semangat belajar!</span></div>
                 </div>
             </div>
+
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
-                   <p></p>
-<b>Pendahuluan &amp; Apersepsi </b><br /><br />Pengantar: Salah satu bidang
-informatika yang sangat perlu untuk dikuasai adalah bidang berpikir
-komputasional. <br /><br />Definisi: Berpikir komputasional merupakan ilmu yang
-mempelajari bagaimana cara menyelesaikan suatu masalah dengan solusi yang
-efisien, efektif, dan optimal sehingga solusinya bisa dijalankan oleh manusia
-maupun mesin. <br /><br />Ruang Lingkup: Contoh permasalahan dalam berpikir
-komputasional misalnya terkait algoritma dasar dan struktur data.
-<br /><br />Algoritma Dasar: Meliputi pencarian (searching) dan pengurutan
-(sorting). <br />
-<ol style="text-align: left;">
-  <li>
-    Pencarian (Searching): Algoritma untuk mencari nilai atau indeks tertentu
-    dalam sekumpulan data bertipe sama.
-  </li>
-  <li>Pengurutan (Sorting): Algoritma untuk mengurutkan sekumpulan data.</li>
-</ol>
-Struktur Data: Metode atau cara dalam menyusun, mengatur, dan menyimpan berbagai
-data. Contohnya adalah Stack (tumpukan) dan Queue (antrean). <br /><br /><b
-  >Mengenal Berpikir Komputasional (Computational Thinking) </b
-><br /><br />Pengertian: Sebuah metode pemecahan masalah dengan
-mengaplikasikan/melibatkan teknik yang digunakan oleh software engineer dalam
-menulis program. <br /><br />Tujuan: Melalui berpikir komputasional, kita akan
-berlatih berpikir seperti seorang ilmuwan informatika, bukan berpikir seperti
-komputer karena komputer adalah mesin. <br /><br />Strategi: Mencari strategi
-untuk mengatasi persoalan. Hampir semua persoalan sehari-hari mengandung konsep
-komputasi sehingga bisa diselesaikan dengan bantuan mesin komputer.
-<br /><br />Contoh Implementasi: Robot yang melayani penjualan di restoran,
-pengantar makanan/obat di rumah sakit, hingga sistem komputer pemantau
-perkebunan sawit. <br /><br /><b>Karakteristik Berpikir Komputasional: </b
-><br /><br />
-<ol style="text-align: left;">
-  <li>Berdasarkan konsep, bukan sekadar menulis kode program.</li>
-  <li>Kemampuan dasar yang harus dimiliki setiap orang di era milenial.</li>
-  <li>Memadukan pemikiran matematis dan pemikiran teknik.</li>
-  <li>Merupakan sebuah ide dan bukan sebuah benda.</li>
-  <li>Menantang secara keilmuan dan dapat diselesaikan secara saintifik.</li>
-</ol>
-<br /><b>4 Fondasi Berpikir Komputasional </b><br /><br />
-<ol style="text-align: left;">
-  <li>
-    Abstraksi (Abstraction): Menyaring bagian penting dari suatu permasalahan
-    dan mengabaikan yang tidak penting sehingga memudahkan fokus kepada solusi.
-  </li>
-  <li>
-    Algoritma (Algorithm): Menuliskan otomasi solusi melalui berpikir algoritmic
-    (langkah-langkah terurut) untuk mencapai tujuan.
-  </li>
-  <li>
-    Dekomposisi (Decomposition): Memecah persoalan sedemikian rupa sehingga
-    dapat diselesaikan dengan cepat, efisien, dan optimal. Masalah yang sulit
-    akan menjadi mudah jika diselesaikan sebagian-sebagian secara sistematis.
-  </li>
-  <li>
-    Pengenalan Pola (Pattern Recognition): Proses generalisasi serta mentransfer
-    proses penyelesaian persoalan ke persoalan lain yang sejenis.
-  </li>
-</ol>
-<br /><b>Algoritma Pencarian (Searching) </b><br /><br />Definisi: Menemukan
-"sesuatu" (benda, angka, konsep, informasi) yang memenuhi kriteria tertentu
-dalam suatu ruang pencarian. <br /><br />Elemen: Sekumpulan benda/objek,
-kriteria yang dicari, dan pengecekan apakah kriteria terpenuhi. <br /><br /><b
-  >Jenis Algoritma: </b
-><br /><br />
-<ol style="text-align: left;">
-  <li>
-    Sequential Search: Proses pencarian dengan mencocokkan data secara berurutan
-    satu per satu dari awal sampai akhir.
-  </li>
-  <li>
-    Binary Search: Pencarian untuk data yang terurut. Dilakukan dengan menebak
-    apakah data berada di tengah, lalu membandingkannya. Jika tidak cocok,
-    separuh data yang tidak relevan diabaikan, dan pencarian berlanjut pada sisa
-    data.
-  </li>
-</ol>
-<br /><b>Algoritma Pengurutan (Sorting) </b><br /><b><br />Definisi</b>:
-Mengatur agar suatu kelompok benda/objek diletakkan mengikuti aturan tertentu
-(naik atau turun). <br /><b>Metode Utama: </b><br />
-<ol style="text-align: left;">
-  <li>
-    Bubble Sort: Membandingkan masing-masing item dalam data secara
-    berpasang-pasangan dan menukarnya jika urutannya salah, diibaratkan seperti
-    gelembung yang muncul ke permukaan.
-  </li>
-  <li>
-    Selection Sort: Intinya adalah pemilihan. Mencari item terkecil/terbesar
-    dari bagian yang belum terurut lalu menukarnya (swap) ke posisi yang benar.
-  </li>
-  <li>
-    Insertion Sort: Menggunakan konsep penyisipan (insert). Item yang terpilih
-    disisipkan di sebelah kiri item lain pada posisi yang tepat.
-  </li>
-</ol>
-<br /><br /><br /><br /><b>Struktur Data: Stack &amp; Queue </b><br />
-<ol style="text-align: left;">
-  <li>
-    Stack (Tumpukan): Koleksi objek menggunakan prinsip LIFO (Last In First
-    Out). Data yang terakhir masuk akan pertama kali keluar. Contoh: Tumpukan
-    piring di restoran. Operasi dasarnya adalah Push (tambah) dan Pop (hapus).
-  </li>
-  <li>
-    Queue (Antrean): Kumpulan data di mana data yang pertama masuk akan diproses
-    pertama kali (FIFO - First In First Out). Contoh: Antrean mobil di gerbang
-    tol atau antrean pasien. Operasi dasarnya adalah Enqueue (tambah) dan
-    Dequeue (hapus).
-  </li>
-</ol>
-<br />
-<br /><br />
-<p></p>
-
                    <div class="pdf-box"><a href="https://drive.google.com/file/d/1JnEyi4GkRpT8bV6PO1mQIMtVnX_lQJRB/view?usp=sharing" target="_blank" class="btn-pdf">📥 Buka Naskah PDF</a></div>
                 </div>
                 <button class="btn-action" onclick="mulaiKuis()">Logika Siap, Mulai Kuis!</button>
             </div>
+
             <div id="area-kuis" class="area-konten">
                 <h4 id="indikator" style="font-weight:700; color:var(--warna-utama)">Soal 1</h4>
                 <h2 id="teks-soal" style="font-size:1.2rem; min-height:60px; margin-bottom:20px;">Memuat soal...</h2>
@@ -194,71 +86,175 @@ Mengatur agar suatu kelompok benda/objek diletakkan mengikuti aturan tertentu
                 <button class="btn-action btn-bantuan" id="tombol-bantuan" onclick="mintaBantuan()">💡 Tanya Pak Agus (-5 Poin)</button>
                 <button id="btn-lanjut" class="btn-action btn-disabled" onclick="simpanJawaban()" disabled>Pilih Jawaban Dulu</button>
             </div>
+
             <div id="area-hasil" class="area-konten">
                 <div id="res-nama" style="font-size:1.2rem; font-weight:800; text-align:center; text-transform:uppercase"></div>
                 <div class="angka-skor" id="res-skor">0</div>
+                <p id="teks-percobaan" style="text-align: center; font-weight: bold; color: var(--warna-utama); margin: 0;"></p>
                 <p id="teks-penalti" style="text-align: center; color: var(--warna-merah); margin-top: 5px;"></p>
-                <button class="btn-action" onclick="location.href='index.html'">✅ Selesai</button>
+                
+                <div id="wrapper-tombol-hasil">
+                    <button id="btn-remedial" class="btn-action btn-remedial" onclick="mulaiKuis()">🔄 Remedial (Ulangi Kuis)</button>
+                    <button class="btn-action" onclick="location.href='index.html'">✅ Selesai & Kembali</button>
+                </div>
             </div>
         </div>
         <div class="footer">Design by <b>Agus Suyatno, S.Kom</b><br>&copy; 2026</div>
     </div>
-    <script src="soal-bk.js"></script><script src="siswa.js"></script>
+
+    <script src="soal-bk.js"></script>
+    <script src="siswa.js"></script>
     <script>
-        let nS="", kS="", dS=[], idx=0, benar=0, terpilih=null, bantuanPakai=false, totalBantuan=0;
-        function save(f) { localStorage.setItem('pro_bk', JSON.stringify({n:nS,k:kS,f:f,s:dS,i:idx,b:benar,tb:totalBantuan})); }
+        let nS="", kS="", dS=[], idx=0, benar=0, terpilih=null, bantuanPakai=false, totalBantuan=0, totalPercobaan=1;
+
+        // Fungsi simpan menyertakan totalPercobaan
+        function save(f) { 
+            localStorage.setItem('pro_bk', JSON.stringify({
+                n:nS, k:kS, f:f, s:dS, i:idx, b:benar, tb:totalBantuan, tp:totalPercobaan
+            })); 
+        }
+
         window.onload = function() {
             const p = JSON.parse(localStorage.getItem('pro_bk'));
-            if(p){ nS=p.n;kS=p.k;dS=p.s;idx=p.i;benar=p.b;totalBantuan=p.tb;
+            if(p){ 
+                nS=p.n; kS=p.k; dS=p.s; idx=p.i; benar=p.b; 
+                totalBantuan=p.tb; 
+                totalPercobaan=p.tp || 1; // Default 1 jika data lama
                 document.getElementById('area-mentor-global').style.display="block";
                 document.getElementById('btn-logout').style.display="flex";
                 if(p.f==='materi') showMateri(); else muatSoal();
             } else { inisialisasi(); }
         };
+
         function inisialisasi(){
             const sk = document.getElementById('pilih-kelas');
             [...new Set(SISWA_BARU.map(x=>x.kelas))].sort().forEach(k=>{let o=document.createElement('option');o.value=k;o.innerText=k;sk.appendChild(o);});
         }
+
         function filterNama(){
-            const k = document.getElementById('pilih-kelas').value; const sn = document.getElementById('pilih-nama'); sn.innerHTML='<option value="">-- Pilih Nama --</option>';
+            const k = document.getElementById('pilih-kelas').value; 
+            const sn = document.getElementById('pilih-nama'); 
+            sn.innerHTML='<option value="">-- Pilih Nama --</option>';
             if(!k) return sn.disabled=true; sn.disabled=false;
             SISWA_BARU.filter(x=>x.kelas===k).forEach(x=>{let o=document.createElement('option');o.value=x.nama;o.innerText=x.nama;sn.appendChild(o);});
         }
-        function simpanNamaSiswa(){ nS=document.getElementById('pilih-nama').value; kS=document.getElementById('pilih-kelas').value; if(!nS) return alert("Pilih Nama!"); document.getElementById('area-mentor-global').style.display="block"; document.getElementById('btn-logout').style.display="flex"; showMateri(); }
-        function showMateri(){ hideAll(); document.getElementById('area-materi').style.display='block'; document.getElementById('pesan-mentor').innerText=`Halo ${nS}, ayo belajar!`; save('materi'); }
-        function mulaiKuis(){ dS=[...daftarSoalAsli].sort(()=>Math.random()-0.5); idx=0; benar=0; totalBantuan=0; muatSoal(); }
+
+        function simpanNamaSiswa(){ 
+            nS=document.getElementById('pilih-nama').value; 
+            kS=document.getElementById('pilih-kelas').value; 
+            if(!nS) return alert("Pilih Nama!"); 
+            document.getElementById('area-mentor-global').style.display="block"; 
+            document.getElementById('btn-logout').style.display="flex"; 
+            showMateri(); 
+        }
+
+        function showMateri(){ 
+            hideAll(); 
+            document.getElementById('area-materi').style.display='block'; 
+            document.getElementById('pesan-mentor').innerText=`Halo ${nS}, ayo belajar!`; 
+            save('materi'); 
+        }
+
+        function mulaiKuis(){ 
+            // Jika masuk sini dari tombol Remedial, totalPercobaan bertambah
+            const p = JSON.parse(localStorage.getItem('pro_bk'));
+            if (p && p.f === 'hasil') {
+                totalPercobaan++;
+            }
+            
+            dS=[...daftarSoalAsli].sort(()=>Math.random()-0.5); 
+            idx=0; benar=0; totalBantuan=0; 
+            muatSoal(); 
+        }
+
         function muatSoal(){
-            hideAll(); document.getElementById('area-kuis').style.display='block'; terpilih=null; bantuanPakai=false;
-            let q=dS[idx]; document.getElementById('indikator').innerText=`Soal ${idx+1}/${dS.length}`;
+            hideAll(); 
+            document.getElementById('area-kuis').style.display='block'; 
+            terpilih=null; bantuanPakai=false;
+            let q=dS[idx]; 
+            document.getElementById('indikator').innerText=`Soal ${idx+1}/${dS.length}`;
             document.getElementById('teks-soal').innerText=q.p;
-            document.getElementById('tombol-bantuan').disabled=false; document.getElementById('tombol-bantuan').classList.remove('btn-disabled');
-            document.getElementById('kotak-mentor').className="mentor-box"; document.getElementById('pesan-mentor').innerText="Gunakan logika terbaikmu!";
-            const bl=document.getElementById('btn-lanjut'); bl.disabled=true; bl.className="btn-action btn-disabled";
+            document.getElementById('tombol-bantuan').disabled=false; 
+            document.getElementById('tombol-bantuan').classList.remove('btn-disabled');
+            document.getElementById('kotak-mentor').className="mentor-box"; 
+            document.getElementById('pesan-mentor').innerText="Gunakan logika terbaikmu!";
+            const bl=document.getElementById('btn-lanjut'); 
+            bl.disabled=true; bl.className="btn-action btn-disabled";
             const co=document.getElementById('container-opsi'); co.innerHTML='';
             q.o.forEach((t,i)=>{
                 const b=document.createElement('button'); b.className='btn-opsi'; b.innerText=t;
-                b.onclick=()=>{document.querySelectorAll('.btn-opsi').forEach(x=>x.classList.remove('terpilih')); b.classList.add('terpilih'); terpilih=i; bl.disabled=false; bl.className="btn-action";};
+                b.onclick=()=>{
+                    document.querySelectorAll('.btn-opsi').forEach(x=>x.classList.remove('terpilih')); 
+                    b.classList.add('terpilih'); terpilih=i; 
+                    bl.disabled=false; bl.className="btn-action";
+                };
                 co.appendChild(b);
             });
             save('kuis');
         }
+
         function mintaBantuan(){
-            if(bantuanPakai) return; bantuanPakai=true; totalBantuan++;
+            if(bantuanPakai) return; 
+            bantuanPakai=true; totalBantuan++;
             document.getElementById('kotak-mentor').className="mentor-box peringatan";
             document.getElementById('pesan-mentor').innerText=`Pak Agus: ${dS[idx].b}`;
-            document.getElementById('tombol-bantuan').disabled=true; document.getElementById('tombol-bantuan').classList.add('btn-disabled');
+            document.getElementById('tombol-bantuan').disabled=true; 
+            document.getElementById('tombol-bantuan').classList.add('btn-disabled');
         }
-        function simpanJawaban(){ if(terpilih===dS[idx].k) benar++; idx++; if(idx<dS.length) muatSoal(); else tampilkanHasil(); }
+
+        function simpanJawaban(){ 
+            if(terpilih===dS[idx].k) benar++; 
+            idx++; 
+            if(idx<dS.length) muatSoal(); 
+            else tampilkanHasil(); 
+        }
+
         function tampilkanHasil(){
-            hideAll(); document.getElementById('area-hasil').style.display='block';
-            let skorAwal = Math.round((benar/dS.length)*100); let penalti = totalBantuan*5; let skorAkhir = Math.max(0, skorAwal-penalti);
-            document.getElementById('res-nama').innerText=nS; document.getElementById('res-skor').innerText=skorAkhir;
+            hideAll(); 
+            document.getElementById('area-hasil').style.display='block';
+            let skorAwal = Math.round((benar/dS.length)*100); 
+            let penalti = totalBantuan*5; 
+            let skorAkhir = Math.max(0, skorAwal-penalti);
+            
+            document.getElementById('res-nama').innerText=nS; 
+            document.getElementById('res-skor').innerText=skorAkhir;
+            document.getElementById('teks-percobaan').innerText = `Percobaan Ke-${totalPercobaan}`;
             document.getElementById('teks-penalti').innerText = totalBantuan > 0 ? `(Penalti bantuan: -${penalti} poin)` : "";
-            fetch("https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec?"+new URLSearchParams({namaSiswa:nS, kelasSiswa:kS, modul:"BK", skor:skorAkhir}),{mode:'no-cors'});
-            localStorage.removeItem('pro_bk');
+            
+            // Tampilkan tombol remedial hanya jika skor di bawah 100 (atau sesuai kriteria Anda)
+            const btnRemed = document.getElementById('btn-remedial');
+            if(skorAkhir >= 100) {
+                btnRemed.style.display = 'none';
+                document.getElementById('pesan-mentor').innerText = "Luar biasa! Logikamu sempurna.";
+            } else {
+                btnRemed.style.display = 'block';
+                document.getElementById('pesan-mentor').innerText = "Jangan menyerah, asah terus logika berpikirmu!";
+            }
+
+            // Kirim data ke Spreadsheet (termasuk totalPercobaan)
+            const params = new URLSearchParams({
+                namaSiswa: nS, 
+                kelasSiswa: kS, 
+                modul: "BK", 
+                skor: skorAkhir, 
+                bantuan: totalBantuan, 
+                percobaan: totalPercobaan,
+                status: skorAkhir >= 100 ? "TUNTAS" : "REMEDIAL"
+            });
+            
+            fetch("https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec?" + params, {mode:'no-cors'});
+            
+            save('hasil');
         }
+
         function hideAll(){ document.querySelectorAll('.area-konten').forEach(a=>a.style.display='none'); }
-        function logoutSiswa(){ if(confirm("Keluar?")) { localStorage.removeItem('pro_bk'); location.reload(); } }
+        
+        function logoutSiswa(){ 
+            if(confirm("Keluar? Progres belajar akan dihapus.")) { 
+                localStorage.removeItem('pro_bk'); 
+                location.reload(); 
+            } 
+        }
     </script>
 </body>
 </html>
