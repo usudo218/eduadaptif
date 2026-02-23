@@ -13,20 +13,27 @@
         }
         * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
+        /* Layout Dasar */
         html, body { height: 100%; margin: 0; }
-        body { background-color: var(--bg); color: var(--teks); display: flex; flex-direction: column; }
-        
-        /* Area Login */
-        #login-screen { 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            position: fixed; inset: 0; background: var(--bg); z-index: 1000;
+        body { 
+            background-color: var(--bg); 
+            color: var(--teks); 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
         }
+
+        /* Container Pembungkus agar Footer selalu di bawah */
+        .wrapper { flex: 1 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+        /* Area Login */
+        #login-screen { width: 100%; display: flex; justify-content: center; padding: 20px; }
         .login-card { 
             background: var(--putih); padding: 40px; border-radius: 24px; 
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 400px; 
         }
         .img-karakter { 
-            width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--aksen); 
+            width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--aksen); 
             margin-bottom: 20px; object-fit: cover; background: #fff;
         }
         
@@ -38,29 +45,31 @@
         .eye-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #64748b; }
 
         /* Area Dashboard */
-        #main-dashboard { display: none; flex: 1 0 auto; width: 100%; max-width: 1400px; margin: 0 auto; padding: 20px; }
-        .container { background: var(--putih); border-radius: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); overflow: hidden; }
+        #main-dashboard { display: none; width: 100%; max-width: 1400px; padding: 20px; margin-top: 20px; }
+        .container-box { background: var(--putih); border-radius: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); overflow: hidden; }
 
         .header { 
             background: var(--utama); color: white; padding: 20px 30px; 
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
         }
         .header-profile { display: flex; align-items: center; gap: 15px; }
-        .img-mini { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #fff; background: #fff; }
+        .img-mini { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #fff; background: #fff; }
 
         .btn-nav { 
             padding: 10px 15px; border-radius: 8px; border: none; cursor: pointer; 
-            font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; transition: 0.3s; color: white;
+            font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; color: white;
         }
         .btn-reload { background: var(--aksen); }
         .btn-excel { background: var(--sukses); }
         .btn-logout { background: var(--bahaya); }
 
+        /* Toolbar */
         .toolbar { padding: 25px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
         .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-items: flex-end; }
         .filter-group label { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 8px; display: block; }
         select, input { padding: 10px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 0.9rem; width: 100%; }
 
+        /* Tabel */
         .table-area { overflow-x: auto; background: white; }
         table { width: 100%; border-collapse: collapse; min-width: 1100px; }
         th { background: #f8fafc; color: #475569; padding: 15px 20px; text-align: left; font-size: 0.75rem; border-bottom: 2px solid #e2e8f0; }
@@ -70,108 +79,110 @@
         .tuntas { background: #dcfce7; color: #166534; }
         .remedial { background: #fee2e2; color: #991b1b; }
 
-        /* Footer Perbaikan */
+        /* Footer Tetap di Bawah */
         .main-footer {
-            flex-shrink: 0; text-align: center; padding: 30px; color: #64748b; font-size: 0.9rem; width: 100%;
+            flex-shrink: 0; text-align: center; padding: 40px 20px; color: #64748b; font-size: 0.9rem; width: 100%;
         }
         .main-footer b { color: var(--utama); }
     </style>
 </head>
 <body>
 
-<div id="login-screen">
-    <div class="login-card">
-        <img src="images/pak-agus.png" class="img-karakter" alt="Pak Agus">
-        <h2 style="margin:0 0 5px">Admin Elang Digital</h2>
-        <p style="color:#64748b; font-size:0.85rem; margin-bottom:25px">Monitoring Progres Siswa Real-Time</p>
-        
-        <div class="password-wrapper">
-            <input type="password" id="admin-pass" placeholder="Password Akses">
-            <div class="eye-icon" onclick="togglePassword()">
-                <i data-lucide="eye" id="eye-icon-svg"></i>
+<div class="wrapper">
+    <div id="login-screen">
+        <div class="login-card">
+            <img src="images/pak-agus.png" class="img-karakter" alt="Pak Agus">
+            <h2 style="margin:0 0 5px">Admin Elang Digital</h2>
+            <p style="color:#64748b; font-size:0.85rem; margin-bottom:25px">Monitoring Progres Siswa Real-Time</p>
+            
+            <div class="password-wrapper">
+                <input type="password" id="admin-pass" placeholder="Password Akses">
+                <div class="eye-icon" onclick="togglePassword()">
+                    <i data-lucide="eye" id="eye-icon-svg"></i>
+                </div>
             </div>
+            <button onclick="cekLogin()" style="width:100%; padding:14px; background:var(--aksen); color:white; border:none; border-radius:12px; font-weight:bold; cursor:pointer">Masuk Dashboard</button>
         </div>
-        <button onclick="cekLogin()" style="width:100%; padding:14px; background:var(--aksen); color:white; border:none; border-radius:12px; font-weight:bold; cursor:pointer">Masuk Dashboard</button>
     </div>
-</div>
 
-<div id="main-dashboard">
-    <div class="container">
-        <div class="header">
-            <div class="header-profile">
-                <img src="images/pak-agus.png" class="img-mini" alt="Profile">
-                <div>
-                    <h1 style="margin:0; font-size:1.1rem">Monitoring Siswa</h1>
-                    <p style="margin:0; font-size:0.7rem; opacity:0.8">Dashboard Elang Digital 2026</p>
+    <div id="main-dashboard">
+        <div class="container-box">
+            <div class="header">
+                <div class="header-profile">
+                    <img src="images/pak-agus.png" class="img-mini" alt="Profile">
+                    <div>
+                        <h1 style="margin:0; font-size:1.1rem">Monitoring Siswa</h1>
+                        <p style="margin:0; font-size:0.7rem; opacity:0.8">Dashboard Elang Digital 2026</p>
+                    </div>
+                </div>
+                <div style="display:flex; gap:10px">
+                    <button class="btn-nav btn-reload" onclick="muatData()"><i data-lucide="refresh-cw" style="width:14px"></i> Reload</button>
+                    <button class="btn-nav btn-excel" onclick="eksporExcel()"><i data-lucide="file-down" style="width:14px"></i> Excel</button>
+                    <button class="btn-nav btn-logout" onclick="logout()"><i data-lucide="log-out" style="width:14px"></i> Logout</button>
                 </div>
             </div>
-            <div style="display:flex; gap:10px">
-                <button class="btn-nav btn-reload" onclick="muatData()"><i data-lucide="refresh-cw" style="width:14px"></i> Reload</button>
-                <button class="btn-nav btn-excel" onclick="eksporExcel()"><i data-lucide="file-down" style="width:14px"></i> Excel</button>
-                <button class="btn-nav btn-logout" onclick="logout()"><i data-lucide="log-out" style="width:14px"></i> Logout</button>
-            </div>
-        </div>
 
-        <div class="toolbar">
-            <div class="filter-grid">
-                <div class="filter-group">
-                    <label>Pencarian Nama</label>
-                    <input type="text" id="cari-nama" placeholder="Nama siswa..." onkeyup="filterData()">
-                </div>
-                <div class="filter-group">
-                    <label>Filter Kelas</label>
-                    <select id="filt-kelas" onchange="filterData()">
-                        <option value="SEMUA">Semua Kelas</option>
-                        <option value="KELAS 10-1">10-1</option><option value="KELAS 10-2">10-2</option>
-                        <option value="KELAS 10-3">10-3</option><option value="KELAS 10-4">10-4</option>
-                        <option value="KELAS 10-5">10-5</option><option value="KELAS 10-6">10-6</option>
-                        <option value="KELAS 10-7">10-7</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Filter Modul</label>
-                    <select id="filt-modul" onchange="filterData()">
-                        <option value="SEMUA">Semua Modul</option>
-                        <option value="BK">BK (Berpikir Komputasional)</option>
-                        <option value="TIK">TIK (Teknologi Informasi)</option>
-                        <option value="SK">SK (Sistem Komputer)</option>
-                        <option value="JKI">JKI (Jaringan Komputer)</option>
-                        <option value="AD">AD (Analisis Data)</option>
-                        <option value="AP">AP (Algoritma Pemrograman)</option>
-                        <option value="DSI">DSI (Dampak Sosial)</option>
-                        <option value="PLB">PLB (Praktik Lintas Bidang)</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Urutkan Skor</label>
-                    <select id="sort-skor" onchange="filterData()">
-                        <option value="DEFAULT">Terbaru</option>
-                        <option value="TINGGI">Teratas</option>
-                        <option value="RENDAH">Terbawah</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <div style="background:var(--utama); color:white; padding:10px; border-radius:10px; text-align:center; font-weight:bold;">
-                        Total: <span id="label-total">0</span>
+            <div class="toolbar">
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label>Cari Nama</label>
+                        <input type="text" id="cari-nama" placeholder="Nama siswa..." onkeyup="filterData()">
+                    </div>
+                    <div class="filter-group">
+                        <label>Filter Kelas</label>
+                        <select id="filt-kelas" onchange="filterData()">
+                            <option value="SEMUA">Semua Kelas</option>
+                            <option value="KELAS 10-1">10-1</option><option value="KELAS 10-2">10-2</option>
+                            <option value="KELAS 10-3">10-3</option><option value="KELAS 10-4">10-4</option>
+                            <option value="KELAS 10-5">10-5</option><option value="KELAS 10-6">10-6</option>
+                            <option value="KELAS 10-7">10-7</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Filter Modul</label>
+                        <select id="filt-modul" onchange="filterData()">
+                            <option value="SEMUA">Semua Modul</option>
+                            <option value="BK">BK (Berpikir Komputasional)</option>
+                            <option value="TIK">TIK (Teknologi Informasi)</option>
+                            <option value="SK">SK (Sistem Komputer)</option>
+                            <option value="JKI">JKI (Jaringan Komputer)</option>
+                            <option value="AD">AD (Analisis Data)</option>
+                            <option value="AP">AP (Algoritma Pemrograman)</option>
+                            <option value="DSI">DSI (Dampak Sosial)</option>
+                            <option value="PLB">PLB (Praktik Lintas Bidang)</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Urutkan Skor</label>
+                        <select id="sort-skor" onchange="filterData()">
+                            <option value="DEFAULT">Terbaru</option>
+                            <option value="TINGGI">Skor Teratas</option>
+                            <option value="RENDAH">Skor Terbawah</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <div style="background:var(--utama); color:white; padding:10px; border-radius:10px; text-align:center; font-weight:bold;">
+                            Total: <span id="label-total">0</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="table-area">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Waktu</th><th>Nama Siswa</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Bantuan</th><th>Coba</th><th>Status</th><th>Device</th>
-                    </tr>
-                </thead>
-                <tbody id="isi-tabel"></tbody>
-            </table>
+            <div class="table-area">
+                <table id="tabel-admin">
+                    <thead>
+                        <tr>
+                            <th>Waktu</th><th>Nama Siswa</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Bantuan</th><th>Percobaan</th><th>Status</th><th>Device</th>
+                        </tr>
+                    </thead>
+                    <tbody id="isi-tabel"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
-<footer class="main-footer" id="footer-admin" style="display:none;">
+<footer class="main-footer">
     Design By <b>Agus Suyatno, S.Kom</b><br>
     SMA Negeri 1 Muncar &copy; 2026
 </footer>
@@ -197,7 +208,9 @@
     }
 
     window.onload = function() {
-        if(localStorage.getItem("admin_logged") === "true") showDashboard();
+        if(localStorage.getItem("admin_logged") === "true") {
+            showDashboard();
+        }
     }
 
     function cekLogin() {
@@ -210,17 +223,19 @@
     function showDashboard() {
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('main-dashboard').style.display = 'block';
-        document.getElementById('footer-admin').style.display = 'block';
         muatData();
     }
 
     function logout() {
-        if(confirm("Keluar?")) { localStorage.removeItem("admin_logged"); location.reload(); }
+        if(confirm("Keluar dari Panel Admin?")) {
+            localStorage.removeItem("admin_logged");
+            location.reload();
+        }
     }
 
     async function muatData() {
         const tbody = document.getElementById('isi-tabel');
-        tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; padding:50px;'>⏳ Sedang mengambil data...</td></tr>";
+        tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; padding:50px;'>⏳ Sedang mengambil data terbaru...</td></tr>";
         try {
             const res = await fetch(URL_GAS + "?action=readData", { redirect: 'follow' });
             const data = await res.json();
@@ -269,7 +284,7 @@
     }
 
     function eksporExcel() {
-        const wb = XLSX.utils.table_to_book(document.querySelector('table'));
+        const wb = XLSX.utils.table_to_book(document.getElementById('tabel-admin'));
         XLSX.writeFile(wb, "Rekap_Monitoring_2026.xlsx");
     }
 </script>
