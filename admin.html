@@ -2,120 +2,66 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Panel Admin ELANG DIGITAL</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <title>Panel Admin - ELANG DIGITAL</title>
     <style>
-        body { font-family: sans-serif; background: #f0f2f5; padding: 20px; text-align: center; }
-        .box { background: white; padding: 30px; border-radius: 12px; max-width: 1000px; margin: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        input { padding: 10px; width: 200px; border: 1px solid #ddd; border-radius: 5px; }
-        button { padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13px; }
-        th, td { border: 1px solid #eee; padding: 10px; text-align: left; }
-        th { background: #1e293b; color: white; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f1f5f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .box { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 400px; }
+        .img-admin { width: 100px; border-radius: 50%; border: 3px solid #4f46e5; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #4f46e5; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #4338ca; }
+        .error-msg { color: #ef4444; font-size: 0.85rem; margin-top: 10px; display: none; }
     </style>
 </head>
 <body>
 
-<div class="box">
-    <div id="login-area">
-        <img src="images/Pak-Agus.png" style="width:80px; border-radius:50%">
-        <h2>Akses Admin</h2>
-        <input type="password" id="pass" placeholder="Kode: ADMIN2026"><br><br>
-        <button onclick="prosesLogin()">🔓 Masuk Dashboard</button>
-    </div>
-
-    <div id="admin-area" style="display:none">
-        <div style="display:flex; justify-content: space-between; align-items: center;">
-            <h2 style="margin:0">Monitoring Siswa</h2>
-            <button onclick="muatData()" style="background:#10b981">🔄 Refresh Data</button>
-        </div>
-        <div id="status-koneksi" style="margin-top:10px; font-weight:bold; color:blue"></div>
-        <table id="tabel-admin">
-            <thead>
-                <tr>
-                    <th>Waktu</th><th>Nama</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Coba</th><th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="isi-tabel"></tbody>
-        </table>
-    </div>
+<div class="box" id="login-box">
+    <img src="images/Pak-Agus.png" class="img-admin" alt="Admin">
+    <h2>Login Admin</h2>
+    <p>Silakan masukkan kode akses</p>
+    <input type="password" id="pass" placeholder="Kode Akses (Contoh: ADMIN2026)">
+    <button onclick="cekLogin()">Masuk Dashboard</button>
+    <div id="pesan-salah" class="error-msg">Kode Akses Salah!</div>
 </div>
 
 <script>
-    const KODE_BENAR = "ADMIN2026";
-    // TEMPEL URL HASIL DEPLOY LANGKAH 2 DI SINI
+    // 1. KODE AKSES (Sesuaikan dengan keinginan Anda)
+    const KODE_RAHASIA = "ADMIN2026";
+
+    // 2. TEMPEL URL WEB APP (HASIL DEPLOY) DI SINI
     const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbywzkacgm1ChC2PPvDPU9w4JIvGK8wMZiDBuRWKmdv8qFtSmDhUUDsahE6Azypztow0/exec";
 
-    function prosesLogin() {
-        if(document.getElementById('pass').value === KODE_BENAR) {
-            document.getElementById('login-area').style.display = 'none';
-            document.getElementById('admin-area').style.display = 'block';
-            muatData();
+    function cekLogin() {
+        const input = document.getElementById('pass').value;
+        const pesan = document.getElementById('pesan-salah');
+
+        if (input === KODE_RAHASIA) {
+            // Jika benar, simpan status login sederhana dan pindah ke halaman data
+            // Untuk tes awal, kita langsung arahkan ke fungsi muat data atau alert sukses
+            alert("Login Berhasil! Menyambungkan ke database...");
+            
+            // Simpan status di memori browser agar tidak login ulang terus
+            sessionStorage.setItem("admin_masuk", "ya");
+            
+            // Ambil data untuk memastikan koneksi Web App aktif
+            tesKoneksi();
         } else {
-            alert("Kode Salah!");
+            pesan.style.display = "block";
         }
     }
 
-    async function muatData() {
-    const info = document.getElementById('status-koneksi');
-    const tbody = document.getElementById('isi-tabel');
-    info.innerText = "⏳ Sedang mengambil data...";
-
-    try {
-        const res = await fetch(URL_WEB_APP + "?action=readData", { redirect: 'follow' });
-        const data = await res.json();
-        
-        // Cek jika data hanya berisi header (panjang baris = 1)
-        if (data.length <= 1) {
-            info.innerText = "⚠️ Data di Spreadsheet masih kosong!";
-            tbody.innerHTML = "<tr><td colspan='7' style='text-align:center'>Belum ada siswa yang mengerjakan kuis.</td></tr>";
-            return;
-        }
-
-        info.innerText = `✅ Berhasil memuat ${data.length - 1} data siswa.`;
-        tbody.innerHTML = ""; 
-
-        // Tampilkan data mulai dari indeks 1 (lewati header)
-        for (let i = 1; i < data.length; i++) {
-            let r = data[i];
-            tbody.innerHTML += `<tr>
-                <td>${r[0] ? new Date(r[0]).toLocaleDateString() : '-'}</td>
-                <td><b>${r[1]}</b></td>
-                <td>${r[2]}</td>
-                <td>${r[3]}</td>
-                <td>${r[4]}</td>
-                <td>${r[6]}</td>
-                <td>${r[7]}</td>
-            </tr>`;
-        }
-    } catch (err) {
-        console.error(err);
-        info.innerText = "❌ Gagal memuat JSON. Cek Deployment ID Anda.";
-    }
-}
-
-            info.innerText = `✅ Berhasil memuat ${data.length - 1} data.`;
-            // Loop data mulai baris ke-2 (index 1)
-            for(let i = 1; i < data.length; i++) {
-                let r = data[i];
-                tbody.innerHTML += `<tr>
-                    <td>${new Date(r[0]).toLocaleDateString()}</td>
-                    <td><b>${r[1]}</b></td>
-                    <td>${r[2]}</td>
-                    <td>${r[3]}</td>
-                    <td>${r[4]}</td>
-                    <td>${r[6]}</td>
-                    <td>${r[7]}</td>
-                </tr>`;
+    async function tesKoneksi() {
+        try {
+            const res = await fetch(URL_WEB_APP + "?action=readData", { redirect: 'follow' });
+            if(res.ok) {
+                alert("Koneksi ke Google Sheets SUKSES!");
+                // Di sini Anda bisa memunculkan tabel data siswa
             }
         } catch (err) {
-            console.error(err);
-            info.innerText = "❌ Gagal Terhubung! Pastikan URL Web App sudah benar & dideploy sebagai 'Anyone'.";
+            alert("Login Benar, TAPI Gagal Konek ke Google Sheets. Cek Izin Deployment Anda!");
         }
     }
 </script>
 
 </body>
 </html>
-
-
