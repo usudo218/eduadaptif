@@ -7,7 +7,7 @@
     <style>
         :root { --utama: #1e293b; --aksen: #4f46e5; --sukses: #10b981; --bg: #f8fafc; }
         * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: var(--bg); margin: 0; padding: 20px; color: #334155; }
+        body { background: var(--bg); margin: 0; padding: 20px; }
         .container { background: white; max-width: 1300px; margin: auto; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); padding: 30px; }
         .login-box { text-align: center; padding: 50px 20px; }
         .img-admin { width: 100px; border-radius: 50%; border: 3px solid var(--aksen); margin-bottom: 15px; }
@@ -40,7 +40,7 @@
             <h1>Monitoring Progres Siswa</h1>
             <div>
                 <button class="btn btn-blue" onclick="fetchData()">🔄 Segarkan</button>
-                <button class="btn btn-green" onclick="exportExcel()">📥 Ekspor Excel</button>
+                <button class="btn btn-green" onclick="exportExcel()">📥 Excel</button>
             </div>
         </div>
 
@@ -75,7 +75,7 @@
             <table id="main-table">
                 <thead>
                     <tr>
-                        <th>Waktu</th><th>Nama</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Bantuan</th><th>Percobaan</th><th>Status</th><th>Browser</th>
+                        <th>Waktu</th><th>Nama</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Bantuan</th><th>Coba</th><th>Status</th><th>Browser</th>
                     </tr>
                 </thead>
                 <tbody id="table-body"></tbody>
@@ -87,7 +87,7 @@
 <script>
     const SECRET_KEY = "ADMIN2026";
     // MASUKKAN URL HASIL DEPLOY TERBARU ANDA DI SINI
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwAdmksUF4knlPXBSnW8BACYslLR9nho_Of4DO3deFwtIEMKRs563aKF5KRm2PF3yQg/exec
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxhnf2aRSA8OUE3o49k10oDFgZPkrr_z1InUl0ORitik1UbPtkWdiSR9ANVp6wxjwdb/exec
 "; 
     
     let dbData = [];
@@ -102,15 +102,15 @@
 
     async function fetchData() {
         const body = document.getElementById('table-body');
-        body.innerHTML = "<tr><td colspan='9' style='text-align:center;'>⏳ Menghubungkan ke Cloud...</td></tr>";
+        body.innerHTML = "<tr><td colspan='9' style='text-align:center;'>⏳ Menghubungkan...</td></tr>";
         try {
-            // Menggunakan redirect 'follow' agar tidak error CORS
+            // Gunakan redirect 'follow' dan action 'readData'
             const res = await fetch(WEB_APP_URL + "?action=readData", { redirect: 'follow' });
-            const json = await res.json();
-            dbData = json.slice(1); 
+            dbData = await res.json();
+            dbData = dbData.slice(1); 
             applyFilters();
         } catch (e) {
-            body.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red;'>❌ Gagal memuat data. Periksa URL Web App atau Izin Deploy (Setel ke 'Anyone').</td></tr>";
+            body.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red;'>❌ Gagal memuat data. Periksa URL atau Izin Deploy (Setel ke 'Anyone').</td></tr>";
         }
     }
 
@@ -139,11 +139,11 @@
 
         data.forEach(r => {
             const dateStr = r[0] ? new Date(r[0]).toLocaleString('id-ID') : "-";
-            const stClass = (r[7] || "").toString() === "TUNTAS" ? "tuntas" : "remedial";
+            const stClass = (r[7] || "").toString().toUpperCase() === "TUNTAS" ? "tuntas" : "remedial";
             body.innerHTML += `
                 <tr>
                     <td>${dateStr}</td><td><b>${r[1]}</b></td><td>${r[2]}</td><td>${r[3]}</td>
-                    <td>${r[4]}</td><td>${r[5]}x</td><td>Ke-${r[6]}</td>
+                    <td>${r[4]}</td><td>${r[5]}x</td><td>${r[6]}</td>
                     <td><span class="badge ${stClass}">${r[7]}</span></td>
                     <td style="font-size:0.7rem; color:#94a3b8; max-width:150px; overflow:hidden;">${r[8]}</td>
                 </tr>`;
