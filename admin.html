@@ -8,161 +8,209 @@
     <style>
         :root {
             --utama: #1e293b; --aksen: #4f46e5; --sukses: #10b981;
-            --bg: #f1f5f9; --teks: #334155; --putih: #ffffff;
+            --bg: #f1f5f9; --teks: #334155; --putih: #ffffff; --bahaya: #ef4444;
         }
-        * { box-sizing: border-box; font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
-        body { background-color: var(--bg); color: var(--teks); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg); color: var(--teks); margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
         
-        .container { background: var(--putih); width: 95%; max-width: 1400px; margin: 20px auto; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); overflow: hidden; display: none; }
+        /* Area Login */
+        #login-screen { 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            position: fixed; inset: 0; background: var(--bg); z-index: 1000;
+        }
+        .login-card { 
+            background: var(--putih); padding: 40px; border-radius: 24px; 
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 400px; 
+        }
+        .img-pak-agus { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--aksen); margin-bottom: 20px; object-fit: cover; background: #f8fafc; }
 
-        /* Login Card */
-        .login-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 400px; padding: 40px; background: var(--putih); border-radius: 24px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); text-align: center; }
-        .login-wrapper img { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--aksen); margin-bottom: 20px; object-fit: cover; background: #f8fafc; }
-        .login-wrapper h2 { margin: 0 0 10px 0; color: var(--utama); }
-        .login-wrapper input { width: 100%; padding: 14px 20px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 1rem; margin-bottom: 20px; outline: none; }
-        .btn-login { width: 100%; padding: 14px; background: var(--aksen); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn-login:hover { transform: translateY(-2px); background: #4338ca; }
+        /* Area Dashboard */
+        #main-dashboard { display: none; padding: 20px; width: 100%; max-width: 1400px; margin: auto; }
+        .container { background: var(--putih); border-radius: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); overflow: hidden; }
 
-        /* Dashboard */
-        .header { background: var(--utama); color: white; padding: 30px; display: flex; justify-content: space-between; align-items: center; }
+        /* Header */
+        .header { 
+            background: var(--utama); color: white; padding: 25px 30px; 
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-buttons { display: flex; gap: 10px; }
+        .btn-nav { 
+            padding: 10px 15px; border-radius: 8px; border: none; cursor: pointer; 
+            font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; transition: 0.3s;
+        }
+        .btn-reload { background: var(--aksen); color: white; }
+        .btn-excel { background: var(--sukses); color: white; }
+        .btn-logout { background: var(--bahaya); color: white; }
+        .btn-nav:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        /* Filter Area */
         .toolbar { padding: 25px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
         .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-items: flex-end; }
         .filter-group { display: flex; flex-direction: column; gap: 8px; }
-        .filter-group label { font-size: 0.7rem; font-weight: 800; color: #64748b; text-transform: uppercase; }
-        .filter-group select, .filter-group input { padding: 10px 12px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 0.85rem; }
+        .filter-group label { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; }
+        select, input { padding: 10px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 0.9rem; width: 100%; }
 
-        /* Table */
+        /* Tabel */
         .table-area { overflow-x: auto; background: white; }
         table { width: 100%; border-collapse: collapse; min-width: 1000px; }
-        th { background: #f8fafc; color: #475569; padding: 15px 20px; text-align: left; font-size: 0.75rem; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; }
+        th { background: #f8fafc; color: #475569; padding: 15px 20px; text-align: left; font-size: 0.75rem; border-bottom: 2px solid #e2e8f0; }
         td { padding: 15px 20px; border-bottom: 1px solid #f1f5f9; font-size: 0.85rem; }
-        tr:hover { background: #fdfdfd; }
         
         .badge { padding: 5px 12px; border-radius: 20px; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; }
         .tuntas { background: #dcfce7; color: #166534; }
         .remedial { background: #fee2e2; color: #991b1b; }
-        .btn-excel { background: var(--sukses); color: white; border: none; padding: 10px 18px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+        .stat-total { background: var(--utama); color: white; padding: 10px 20px; border-radius: 10px; font-weight: bold; text-align: center; }
     </style>
 </head>
 <body>
 
-<div id="login-screen" class="login-wrapper">
-    <img src="images/Pak-Agus.png" alt="Pak Agus">
-    <h2>Admin Elang Digital</h2>
-    <p>Gunakan password akses untuk masuk.</p>
-    <input type="password" id="admin-pass" placeholder="Password Akses">
-    <button class="btn-login" onclick="cekLogin()">🔓 Masuk Dashboard</button>
+<div id="login-screen">
+    <div class="login-card">
+        <img src="images/pak-agus.png" class="img-pak-agus" alt="Pak Agus">
+        <h2 style="margin:0 0 10px">Admin Elang Digital</h2>
+        <p style="color:#64748b; font-size:0.9rem; margin-bottom:25px">Monitoring Progres Siswa Real-Time</p>
+        <input type="password" id="admin-pass" placeholder="Password Akses" style="margin-bottom:15px">
+        <button onclick="cekLogin()" style="width:100%; padding:14px; background:var(--aksen); color:white; border:none; border-radius:12px; font-weight:bold; cursor:pointer">Buka Dashboard</button>
+    </div>
 </div>
 
-<div id="main-container" class="container">
-    <div class="header">
-        <div>
-            <h1 style="margin:0; font-size:1.5rem">Monitoring Siswa</h1>
-            <p style="margin:5px 0 0; opacity:0.7; font-size:0.8rem">ELANG DIGITAL DASHBOARD 2026</p>
+<div id="main-dashboard">
+    <div class="container">
+        <div class="header">
+            <div style="display:flex; align-items:center; gap:15px">
+                <img src="images/pak-agus.png" style="width:45px; height:45px; border-radius:50%; border:2px solid white">
+                <div>
+                    <h1 style="margin:0; font-size:1.3rem">Monitoring Siswa</h1>
+                    <p style="margin:0; font-size:0.75rem; opacity:0.8">Dashboard Elang Digital 2026</p>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-nav btn-reload" onclick="muatData()">🔄 Ambil Data</button>
+                <button class="btn-nav btn-excel" onclick="eksporExcel()">📥 Ekspor Excel</button>
+                <button class="btn-nav btn-logout" onclick="logout()">🚪 Logout</button>
+            </div>
         </div>
-        <button class="btn-excel" onclick="eksporExcel()">📥 Ekspor Excel</button>
-    </div>
 
-    <div class="toolbar">
-        <div class="filter-grid">
-            <div class="filter-group">
-                <label>Cari Nama</label>
-                <input type="text" id="cari-nama" placeholder="Nama siswa..." onkeyup="filterDataAdmin()">
-            </div>
-            <div class="filter-group">
-                <label>Filter Kelas</label>
-                <select id="filt-kelas" onchange="filterDataAdmin()">
-                    <option value="SEMUA">-- Semua Kelas --</option>
-                    <option value="KELAS 10-1">10-1</option>
-                    <option value="KELAS 10-2">10-2</option>
-                    <option value="KELAS 10-3">10-3</option>
-                    <option value="KELAS 10-4">10-4</option>
-                    <option value="KELAS 10-5">10-5</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>Urutkan Modul</label>
-                <select id="sort-modul" onchange="filterDataAdmin()">
-                    <option value="DEFAULT">-- Waktu Input --</option>
-                    <option value="A-Z">Modul A-Z</option>
-                    <option value="Z-A">Modul Z-A</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>Urutkan Skor</label>
-                <select id="sort-skor" onchange="filterDataAdmin()">
-                    <option value="NONE">-- Tidak Ada --</option>
-                    <option value="TINGGI">Skor Tertinggi</option>
-                    <option value="RENDAH">Skor Terendah</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <div style="background:var(--aksen); color:white; padding:10px; border-radius:10px; text-align:center; font-weight:bold;">
-                    <small>Total:</small> <span id="label-total">0</span>
+        <div class="toolbar">
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label>Cari Nama</label>
+                    <input type="text" id="cari-nama" placeholder="Ketik nama..." onkeyup="filterData()">
+                </div>
+                <div class="filter-group">
+                    <label>Filter Kelas</label>
+                    <select id="filt-kelas" onchange="filterData()">
+                        <option value="SEMUA">Semua Kelas</option>
+                        <option value="KELAS 10-1">10-1</option>
+                        <option value="KELAS 10-2">10-2</option>
+                        <option value="KELAS 10-3">10-3</option>
+                        <option value="KELAS 10-4">10-4</option>
+                        <option value="KELAS 10-5">10-5</option>
+                        <option value="KELAS 10-6">10-6</option>
+                        <option value="KELAS 10-7">10-7</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Filter Modul</label>
+                    <select id="filt-modul" onchange="filterData()">
+                        <option value="SEMUA">Semua Modul (8)</option>
+                        <option value="BK">Berpikir Komputasional (BK)</option>
+                        <option value="TIK">Teknologi Informasi (TIK)</option>
+                        <option value="SK">Sistem Komputer (SK)</option>
+                        <option value="JKI">Jaringan Komputer (JKI)</option>
+                        <option value="AD">Analisis Data (AD)</option>
+                        <option value="AP">Algoritma Pemrograman (AP)</option>
+                        <option value="DSI">Dampak Sosial (DSI)</option>
+                        <option value="PLB">Praktik Lintas Bidang (PLB)</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Urutkan Skor</label>
+                    <select id="sort-skor" onchange="filterData()">
+                        <option value="DEFAULT">Waktu Input</option>
+                        <option value="TINGGI">Skor Tertinggi</option>
+                        <option value="RENDAH">Skor Terendah</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <div class="stat-total">Total: <span id="label-total">0</span></div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="table-area">
-        <table id="tabel-utama">
-            <thead>
-                <tr>
-                    <th>Waktu</th><th>Nama Siswa</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Coba</th><th>Status</th><th>Device</th>
-                </tr>
-            </thead>
-            <tbody id="isi-tabel"></tbody>
-        </table>
+        <div class="table-area">
+            <table id="tabel-utama">
+                <thead>
+                    <tr>
+                        <th>Waktu</th><th>Nama Siswa</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Coba</th><th>Status</th><th>Device</th>
+                    </tr>
+                </thead>
+                <tbody id="isi-tabel"></tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 <script>
-    const KODE_RAHASIA = "ADMIN2026";
+    const KODE_RAHASIA = "admin2026";
     const URL_GAS = "https://script.google.com/macros/s/AKfycbywzkacgm1ChC2PPvDPU9w4JIvGK8wMZiDBuRWKmdv8qFtSmDhUUDsahE6Azypztow0/exec"; 
-    let cacheDataSiswa = [];
+    let cacheData = [];
+
+    // Cek Sesi saat Refresh
+    window.onload = function() {
+        if(localStorage.getItem("admin_session") === "active") {
+            showDashboard();
+        }
+    }
 
     function cekLogin() {
         if(document.getElementById('admin-pass').value === KODE_RAHASIA) {
-            document.getElementById('login-screen').style.display = 'none';
-            document.body.style.alignItems = 'flex-start';
-            document.getElementById('main-container').style.display = 'block';
-            muatData();
+            localStorage.setItem("admin_session", "active");
+            showDashboard();
         } else { alert("Password Salah!"); }
+    }
+
+    function showDashboard() {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('main-dashboard').style.display = 'block';
+        muatData();
+    }
+
+    function logout() {
+        if(confirm("Keluar dari sistem?")) {
+            localStorage.removeItem("admin_session");
+            location.reload();
+        }
     }
 
     async function muatData() {
         const tbody = document.getElementById('isi-tabel');
-        tbody.innerHTML = "<tr><td colspan='8' style='text-align:center; padding:50px;'>⏳ Menghubungkan ke database Cloud...</td></tr>";
+        tbody.innerHTML = "<tr><td colspan='8' style='text-align:center; padding:50px;'>⏳ Menghubungkan ke Cloud...</td></tr>";
         try {
             const res = await fetch(URL_GAS + "?action=readData", { redirect: 'follow' });
             const data = await res.json();
-            cacheDataSiswa = data.slice(1);
-            filterDataAdmin();
+            cacheData = data.slice(1);
+            filterData();
         } catch (err) {
-            tbody.innerHTML = "<tr><td colspan='8' style='text-align:center; color:red; padding:50px;'>❌ Gagal memuat data. Periksa izin Deployment.</td></tr>";
+            tbody.innerHTML = "<tr><td colspan='8' style='text-align:center; color:red; padding:50px;'>❌ Gagal memuat data.</td></tr>";
         }
     }
 
-    function filterDataAdmin() {
+    function filterData() {
         const kls = document.getElementById('filt-kelas').value;
-        const cariNama = document.getElementById('cari-nama').value.toUpperCase();
-        const sortMdl = document.getElementById('sort-modul').value;
-        const sortSkr = document.getElementById('sort-skor').value;
+        const mdl = document.getElementById('filt-modul').value;
+        const cari = document.getElementById('cari-nama').value.toUpperCase();
+        const sort = document.getElementById('sort-skor').value;
 
-        // 1. Filter
-        let filtered = cacheDataSiswa.filter(r => {
+        let filtered = cacheData.filter(r => {
             const matchKelas = (kls === "SEMUA" || r[2] === kls);
-            const matchNama = (r[1] || "").toString().toUpperCase().includes(cariNama);
-            return matchKelas && matchNama;
+            const matchModul = (mdl === "SEMUA" || (r[3] && r[3].includes(mdl)));
+            const matchNama = (r[1] || "").toString().toUpperCase().includes(cari);
+            return matchKelas && matchModul && matchNama;
         });
 
-        // 2. Sort Modul
-        if(sortMdl === "A-Z") filtered.sort((a, b) => (a[3] || "").localeCompare(b[3] || ""));
-        else if(sortMdl === "Z-A") filtered.sort((a, b) => (b[3] || "").localeCompare(a[3] || ""));
-
-        // 3. Sort Skor (Menggunakan r[4])
-        if(sortSkr === "TINGGI") filtered.sort((a, b) => Number(b[4] || 0) - Number(a[4] || 0));
-        else if(sortSkr === "RENDAH") filtered.sort((a, b) => Number(a[4] || 0) - Number(b[4] || 0));
+        if(sort === "TINGGI") filtered.sort((a,b) => b[4] - a[4]);
+        if(sort === "RENDAH") filtered.sort((a,b) => a[4] - b[4]);
 
         const tbody = document.getElementById('isi-tabel');
         tbody.innerHTML = "";
@@ -175,7 +223,7 @@
                     <td style="color:#64748b; font-size:0.75rem">${r[0] ? new Date(r[0]).toLocaleString('id-ID') : '-'}</td>
                     <td style="font-weight:700">${r[1] || '-'}</td>
                     <td>${r[2] || '-'}</td>
-                    <td>${r[3] || '-'}</td>
+                    <td style="font-size:0.8rem">${r[3] || '-'}</td>
                     <td style="font-weight:800; color:var(--aksen)">${r[4] || '0'}</td>
                     <td>Ke-${r[6] || '1'}</td>
                     <td><span class="badge ${stClass}">${r[7] || '-'}</span></td>
@@ -186,7 +234,7 @@
 
     function eksporExcel() {
         const wb = XLSX.utils.table_to_book(document.getElementById('tabel-utama'));
-        XLSX.writeFile(wb, "Data_Monitoring_ElangDigital.xlsx");
+        XLSX.writeFile(wb, "Data_Monitoring_ElangDigital_2026.xlsx");
     }
 </script>
 </body>
