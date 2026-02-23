@@ -2,66 +2,156 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Admin - ELANG DIGITAL</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f1f5f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .box { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 400px; }
-        .img-admin { width: 100px; border-radius: 50%; border: 3px solid #4f46e5; margin-bottom: 20px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #4f46e5; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        button:hover { background: #4338ca; }
-        .error-msg { color: #ef4444; font-size: 0.85rem; margin-top: 10px; display: none; }
+        :root {
+            --utama: #1e293b; --aksen: #4f46e5; --sukses: #10b981;
+            --bg: #f8fafc; --teks: #334155; --putih: #ffffff;
+        }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: var(--bg); color: var(--teks); margin: 0; padding: 20px; }
+        
+        .container { background: var(--putih); max-width: 1400px; margin: auto; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); padding: 30px; }
+        
+        /* Area Login */
+        .login-box { text-align: center; padding: 60px 20px; }
+        .img-admin { width: 110px; border-radius: 50%; border: 4px solid var(--aksen); margin-bottom: 20px; }
+        input[type="password"] { padding: 12px; border-radius: 8px; border: 2px solid #e2e8f0; width: 300px; font-size: 1rem; outline: none; }
+        
+        /* Dashboard Content */
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px; }
+        .btn { border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; transition: 0.2s; }
+        .btn-blue { background: var(--aksen); }
+        .btn-green { background: var(--sukses); }
+
+        /* Filter */
+        .filter-bar { background: #f1f5f9; padding: 15px; border-radius: 12px; display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-end; }
+        select { padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; background: white; }
+
+        /* Tabel */
+        .table-area { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th { background: var(--utama); color: white; padding: 12px; text-align: left; }
+        td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; }
+        
+        .badge { padding: 4px 8px; border-radius: 5px; font-weight: bold; font-size: 0.7rem; text-transform: uppercase; }
+        .tuntas { background: #dcfce7; color: #166534; }
+        .remedial { background: #fee2e2; color: #991b1b; }
     </style>
 </head>
 <body>
 
-<div class="box" id="login-box">
-    <img src="images/Pak-Agus.png" class="img-admin" alt="Admin">
-    <h2>Login Admin</h2>
-    <p>Silakan masukkan kode akses</p>
-    <input type="password" id="pass" placeholder="Kode Akses (Contoh: ADMIN2026)">
-    <button onclick="cekLogin()">Masuk Dashboard</button>
-    <div id="pesan-salah" class="error-msg">Kode Akses Salah!</div>
+<div class="container">
+    <div id="area-login" class="login-box">
+        <img src="images/Pak-Agus.png" class="img-admin" alt="Pak Agus">
+        <h2>Panel Kendali Elang Digital</h2>
+        <input type="password" id="admin-pass" placeholder="Masukkan Kode khusus"><br><br>
+        <button class="btn btn-blue" onclick="cekLogin()">🔓 Buka Dashboard</button>
+    </div>
+
+    <div id="area-dashboard" style="display:none;">
+        <div class="header">
+            <div>
+                <h1 style="margin:0;">Monitoring Progres Siswa</h1>
+                <p style="margin:5px 0 0; opacity:0.7;">Analitik Data Real-Time &copy; 2026</p>
+            </div>
+            <div>
+                <button class="btn btn-blue" onclick="muatData()">🔄 Refresh</button>
+                <button class="btn btn-green" onclick="eksporKeExcel()">📥 Excel</button>
+            </div>
+        </div>
+
+        <div class="filter-bar">
+            <div>
+                <label style="font-size:0.8rem; font-weight:bold;">Filter Kelas:</label><br>
+                <select id="filt-kelas" onchange="filterDataAdmin()">
+                    <option value="SEMUA">-- Semua Kelas --</option>
+                    <option value="KELAS 10-1">10-1</option><option value="KELAS 10-2">10-2</option>
+                    <option value="KELAS 10-3">10-3</option><option value="KELAS 10-4">10-4</option>
+                    <option value="KELAS 10-5">10-5</option><option value="KELAS 10-6">10-6</option>
+                    <option value="KELAS 10-7">10-7</option>
+                </select>
+            </div>
+            <div style="margin-left:auto;">
+                <b>Total Terfilter: <span id="label-total">0</span> Data</b>
+            </div>
+        </div>
+
+        <div class="table-area">
+            <table id="tabel-utama">
+                <thead>
+                    <tr>
+                        <th>Waktu</th><th>Nama Siswa</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Bantuan</th><th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="isi-tabel">
+                    </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <script>
-    // 1. KODE AKSES (Sesuaikan dengan keinginan Anda)
     const KODE_RAHASIA = "ADMIN2026";
-
-    // 2. TEMPEL URL WEB APP (HASIL DEPLOY) DI SINI
-    const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbywzkacgm1ChC2PPvDPU9w4JIvGK8wMZiDBuRWKmdv8qFtSmDhUUDsahE6Azypztow0/exec";
+    // MASUKKAN URL WEB APP ANDA DI SINI
+    const URL_GAS = "https://script.google.com/macros/s/AKfycbwYvmlH091izhAxBnT4klb1d9CQd61RCTb33b9sDrZfuA5I9j8Sxjzoz0ySK6Rd2GEt/exec"; 
+    
+    let cacheDataSiswa = [];
 
     function cekLogin() {
-        const input = document.getElementById('pass').value;
-        const pesan = document.getElementById('pesan-salah');
-
-        if (input === KODE_RAHASIA) {
-            // Jika benar, simpan status login sederhana dan pindah ke halaman data
-            // Untuk tes awal, kita langsung arahkan ke fungsi muat data atau alert sukses
-            alert("Login Berhasil! Menyambungkan ke database...");
-            
-            // Simpan status di memori browser agar tidak login ulang terus
-            sessionStorage.setItem("admin_masuk", "ya");
-            
-            // Ambil data untuk memastikan koneksi Web App aktif
-            tesKoneksi();
+        const input = document.getElementById('admin-pass').value;
+        if(input === KODE_RAHASIA) {
+            document.getElementById('area-login').style.display = 'none';
+            document.getElementById('area-dashboard').style.display = 'block';
+            muatData();
         } else {
-            pesan.style.display = "block";
+            alert("Kode Salah! Gunakan ADMIN2026");
         }
     }
 
-    async function tesKoneksi() {
+    async function muatData() {
+        const tbody = document.getElementById('isi-tabel');
+        tbody.innerHTML = "<tr><td colspan='7' style='text-align:center;'>⏳ Mengambil data...</td></tr>";
+
         try {
-            const res = await fetch(URL_WEB_APP + "?action=readData", { redirect: 'follow' });
-            if(res.ok) {
-                alert("Koneksi ke Google Sheets SUKSES!");
-                // Di sini Anda bisa memunculkan tabel data siswa
-            }
+            const res = await fetch(URL_GAS + "?action=readData", { redirect: 'follow' });
+            const data = await res.json();
+            cacheDataSiswa = data.slice(1); // Potong baris header
+            filterDataAdmin();
         } catch (err) {
-            alert("Login Benar, TAPI Gagal Konek ke Google Sheets. Cek Izin Deployment Anda!");
+            tbody.innerHTML = "<tr><td colspan='7' style='text-align:center; color:red;'>❌ Gagal muat data. Cek Izin Deployment 'Anyone'.</td></tr>";
         }
+    }
+
+    function filterDataAdmin() {
+        const kls = document.getElementById('filt-kelas').value;
+        const filtered = cacheDataSiswa.filter(r => kls === "SEMUA" || r[2] === kls);
+        
+        const tbody = document.getElementById('isi-tabel');
+        tbody.innerHTML = "";
+        document.getElementById('label-total').innerText = filtered.length;
+
+        filtered.forEach(r => {
+            const tuntas = r[7] === "TUNTAS";
+            tbody.innerHTML += `
+                <tr>
+                    <td>${new Date(r[0]).toLocaleDateString()}</td>
+                    <td><b>${r[1]}</b></td>
+                    <td>${r[2]}</td>
+                    <td>${r[3]}</td>
+                    <td style="font-weight:bold">${r[4]}</td>
+                    <td>${r[5]}x</td>
+                    <td><span class="badge ${tuntas ? 'tuntas' : 'remedial'}">${r[7]}</span></td>
+                </tr>`;
+        });
+    }
+
+    function eksporKeExcel() {
+        const wb = XLSX.utils.table_to_book(document.getElementById('tabel-utama'));
+        XLSX.writeFile(wb, "Rekap_Nilai_ElangDigital.xlsx");
     }
 </script>
-
 </body>
 </html>
