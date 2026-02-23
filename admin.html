@@ -7,159 +7,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         :root {
-            --utama: #1e293b; 
-            --aksen: #4f46e5; 
-            --sukses: #10b981;
-            --bg: #f1f5f9; 
-            --teks: #334155; 
-            --putih: #ffffff;
-            --rose: #e11d48;
+            --utama: #1e293b; --aksen: #4f46e5; --sukses: #10b981;
+            --bg: #f1f5f9; --teks: #334155; --putih: #ffffff;
         }
         * { box-sizing: border-box; font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
-        body { 
-            background-color: var(--bg); 
-            color: var(--teks); 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh;
-        }
+        body { background-color: var(--bg); color: var(--teks); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         
-        /* Layout Utama */
-        .container { 
-            background: var(--putih); 
-            width: 95%; 
-            max-width: 1400px; 
-            margin: 20px auto; 
-            border-radius: 20px; 
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); 
-            overflow: hidden;
-            display: none; /* Sembunyi sebelum login */
-        }
+        .container { background: var(--putih); width: 95%; max-width: 1400px; margin: 20px auto; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); overflow: hidden; display: none; }
 
-        /* Tampilan Login Profesional */
-        .login-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 400px;
-            padding: 40px;
-            background: var(--putih);
-            border-radius: 24px;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .login-wrapper img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 4px solid var(--aksen);
-            margin-bottom: 20px;
-            object-fit: cover;
-            background: #f8fafc;
-        }
-        .login-wrapper h2 { margin: 0 0 10px 0; color: var(--utama); font-size: 1.5rem; }
-        .login-wrapper p { color: #64748b; margin-bottom: 25px; font-size: 0.9rem; }
-        .login-wrapper input {
-            width: 100%;
-            padding: 14px 20px;
-            border-radius: 12px;
-            border: 2px solid #e2e8f0;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            transition: 0.3s;
-            outline: none;
-        }
-        .login-wrapper input:focus { border-color: var(--aksen); box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); }
-        .btn-login {
-            width: 100%;
-            padding: 14px;
-            background: var(--aksen);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-login:hover { background: #4338ca; transform: translateY(-2px); }
+        /* Login Card */
+        .login-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 400px; padding: 40px; background: var(--putih); border-radius: 24px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); text-align: center; }
+        .login-wrapper img { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--aksen); margin-bottom: 20px; object-fit: cover; background: #f8fafc; }
+        .login-wrapper h2 { margin: 0 0 10px 0; color: var(--utama); }
+        .login-wrapper input { width: 100%; padding: 14px 20px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 1rem; margin-bottom: 20px; outline: none; }
+        .btn-login { width: 100%; padding: 14px; background: var(--aksen); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-login:hover { transform: translateY(-2px); background: #4338ca; }
 
-        /* Dashboard Header */
-        .header { 
-            background: var(--utama); 
-            color: white; 
-            padding: 30px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-        }
-        .header-title h1 { margin: 0; font-size: 1.5rem; letter-spacing: -0.5px; }
-        .header-title p { margin: 5px 0 0 0; opacity: 0.7; font-size: 0.8rem; }
-
-        /* Toolbar & Filter */
+        /* Dashboard */
+        .header { background: var(--utama); color: white; padding: 30px; display: flex; justify-content: space-between; align-items: center; }
         .toolbar { padding: 25px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
-        .filter-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 15px; 
-            align-items: flex-end; 
-        }
+        .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-items: flex-end; }
         .filter-group { display: flex; flex-direction: column; gap: 8px; }
-        .filter-group label { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; }
-        .filter-group select, .filter-group input { 
-            padding: 10px 15px; 
-            border-radius: 10px; 
-            border: 1px solid #cbd5e1; 
-            background: white;
-            font-size: 0.9rem;
-        }
+        .filter-group label { font-size: 0.7rem; font-weight: 800; color: #64748b; text-transform: uppercase; }
+        .filter-group select, .filter-group input { padding: 10px 12px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 0.85rem; }
 
-        /* Tabel Area */
-        .table-area { padding: 0; overflow-x: auto; background: white; }
+        /* Table */
+        .table-area { overflow-x: auto; background: white; }
         table { width: 100%; border-collapse: collapse; min-width: 1000px; }
-        th { 
-            background: #f8fafc; 
-            color: #475569; 
-            font-weight: 600; 
-            padding: 15px 20px; 
-            text-align: left; 
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            border-bottom: 2px solid #e2e8f0;
-        }
-        td { padding: 15px 20px; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; vertical-align: middle; }
+        th { background: #f8fafc; color: #475569; padding: 15px 20px; text-align: left; font-size: 0.75rem; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 15px 20px; border-bottom: 1px solid #f1f5f9; font-size: 0.85rem; }
         tr:hover { background: #fdfdfd; }
         
-        /* Badges & Info */
-        .badge { padding: 5px 12px; border-radius: 20px; font-weight: 700; font-size: 0.7rem; }
+        .badge { padding: 5px 12px; border-radius: 20px; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; }
         .tuntas { background: #dcfce7; color: #166534; }
         .remedial { background: #fee2e2; color: #991b1b; }
-        .device-info { font-size: 0.75rem; color: #94a3b8; display: block; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .nama-siswa { font-weight: 700; color: var(--utama); }
-
-        /* Button Actions */
-        .btn-group { display: flex; gap: 10px; }
-        .btn-action { 
-            border: none; 
-            padding: 10px 18px; 
-            border-radius: 10px; 
-            font-weight: 600; 
-            font-size: 0.85rem;
-            cursor: pointer; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 8px;
-            transition: 0.2s;
-        }
-        .btn-refresh { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
-        .btn-refresh:hover { background: white; color: var(--utama); }
-        .btn-excel { background: var(--sukses); color: white; }
-        .btn-excel:hover { opacity: 0.9; }
-
-        .stat-label { font-size: 0.9rem; font-weight: bold; background: var(--aksen); color: white; padding: 10px 20px; border-radius: 10px; }
+        .btn-excel { background: var(--sukses); color: white; border: none; padding: 10px 18px; border-radius: 10px; font-weight: 600; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -167,28 +49,25 @@
 <div id="login-screen" class="login-wrapper">
     <img src="images/Pak-Agus.png" alt="Pak Agus">
     <h2>Admin Elang Digital</h2>
-    <p>Silakan masukkan kode akses untuk memantau progres siswa secara real-time.</p>
+    <p>Gunakan password akses untuk masuk.</p>
     <input type="password" id="admin-pass" placeholder="Password Akses">
     <button class="btn-login" onclick="cekLogin()">🔓 Masuk Dashboard</button>
 </div>
 
 <div id="main-container" class="container">
     <div class="header">
-        <div class="header-title">
-            <h1>Monitoring Progres Siswa</h1>
-            <p>ELANG DIGITAL DASHBOARD • 2026</p>
+        <div>
+            <h1 style="margin:0; font-size:1.5rem">Monitoring Siswa</h1>
+            <p style="margin:5px 0 0; opacity:0.7; font-size:0.8rem">ELANG DIGITAL DASHBOARD 2026</p>
         </div>
-        <div class="btn-group">
-            <button class="btn-action btn-refresh" onclick="muatData()">🔄 Refresh Data</button>
-            <button class="btn-action btn-excel" onclick="eksporExcel()">📥 Ekspor Excel</button>
-        </div>
+        <button class="btn-excel" onclick="eksporExcel()">📥 Ekspor Excel</button>
     </div>
 
     <div class="toolbar">
         <div class="filter-grid">
             <div class="filter-group">
-                <label>Cari Nama Siswa</label>
-                <input type="text" id="cari-nama" placeholder="Ketik nama siswa..." onkeyup="filterDataAdmin()">
+                <label>Cari Nama</label>
+                <input type="text" id="cari-nama" placeholder="Nama siswa..." onkeyup="filterDataAdmin()">
             </div>
             <div class="filter-group">
                 <label>Filter Kelas</label>
@@ -199,13 +78,27 @@
                     <option value="KELAS 10-3">10-3</option>
                     <option value="KELAS 10-4">10-4</option>
                     <option value="KELAS 10-5">10-5</option>
-                    <option value="KELAS 10-6">10-6</option>
-                    <option value="KELAS 10-7">10-7</option>
                 </select>
             </div>
-            <div class="filter-group" style="flex-grow: 1; align-items: flex-end;">
-                <div class="stat-label">
-                    Ditemukan: <span id="label-total">0</span> Data
+            <div class="filter-group">
+                <label>Urutkan Modul</label>
+                <select id="sort-modul" onchange="filterDataAdmin()">
+                    <option value="DEFAULT">-- Waktu Input --</option>
+                    <option value="A-Z">Modul A-Z</option>
+                    <option value="Z-A">Modul Z-A</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Urutkan Skor</label>
+                <select id="sort-skor" onchange="filterDataAdmin()">
+                    <option value="NONE">-- Tidak Ada --</option>
+                    <option value="TINGGI">Skor Tertinggi</option>
+                    <option value="RENDAH">Skor Terendah</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <div style="background:var(--aksen); color:white; padding:10px; border-radius:10px; text-align:center; font-weight:bold;">
+                    <small>Total:</small> <span id="label-total">0</span>
                 </div>
             </div>
         </div>
@@ -215,19 +108,10 @@
         <table id="tabel-utama">
             <thead>
                 <tr>
-                    <th>Waktu</th>
-                    <th>Nama Siswa</th>
-                    <th>Kelas</th>
-                    <th>Modul</th>
-                    <th>Skor</th>
-                    <th>Bantuan</th>
-                    <th>Coba Ke-</th>
-                    <th>Status</th>
-                    <th>Device/Browser</th>
+                    <th>Waktu</th><th>Nama Siswa</th><th>Kelas</th><th>Modul</th><th>Skor</th><th>Coba</th><th>Status</th><th>Device</th>
                 </tr>
             </thead>
-            <tbody id="isi-tabel">
-                </tbody>
+            <tbody id="isi-tabel"></tbody>
         </table>
     </div>
 </div>
@@ -235,79 +119,74 @@
 <script>
     const KODE_RAHASIA = "ADMIN2026";
     const URL_GAS = "https://script.google.com/macros/s/AKfycbywzkacgm1ChC2PPvDPU9w4JIvGK8wMZiDBuRWKmdv8qFtSmDhUUDsahE6Azypztow0/exec"; 
-    
     let cacheDataSiswa = [];
 
-    // Fungsi Login Profesional
     function cekLogin() {
-        const input = document.getElementById('admin-pass').value;
-        if(input === KODE_RAHASIA) {
+        if(document.getElementById('admin-pass').value === KODE_RAHASIA) {
             document.getElementById('login-screen').style.display = 'none';
             document.body.style.alignItems = 'flex-start';
             document.getElementById('main-container').style.display = 'block';
             muatData();
-        } else {
-            alert("⚠️ Kode Akses Salah! Silakan coba lagi.");
-        }
+        } else { alert("Password Salah!"); }
     }
 
     async function muatData() {
         const tbody = document.getElementById('isi-tabel');
-        tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; padding:50px;'>⏳ Sedang mengambil data dari server Pak Agus...</td></tr>";
-
+        tbody.innerHTML = "<tr><td colspan='8' style='text-align:center; padding:50px;'>⏳ Menghubungkan ke database Cloud...</td></tr>";
         try {
             const res = await fetch(URL_GAS + "?action=readData", { redirect: 'follow' });
             const data = await res.json();
-            cacheDataSiswa = data.slice(1); // Abaikan baris header
+            cacheDataSiswa = data.slice(1);
             filterDataAdmin();
         } catch (err) {
-            console.error(err);
-            tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red; padding:50px;'>❌ Gagal muat data. Periksa koneksi atau izin Deployment Script.</td></tr>";
+            tbody.innerHTML = "<tr><td colspan='8' style='text-align:center; color:red; padding:50px;'>❌ Gagal memuat data. Periksa izin Deployment.</td></tr>";
         }
     }
 
-    // Fungsi Sortir & Cari (Per Siswa & Per Kelas)
     function filterDataAdmin() {
         const kls = document.getElementById('filt-kelas').value;
         const cariNama = document.getElementById('cari-nama').value.toUpperCase();
-        
-        const filtered = cacheDataSiswa.filter(r => {
+        const sortMdl = document.getElementById('sort-modul').value;
+        const sortSkr = document.getElementById('sort-skor').value;
+
+        // 1. Filter
+        let filtered = cacheDataSiswa.filter(r => {
             const matchKelas = (kls === "SEMUA" || r[2] === kls);
             const matchNama = (r[1] || "").toString().toUpperCase().includes(cariNama);
             return matchKelas && matchNama;
         });
-        
+
+        // 2. Sort Modul
+        if(sortMdl === "A-Z") filtered.sort((a, b) => (a[3] || "").localeCompare(b[3] || ""));
+        else if(sortMdl === "Z-A") filtered.sort((a, b) => (b[3] || "").localeCompare(a[3] || ""));
+
+        // 3. Sort Skor (Menggunakan r[4])
+        if(sortSkr === "TINGGI") filtered.sort((a, b) => Number(b[4] || 0) - Number(a[4] || 0));
+        else if(sortSkr === "RENDAH") filtered.sort((a, b) => Number(a[4] || 0) - Number(b[4] || 0));
+
         const tbody = document.getElementById('isi-tabel');
         tbody.innerHTML = "";
         document.getElementById('label-total').innerText = filtered.length;
 
-        if(filtered.length === 0) {
-            tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; padding:30px; color:#94a3b8;'>Data tidak ditemukan.</td></tr>";
-            return;
-        }
-
         filtered.forEach(r => {
-            const dateStr = r[0] ? new Date(r[0]).toLocaleString('id-ID', {dateStyle:'short', timeStyle:'short'}) : "-";
-            const stClass = (r[7] && r[7].toString().toUpperCase() === "TUNTAS") ? "tuntas" : "remedial";
-            
+            const stClass = (r[7] || "").toString().toUpperCase() === "TUNTAS" ? "tuntas" : "remedial";
             tbody.innerHTML += `
                 <tr>
-                    <td style="color:#64748b">${dateStr}</td>
-                    <td class="nama-siswa">${r[1] || '-'}</td>
-                    <td><span style="font-weight:600">${r[2] || '-'}</span></td>
+                    <td style="color:#64748b; font-size:0.75rem">${r[0] ? new Date(r[0]).toLocaleString('id-ID') : '-'}</td>
+                    <td style="font-weight:700">${r[1] || '-'}</td>
+                    <td>${r[2] || '-'}</td>
                     <td>${r[3] || '-'}</td>
                     <td style="font-weight:800; color:var(--aksen)">${r[4] || '0'}</td>
-                    <td>${r[5] || '0'}x</td>
-                    <td>Percobaan ${r[6] || '1'}</td>
+                    <td>Ke-${r[6] || '1'}</td>
                     <td><span class="badge ${stClass}">${r[7] || '-'}</span></td>
-                    <td><span class="device-info" title="${r[8]}">${r[8] || '-'}</span></td>
+                    <td style="font-size:0.7rem; color:#94a3b8">${r[8] || '-'}</td>
                 </tr>`;
         });
     }
 
     function eksporExcel() {
         const wb = XLSX.utils.table_to_book(document.getElementById('tabel-utama'));
-        XLSX.writeFile(wb, "Data_Monitoring_ElangDigital_2026.xlsx");
+        XLSX.writeFile(wb, "Data_Monitoring_ElangDigital.xlsx");
     }
 </script>
 </body>
