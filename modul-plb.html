@@ -6,9 +6,9 @@
     <title>Modul PLB - ELANG DIGITAL</title>
     <style>
         :root {
-            --warna-utama: #15803D; /* Hijau untuk PLB */
-            --warna-aksen: #D97706; 
-            --warna-merah: #EF4444; /* Merah untuk Tombol PDF */
+            --warna-utama: #15803D; /* Hijau PLB */
+            --warna-aksen: #166534; 
+            --warna-merah: #EF4444; 
             --warna-merah-hover: #DC2626;
             --warna-kuning: #F59E0B; 
             --warna-latar: #F3F4F6; 
@@ -21,9 +21,8 @@
         .app-container { background: white; width: 100%; max-width: 650px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; margin-top: 20px; display: flex; flex-direction: column;}
         
         .header { background: var(--warna-utama); color: white; padding: 50px 20px 30px 20px; text-align: center; position: relative; }
-        .header h1 { margin: 0; font-size: 1.5rem; font-weight: 700; }
+        .header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; }
         
-        /* TOMBOL HEADER SERAGAM (HOME & LOGOUT) */
         .btn-header { 
             position: absolute; 
             top: 15px; 
@@ -67,15 +66,14 @@
         .teks-materi { background: #f9fafb; padding: 25px; border-radius: 12px; border: 1px solid #e5e7eb; height: 500px; overflow-y: auto; text-align: justify; line-height: 1.7; }
         .teks-materi h3 { color: var(--warna-utama); border-bottom: 2px solid #eee; padding-bottom: 8px; margin-top: 25px; }
 
-        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; }
+        .btn-opsi { background: white; border: 2px solid #D1D5DB; padding: 15px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; transition: 0.2s; }
         .btn-opsi.terpilih { background: var(--latar-mentor); border-color: var(--warna-utama); font-weight: bold; color: var(--warna-utama); }
 
         .btn-action { width: 100%; background: var(--warna-utama); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
-        .btn-submit { background: var(--warna-aksen); }
+        .btn-submit { background: #D97706; } /* Warna Aksen PLB */
         .btn-bantuan { background: var(--warna-kuning); color: white; margin-bottom: 20px;}
         .btn-disabled { background: #9CA3AF; cursor: not-allowed; }
 
-        /* Tombol PDF Merah Profesional */
         .pdf-box { background: #F0FDF4; padding: 18px; border-radius: 12px; border: 1px dashed var(--warna-utama); margin-top: 20px; text-align: center; }
         .btn-pdf-merah { background: var(--warna-merah) !important; color: white !important; text-decoration: none; display: inline-block; width: auto; padding: 12px 25px; border-radius: 8px; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 10px rgba(21, 128, 61, 0.2); }
         .btn-pdf-merah:hover { background: var(--warna-merah-hover) !important; transform: scale(1.03); }
@@ -100,7 +98,7 @@
                 <div class="login-card">
                     <img src="images/Pak-Agus.png" alt="Pak Agus" class="Pak-Agus-img">
                     <h2>Misi Terakhir, Pejuang!</h2>
-                    <p>Halo, saya Pak Agus. Waktunya membuktikan kolaborasimu dalam menyelesaikan masalah nyata.</p>
+                    <p>Pak Agus akan membimbingmu membuktikan kolaborasi tim dalam menyelesaikan proyek nyata.</p>
                     <select id="pilih-kelas" class="input-nama" onchange="filterNama()">
                         <option value="">-- Pilih Kelas --</option>
                     </select>
@@ -123,15 +121,23 @@
 
             <div id="area-materi" class="area-konten">
                 <div class="teks-materi">
-                    <b>Kolaborasi dalam Tim </b><br /><br />Praktik Lintas Bidang sangat mengedepankan kerja sama tim untuk menyelesaikan proyek informatika. <br /><b>Tim Inklusif</b>:&nbsp;<div>Tim yang terbuka, saling menghargai perbedaan, dan melibatkan semua anggota tanpa diskriminasi. <br /><b>Etika Kolaborasi</b>:&nbsp;<div>Membagi tugas sesuai keahlian, saling membantu, serta melakukan musyawarah untuk mencapai mufakat jika terjadi perbedaan ide. <br /><b>Keterampilan Komunikasi:</b>&nbsp;</div><div>Pentingnya kemampuan Public Speaking agar hasil karya dapat dipresentasikan dan dipahami oleh masyarakat luas. <br /><br /><b>Tahapan Pengembangan Proyek </b><br /><br />Dalam menyelesaikan masalah menggunakan informatika, terdapat siklus kerja yang teratur: <br /><b>Identifikasi Masalah</b>:&nbsp;</div><div>Langkah pertama adalah menemukan dan merumuskan persoalan yang akan diselesaikan. <br /><b>Pengumpulan Data</b>:&nbsp;</div><div>Mencari data melalui metode efektif, seperti kuesioner atau survei online. <br /><b>Perancangan Algoritma</b>:&nbsp;</div><div>Menyusun alur logika penyelesaian sebelum menulis kode program. <br /><b>Pengujian (Testing):&nbsp;</b></div><div>Tahap untuk mencari kesalahan (bug) dan memastikan aplikasi berjalan sesuai rancangan. <br /><br /><b>Siklus Pengolahan Data </b><br />Proses pengolahan data untuk proyek (misal: pariwisata) harus dilakukan secara berurutan: <br /><div style="text-align: center;"><b><span style="font-size: medium;">Pengumpulan - Pengolahan -  Analisis - Visualisasi - Publikasi</span></b></div><br /><b>Pemanfaatan Teknologi Digital </b><br />Teknologi digunakan untuk meningkatkan nilai guna suatu proyek: <br /><b>Promosi Online</b>:&nbsp;</div><div>Penggunaan media sosial dan website sangat efektif karena dapat diakses 24 jam secara global, sehingga memperluas jangkauan pasar UMKM dan meningkatkan pendapatan ekonomi. <br /><b>Aplikasi Perkantoran</b>:&nbsp;</div><div>Penggunaan Microsoft Word yang diintegrasikan dengan grafik dari Excel untuk menyusun laporan akhir yang akurat dan rapi. <br /><br /><b>Dokumentasi dan Hak Cipta </b><br />Dokumentasi diperlukan agar proyek dapat dipertanggungjawabkan dan dikembangkan di masa depan: <br /><b>Pentingnya Dokumentasi</b>:&nbsp;</div><div>Memudahkan perbaikan (maintenance) dan membantu orang lain memahami alur kerja proyek. <br /><b>Publikasi Video</b>:&nbsp;</div><div>Penggunaan platform seperti YouTube untuk membagikan dokumentasi proyek. <br /><br /><div><b>Hak Kekayaan Intelektual (HKI)</b>:&nbsp;</div><div>Dalam pembuatan konten, wajib menggunakan elemen (seperti musik latar) yang bebas hak cipta atau berlisensi resmi agar tidak terkena pelanggaran hak cipta (Copyright Strike) <br /><br /> </div></div></div>
+                    <h3>Kolaborasi dan Pengembangan Proyek</h3>
+                    <p>Praktik Lintas Bidang (PLB) menekankan pada kerja sama tim inklusif, etika kolaborasi, dan kemampuan komunikasi publik dalam menyelesaikan masalah nyata melalui informatika.</p>
+                    <h3>Siklus Pengolahan Data Proyek:</h3>
+                    <ul>
+                        <li><strong>Identifikasi Masalah:</strong> Merumuskan persoalan.</li>
+                        <li><strong>Pengumpulan Data:</strong> Survei atau kuesioner.</li>
+                        <li><strong>Analisis & Perancangan:</strong> Menyusun alur logika.</li>
+                        <li><strong>Pengujian & Publikasi:</strong> Mencari bug dan dokumentasi.</li>
+                    </ul>
                     <div class="pdf-box">
-                        <p style="margin-bottom: 12px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi lengkap?</p>
+                        <p style="margin-bottom: 12px; font-weight: bold; color: var(--warna-teks);">📖 Ingin membaca naskah materi PLB lengkap?</p>
                         <a href="LINK_GOOGLE_DRIVE_PDF_PLB_BAPAK" target="_blank" class="btn-pdf-merah">
                             📥 Buka Naskah Materi (PDF)
                         </a>
                     </div>
                 </div>
-                <button class="btn-action" onclick="mulaiKuis()">Tim Siap, Mulai Kuis Akhir!</button>
+                <button class="btn-action" onclick="mulaiKuis()">Tim Siap, Mulai Kuis!</button>
             </div>
 
             <div id="area-kuis" class="area-konten">
@@ -146,8 +152,10 @@
                 <div id="wrapper-nama-hasil" class="nama-hasil"></div>
                 <div class="angka-skor" id="teks-skor">0</div>
                 <p id="keterangan-hasil" style="text-align: center; font-weight: bold; font-size: 1.2rem; margin-top: 0;"></p>
+                <p id="teks-percobaan" style="text-align: center; font-weight: bold; color: var(--warna-utama); margin: 5px 0;"></p>
                 <p id="teks-penalti" style="text-align: center; color: var(--warna-merah); margin-top: 5px;"></p>
-                <button id="tombol-ulang" class="btn-action" style="display: none;" onclick="tampilkanMateri()">🔄 Remedial</button>
+                
+                <button id="tombol-ulang" class="btn-action" style="display: none;" onclick="jalankanRemedial()">🔄 Remedial (Ulangi Kuis)</button>
                 <button id="tombol-selesai" class="btn-action btn-submit" style="display: none;" onclick="kembaliKeHome()">✅ Selesai</button>
             </div>
         </div>
@@ -163,11 +171,14 @@
     <script>
         let namaSiswa = ""; let kelasSiswa = ""; let daftarSoalBerjalan = [];
         let indeksSoalSekarang = 0; let jumlahBenar = 0; let jawabanTerpilihSementara = null;
-        let bantuanPerSoalDipakai = false; let totalKaliBantuan = 0; let jumlahPercobaan = 0;
+        let bantuanPerSoalDipakai = false; let totalKaliBantuan = 0; let jumlahPercobaan = 1;
         const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzgcZKAlz7gOP2uEz9fHhpspj726hqYP1F7nYo8FQybaY_cStqxiZ7YA8NNQ0CMdLrV/exec"; 
 
         function simpanProgres(fase) {
-            localStorage.setItem('progres_plb', JSON.stringify({ nama: namaSiswa, kelas: kelasSiswa, fase: fase, soal: daftarSoalBerjalan, indeks: indeksSoalSekarang, benar: jumlahBenar, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan }));
+            localStorage.setItem('progres_plb', JSON.stringify({ 
+                nama: namaSiswa, kelas: kelasSiswa, fase: fase, soal: daftarSoalBerjalan, 
+                indeks: indeksSoalSekarang, benar: jumlahBenar, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan 
+            }));
         }
 
         window.onload = function() {
@@ -175,17 +186,15 @@
             if(simpanan) {
                 const p = JSON.parse(simpanan);
                 namaSiswa = p.nama; kelasSiswa = p.kelas; daftarSoalBerjalan = p.soal; indeksSoalSekarang = p.indeks;
-                jumlahBenar = p.benar; totalKaliBantuan = p.bantuan; jumlahPercobaan = p.percobaan;
+                jumlahBenar = p.benar; totalKaliBantuan = p.bantuan; jumlahPercobaan = p.percobaan || 1;
                 document.getElementById('area-mentor-global').style.display = "block";
                 document.getElementById('btn-logout').style.display = "block";
-                if(p.fase === 'materi') tampilkanMateri(); else muatSoal();
-            } else {
-                inisialisasiDropdown();
-            }
+                if(p.fase === 'materi') tampilkanMateri(); else if(p.fase === 'hasil') tampilkanHasil(); else muatSoal();
+            } else { inisialisasiDropdown(); }
         };
 
         function logoutSiswa() {
-            if(confirm("Apakah Anda ingin Logout? Progres belajar di modul ini akan dihapus.")) {
+            if(confirm("Logout? Progres modul ini akan dihapus.")) {
                 localStorage.removeItem('progres_plb');
                 window.location.reload();
             }
@@ -225,37 +234,56 @@
 
         function tampilkanMateri() {
             ubahTampilan('area-materi');
-            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! Silakan klik tombol merah di bawah untuk membaca materi lengkapnya ya!`;
+            document.getElementById('pesan-mentor').innerText = `Halo ${namaSiswa}! Silakan klik tombol merah di bawah untuk membaca materi ya!`;
             simpanProgres('materi');
         }
 
         function mulaiKuis() {
             ubahTampilan('area-kuis');
-            jumlahPercobaan++;
             if(daftarSoalBerjalan.length === 0) {
                 daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
             }
             muatSoal();
         }
 
+        function jalankanRemedial() {
+            jumlahPercobaan++;
+            indeksSoalSekarang = 0;
+            jumlahBenar = 0;
+            totalKaliBantuan = 0;
+            jawabanTerpilihSementara = null;
+            bantuanPerSoalDipakai = false;
+            daftarSoalBerjalan = [...daftarSoalAsli].sort(() => Math.random() - 0.5);
+            muatSoal();
+        }
+
         function muatSoal() {
             ubahTampilan('area-kuis');
             let s = daftarSoalBerjalan[indeksSoalSekarang];
+            jawabanTerpilihSementara = null; 
+            bantuanPerSoalDipakai = false;
+            
             document.getElementById('indikator-soal').innerText = `Soal ${indeksSoalSekarang + 1}/15`;
             document.getElementById('teks-soal').innerText = s.p;
-            jawabanTerpilihSementara = null; bantuanPerSoalDipakai = false;
             document.getElementById('tombol-bantuan').disabled = false;
             document.getElementById('kotak-mentor').className = "mentor-box";
-            document.getElementById('pesan-mentor').innerText = "Menganalisis proyek membutuhkan kerjasama tim...";
+            document.getElementById('pesan-mentor').innerText = "Menganalisis proyek membutuhkan kerjasama tim yang baik...";
+            
             const btnLanjut = document.getElementById('tombol-lanjut');
-            btnLanjut.disabled = true; btnLanjut.className = "btn-action btn-disabled";
+            btnLanjut.disabled = true; 
+            btnLanjut.className = "btn-action btn-disabled";
+            btnLanjut.innerText = "Pilih Jawaban Dulu";
+            
             const cont = document.getElementById('container-opsi'); cont.innerHTML = '';
             s.o.forEach((txt, i) => {
                 const btn = document.createElement('button'); btn.className = 'btn-opsi'; btn.innerText = txt;
                 btn.onclick = () => {
                     document.querySelectorAll('.btn-opsi').forEach(b => b.classList.remove('terpilih'));
-                    btn.classList.add('terpilih'); jawabanTerpilihSementara = i;
-                    btnLanjut.disabled = false; btnLanjut.className = "btn-action btn-submit";
+                    btn.classList.add('terpilih'); 
+                    jawabanTerpilihSementara = i;
+                    btnLanjut.disabled = false; 
+                    btnLanjut.className = "btn-action btn-submit";
+                    btnLanjut.innerText = "Simpan & Lanjut";
                 };
                 cont.appendChild(btn);
             });
@@ -266,7 +294,7 @@
             if(bantuanPerSoalDipakai) return;
             bantuanPerSoalDipakai = true; totalKaliBantuan++;
             document.getElementById('kotak-mentor').className = "mentor-box peringatan";
-            document.getElementById('pesan-mentor').innerText = `${daftarSoalBerjalan[indeksSoalSekarang].b}`;
+            document.getElementById('pesan-mentor').innerText = ` ${daftarSoalBerjalan[indeksSoalSekarang].b}`;
             document.getElementById('tombol-bantuan').disabled = true;
             simpanProgres('kuis');
         }
@@ -286,23 +314,33 @@
             
             document.getElementById('wrapper-nama-hasil').innerText = namaSiswa;
             document.getElementById('teks-skor').innerText = skorAkhir;
+            document.getElementById('teks-percobaan').innerText = `Percobaan Ke-${jumlahPercobaan}`;
             
             const tuntas = skorAkhir >= 100;
             document.getElementById('keterangan-hasil').innerText = tuntas ? "KOLABORASI SUKSES" : "PROYEK BELUM TUNTAS";
             document.getElementById('pesan-mentor').innerText = tuntas ? "Selamat! Kamu telah menguasai seluruh elemen Informatika." : "Ayo perbaiki pemahaman proyekmu melalui remedial.";
             document.getElementById('teks-penalti').innerText = totalKaliBantuan > 0 ? `(Penalti bantuan: -${totalPenalti} poin)` : "";
+            
             document.getElementById('tombol-selesai').style.display = tuntas ? "block" : "none";
             document.getElementById('tombol-ulang').style.display = tuntas ? "none" : "block";
             
-            fetch(URL_APPS_SCRIPT + "?" + new URLSearchParams({ namaSiswa, kelasSiswa, modul: "Praktik Lintas Bidang (PLB)", skor: skorAkhir, bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, status: tuntas ? "TUNTAS" : "REMEDIAL", browser: navigator.userAgent }), { method: 'GET', mode: 'no-cors' });
-            localStorage.removeItem('progres_plb');
+            fetch(URL_APPS_SCRIPT + "?" + new URLSearchParams({ 
+                namaSiswa, kelasSiswa, modul: "Praktik Lintas Bidang (PLB)", skor: skorAkhir, 
+                bantuan: totalKaliBantuan, percobaan: jumlahPercobaan, 
+                status: tuntas ? "TUNTAS" : "REMEDIAL", browser: navigator.userAgent 
+            }), { method: 'GET', mode: 'no-cors' });
+            
+            simpanProgres('hasil');
         }
 
         function ubahTampilan(id) {
             document.querySelectorAll('.area-konten').forEach(a => a.style.display = 'none');
             document.getElementById(id).style.display = 'block';
         }
-        function kembaliKeHome() { window.location.href = "index.html"; }
+        function kembaliKeHome() { 
+            localStorage.removeItem('progres_plb');
+            window.location.href = "index.html"; 
+        }
     </script>
 </body>
 </html>
