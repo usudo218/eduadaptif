@@ -11,10 +11,12 @@
             --utama: #1e293b; --aksen: #4f46e5; --sukses: #10b981;
             --bg: #f1f5f9; --teks: #334155; --putih: #ffffff; --bahaya: #ef4444;
         }
-        * { box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
-        body { background-color: var(--bg); color: var(--teks); margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
-        /* Layout Login */
+        html, body { height: 100%; margin: 0; }
+        body { background-color: var(--bg); color: var(--teks); display: flex; flex-direction: column; }
+        
+        /* Area Login */
         #login-screen { 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
             position: fixed; inset: 0; background: var(--bg); z-index: 1000;
@@ -23,10 +25,9 @@
             background: var(--putih); padding: 40px; border-radius: 24px; 
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 400px; 
         }
-        /* Style Gambar Pak Agus */
         .img-karakter { 
             width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--aksen); 
-            margin-bottom: 20px; object-fit: cover; background: #fff; display: inline-block;
+            margin-bottom: 20px; object-fit: cover; background: #fff;
         }
         
         .password-wrapper { position: relative; width: 100%; margin-bottom: 20px; }
@@ -36,8 +37,8 @@
         }
         .eye-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #64748b; }
 
-        /* Layout Dashboard */
-        #main-dashboard { display: none; padding: 20px; width: 100%; max-width: 1400px; margin: auto; flex: 1; width: 100%; }
+        /* Area Dashboard */
+        #main-dashboard { display: none; flex: 1 0 auto; width: 100%; max-width: 1400px; margin: 0 auto; padding: 20px; }
         .container { background: var(--putih); border-radius: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); overflow: hidden; }
 
         .header { 
@@ -69,9 +70,9 @@
         .tuntas { background: #dcfce7; color: #166534; }
         .remedial { background: #fee2e2; color: #991b1b; }
 
-        /* Footer */
+        /* Footer Perbaikan */
         .main-footer {
-            text-align: center; padding: 40px 20px; color: #64748b; font-size: 0.9rem;
+            flex-shrink: 0; text-align: center; padding: 30px; color: #64748b; font-size: 0.9rem; width: 100%;
         }
         .main-footer b { color: var(--utama); }
     </style>
@@ -80,7 +81,7 @@
 
 <div id="login-screen">
     <div class="login-card">
-        <img src="pak-agus.png" class="img-karakter" alt="Logo Pak Agus">
+        <img src="images/pak-agus.png" class="img-karakter" alt="Pak Agus">
         <h2 style="margin:0 0 5px">Admin Elang Digital</h2>
         <p style="color:#64748b; font-size:0.85rem; margin-bottom:25px">Monitoring Progres Siswa Real-Time</p>
         
@@ -98,7 +99,7 @@
     <div class="container">
         <div class="header">
             <div class="header-profile">
-                <img src="pak-agus.png" class="img-mini" alt="Mini Pak Agus">
+                <img src="images/pak-agus.png" class="img-mini" alt="Profile">
                 <div>
                     <h1 style="margin:0; font-size:1.1rem">Monitoring Siswa</h1>
                     <p style="margin:0; font-size:0.7rem; opacity:0.8">Dashboard Elang Digital 2026</p>
@@ -115,7 +116,7 @@
             <div class="filter-grid">
                 <div class="filter-group">
                     <label>Pencarian Nama</label>
-                    <input type="text" id="cari-nama" placeholder="Cari nama siswa..." onkeyup="filterData()">
+                    <input type="text" id="cari-nama" placeholder="Nama siswa..." onkeyup="filterData()">
                 </div>
                 <div class="filter-group">
                     <label>Filter Kelas</label>
@@ -168,19 +169,18 @@
             </table>
         </div>
     </div>
-
-    <footer class="main-footer">
-        Design By <b>Agus Suyatno, S.Kom</b><br>
-        SMA Negeri 1 Muncar &copy; 2026
-    </footer>
 </div>
+
+<footer class="main-footer" id="footer-admin" style="display:none;">
+    Design By <b>Agus Suyatno, S.Kom</b><br>
+    SMA Negeri 1 Muncar &copy; 2026
+</footer>
 
 <script>
     const KODE_RAHASIA = "ADMIN2026";
     const URL_GAS = "https://script.google.com/macros/s/AKfycbywzkacgm1ChC2PPvDPU9w4JIvGK8wMZiDBuRWKmdv8qFtSmDhUUDsahE6Azypztow0/exec"; 
     let cacheData = [];
 
-    // Aktifkan Ikon
     lucide.createIcons();
 
     function togglePassword() {
@@ -196,16 +196,12 @@
         lucide.createIcons();
     }
 
-    // Penjaga Sesi Refresh
     window.onload = function() {
-        if(localStorage.getItem("admin_logged") === "true") {
-            showDashboard();
-        }
+        if(localStorage.getItem("admin_logged") === "true") showDashboard();
     }
 
     function cekLogin() {
-        const val = document.getElementById('admin-pass').value;
-        if(val === KODE_RAHASIA) {
+        if(document.getElementById('admin-pass').value === KODE_RAHASIA) {
             localStorage.setItem("admin_logged", "true");
             showDashboard();
         } else { alert("Password Salah!"); }
@@ -214,26 +210,24 @@
     function showDashboard() {
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('main-dashboard').style.display = 'block';
+        document.getElementById('footer-admin').style.display = 'block';
         muatData();
     }
 
     function logout() {
-        if(confirm("Keluar dari Panel Admin?")) {
-            localStorage.removeItem("admin_logged");
-            location.reload();
-        }
+        if(confirm("Keluar?")) { localStorage.removeItem("admin_logged"); location.reload(); }
     }
 
     async function muatData() {
         const tbody = document.getElementById('isi-tabel');
-        tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; padding:50px;'>⏳ Sedang mengambil data terbaru...</td></tr>";
+        tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; padding:50px;'>⏳ Sedang mengambil data...</td></tr>";
         try {
             const res = await fetch(URL_GAS + "?action=readData", { redirect: 'follow' });
             const data = await res.json();
             cacheData = data.slice(1);
             filterData();
         } catch (err) {
-            tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red; padding:50px;'>❌ Gagal koneksi ke server.</td></tr>";
+            tbody.innerHTML = "<tr><td colspan='9' style='text-align:center; color:red; padding:50px;'>❌ Gagal koneksi database.</td></tr>";
         }
     }
 
@@ -276,7 +270,7 @@
 
     function eksporExcel() {
         const wb = XLSX.utils.table_to_book(document.querySelector('table'));
-        XLSX.writeFile(wb, "Monitoring_ElangDigital_2026.xlsx");
+        XLSX.writeFile(wb, "Rekap_Monitoring_2026.xlsx");
     }
 </script>
 </body>
